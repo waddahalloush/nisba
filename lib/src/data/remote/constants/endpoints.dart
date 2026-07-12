@@ -1,0 +1,40 @@
+class EndPoints {
+  static const baseUrl = 'https://store-backend.thakipos.com/api/v1';
+
+  static const Duration receiveTimeout = Duration(seconds: 120);
+  static const Duration connectionTimeout = Duration(seconds: 120);
+  static const signupClient = '/auth/client/signup';
+  static const loginClient = '/auth/client/login';
+  static const verifyOtp = '/auth/client/verify-otp';
+  static const logout = '/auth/logout';
+  static const refreshAccessToken = '/auth/refresh';
+  static const forgetPasswordRequest = '/auth/client/forgot-password/request';
+  static const forgetPasswordVerify = '/auth/client/forgot-password/verify';
+  static const forgetPasswordReset = '/auth/client/forgot-password';
+  static const getCategoriesList = '/categories';
+  static const getBrandsList = '/brands';
+  static const getBrandsByCategory = '/brands/by-category';
+  static const getProductList = '/products';
+  static const getSliderList = '/sliders';
+  static const getOfferList = '/offers';
+  static const getMyOrders = '/orders/my-orders';
+  static const getAuthUser = '/auth/me';
+  static const getStoreSettings = '/settings';
+  static const getMyNotifications = '/notifications/my-notifications';
+  static const markreadNotification = '/notifications';
+  static const updateFcmToken = '/notifications/fcm-token';
+  static const getEnums = '/enums';
+  static const validatePromoCode = '/promo-codes/validate';
+  static const deliveryFees = '/delivery-fees';
+  static const getDeliveryFeeByGovernorate = '/delivery-fees/governorate';
+  static const loveProduct = '/client/love';
+  static const unLoveProduct = '/client/unlove';
+  static const rateProduct = '/client/rate';
+  static const commentProduct = '/client/comment';
+  static const getFavoriteProducts = '/client/favorites';
+  static const uploads = '/uploads/image';
+  static const getActivePaymentMethod = '/payment-methods/active';
+  static const createOrder = '/orders';
+  static const cancelOrder = '/orders';
+  static const reorder = '/orders';
+}
