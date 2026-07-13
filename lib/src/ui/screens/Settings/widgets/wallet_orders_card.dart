@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
+import 'package:nisba_app/src/routes/routes_names.dart';
 
 /// كارد المحفظة + الطلبات السابقة
 class WalletOrdersCard extends StatelessWidget {
@@ -95,65 +97,81 @@ class WalletOrdersCard extends StatelessWidget {
         SizedBox(height: 8.h),
 
         // صندوق المحفظة البرتقالي
-        Container(
-          padding: EdgeInsets.only(
-            left: 8.w,
-            right: 8.w,
-            bottom: 8.w,
-            top: 0.w,
-          ),
-          decoration: BoxDecoration(
-            color: cs.primary,
-            borderRadius: BorderRadius.circular(16.r),
-          ),
-          child: Column(
-            children: [
-              // نقاط المحفظة
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '$walletPoints',
-                    style: TextStyle(
-                      fontSize: 36.sp,
-                      fontWeight: FontWeight.bold,
-                      color: cs.onPrimary,
-                    ),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutesNames.wallet);
+          },
+          child: Container(
+            padding: EdgeInsets.only(
+              left: 8.w,
+              right: 8.w,
+              bottom: 8.w,
+              top: 0.w,
+            ),
+            decoration: BoxDecoration(
+              color: cs.primary,
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: Column(
+              children: [
+                // نقاط المحفظة
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutesNames.points);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '$walletPoints',
+                        style: TextStyle(
+                          fontSize: 36.sp,
+                          fontWeight: FontWeight.bold,
+                          color: cs.onPrimary,
+                        ),
+                      ),
+                      SizedBox(width: 6.w),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.h),
+                        child: Text(
+                          'نقطة',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: cs.onPrimary.withValues(alpha: 0.85),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(width: 6.w),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.h),
-                    child: Text(
-                      'نقطة',
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: cs.onPrimary.withValues(alpha: 0.85),
+                ),
+                SizedBox(height: 14.h),
+                // أزرار شحن وإهداء
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildCapsuleButton(
+                        context,
+                        label: 'شحن المحفظة',
+                        icon: Iconsax.wallet,
+                        onTap: () {
+                          Get.toNamed(AppRoutesNames.rechargeWallet);
+                        },
                       ),
                     ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 14.h),
-              // أزرار شحن وإهداء
-              Row(
-                children: [
-                  Expanded(
-                    child: _buildCapsuleButton(
-                      context,
-                      label: 'شحن المحفظة',
-                      icon: Iconsax.wallet,
+                    SizedBox(width: 10.w),
+                    Expanded(
+                      child: _buildCapsuleButton(
+                        context,
+                        label: 'إهداء رصيد',
+                        icon: Icons.person,
+                        onTap: () {
+                          Get.toNamed(AppRoutesNames.giftCredit);
+                        },
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 10.w),
-                  Expanded(
-                    child: _buildCapsuleButton(
-                      context,
-                      label: 'إهداء رصيد',
-                      icon: Icons.person,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],
@@ -164,12 +182,13 @@ class WalletOrdersCard extends StatelessWidget {
     BuildContext context, {
     required String label,
     required IconData icon,
+    required VoidCallback onTap,
   }) {
     final cs = Theme.of(context).colorScheme;
     final theme = Theme.of(context);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(

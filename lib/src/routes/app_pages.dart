@@ -1,13 +1,23 @@
 import 'package:get/get.dart';
 import 'package:nisba_app/src/ui/screens/Notification/notification_screen.dart';
+import 'package:nisba_app/src/ui/screens/Settings/Coupons/coupon_screen.dart';
+import 'package:nisba_app/src/ui/screens/Settings/Points/point_screen.dart';
+import 'package:nisba_app/src/ui/screens/Settings/Reports/report_screen.dart';
+import 'package:nisba_app/src/ui/screens/Settings/cars/my_cars_screen.dart';
+import 'package:nisba_app/src/ui/screens/account/Gift%20Credit/gift_credit_screen.dart';
+import 'package:nisba_app/src/ui/screens/account/Recharge%20Wallet/recharge_wallet_screen.dart';
+import 'package:nisba_app/src/ui/screens/account/wallet/wallet_screen.dart';
 
 import '../ui/screens/Auth/OTP/otp_verify_screen.dart';
 import '../ui/screens/Auth/Register/register_screen.dart';
 import '../ui/screens/Auth/login/login_screen.dart';
 import '../ui/screens/Favorite/favorite_screen.dart';
+import '../ui/screens/Settings/About/about_screen.dart';
+import '../ui/screens/Settings/FAQs/faq_screen.dart';
 import '../ui/screens/Settings/app_setting_screen.dart';
 import '../ui/screens/Splash Screen/splash_screen.dart';
-import '../ui/screens/account setting/account_setting_screen.dart';
+import '../ui/screens/account/account_setting_screen.dart';
+import '../ui/screens/account/User Account/user_account_screen.dart';
 import '../ui/screens/dashboard/dashboard_screen.dart';
 import 'routes_names.dart';
 
@@ -56,6 +66,56 @@ abstract class AppPages {
     GetPage(
       name: AppRoutesNames.favorite,
       page: () => const FavoriteScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.userAccount,
+      page: () => const UserAccountScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.wallet,
+      page: () => const WalletScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.giftCredit,
+      page: () => const GiftCreditScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.rechargeWallet,
+      page: () => const RechargeWalletScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.faq,
+      page: () => const FaqScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.about,
+      page: () => const AboutScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.myCars,
+      page: () => const MyCarsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.points,
+      page: () => const PointScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.coupon,
+      page: () => const CouponScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.report,
+      page: () => const ReportScreen(),
       transition: Transition.fadeIn,
     ),
   ];

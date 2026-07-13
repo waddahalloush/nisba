@@ -9,4 +9,14 @@ class AppRoutesNames {
   static String accountSetting = "/account-setting";
   static String notification = "/notification";
   static String favorite = "/favorite";
+  static String userAccount = "/user-account";
+  static String wallet = "/wallet";
+  static String rechargeWallet = "/recharge-wallet";
+  static String giftCredit = "/gift-credit";
+  static String faq = "/faq";
+  static String about = "/about";
+  static String myCars = "/my-cars";
+  static String points = "/points";
+  static String coupon = "/coupon";
+  static String report = "/report";
 }

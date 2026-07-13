@@ -45,7 +45,13 @@ class AppSettingController extends GetxController {
 
   // ---- إجراءات سريعة ----
   final quickActions = [
-    QuickAction(label: 'القسائم والعروض', icon: Iconsax.card, onTap: () {}),
+    QuickAction(
+      label: 'القسائم والعروض',
+      icon: Iconsax.card,
+      onTap: () {
+        Get.toNamed(AppRoutesNames.coupon);
+      },
+    ),
     QuickAction(
       label: 'المفضلة',
       icon: Iconsax.heart,
@@ -53,8 +59,20 @@ class AppSettingController extends GetxController {
         Get.toNamed(AppRoutesNames.favorite);
       },
     ),
-    QuickAction(label: 'سيارتي', icon: Iconsax.car, onTap: () {}),
-    QuickAction(label: 'التقارير', icon: Iconsax.document, onTap: () {}),
+    QuickAction(
+      label: 'سيارتي',
+      icon: Iconsax.car,
+      onTap: () {
+        Get.toNamed(AppRoutesNames.myCars);
+      },
+    ),
+    QuickAction(
+      label: 'التقارير',
+      icon: Iconsax.document,
+      onTap: () {
+        Get.toNamed(AppRoutesNames.report);
+      },
+    ),
   ];
 
   // ---- المكافآت ----
@@ -99,14 +117,35 @@ class AppSettingController extends GetxController {
   }
 
   static List<SettingsItem> _buildSettings() {
-    return const [
-      SettingsItem(title: 'طريقة الدفع', icon: Icons.credit_card),
-      SettingsItem(title: 'مركز المساعدة', icon: Icons.help_outline_rounded),
-      SettingsItem(title: 'عن التطبيق', icon: Icons.info_outline_rounded),
-      SettingsItem(title: 'الشروط والخدمات', icon: Icons.description_outlined),
-      SettingsItem(title: 'شروط الخصوصية', icon: Icons.privacy_tip_outlined),
-      SettingsItem(title: 'الأسئلة الشائعة', icon: Icons.quiz_outlined),
-      SettingsItem(title: 'أبدِ رأيك', icon: Icons.rate_review_outlined),
+    return [
+      const SettingsItem(title: 'طريقة الدفع', icon: Icons.credit_card),
+      const SettingsItem(
+        title: 'مركز المساعدة',
+        icon: Icons.help_outline_rounded,
+      ),
+      SettingsItem(
+        title: 'عن التطبيق',
+        icon: Icons.info_outline_rounded,
+        onTap: () {
+          Get.toNamed(AppRoutesNames.about);
+        },
+      ),
+      const SettingsItem(
+        title: 'الشروط والخدمات',
+        icon: Icons.description_outlined,
+      ),
+      const SettingsItem(
+        title: 'شروط الخصوصية',
+        icon: Icons.privacy_tip_outlined,
+      ),
+      SettingsItem(
+        title: 'الأسئلة الشائعة',
+        icon: Icons.quiz_outlined,
+        onTap: () {
+          Get.toNamed(AppRoutesNames.faq);
+        },
+      ),
+      const SettingsItem(title: 'أبدِ رأيك', icon: Icons.rate_review_outlined),
     ];
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:nisba_app/src/routes/routes_names.dart';
 
 class AccountSettingController extends GetxController {
   final userName = 'أحمد محمد'.obs;
@@ -28,7 +29,9 @@ class AccountSettingController extends GetxController {
       icon: Iconsax.user,
       title: 'معلومات الحساب',
       subtitle: 'الاسم، البريد الإلكتروني، رقم الهاتف',
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(AppRoutesNames.userAccount);
+      },
     ),
     SettingsItem(
       icon: Iconsax.card,
