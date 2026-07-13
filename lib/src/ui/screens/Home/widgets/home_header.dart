@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/app_colors.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
+import 'package:nisba_app/src/routes/routes_names.dart';
 import 'package:nisba_app/src/ui/screens/Home/controller/home_controller.dart';
 
 /// الهيدر العلوي للشاشة الرئيسية - SliverAppBar متدرج مع بانر وبحث
@@ -40,29 +41,34 @@ class HomeHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // السلة مع الإشعار
-        Stack(
-          children: [
-            Icon(Iconsax.shopping_cart, color: onPrimary, size: 22.sp),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Container(
-                padding: const EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.error,
-                  shape: BoxShape.circle,
-                ),
-                child: Text(
-                  '2',
-                  style: TextStyle(
-                    color: theme.colorScheme.onError,
-                    fontSize: 8.sp,
-                    fontWeight: FontWeight.bold,
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutesNames.cart);
+          },
+          child: Stack(
+            children: [
+              Icon(Iconsax.shopping_cart, color: onPrimary, size: 22.sp),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.error,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    '2',
+                    style: TextStyle(
+                      color: theme.colorScheme.onError,
+                      fontSize: 8.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         // العنوان (Pill)
         Container(

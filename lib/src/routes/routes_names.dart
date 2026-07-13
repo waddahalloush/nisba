@@ -19,4 +19,11 @@ class AppRoutesNames {
   static String points = "/points";
   static String coupon = "/coupon";
   static String report = "/report";
+  static String privacy = "/privacy";
+  static String support = "/support";
+  static String paymentSetting = "/payment-setting";
+  static String visa = "/visa";
+  static String cart = "/cart";
+  static String payment = "/payment";
+  static String offer = "/offer";
 }

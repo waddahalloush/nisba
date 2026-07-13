@@ -4,9 +4,13 @@ import 'package:nisba_app/src/ui/screens/Auth/OTP/otp_verify_controller.dart';
 import 'package:nisba_app/src/ui/screens/Auth/Register/register_controller.dart';
 import 'package:nisba_app/src/ui/screens/Home/controller/home_controller.dart';
 import 'package:nisba_app/src/ui/screens/Notification/notification_controller.dart';
+import 'package:nisba_app/src/ui/screens/Payment/payment_controller.dart';
+import 'package:nisba_app/src/ui/screens/Settings/Help/Customer%20Support/customer_support_controller.dart';
 import 'package:nisba_app/src/ui/screens/Settings/cars/my_cars_controller.dart';
 import 'package:nisba_app/src/ui/screens/account/Gift%20Credit/gift_credit_controller.dart';
 import 'package:nisba_app/src/ui/screens/account/account_setting_controller.dart';
+import 'package:nisba_app/src/ui/screens/account/payment%20setting/payment_setting_controller.dart';
+import 'package:nisba_app/src/ui/screens/account/visa/add_visa_controller.dart';
 import 'package:nisba_app/src/ui/screens/account/wallet/wallet_controller.dart';
 
 import '../data/remote/api/app_api.dart';
@@ -15,7 +19,9 @@ import '../data/remote/constants/endpoints.dart';
 import '../data/remote/interceptors/auth_interceptor.dart';
 import '../data/repository.dart';
 import '../ui/screens/Auth/login/login_controller.dart';
+import '../ui/screens/Cart/cart_controller.dart';
 import '../ui/screens/Favorite/favorite_controller.dart';
+import '../ui/screens/Offer/offer_controller.dart';
 import '../ui/screens/Order/controller/order_controller.dart';
 import '../ui/screens/Settings/About/about_controller.dart';
 import '../ui/screens/Settings/Coupons/coupon_controller.dart';
@@ -58,6 +64,12 @@ class AppBinding extends Bindings {
     Get.lazyPut(() => PointController(), fenix: true);
     Get.lazyPut(() => CouponController(), fenix: true);
     Get.lazyPut(() => ReportController(), fenix: true);
+    Get.lazyPut(() => CustomerSupportController(), fenix: true);
+    Get.lazyPut(() => PaymentSettingController(), fenix: true);
+    Get.lazyPut(() => AddVisaController(), fenix: true);
+    Get.lazyPut(() => CartController(), fenix: true);
+    Get.lazyPut(() => PaymentController(), fenix: true);
+    Get.lazyPut(() => OfferController(), fenix: true);
 
     //! -----------------------
     Get.lazyPut(

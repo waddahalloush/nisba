@@ -115,33 +115,28 @@ class WalletOrdersCard extends StatelessWidget {
             child: Column(
               children: [
                 // نقاط المحفظة
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(AppRoutesNames.points);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '$walletPoints',
-                        style: TextStyle(
-                          fontSize: 36.sp,
-                          fontWeight: FontWeight.bold,
-                          color: cs.onPrimary,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '$walletPoints',
+                      style: TextStyle(
+                        fontSize: 36.sp,
+                        fontWeight: FontWeight.bold,
+                        color: cs.onPrimary,
+                      ),
+                    ),
+                    SizedBox(width: 6.w),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h),
+                      child: Text(
+                        'نقطة',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: cs.onPrimary.withValues(alpha: 0.85),
                         ),
                       ),
-                      SizedBox(width: 6.w),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10.h),
-                        child: Text(
-                          'نقطة',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: cs.onPrimary.withValues(alpha: 0.85),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 14.h),
                 // أزرار شحن وإهداء

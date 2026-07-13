@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
+import 'package:nisba_app/src/routes/routes_names.dart';
 
 /// شريط التصنيفات الأفقي (مطاعم، بقالة، مقاهي، عروض)
 class HomeCategories extends StatelessWidget {
@@ -17,50 +19,65 @@ class HomeCategories extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           children: [
-            _buildItem(theme, 'مطاعم', Assets.images.catFood.path),
-            _buildItem(theme, 'بقالة', Assets.images.catVigi.path),
-            _buildItem(theme, 'مقاهي', Assets.images.catCafee.path),
-            _buildItem(theme, 'العروض اليومية', Assets.images.catOffer.path),
+            _buildItem(theme, 'مطاعم', Assets.images.catFood.path, () {}),
+            _buildItem(theme, 'بقالة', Assets.images.catVigi.path, () {}),
+            _buildItem(theme, 'مقاهي', Assets.images.catCafee.path, () {}),
+            _buildItem(
+              theme,
+              'العروض اليومية',
+              Assets.images.catOffer.path,
+              () {
+                Get.toNamed(AppRoutesNames.offer);
+              },
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildItem(ThemeData theme, String title, String imageUrl) {
-    return Container(
-      width: 81.w,
-      margin: EdgeInsets.symmetric(horizontal: 5.w),
-      child: Column(
-        children: [
-          Container(
-            height: 75.h,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
-              borderRadius: BorderRadius.circular(18.r),
-              boxShadow: [
-                BoxShadow(
-                  color: theme.colorScheme.shadow.withValues(alpha: 0.05),
-                  blurRadius: 6,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-              image: DecorationImage(image: AssetImage(imageUrl)),
+  Widget _buildItem(
+    ThemeData theme,
+    String title,
+    String imageUrl,
+    VoidCallback onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 81.w,
+        margin: EdgeInsets.symmetric(horizontal: 5.w),
+        child: Column(
+          children: [
+            Container(
+              height: 75.h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(18.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: theme.colorScheme.shadow.withValues(alpha: 0.05),
+                    blurRadius: 6,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+                image: DecorationImage(image: AssetImage(imageUrl)),
+              ),
             ),
-          ),
-          SizedBox(height: 6.h),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 10.sp,
-              fontWeight: FontWeight.w600,
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.87),
+            SizedBox(height: 6.h),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w600,
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.87),
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

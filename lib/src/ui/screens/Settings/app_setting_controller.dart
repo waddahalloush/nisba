@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
 
 import '../../../../generated/assets.gen.dart';
@@ -42,9 +43,18 @@ class AppSettingController extends GetxController {
   final walletPoints = 0;
   final appVersion = '1.0.0';
   final appName = 'تطبيق نسبة';
+  final selectedPaymentMethod = 'المحفظة'.obs;
+  final myPoints = 0.obs;
 
   // ---- إجراءات سريعة ----
   final quickActions = [
+    QuickAction(
+      label: 'مكافآت',
+      icon: Iconsax.gift,
+      onTap: () {
+        Get.toNamed(AppRoutesNames.points);
+      },
+    ),
     QuickAction(
       label: 'القسائم والعروض',
       icon: Iconsax.card,
@@ -88,7 +98,7 @@ class AppSettingController extends GetxController {
     settingsItems = _buildSettings();
   }
 
-  static List<RewardModel> _buildRewards() {
+  List<RewardModel> _buildRewards() {
     return [
       RewardModel(
         title: 'هدية ترحيبية',
@@ -116,12 +126,15 @@ class AppSettingController extends GetxController {
     ];
   }
 
-  static List<SettingsItem> _buildSettings() {
+  List<SettingsItem> _buildSettings() {
     return [
-      const SettingsItem(title: 'طريقة الدفع', icon: Icons.credit_card),
-      const SettingsItem(
+     
+      SettingsItem(
         title: 'مركز المساعدة',
         icon: Icons.help_outline_rounded,
+        onTap: () {
+          Get.toNamed(AppRoutesNames.support);
+        },
       ),
       SettingsItem(
         title: 'عن التطبيق',
@@ -130,14 +143,14 @@ class AppSettingController extends GetxController {
           Get.toNamed(AppRoutesNames.about);
         },
       ),
-      const SettingsItem(
+      SettingsItem(
         title: 'الشروط والخدمات',
         icon: Icons.description_outlined,
+        onTap: () {
+          Get.toNamed(AppRoutesNames.privacy);
+        },
       ),
-      const SettingsItem(
-        title: 'شروط الخصوصية',
-        icon: Icons.privacy_tip_outlined,
-      ),
+
       SettingsItem(
         title: 'الأسئلة الشائعة',
         icon: Icons.quiz_outlined,
@@ -148,6 +161,8 @@ class AppSettingController extends GetxController {
       const SettingsItem(title: 'أبدِ رأيك', icon: Icons.rate_review_outlined),
     ];
   }
+
+  
 }
 
 /// نموذج داخلي للإجراءات السريعة
@@ -162,3 +177,5 @@ class QuickAction {
     required this.onTap,
   });
 }
+
+

@@ -35,9 +35,11 @@ class AccountSettingController extends GetxController {
     ),
     SettingsItem(
       icon: Iconsax.card,
-      title: 'طرق الدفع',
+      title: 'إعدادات الدفع',
       subtitle: 'إدارة بطاقات الدفع والمحفظة',
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(AppRoutesNames.paymentSetting);
+      },
     ),
     SettingsItem(
       icon: Iconsax.notification,
