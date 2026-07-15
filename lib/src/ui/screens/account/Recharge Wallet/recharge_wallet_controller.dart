@@ -5,7 +5,7 @@ class RechargeWalletController extends GetxController {
   final amountController = TextEditingController();
   final selectedAmount = 0.0.obs;
 
-  final presetAmounts = <double>[500, 200, 100, 5000, 1000];
+  final presetAmounts = <double>[500, 200, 100, 5000, 1000, 2000];
   final minAmount = 100.0;
 
   void selectAmount(double amount) {

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'point_controller.dart';
 
 class PointScreen extends GetView<PointController> {
@@ -13,45 +14,57 @@ class PointScreen extends GetView<PointController> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: cs.surfaceContainerHighest,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              // ── Header banner ──
-              _buildHeaderBanner(theme),
-
-              // ── Body ──
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  children: [
-                    // ── Action cards ──
-                    _buildActionCards(theme),
-
-                    SizedBox(height: 14.h),
-
-                    // ── Promo banner ──
-                    _buildPromoBanner(theme),
-
-                    SizedBox(height: 16.h),
-
-                    // ── Ways to earn ──
-                    _buildEarnWays(theme),
-
-                    SizedBox(height: 16.h),
-
-                    // ── Points log ──
-                    _buildPointsLog(theme),
-
-                    SizedBox(height: 24.h),
-                  ],
-                ),
-              ),
-            ],
+    return Scaffold(
+      backgroundColor: cs.surfaceContainerHighest,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+        ),
+        title: Text(
+          'نقاطي',
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: cs.primary,
           ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // ── Header banner ──
+            _buildHeaderBanner(theme),
+
+            // ── Body ──
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                children: [
+                  // ── Action cards ──
+                  _buildActionCards(theme),
+
+                  SizedBox(height: 14.h),
+
+                  // ── Promo banner ──
+                  _buildPromoBanner(theme),
+
+                  SizedBox(height: 16.h),
+
+                  // ── Ways to earn ──
+                  _buildEarnWays(theme),
+
+                  SizedBox(height: 16.h),
+
+                  // ── Points log ──
+                  _buildPointsLog(theme),
+
+                  SizedBox(height: 24.h),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -60,101 +73,75 @@ class PointScreen extends GetView<PointController> {
   Widget _buildHeaderBanner(ThemeData theme) {
     final cs = theme.colorScheme;
 
-    return Stack(
-      children: [
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.fromLTRB(16.w, 50.h, 16.w, 28.h),
-          decoration: BoxDecoration(
-            color: cs.primary,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(36.r),
-              bottomRight: Radius.circular(36.r),
-            ),
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(16.w),
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      decoration: BoxDecoration(
+        color: cs.primary,
+        image: DecorationImage(
+          image: Assets.images.pointBg.provider(),
+          fit: BoxFit.fill,
+        ),
+        borderRadius: BorderRadius.circular(36.r),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ── Points total ──
+          Text(
+            'إجمالي نقاطك',
+            style: TextStyle(fontSize: 13.sp, color: cs.onPrimary),
           ),
-          child: Column(
-            children: [
-              SizedBox(height: 8.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 48.w,
-                    height: 48.h,
-                    decoration: BoxDecoration(
-                      color: cs.onPrimary.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(Iconsax.gift, color: cs.onPrimary, size: 26.sp),
-                  ),
-                  SizedBox(width: 10.w),
-                  Text(
-                    'نقاطي',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: cs.onPrimary,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 12.h),
 
-              // ── Points total ──
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
               Obx(
                 () => Text(
-                  'إجمالي نقاطك',
+                  '${controller.totalPoints.value}',
                   style: TextStyle(
-                    fontSize: 12.sp,
-                    color: cs.onPrimary.withValues(alpha: 0.85),
-                  ),
-                ),
-              ),
-              SizedBox(height: 2.h),
-              Obx(
-                () => Text(
-                  '${controller.totalPoints.value} نقطة',
-                  style: TextStyle(
-                    fontSize: 32.sp,
+                    fontSize: 40.sp,
                     fontWeight: FontWeight.bold,
                     color: cs.onPrimary,
                   ),
                 ),
               ),
-              SizedBox(height: 6.h),
-
-              // ── Expiry ──
-              Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Iconsax.clock, color: cs.onPrimary, size: 14.sp),
-                    SizedBox(width: 4.w),
-                    Text(
-                      'تنتهي النقاط في ${controller.expiryDate.value}',
-                      style: TextStyle(
-                        fontSize: 11.sp,
-                        color: cs.onPrimary.withValues(alpha: 0.85),
-                      ),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Text(
+                  'نقطة',
+                  style: TextStyle(fontSize: 13.sp, color: cs.onPrimary),
                 ),
               ),
             ],
           ),
-        ),
-        Positioned(
-          top: 44.h,
-          right: 8.w,
-          child: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onPrimary),
-            style: IconButton.styleFrom(
-              backgroundColor: cs.onPrimary.withValues(alpha: 0.2),
+
+          SizedBox(height: 2.h),
+          // ── Expiry ──
+          Obx(
+            () => Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Iconsax.clock, color: cs.onPrimary, size: 14.sp),
+                  SizedBox(width: 4.w),
+                  Text(
+                    'تنتهي النقاط في ${controller.expiryDate.value}',
+                    style: TextStyle(fontSize: 11.sp, color: cs.onPrimary),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -226,14 +213,12 @@ class PointScreen extends GetView<PointController> {
       ),
       child: Row(
         children: [
-          Icon(Iconsax.star1, color: cs.primary, size: 22.sp),
+          Assets.images.pointIconSmall.image(width: 35.w, height: 35.h),
           SizedBox(width: 10.w),
           Expanded(
             child: Text(
-              'كل نقطة تقربك من المزيد! استخدم نقاطك واستمتع بمزايا حصرية وعروض مميزة.',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: cs.onSurface.withValues(alpha: 0.65),
-              ),
+              'كل نقطة تقربك من المزيد!\n استخدم نقاطك واستمتع بمزايا حصرية وعروض مميزة.',
+              style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
             ),
           ),
         ],
@@ -244,19 +229,64 @@ class PointScreen extends GetView<PointController> {
   Widget _buildEarnWays(ThemeData theme) {
     final cs = theme.colorScheme;
 
+    return Container(
+      padding: EdgeInsets.all(14.r),
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: cs.shadow.withValues(alpha: 0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'طرق اكتساب النقاط',
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: cs.primary,
+            ),
+          ),
+          Divider(
+            height: 12.h,
+            color: cs.outlineVariant.withValues(alpha: 0.4),
+          ),
+          const _EarnWayRow(
+            icon: Iconsax.shop,
+            text: 'الشراء من المطاعم/المحلات.',
+          ),
+          Divider(
+            height: 12.h,
+            color: cs.outlineVariant.withValues(alpha: 0.4),
+          ),
+          const _EarnWayRow(
+            icon: Iconsax.discount_shape,
+            text: 'العروض الخاصة والترويج.',
+          ),
+          Divider(
+            height: 12.h,
+            color: cs.outlineVariant.withValues(alpha: 0.4),
+          ),
+          const _EarnWayRow(icon: Iconsax.people, text: 'إحالة الأصدقاء.'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPointsLog(ThemeData theme) {
+    final cs = theme.colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'طرق اكتساب النقاط',
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: cs.onSurface,
-          ),
-        ),
-        SizedBox(height: 10.h),
+        // ── Totals row ──
         Container(
-          padding: EdgeInsets.all(14.r),
+          padding: EdgeInsets.only(bottom: 11.h, right: 11.h, left: 11.h),
           decoration: BoxDecoration(
             color: cs.surface,
             borderRadius: BorderRadius.circular(16.r),
@@ -269,84 +299,64 @@ class PointScreen extends GetView<PointController> {
             ],
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _EarnWayRow(
-                icon: Iconsax.shop,
-                text: 'الشراء من المطاعم/المحلات.',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'سجل النقاط',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: cs.primary,
+                    ),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {},
+                    iconAlignment: IconAlignment.end,
+                    icon: Icon(
+                      Icons.arrow_forward_ios,
+                      color: cs.primary,
+                      size: 10.sp,
+                    ),
+                    label: Text(
+                      'عرض الكل',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10.sp,
+                        color: cs.primary,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Divider(
-                height: 24.h,
-                color: cs.outlineVariant.withValues(alpha: 0.4),
-              ),
-              const _EarnWayRow(
-                icon: Iconsax.discount_shape,
-                text: 'العروض الخاصة والترويج.',
-              ),
-              Divider(
-                height: 24.h,
-                color: cs.outlineVariant.withValues(alpha: 0.4),
-              ),
-              const _EarnWayRow(icon: Iconsax.people, text: 'إحالة الأصدقاء.'),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
 
-  Widget _buildPointsLog(ThemeData theme) {
-    final cs = theme.colorScheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'سجل النقاط',
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: cs.onSurface,
-          ),
-        ),
-        SizedBox(height: 10.h),
-
-        // ── Totals row ──
-        Container(
-          padding: EdgeInsets.all(14.r),
-          decoration: BoxDecoration(
-            color: cs.surface,
-            borderRadius: BorderRadius.circular(16.r),
-            boxShadow: [
-              BoxShadow(
-                color: cs.shadow.withValues(alpha: 0.04),
-                blurRadius: 8,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: _TotalColumn(
-                  label: 'إجمالي المكتسب',
-                  value: controller.totalEarned,
-                  color: cs.primary,
-                ),
-              ),
-              Container(width: 1, height: 30.h, color: cs.outlineVariant),
-              Expanded(
-                child: _TotalColumn(
-                  label: 'إجمالي المستبدل',
-                  value: controller.totalRedeemed,
-                  color: cs.error,
-                ),
-              ),
-              Container(width: 1, height: 30.h, color: cs.outlineVariant),
-              Expanded(
-                child: _TotalColumn(
-                  label: 'الرصيد الحالي',
-                  value: controller.totalPoints,
-                  color: cs.primary,
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: _TotalColumn(
+                      label: 'إجمالي المكتسب',
+                      value: controller.totalEarned,
+                      color: Colors.teal,
+                    ),
+                  ),
+                  Container(width: 1, height: 30.h, color: cs.outlineVariant),
+                  Expanded(
+                    child: _TotalColumn(
+                      label: 'إجمالي المستبدل',
+                      value: controller.totalRedeemed,
+                      color: cs.error,
+                    ),
+                  ),
+                  Container(width: 1, height: 30.h, color: cs.outlineVariant),
+                  Expanded(
+                    child: _TotalColumn(
+                      label: 'الرصيد الحالي',
+                      value: controller.totalPoints,
+                      color: cs.primary,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

@@ -22,13 +22,13 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Text(
             'شحن الرصيد',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
         ),
@@ -102,6 +102,8 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
               color: cs.onSurface,
             ),
             decoration: InputDecoration(
+              filled: true,
+              fillColor: cs.primary.withAlpha(15),
               hintText: 'أدخل المبلغ 0.00 (ر.ق)',
               hintStyle: TextStyle(
                 color: cs.onSurface.withValues(alpha: 0.3),
@@ -132,18 +134,11 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
 
     return Row(
       children: [
-        Icon(
-          Iconsax.info_circle,
-          color: cs.onSurface.withValues(alpha: 0.4),
-          size: 14.sp,
-        ),
+        Icon(Iconsax.info_circle, color: cs.onSurface, size: 14.sp),
         SizedBox(width: 6.w),
         Text(
           'الحد الأدنى للشحن: ${controller.minAmount.toInt()} (ر.ق)',
-          style: TextStyle(
-            fontSize: 11.sp,
-            color: cs.onSurface.withValues(alpha: 0.5),
-          ),
+          style: TextStyle(fontSize: 11.sp, color: cs.onSurface),
         ),
       ],
     );
@@ -299,18 +294,13 @@ class _PresetCard extends StatelessWidget {
               width: 40.w,
               height: 40.h,
               decoration: BoxDecoration(
-                color: isSelected
-                    ? cs.primary.withValues(alpha: 0.12)
-                    : cs.surfaceContainerHighest,
+                color: cs.primary.withValues(alpha: 0.12),
+
                 shape: BoxShape.circle,
               ),
               child: isSelected
                   ? Icon(Iconsax.tick_circle, color: cs.primary, size: 24.sp)
-                  : Icon(
-                      Iconsax.wallet_money,
-                      color: cs.onSurface.withValues(alpha: 0.4),
-                      size: 22.sp,
-                    ),
+                  : Icon(Iconsax.dollar_square, color: cs.primary, size: 22.sp),
             ),
             SizedBox(height: 8.h),
 

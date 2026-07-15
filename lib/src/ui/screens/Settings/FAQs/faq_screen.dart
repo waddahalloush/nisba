@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'faq_controller.dart';
 
 class FaqScreen extends GetView<FaqController> {
@@ -22,16 +23,15 @@ class FaqScreen extends GetView<FaqController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Text(
             'الأسئلة الشائعة',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
-          centerTitle: true,
         ),
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -121,6 +121,10 @@ class FaqScreen extends GetView<FaqController> {
       decoration: BoxDecoration(
         color: cs.primary,
         borderRadius: BorderRadius.circular(24.r),
+        image: DecorationImage(
+          image: Assets.images.faqBg.provider(),
+          fit: BoxFit.fill,
+        ),
         boxShadow: [
           BoxShadow(
             color: cs.primary.withValues(alpha: 0.25),
@@ -130,57 +134,66 @@ class FaqScreen extends GetView<FaqController> {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Icon
-          Container(
-            width: 56.w,
-            height: 56.h,
-            decoration: BoxDecoration(
-              color: cs.onPrimary.withValues(alpha: 0.2),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(Iconsax.headphone, color: cs.onPrimary, size: 28.sp),
-          ),
-          SizedBox(height: 12.h),
+          Row(
+            children: [
+              // Icon
+              Container(
+                width: 45.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: cs.onPrimary,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.headphones_outlined,
+                  color: cs.primary,
+                  size: 25.sp,
+                ),
+              ),
+              SizedBox(width: 10.h),
 
-          // Text
-          Text(
-            'لم تجد إجابتك؟',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: cs.onPrimary,
-            ),
+              // Text
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'لم تجد إجابتك؟',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: cs.onPrimary,
+                    ),
+                  ),
+                  SizedBox(height: 6.h),
+                  Text(
+                    'فريق الدعم لدينا جاهز لمساعدتك',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: cs.onPrimary.withValues(alpha: 0.85),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          SizedBox(height: 6.h),
-          Text(
-            'فريق الدعم لدينا جاهز لمساعدتك',
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: cs.onPrimary.withValues(alpha: 0.85),
-            ),
-          ),
-
           SizedBox(height: 16.h),
 
           // Button
-          SizedBox(
-            width: double.infinity,
-            height: 44.h,
-            child: ElevatedButton(
-              onPressed: controller.contactSupport,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: cs.onPrimary,
-                foregroundColor: cs.primary,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
+          ElevatedButton(
+            onPressed: controller.contactSupport,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: cs.onPrimary,
+              foregroundColor: cs.primary,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(35.r),
               ),
-              child: Text(
-                'تواصل معنا',
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
-              ),
+            ),
+            child: Text(
+              'تواصل معنا',
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -254,7 +267,7 @@ class _FaqCard extends StatelessWidget {
                           faq.question,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.bold,
-                            color: cs.onSurface,
+                            color: isExpanded ? cs.primary : cs.onSurface,
                           ),
                         ),
                         SizedBox(height: 3.h),
@@ -307,13 +320,6 @@ class _FaqCard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                faq.answerTitle!,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: cs.primary,
-                                ),
-                              ),
                               if (faq.answerDesc != null) ...[
                                 SizedBox(height: 4.h),
                                 Text(

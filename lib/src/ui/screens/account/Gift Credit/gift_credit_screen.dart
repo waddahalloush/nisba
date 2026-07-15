@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'gift_credit_controller.dart';
 
 class GiftCreditScreen extends GetView<GiftCreditController> {
@@ -22,13 +24,13 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Text(
             'إهداء رصيد',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
         ),
@@ -45,7 +47,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
 
               // ── Tab content ──
               Obx(() {
-                if (controller.selectedTab.value == 0) {
+                if (controller.selectedTab.value == 1) {
                   return _buildQRCodeTab(theme);
                 }
                 return _buildPhoneTab(theme);
@@ -92,13 +94,15 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
         () => Row(
           children: [
             _TabChip(
-              label: 'QR Code',
+              label: 'رقم الهاتف',
+              icon: Icons.mobile_screen_share,
               isSelected: controller.selectedTab.value == 0,
               onTap: () => controller.selectTab(0),
             ),
             SizedBox(width: 4.w),
             _TabChip(
-              label: 'رقم الهاتف',
+              label: 'QR Code',
+              icon: Icons.qr_code,
               isSelected: controller.selectedTab.value == 1,
               onTap: () => controller.selectTab(1),
             ),
@@ -126,7 +130,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
       ),
       child: Column(
         children: [
-          Icon(Iconsax.scan_barcode, color: cs.primary, size: 48.sp),
+          Assets.images.qrCode.image(width: 50, height: 50),
           SizedBox(height: 12.h),
           Text(
             'اطلب من المستلم مسح الرمز',
@@ -155,67 +159,49 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
           ),
         ],
       ),
-      child: Row(
-        children: [
-          // Country code
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-            decoration: BoxDecoration(
-              color: cs.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(12.r),
+      child: Directionality(
+        textDirection: TextDirection.ltr,
+        child: IntlPhoneField(
+          controller: controller.phoneController,
+          textAlign: TextAlign.right,
+          decoration: InputDecoration(
+            hintText: 'phone_number_hint'.tr,
+            hintStyle: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.45),
             ),
-            child: Obx(
-              () => Text(
-                controller.countryCode.value,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                  color: cs.onSurface,
-                ),
-              ),
+            filled: true,
+            fillColor: theme.colorScheme.surface,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.w,
+              vertical: 16.h,
             ),
-          ),
-          SizedBox(width: 10.w),
-
-          // Phone digits
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
-              decoration: BoxDecoration(
-                color: cs.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Row(
-                children: List.generate(
-                  7,
-                  (i) => Expanded(
-                    child: Container(
-                      height: 24.h,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: cs.onSurface.withValues(alpha: 0.15),
-                            width: 1.5,
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        '5',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w600,
-                          color: cs.onSurface,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: cs.primary, width: 1.5),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: cs.primary, width: 1.5),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.r),
+              borderSide: BorderSide(color: cs.primary, width: 2.0),
             ),
           ),
-        ],
+          initialCountryCode: 'QA',
+          disableLengthCheck: true,
+          dropdownIconPosition: IconPosition.trailing,
+          dropdownIcon: Icon(
+            Icons.keyboard_arrow_down,
+            color: theme.colorScheme.onSurface,
+          ),
+          style: theme.textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
+          onChanged: (phone) {
+            controller.phoneNumber.value = phone.completeNumber;
+          },
+        ),
       ),
     );
   }
@@ -235,10 +221,8 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
           SizedBox(width: 10.w),
           Expanded(
             child: Text(
-              'سيتم إرسال رسالة إلى المستلم لإعلامه بالإهداء',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: cs.onSurface.withValues(alpha: 0.7),
-              ),
+              'سيتم إرسال رسالة للمستلم تحتوي على رصيد الإهداء',
+              style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
             ),
           ),
         ],
@@ -272,11 +256,11 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
                   onTap: () => controller.selectAmount(amount),
                 ),
               ),
-              _AmountChip(
-                label: 'مبلغ آخر',
-                isSelected: controller.selectedAmount.value == 0,
-                onTap: controller.clearAmount,
-              ),
+              // _AmountChip(
+              //   label: 'مبلغ آخر',
+              //   isSelected: controller.selectedAmount.value == 0,
+              //   onTap: controller.clearAmount,
+              // ),
             ],
           ),
         ),
@@ -293,7 +277,8 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
         Text(
           'ملاحظة (اختياري)',
           style: theme.textTheme.bodySmall?.copyWith(
-            color: cs.onSurface.withValues(alpha: 0.5),
+            color: cs.onSurface,
+            fontWeight: FontWeight.bold,
           ),
         ),
         SizedBox(height: 8.h),
@@ -336,20 +321,24 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
   Widget _buildSecurityLine(ThemeData theme) {
     final cs = theme.colorScheme;
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Iconsax.shield_tick, color: cs.primary, size: 16.sp),
-        SizedBox(width: 6.w),
-        Text(
-          'عملية آمنة وسريعة',
-          style: TextStyle(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500,
-            color: cs.primary,
+    return Container(
+      padding: EdgeInsets.all(14.r),
+      decoration: BoxDecoration(
+        color: cs.primary.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Row(
+        children: [
+          Assets.images.privacy.image(width: 35.w, height: 35.h),
+          SizedBox(width: 10.w),
+          Expanded(
+            child: Text(
+              'عملية آمنة و سريعة \n رصيد الإهداء يصل فورا للمستلم',
+              style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -385,11 +374,13 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
 class _TabChip extends StatelessWidget {
   final String label;
   final bool isSelected;
+  final IconData icon;
   final VoidCallback onTap;
 
   const _TabChip({
     required this.label,
     required this.isSelected,
+    required this.icon,
     required this.onTap,
   });
 
@@ -404,19 +395,32 @@ class _TabChip extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 10.h),
           decoration: BoxDecoration(
-            color: isSelected ? cs.surface : Colors.transparent,
+            color: isSelected ? cs.primary.withAlpha(30) : Colors.transparent,
             borderRadius: BorderRadius.circular(12.r),
           ),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 13.sp,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-              color: isSelected
-                  ? cs.onSurface
-                  : cs.onSurface.withValues(alpha: 0.5),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 15.sp,
+                color: isSelected
+                    ? cs.primary
+                    : cs.onSurface.withValues(alpha: 0.5),
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                  color: isSelected
+                      ? cs.primary
+                      : cs.onSurface.withValues(alpha: 0.5),
+                ),
+              ),
+            ],
           ),
         ),
       ),

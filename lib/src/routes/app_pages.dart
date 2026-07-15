@@ -1,4 +1,8 @@
 import 'package:get/get.dart';
+import 'package:nisba_app/src/ui/screens/Home/Products/Product%20Details/product_details.dart';
+import 'package:nisba_app/src/ui/screens/Home/Restorant/restorant_screen.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Hotels/hotel_screen.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/kioks/kioks_screen.dart';
 import 'package:nisba_app/src/ui/screens/Notification/notification_screen.dart';
 import 'package:nisba_app/src/ui/screens/Payment/payment_screen.dart';
 import 'package:nisba_app/src/ui/screens/Settings/Coupons/coupon_screen.dart';
@@ -17,6 +21,10 @@ import '../ui/screens/Auth/Register/register_screen.dart';
 import '../ui/screens/Auth/login/login_screen.dart';
 import '../ui/screens/Cart/cart_screen.dart';
 import '../ui/screens/Favorite/favorite_screen.dart';
+import '../ui/screens/Home/Restorant/Restorant Details/restorant_details_screen.dart';
+import '../ui/screens/Home/Services/Hotels/Hotel Details/hotel_details_screen.dart';
+import '../ui/screens/Home/Services/Mall/Mall Details/mall_details_screen.dart';
+import '../ui/screens/Home/Services/Mall/mall_screen.dart';
 import '../ui/screens/Offer/offer_screen.dart';
 import '../ui/screens/Settings/About/about_screen.dart';
 import '../ui/screens/Settings/FAQs/faq_screen.dart';
@@ -158,6 +166,46 @@ abstract class AppPages {
     GetPage(
       name: AppRoutesNames.offer,
       page: () => const OfferScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.restorant,
+      page: () => const RestorantScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.restorantDetails,
+      page: () => const RestorantDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.productDetails,
+      page: () => const ProductDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.mall,
+      page: () => const MallScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.mallDetails,
+      page: () => const MallDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.hotel,
+      page: () => const HotelScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.hotel,
+      page: () => const HotelDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.kioks,
+      page: () => const KioksScreen(),
       transition: Transition.fadeIn,
     ),
   ];

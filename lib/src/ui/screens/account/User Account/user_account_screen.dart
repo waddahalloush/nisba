@@ -23,7 +23,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,15 +32,13 @@ class UserAccountScreen extends GetView<UserAccountController> {
                 'معلومات الحساب',
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: cs.onSurface,
+                  color: cs.primary,
                 ),
               ),
               SizedBox(height: 2.h),
               Text(
                 'قم بتحديث معلوماتك الشخصية',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: cs.onSurface.withValues(alpha: 0.5),
-                ),
+                style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
               ),
             ],
           ),
@@ -137,11 +135,18 @@ class UserAccountScreen extends GetView<UserAccountController> {
               width: 28.w,
               height: 28.h,
               decoration: BoxDecoration(
-                color: cs.primary,
+                color: cs.onPrimary,
                 shape: BoxShape.circle,
                 border: Border.all(color: cs.surface, width: 2),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 3,
+                    offset: const Offset(0, 2),
+                    color: Colors.grey.shade300,
+                  ),
+                ],
               ),
-              child: Icon(Iconsax.edit_2, color: cs.onPrimary, size: 14.sp),
+              child: Icon(Iconsax.edit_2, color: cs.primary, size: 14.sp),
             ),
           ),
         ],
@@ -189,13 +194,13 @@ class UserAccountScreen extends GetView<UserAccountController> {
               controller: controller,
               keyboardType: keyboardType,
               validator: validator,
-              style: theme.textTheme.bodyMedium?.copyWith(color: cs.onSurface),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: cs.onSurface,
+                fontWeight: FontWeight.bold,
+              ),
               decoration: InputDecoration(
                 labelText: label,
-                labelStyle: TextStyle(
-                  color: cs.onSurface.withValues(alpha: 0.45),
-                  fontSize: 12.sp,
-                ),
+                labelStyle: TextStyle(color: cs.onSurface, fontSize: 12.sp),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -245,16 +250,14 @@ class UserAccountScreen extends GetView<UserAccountController> {
                   children: [
                     Text(
                       'تاريخ الميلاد',
-                      style: TextStyle(
-                        color: cs.onSurface.withValues(alpha: 0.45),
-                        fontSize: 12.sp,
-                      ),
+                      style: TextStyle(color: cs.onSurface, fontSize: 12.sp),
                     ),
                     SizedBox(height: 4.h),
                     Text(
                       controller.birthDate.value,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onSurface,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -300,6 +303,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
                 Expanded(
                   child: _GenderOption(
                     label: 'ذكر',
+                    biologicalIcon: Icons.male_rounded,
                     isSelected: controller.selectedGender.value == 'ذكر',
                     onTap: () => controller.selectGender('ذكر'),
                   ),
@@ -308,6 +312,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
                 Expanded(
                   child: _GenderOption(
                     label: 'أنثى',
+                    biologicalIcon: Icons.female_rounded,
                     isSelected: controller.selectedGender.value == 'أنثى',
                     onTap: () => controller.selectGender('أنثى'),
                   ),
@@ -333,7 +338,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
           foregroundColor: cs.onPrimary,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
+            borderRadius: BorderRadius.circular(35.r),
           ),
         ),
         child: Text(
@@ -347,11 +352,13 @@ class UserAccountScreen extends GetView<UserAccountController> {
 
 class _GenderOption extends StatelessWidget {
   final String label;
+  final IconData biologicalIcon;
   final bool isSelected;
   final VoidCallback onTap;
 
   const _GenderOption({
     required this.label,
+    required this.biologicalIcon,
     required this.isSelected,
     required this.onTap,
   });
@@ -359,29 +366,47 @@ class _GenderOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final cs = theme.colorScheme;
+    final primaryColor = theme.colorScheme.primary;
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
         decoration: BoxDecoration(
-          color: isSelected ? cs.primary : Colors.transparent,
-          borderRadius: BorderRadius.circular(12.r),
+          color: theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(14.r),
           border: Border.all(
-            color: isSelected ? cs.primary : cs.outlineVariant,
+            color: isSelected ? primaryColor : theme.colorScheme.outlineVariant,
+            width: isSelected ? 1.5 : 1.2,
           ),
         ),
-        child: Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: isSelected
-                ? cs.onPrimary
-                : cs.onSurface.withValues(alpha: 0.6),
-          ),
+        child: Row(
+          children: [
+            Icon(biologicalIcon, size: 24, color: primaryColor),
+            Expanded(
+              child: Text(
+                label,
+                style: context.theme.textTheme.labelLarge?.copyWith(
+                  color: primaryColor,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              width: 20.w,
+              height: 20.h,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: isSelected ? primaryColor : theme.colorScheme.outline,
+                  width: isSelected ? 5.5 : 1.5,
+                ),
+                color: theme.colorScheme.surface,
+              ),
+            ),
+          ],
         ),
       ),
     );

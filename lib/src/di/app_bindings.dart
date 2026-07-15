@@ -2,6 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:nisba_app/src/ui/screens/Auth/OTP/otp_verify_controller.dart';
 import 'package:nisba_app/src/ui/screens/Auth/Register/register_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Restorant/restorant_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Hotels/hotel_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Mall/mall_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/kioks/kioks_controller.dart';
 import 'package:nisba_app/src/ui/screens/Home/controller/home_controller.dart';
 import 'package:nisba_app/src/ui/screens/Notification/notification_controller.dart';
 import 'package:nisba_app/src/ui/screens/Payment/payment_controller.dart';
@@ -21,6 +25,10 @@ import '../data/repository.dart';
 import '../ui/screens/Auth/login/login_controller.dart';
 import '../ui/screens/Cart/cart_controller.dart';
 import '../ui/screens/Favorite/favorite_controller.dart';
+import '../ui/screens/Home/Products/Product Details/product_details_controller.dart';
+import '../ui/screens/Home/Restorant/Restorant Details/restorant_details_controller.dart';
+import '../ui/screens/Home/Services/Hotels/Hotel Details/hotel_details_controller.dart';
+import '../ui/screens/Home/Services/Mall/Mall Details/mall_details_controller.dart';
 import '../ui/screens/Offer/offer_controller.dart';
 import '../ui/screens/Order/controller/order_controller.dart';
 import '../ui/screens/Settings/About/about_controller.dart';
@@ -70,6 +78,14 @@ class AppBinding extends Bindings {
     Get.lazyPut(() => CartController(), fenix: true);
     Get.lazyPut(() => PaymentController(), fenix: true);
     Get.lazyPut(() => OfferController(), fenix: true);
+    Get.lazyPut(() => RestorantController(), fenix: true);
+    Get.lazyPut(() => RestorantDetailsController(), fenix: true);
+    Get.lazyPut(() => ProductDetailsController(), fenix: true);
+    Get.lazyPut(() => MallController(), fenix: true);
+    Get.lazyPut(() => MallDetailsController(), fenix: true);
+    Get.lazyPut(() => HotelController(), fenix: true);
+    Get.lazyPut(() => HotelDetailsController(), fenix: true);
+    Get.lazyPut(() => KioksController(), fenix: true);
 
     //! -----------------------
     Get.lazyPut(

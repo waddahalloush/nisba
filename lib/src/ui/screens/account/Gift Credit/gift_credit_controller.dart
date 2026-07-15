@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 class GiftCreditController extends GetxController {
   final selectedTab = 0.obs; // 0 = QR, 1 = phone
   final phoneController = TextEditingController();
+  RxString phoneNumber = "".obs;
   final noteController = TextEditingController();
   final selectedAmount = 0.0.obs;
-  final countryCode = '+974'.obs;
 
-  final presetAmounts = <double>[10, 20, 30, 50, 100];
+  final presetAmounts = <double>[10, 20, 30, 50, 100, 200, 500, 1000];
   final maxNoteLength = 120;
 
   void selectTab(int index) => selectedTab.value = index;

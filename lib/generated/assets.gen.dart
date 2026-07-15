@@ -49,6 +49,9 @@ class $AssetsImagesGen {
   AssetGenImage get deliveryMan =>
       const AssetGenImage('assets/images/delivery-man.png');
 
+  /// File path: assets/images/faq-bg.png
+  AssetGenImage get faqBg => const AssetGenImage('assets/images/faq-bg.png');
+
   /// File path: assets/images/gift-money.png
   AssetGenImage get giftMoney =>
       const AssetGenImage('assets/images/gift-money.png');
@@ -85,8 +88,23 @@ class $AssetsImagesGen {
   AssetGenImage get orderNoti =>
       const AssetGenImage('assets/images/order-noti.png');
 
+  /// File path: assets/images/point-bg.png
+  AssetGenImage get pointBg =>
+      const AssetGenImage('assets/images/point-bg.png');
+
+  /// File path: assets/images/point-icon-small.png
+  AssetGenImage get pointIconSmall =>
+      const AssetGenImage('assets/images/point-icon-small.png');
+
+  /// File path: assets/images/point-icon.png
+  AssetGenImage get pointIcon =>
+      const AssetGenImage('assets/images/point-icon.png');
+
   /// File path: assets/images/privacy.png
   AssetGenImage get privacy => const AssetGenImage('assets/images/privacy.png');
+
+  /// File path: assets/images/qr-code.png
+  AssetGenImage get qrCode => const AssetGenImage('assets/images/qr-code.png');
 
   /// File path: assets/images/rewards.png
   AssetGenImage get rewards => const AssetGenImage('assets/images/rewards.png');
@@ -107,6 +125,14 @@ class $AssetsImagesGen {
   AssetGenImage get service4 =>
       const AssetGenImage('assets/images/service4.jpg');
 
+  /// File path: assets/images/wallet-bg.png
+  AssetGenImage get walletBg =>
+      const AssetGenImage('assets/images/wallet-bg.png');
+
+  /// File path: assets/images/wallet_icon.png
+  AssetGenImage get walletIcon =>
+      const AssetGenImage('assets/images/wallet_icon.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     appIcon,
@@ -118,6 +144,7 @@ class $AssetsImagesGen {
     catVigi,
     creditOffer,
     deliveryMan,
+    faqBg,
     giftMoney,
     gift,
     googleLogo,
@@ -129,12 +156,18 @@ class $AssetsImagesGen {
     offer2,
     offer3,
     orderNoti,
+    pointBg,
+    pointIconSmall,
+    pointIcon,
     privacy,
+    qrCode,
     rewards,
     service1,
     service2,
     service3,
     service4,
+    walletBg,
+    walletIcon,
   ];
 }
 

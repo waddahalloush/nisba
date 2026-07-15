@@ -26,4 +26,12 @@ class AppRoutesNames {
   static String cart = "/cart";
   static String payment = "/payment";
   static String offer = "/offer";
+  static String restorant = "/restorant";
+  static String restorantDetails = "/restorant-details";
+  static String productDetails = "/product-details";
+  static String mall = "/mall";
+  static String mallDetails = "/mall-details";
+  static String hotel = "/hotel";
+  static String hotelDetails = "/hotel-details";
+  static String kioks = "/kioks";
 }

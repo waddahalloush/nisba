@@ -19,9 +19,21 @@ class HomeCategories extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           children: [
-            _buildItem(theme, 'مطاعم', Assets.images.catFood.path, () {}),
-            _buildItem(theme, 'بقالة', Assets.images.catVigi.path, () {}),
-            _buildItem(theme, 'مقاهي', Assets.images.catCafee.path, () {}),
+            _buildItem(theme, 'مطاعم', Assets.images.catFood.path, () {
+              Get.toNamed(AppRoutesNames.restorant , arguments: {
+                'title':"المطاعم"
+              });
+            }),
+            _buildItem(theme, 'بقالة', Assets.images.catVigi.path, () {
+                Get.toNamed(AppRoutesNames.restorant , arguments: {
+                'title':"بقالة"
+              });
+            }),
+            _buildItem(theme, 'مقاهي', Assets.images.catCafee.path, () {
+                Get.toNamed(AppRoutesNames.restorant , arguments: {
+                'title':"مقاهي"
+              });
+            }),
             _buildItem(
               theme,
               'العروض اليومية',

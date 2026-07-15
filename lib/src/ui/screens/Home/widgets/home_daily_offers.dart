@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
+import 'package:nisba_app/src/routes/routes_names.dart';
 
 /// قسم "عروض اليوم القريبة منك" مع كروت المنتجات الأفقية
 class HomeDailyOffers extends StatelessWidget {
@@ -98,110 +100,118 @@ class HomeDailyOffers extends StatelessWidget {
   ) {
     final onSurface = theme.colorScheme.onSurface;
 
-    return Container(
-      width: 120.w,
-      margin: EdgeInsets.symmetric(horizontal: 3.w),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: theme.colorScheme.shadow.withValues(alpha: 0.025),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16.r),
-                  topRight: Radius.circular(16.r),
-                ),
-                child: SizedBox(
-                  height: 95.h,
-                  width: double.infinity,
-                  child: Image.asset(imageUrl, fit: BoxFit.cover),
-                ),
-              ),
-              Positioned(
-                top: 8.h,
-                left: 8.w,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(6.r),
-                  ),
-                  child: Text(
-                    "وفر\n$savings",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: theme.colorScheme.onPrimary,
-                      fontSize: 9.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.all(5.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: () {
+        Get.toNamed(AppRoutesNames.productDetails);
+      },
+      child: Container(
+        width: 120.w,
+        margin: EdgeInsets.symmetric(horizontal: 3.w),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: theme.colorScheme.shadow.withValues(alpha: 0.025),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 9.sp,
-                    color: onSurface,
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(16.r),
+                    topRight: Radius.circular(16.r),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                  child: SizedBox(
+                    height: 95.h,
+                    width: double.infinity,
+                    child: Image.asset(imageUrl, fit: BoxFit.cover),
+                  ),
                 ),
-                SizedBox(height: 2.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      oldPrice,
-                      style: TextStyle(
-                        color: onSurface.withValues(alpha: 0.45),
-                        fontSize: 10.sp,
-                        decoration: TextDecoration.lineThrough,
-                      ),
+                Positioned(
+                  top: 8.h,
+                  left: 8.w,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 6.w,
+                      vertical: 2.h,
                     ),
-                    Text(
-                      price,
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(6.r),
+                    ),
+                    child: Text(
+                      "وفر\n$savings",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: primaryColor,
+                        color: theme.colorScheme.onPrimary,
+                        fontSize: 9.sp,
                         fontWeight: FontWeight.bold,
-                        fontSize: 11,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 2.h),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    deliveryMeta,
-                    style: TextStyle(
-                      color: onSurface.withValues(alpha: 0.5),
-                      fontSize: 9.sp,
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.all(5.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 9.sp,
+                      color: onSurface,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 2.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        oldPrice,
+                        style: TextStyle(
+                          color: onSurface.withValues(alpha: 0.45),
+                          fontSize: 10.sp,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      Text(
+                        price,
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 2.h),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      deliveryMeta,
+                      style: TextStyle(
+                        color: onSurface.withValues(alpha: 0.5),
+                        fontSize: 9.sp,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

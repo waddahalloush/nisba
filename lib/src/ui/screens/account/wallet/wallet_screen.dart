@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'wallet_controller.dart';
 
 class WalletScreen extends GetView<WalletController> {
@@ -22,23 +23,23 @@ class WalletScreen extends GetView<WalletController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Text(
             'المحفظة',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
           actions: [
             IconButton(
               onPressed: () {},
-              icon: Icon(Iconsax.notification, color: cs.onSurface),
+              icon: Icon(Iconsax.message_question, color: cs.onSurface),
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(Iconsax.message_question, color: cs.onSurface),
+              icon: Icon(Iconsax.notification, color: cs.onSurface),
             ),
           ],
         ),
@@ -79,39 +80,16 @@ class WalletScreen extends GetView<WalletController> {
       width: double.infinity,
       padding: EdgeInsets.all(20.r),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            cs.primary,
-            cs.primary.withValues(alpha: 0.85),
-            cs.primary.withValues(alpha: 0.7),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        image: DecorationImage(
+          image: Assets.images.walletBg.provider(),
+          fit: BoxFit.fill,
         ),
-        borderRadius: BorderRadius.circular(24.r),
-        boxShadow: [
-          BoxShadow(
-            color: cs.primary.withValues(alpha: 0.3),
-            blurRadius: 16,
-            offset: const Offset(0, 6),
-          ),
-        ],
       ),
       child: Column(
         children: [
           // ── User info row ──
           Row(
             children: [
-              Container(
-                width: 44.w,
-                height: 44.h,
-                decoration: BoxDecoration(
-                  color: cs.onPrimary.withValues(alpha: 0.2),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(Iconsax.user, color: cs.onPrimary, size: 22.sp),
-              ),
-              SizedBox(width: 10.w),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +98,7 @@ class WalletScreen extends GetView<WalletController> {
                       () => Text(
                         controller.userName.value,
                         style: TextStyle(
-                          fontSize: 14.sp,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                           color: cs.onPrimary,
                         ),
@@ -130,88 +108,93 @@ class WalletScreen extends GetView<WalletController> {
                     Obx(
                       () => Text(
                         controller.phoneNumber.value,
-                        style: TextStyle(
-                          fontSize: 11.sp,
-                          color: cs.onPrimary.withValues(alpha: 0.8),
-                        ),
+                        style: TextStyle(fontSize: 12.sp, color: cs.onPrimary),
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-
-          SizedBox(height: 20.h),
-
-          // ── Balance ──
-          Obx(
-            () => Text(
-              'رصيدك الحالي',
-              style: TextStyle(
-                fontSize: 12.sp,
-                color: cs.onPrimary.withValues(alpha: 0.8),
-              ),
-            ),
-          ),
-          SizedBox(height: 4.h),
-          Obx(
-            () => Text(
-              '${controller.balance.value.toStringAsFixed(2)} QAR',
-              style: TextStyle(
-                fontSize: 30.sp,
-                fontWeight: FontWeight.bold,
-                color: cs.onPrimary,
-              ),
-            ),
-          ),
-
-          SizedBox(height: 20.h),
-
-          // ── Action buttons ──
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: controller.showBalance,
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: cs.onPrimary,
-                    side: BorderSide(
-                      color: cs.onPrimary.withValues(alpha: 0.4),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                  ),
-                  child: Text(
-                    'عرض الرصيد',
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
+              Container(
+                width: 44.w,
+                height: 44.h,
+                decoration: BoxDecoration(
+                  color: cs.onPrimary.withValues(alpha: 0.2),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: Assets.images.appIcon.provider(),
                   ),
                 ),
               ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: controller.topUpWallet,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: cs.onPrimary,
-                    foregroundColor: cs.primary,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                  ),
-                  child: Text(
-                    'شحن المحفظة',
+            ],
+          ),
+          SizedBox(height: 8.h),
+          // ── Balance ──
+          Text(
+            'رصيدك الحالي',
+            style: TextStyle(fontSize: 12.sp, color: cs.onPrimary),
+          ),
+
+          Obx(
+            () => Text.rich(
+              TextSpan(
+                style: TextStyle(
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.bold,
+                  color: cs.onPrimary,
+                ),
+                children: [
+                  TextSpan(text: controller.balance.value.toStringAsFixed(2)),
+                  TextSpan(
+                    text: 'ر.ق',
                     style: TextStyle(
-                      fontSize: 12.sp,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
+                      color: cs.onPrimary,
                     ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // ── Action buttons ──
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton.icon(
+                onPressed: controller.showBalance,
+                icon: const Icon(Iconsax.eye, color: Colors.white),
+                style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                label: Text(
+                  'عرض الرصيد',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+
+              ElevatedButton(
+                onPressed: controller.topUpWallet,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xfffd990f),
+                  foregroundColor: cs.onPrimary,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.r),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                    horizontal: 15.w,
+                  ),
+                ),
+
+                child: Text(
+                  'شحن المحفظة',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
@@ -265,7 +248,7 @@ class WalletScreen extends GetView<WalletController> {
     final cs = theme.colorScheme;
 
     return Container(
-      padding: EdgeInsets.all(14.r),
+      padding: EdgeInsets.symmetric(horizontal: 14.r, vertical: 5.h),
       decoration: BoxDecoration(
         color: cs.primary.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(16.r),
@@ -290,7 +273,7 @@ class WalletScreen extends GetView<WalletController> {
                   'محفظتك في أمان',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: cs.onSurface,
+                    color: cs.primary,
                   ),
                 ),
                 SizedBox(height: 2.h),
@@ -303,6 +286,7 @@ class WalletScreen extends GetView<WalletController> {
               ],
             ),
           ),
+          Assets.images.walletIcon.image(width: 80, height: 80),
         ],
       ),
     );
@@ -316,12 +300,34 @@ class WalletScreen extends GetView<WalletController> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: 8.h),
-          child: Text(
-            'آخر المعاملات',
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: cs.onSurface,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'العمليات الأخيرة',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: cs.primary,
+                ),
+              ),
+              TextButton.icon(
+                onPressed: () {},
+                iconAlignment: IconAlignment.end,
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                  color: cs.primary,
+                  size: 10.sp,
+                ),
+                label: Text(
+                  'عرض الكل',
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10.sp,
+                    color: cs.primary,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
 

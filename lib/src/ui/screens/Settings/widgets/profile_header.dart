@@ -26,7 +26,7 @@ class ProfileHeader extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(
-        top: 20.h,
+        top: 30.h,
         bottom: 90.h,
         left: 20.w,
         right: 20.w,

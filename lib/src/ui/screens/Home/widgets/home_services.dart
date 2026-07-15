@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
+import 'package:nisba_app/src/routes/routes_names.dart';
 
 /// قسم الخدمات الأفقي
 class HomeServices extends StatelessWidget {
@@ -49,38 +51,43 @@ class HomeServices extends StatelessWidget {
   }
 
   Widget _buildCard(ThemeData theme, String title, String imageUrl) {
-    return SizedBox(
-      width: 90.w,
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: theme.colorScheme.shadow.withValues(alpha: 0.03),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
-                child: Image.asset(imageUrl, fit: BoxFit.cover),
+    return InkWell(
+      onTap: () {
+        Get.toNamed(AppRoutesNames.mall);
+      },
+      child: SizedBox(
+        width: 90.w,
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: theme.colorScheme.shadow.withValues(alpha: 0.03),
+                      blurRadius: 6,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.r),
+                  child: Image.asset(imageUrl, fit: BoxFit.cover),
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 6.h),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 11.sp,
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.87),
+            SizedBox(height: 6.h),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 11.sp,
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.87),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
