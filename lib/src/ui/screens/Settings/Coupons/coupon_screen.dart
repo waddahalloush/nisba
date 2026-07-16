@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'coupon_controller.dart';
 
 class CouponScreen extends GetView<CouponController> {
@@ -22,7 +23,7 @@ class CouponScreen extends GetView<CouponController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,14 +32,14 @@ class CouponScreen extends GetView<CouponController> {
                 'قسائم التوفير',
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: cs.onSurface,
+                  color: cs.primary,
                 ),
               ),
               SizedBox(height: 2.h),
               Text(
                 'اختر القسيمة الأنسب لاحتياجاتك وابدأ التوفير الآن.',
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: cs.onSurface.withValues(alpha: 0.5),
+                  color: cs.onSurface,
                   fontSize: 10.sp,
                 ),
               ),
@@ -53,7 +54,7 @@ class CouponScreen extends GetView<CouponController> {
               // ── Tab bar ──
               _buildTabBar(theme),
 
-              SizedBox(height: 16.h),
+              SizedBox(height: 10.h),
 
               // ── Section title ──
               Text(
@@ -68,12 +69,12 @@ class CouponScreen extends GetView<CouponController> {
               // ── Coupon list ──
               _buildCouponList(theme),
 
-              SizedBox(height: 16.h),
+              SizedBox(height: 10.h),
 
               // ── Bottom code input ──
               _buildCodeInput(theme),
 
-              SizedBox(height: 24.h),
+              SizedBox(height: 16.h),
             ],
           ),
         ),
@@ -96,8 +97,11 @@ class CouponScreen extends GetView<CouponController> {
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 12.h),
                   decoration: BoxDecoration(
-                    color: isSelected ? cs.primary : cs.surface,
-                    borderRadius: BorderRadius.circular(12.r),
+                    border: BoxBorder.fromLTRB(
+                      bottom: BorderSide(
+                        color: isSelected ? cs.primary : cs.surface,
+                      ),
+                    ),
                   ),
                   child: Text(
                     controller.tabs[i],
@@ -105,9 +109,7 @@ class CouponScreen extends GetView<CouponController> {
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w600,
-                      color: isSelected
-                          ? cs.onPrimary
-                          : cs.onSurface.withValues(alpha: 0.55),
+                      color: isSelected ? cs.primary : cs.onSurface,
                     ),
                   ),
                 ),
@@ -124,7 +126,7 @@ class CouponScreen extends GetView<CouponController> {
       () => Column(
         children: controller.filteredCoupons.map((coupon) {
           return Padding(
-            padding: EdgeInsets.only(bottom: 12.h),
+            padding: EdgeInsets.only(bottom: 10.h),
             child: _CouponCard(coupon: coupon),
           );
         }).toList(),
@@ -156,7 +158,7 @@ class CouponScreen extends GetView<CouponController> {
               Icon(Iconsax.ticket_discount, color: cs.primary, size: 20.sp),
               SizedBox(width: 8.w),
               Text(
-                'لديك قسيمة أخرى؟',
+                'ولديك قسيمة أخرى؟',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.onSurface,
@@ -187,7 +189,7 @@ class CouponScreen extends GetView<CouponController> {
                       fontSize: 12.sp,
                     ),
                     filled: true,
-                    fillColor: cs.surfaceContainerHighest,
+                    fillColor: cs.primary.withAlpha(16),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12.r),
                       borderSide: BorderSide.none,
@@ -238,156 +240,218 @@ class _CouponCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
+    // نعتمد اللون الأصفر المستعمل في بطاقة الخصم والزر من لوحة الألوان الأساسية
+    final primaryColor = cs.primary;
+    final darkTextColor = cs.onSurface; // لون النصوص الداكنة في التصميم
+    final grayTextColor = cs.onSurface.withAlpha(190);
+
+    // تحديد الأيقونة المناسبة للبطاقة بناءً على العنوان
+    IconData couponIcon = Iconsax.percentage_square;
+    String prefixText = 'وفر';
+    String discountValue = '15%';
+
+    if (coupon.title.contains('شحن')) {
+      couponIcon = Iconsax.truck_fast;
+      prefixText = 'شحن مجاني';
+      discountValue = '100%';
+    } else if (coupon.title.contains('عروض')) {
+      couponIcon = Iconsax.gift;
+      prefixText = 'وفر';
+      discountValue = '20%';
+    }
 
     return Container(
       decoration: BoxDecoration(
-        color: cs.surface,
-        borderRadius: BorderRadius.circular(20.r),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18.r),
         boxShadow: [
           BoxShadow(
-            color: cs.shadow.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
+      padding: EdgeInsets.all(12.r),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // ── Top section (discount + title) ──
-          Container(
-            padding: EdgeInsets.all(16.r),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [cs.primary, cs.primary.withValues(alpha: 0.85)],
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-              ),
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-            ),
-            child: Column(
-              children: [
-                Row(
+          // ── السطر الأول ──
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // الابن الأول: عمود يحتوي على اسم القسيمة والوصف
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 44.w,
-                      height: 44.h,
-                      decoration: BoxDecoration(
-                        color: cs.onPrimary.withValues(alpha: 0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Iconsax.ticket_discount,
-                        color: cs.onPrimary,
-                        size: 22.sp,
+                    SizedBox(height: 12.h),
+                    Text(
+                      coupon.title,
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.bold,
+                        color: darkTextColor,
                       ),
                     ),
-                    SizedBox(width: 12.w),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            coupon.title,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold,
-                              color: cs.onPrimary,
-                            ),
-                          ),
-                          SizedBox(height: 4.h),
-                          Text(
-                            coupon.discount,
-                            style: TextStyle(
-                              fontSize: 22.sp,
-                              fontWeight: FontWeight.bold,
-                              color: cs.onPrimary,
-                            ),
-                          ),
-                        ],
-                      ),
+                    SizedBox(height: 6.h),
+                    Text(
+                      coupon.description,
+                      style: TextStyle(fontSize: 11.sp, color: grayTextColor),
                     ),
                   ],
                 ),
-                SizedBox(height: 10.h),
-                Text(
-                  coupon.maxSaving,
-                  style: TextStyle(
-                    fontSize: 11.sp,
-                    color: cs.onPrimary.withValues(alpha: 0.9),
+              ),
+              SizedBox(width: 12.w),
+              // الابن الثاني: حاوية باللون الأساسي تحتوي على قيمة التوفير والحد الأقصى والأيقونة
+              Container(
+                width: 135.w,
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
+
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: Assets.images.ticket.provider(),
+                    fit: BoxFit.fill,
                   ),
                 ),
-              ],
-            ),
-          ),
-
-          // ── Bottom section ──
-          Padding(
-            padding: EdgeInsets.all(14.r),
-            child: Column(
-              children: [
-                // Min order + expiry
-                Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Iconsax.shopping_cart,
-                            color: cs.onSurface.withValues(alpha: 0.5),
-                            size: 14.sp,
-                          ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            coupon.minOrder,
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              color: cs.onSurface.withValues(alpha: 0.55),
-                            ),
-                          ),
-                        ],
+                    Text(
+                      prefixText,
+                      style: TextStyle(
+                        fontSize: 10.sp,
+                        color: Colors.white.withOpacity(0.9),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Iconsax.clock, color: cs.error, size: 14.sp),
-                        SizedBox(width: 4.w),
                         Text(
-                          coupon.expiry,
-                          style: TextStyle(fontSize: 10.sp, color: cs.error),
+                          discountValue,
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            height: 1.1,
+                          ),
                         ),
+                        SizedBox(width: 12.w),
+                        Icon(couponIcon, color: Colors.white, size: 32.sp),
                       ],
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      coupon.maxSaving,
+                      style: TextStyle(
+                        fontSize: 8.sp,
+                        color: Colors.white.withOpacity(0.9),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
+              ),
+            ],
+          ),
 
-                SizedBox(height: 12.h),
+          SizedBox(height: 16.h),
 
-                // Use button
-                SizedBox(
-                  width: double.infinity,
-                  height: 42.h,
-                  child: ElevatedButton(
-                    onPressed: () =>
-                        Get.find<CouponController>().useCoupon(coupon),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: cs.primary,
-                      foregroundColor: cs.onPrimary,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
+          // خط فاصل رفيع جداً قبل السطر الثاني كما بالصورة
+          Divider(color: Colors.grey.shade100, height: 1),
+
+          SizedBox(height: 12.h),
+
+          // ── السطر الثاني ──
+          Row(
+            children: [
+              // الحد الأدنى
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Iconsax.bag_2, size: 14.sp, color: primaryColor),
+                  SizedBox(width: 4.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'الحد الأدنى للطلب',
+                        style: TextStyle(fontSize: 8.sp, color: grayTextColor),
                       ),
+                      Text(
+                        coupon.minOrder,
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold,
+                          color: darkTextColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // ديفايدر رأسي
+              Container(
+                height: 20.h,
+                width: 1,
+                color: Colors.grey.shade300,
+                margin: EdgeInsets.symmetric(horizontal: 12.w),
+              ),
+
+              // المدة
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Iconsax.clock, size: 14.sp, color: primaryColor),
+                  SizedBox(width: 4.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'ينتهي خلال',
+                        style: TextStyle(fontSize: 8.sp, color: grayTextColor),
+                      ),
+                      Text(
+                        coupon.expiry.replaceAll('ينتهي خلال ', ''),
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold,
+                          color: darkTextColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              const Spacer(),
+              // زر استخدم القسيمة (مفرغ ذو حواف دائرية)
+              SizedBox(
+                height: 34.h,
+                child: OutlinedButton(
+                  onPressed: () =>
+                      Get.find<CouponController>().useCoupon(coupon),
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: primaryColor, width: 1.2),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
-                    child: Text(
-                      'استخدم القسيمة',
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  ),
+                  child: Text(
+                    'استخدم القسيمة',
+                    style: TextStyle(
+                      fontSize: 11.sp,
+                      fontWeight: FontWeight.bold,
+                      color: primaryColor,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

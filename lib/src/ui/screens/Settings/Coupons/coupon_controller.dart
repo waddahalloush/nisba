@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 class CouponModel {
   final String title;
+  final String description;
   final String discount;
   final String maxSaving;
   final String minOrder;
@@ -11,6 +12,7 @@ class CouponModel {
 
   const CouponModel({
     required this.title,
+    required this.description,
     required this.discount,
     required this.maxSaving,
     required this.minOrder,
@@ -28,25 +30,28 @@ class CouponController extends GetxController {
   final coupons = <CouponModel>[
     const CouponModel(
       title: 'قسيمة التسوق',
+      description: 'خصم على جميع منتجات التسوق',
       discount: 'وفر 15%',
       maxSaving: 'حد أقصى 75 ريال قطري',
-      minOrder: 'الحد الأدنى للطلب 150 ر.ق',
+      minOrder: '150 ر.ق',
       expiry: 'ينتهي خلال 5 أيام',
       status: 'valid',
     ),
     const CouponModel(
       title: 'قسيمة الشحن',
+      description: 'شحن مجاني على جميع الطلبات',
       discount: 'شحن مجاني 100%',
       maxSaving: 'حد أقصى 25 ريال قطري',
-      minOrder: 'الحد الأدنى للطلب 100 ر.ق',
+      minOrder: '100 ر.ق',
       expiry: 'ينتهي خلال 7 أيام',
       status: 'valid',
     ),
     const CouponModel(
       title: 'قسيمة العروض',
+      description: 'خصم على العروض والمنتجات المختارة',
       discount: 'وفر 20%',
       maxSaving: 'حد أقصى 100 ريال قطري',
-      minOrder: 'الحد الأدنى للطلب 200 ر.ق',
+      minOrder: '200 ر.ق',
       expiry: 'ينتهي خلال 12 يوم',
       status: 'valid',
     ),

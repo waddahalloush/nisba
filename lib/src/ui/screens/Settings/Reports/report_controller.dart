@@ -1,5 +1,4 @@
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MonthDetail {
@@ -28,38 +27,40 @@ class ReportController extends GetxController {
   final pointsChange = 0.00.obs;
   final lastUpdate = '2:32 م'.obs;
 
-  // 30-day chart data
+  final chartPeriod = '30 يوم'.obs;
+
+  // 30-day chart data (values 0-1000 range)
   final chartSpots = <FlSpot>[
-    const FlSpot(0, 3),
-    const FlSpot(1, 5),
-    const FlSpot(2, 4),
-    const FlSpot(3, 8),
-    const FlSpot(4, 6),
-    const FlSpot(5, 10),
-    const FlSpot(6, 7),
-    const FlSpot(7, 9),
-    const FlSpot(8, 12),
-    const FlSpot(9, 8),
-    const FlSpot(10, 11),
-    const FlSpot(11, 14),
-    const FlSpot(12, 10),
-    const FlSpot(13, 15),
-    const FlSpot(14, 13),
-    const FlSpot(15, 18),
-    const FlSpot(16, 16),
-    const FlSpot(17, 20),
-    const FlSpot(18, 17),
-    const FlSpot(19, 22),
-    const FlSpot(20, 19),
-    const FlSpot(21, 24),
-    const FlSpot(22, 21),
-    const FlSpot(23, 26),
-    const FlSpot(24, 23),
-    const FlSpot(25, 28),
-    const FlSpot(26, 25),
-    const FlSpot(27, 30),
-    const FlSpot(28, 27),
-    const FlSpot(29, 32),
+    const FlSpot(0, 300),
+    const FlSpot(1, 420),
+    const FlSpot(2, 350),
+    const FlSpot(3, 550),
+    const FlSpot(4, 480),
+    const FlSpot(5, 620),
+    const FlSpot(6, 510),
+    const FlSpot(7, 680),
+    const FlSpot(8, 590),
+    const FlSpot(9, 720),
+    const FlSpot(10, 640),
+    const FlSpot(11, 780),
+    const FlSpot(12, 700),
+    const FlSpot(13, 830),
+    const FlSpot(14, 750),
+    const FlSpot(15, 880),
+    const FlSpot(16, 810),
+    const FlSpot(17, 910),
+    const FlSpot(18, 850),
+    const FlSpot(19, 950),
+    const FlSpot(20, 890),
+    const FlSpot(21, 980),
+    const FlSpot(22, 920),
+    const FlSpot(23, 1000),
+    const FlSpot(24, 930),
+    const FlSpot(25, 970),
+    const FlSpot(26, 880),
+    const FlSpot(27, 940),
+    const FlSpot(28, 860),
+    const FlSpot(29, 910),
   ];
 
   final monthDetails = <MonthDetail>[

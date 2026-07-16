@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'widgets/add_car_form.dart';
+
 class CarModel {
   final String plateNumber;
   final String brand;
@@ -51,7 +53,7 @@ class MyCarsController extends GetxController {
       color: 'أحمر',
       imageUrl: '',
     ),
-  ];
+  ].obs;
 
   void addCar() {
     if (plateController.text.trim().isEmpty) {
@@ -75,6 +77,7 @@ class MyCarsController extends GetxController {
     selectedBrand.value = '';
     selectedCategory.value = '';
     selectedColor.value = '';
+    Get.back();
     Get.snackbar('نجاح', 'تمت إضافة السيارة بنجاح');
   }
 
@@ -85,6 +88,12 @@ class MyCarsController extends GetxController {
   void selectBrand(String brand) => selectedBrand.value = brand;
   void selectCategory(String cat) => selectedCategory.value = cat;
   void selectColor(String color) => selectedColor.value = color;
+
+  void showAddCarBottomSheet() => Get.bottomSheet(
+    const AddCarForm(),
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+  );
 
   void showBrandPicker() => _showPicker('الماركة', brands, selectBrand);
   void showCategoryPicker() => _showPicker('الفئة', categories, selectCategory);

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'report_controller.dart';
 
 class ReportScreen extends GetView<ReportController> {
@@ -23,13 +24,13 @@ class ReportScreen extends GetView<ReportController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Text(
             'التقارير',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
         ),
@@ -79,6 +80,7 @@ class ReportScreen extends GetView<ReportController> {
 
     return Obx(
       () => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _TabChip(
             label: 'شهري',
@@ -114,6 +116,10 @@ class ReportScreen extends GetView<ReportController> {
           end: Alignment.bottomLeft,
         ),
         borderRadius: BorderRadius.circular(20.r),
+        image: DecorationImage(
+          image: Assets.images.reportBg.provider(),
+          fit: BoxFit.fill,
+        ),
         boxShadow: [
           BoxShadow(
             color: cs.primary.withValues(alpha: 0.25),
@@ -123,6 +129,7 @@ class ReportScreen extends GetView<ReportController> {
         ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'المبلغ الكلي',
@@ -134,7 +141,7 @@ class ReportScreen extends GetView<ReportController> {
           SizedBox(height: 4.h),
           Obx(
             () => Text(
-              '${controller.totalAmount.value.toStringAsFixed(2)} ر.ب',
+              '${controller.totalAmount.value.toStringAsFixed(2)} ر.ق',
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -144,12 +151,22 @@ class ReportScreen extends GetView<ReportController> {
           ),
           SizedBox(height: 4.h),
           Obx(
-            () => Text(
-              '${controller.totalChange.value.toStringAsFixed(2)}% عن الشهر الماضي',
-              style: TextStyle(
-                fontSize: 11.sp,
-                color: cs.onPrimary.withValues(alpha: 0.8),
-              ),
+            () => Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  '${controller.totalChange.value.toStringAsFixed(2)}% عن الشهر الماضي',
+                  style: TextStyle(
+                    fontSize: 11.sp,
+                    color: cs.onPrimary.withValues(alpha: 0.8),
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_downward,
+                  size: 12.sp,
+                  color: cs.onPrimary.withValues(alpha: 0.8),
+                ),
+              ],
             ),
           ),
         ],
@@ -159,6 +176,7 @@ class ReportScreen extends GetView<ReportController> {
 
   Widget _buildChartCard(ThemeData theme) {
     final cs = theme.colorScheme;
+    const chartColor = Color(0xFFF5A623);
 
     return Container(
       padding: EdgeInsets.all(14.r),
@@ -176,20 +194,77 @@ class ReportScreen extends GetView<ReportController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'نظرة عامة على الأداء',
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: cs.onSurface,
-            ),
+          // ── Header row with title + period dropdown ──
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'نظرة عامة على الأداء',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: cs.onSurface,
+                      ),
+                    ),
+                    SizedBox(height: 2.h),
+                    Text(
+                      'آخر 30 يوم',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: cs.onSurface.withValues(alpha: 0.5),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Obx(
+                () => Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 6.h,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25.r),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: controller.chartPeriod.value,
+                      isDense: true,
+                      icon: Icon(
+                        Iconsax.arrow_down_1,
+                        size: 14.sp,
+                        color: Colors.grey.shade400,
+                      ),
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey.shade400,
+                      ),
+                      dropdownColor: cs.surface,
+                      borderRadius: BorderRadius.circular(10.r),
+                      items: const [
+                        DropdownMenuItem(value: '7 يوم', child: Text('7 يوم')),
+                        DropdownMenuItem(
+                          value: '30 يوم',
+                          child: Text('30 يوم'),
+                        ),
+                        DropdownMenuItem(
+                          value: '90 يوم',
+                          child: Text('90 يوم'),
+                        ),
+                      ],
+                      onChanged: (val) {
+                        if (val != null) controller.chartPeriod.value = val;
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          SizedBox(height: 2.h),
-          Text(
-            'آخر 30 يوم',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: cs.onSurface.withValues(alpha: 0.5),
-            ),
-          ),
+
           SizedBox(height: 16.h),
 
           // ── Line chart ──
@@ -200,19 +275,20 @@ class ReportScreen extends GetView<ReportController> {
                 gridData: FlGridData(
                   show: true,
                   drawVerticalLine: false,
-                  horizontalInterval: 10,
+                  horizontalInterval: 250,
                   getDrawingHorizontalLine: (value) => FlLine(
-                    color: cs.outlineVariant.withValues(alpha: 0.5),
+                    color: cs.outlineVariant.withValues(alpha: 0.4),
                     strokeWidth: 1,
+                    dashArray: [4, 4],
                   ),
                 ),
                 titlesData: FlTitlesData(
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 28,
+                      reservedSize: 36,
                       getTitlesWidget: (value, meta) {
-                        if (value % 10 != 0) {
+                        if (value % 250 != 0 || value == 0) {
                           return const SizedBox.shrink();
                         }
                         return Text(
@@ -231,7 +307,7 @@ class ReportScreen extends GetView<ReportController> {
                       reservedSize: 20,
                       interval: 5,
                       getTitlesWidget: (value, meta) {
-                        final days = [1, 5, 10, 15, 20, 25, 30];
+                        const days = {1, 5, 10, 15, 20, 25, 30};
                         if (!days.contains(value.toInt())) {
                           return const SizedBox.shrink();
                         }
@@ -256,18 +332,48 @@ class ReportScreen extends GetView<ReportController> {
                 minX: 0,
                 maxX: 29,
                 minY: 0,
-                maxY: 35,
+                maxY: 1100,
+                lineTouchData: LineTouchData(
+                  touchTooltipData: LineTouchTooltipData(
+                    getTooltipColor: (_) => chartColor,
+                    getTooltipItems: (spots) => spots.map((spot) {
+                      return LineTooltipItem(
+                        spot.y.toInt().toString(),
+                        const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
                 lineBarsData: [
                   LineChartBarData(
                     spots: controller.chartSpots,
                     isCurved: true,
-                    color: cs.primary,
+                    color: chartColor,
                     barWidth: 2.5,
                     isStrokeCapRound: true,
-                    dotData: const FlDotData(show: false),
+                    dotData: FlDotData(
+                      show: true,
+                      getDotPainter: (spot, percent, barData, index) =>
+                          FlDotCirclePainter(
+                            radius: 3,
+                            color: chartColor,
+                            strokeWidth: 0,
+                          ),
+                    ),
                     belowBarData: BarAreaData(
                       show: true,
-                      color: cs.primary.withValues(alpha: 0.08),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          chartColor.withValues(alpha: 0.15),
+                          chartColor.withValues(alpha: 0.0),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -284,13 +390,6 @@ class ReportScreen extends GetView<ReportController> {
 
     final metrics = [
       _MetricData(
-        icon: Iconsax.wallet_money,
-        label: 'قيمة التوفير',
-        value: controller.savingsValue,
-        change: controller.savingsChange,
-        color: cs.primary,
-      ),
-      _MetricData(
         icon: Iconsax.discount_shape,
         label: 'مجموع الخصومات',
         value: controller.discountsValue,
@@ -298,18 +397,25 @@ class ReportScreen extends GetView<ReportController> {
         color: cs.primary,
       ),
       _MetricData(
-        icon: Iconsax.bag_2,
-        label: 'عدد الطلبات المنجزة',
-        value: controller.completedOrders,
-        change: controller.ordersChange,
+        icon: Iconsax.shopping_bag,
+        label: 'قيمة التوفير',
+        value: controller.savingsValue,
+        change: controller.savingsChange,
+        color: cs.primary,
+      ),
+      _MetricData(
+        icon: Iconsax.medal_star,
+        label: 'عدد النقاط المكتسبة',
+        value: controller.earnedPoints,
+        change: controller.pointsChange,
         color: cs.primary,
         isInt: true,
       ),
       _MetricData(
-        icon: Iconsax.star,
-        label: 'عدد النقاط المكتسبة',
-        value: controller.earnedPoints,
-        change: controller.pointsChange,
+        icon: Iconsax.shopping_cart,
+        label: 'عدد الطلبات المنجزة',
+        value: controller.completedOrders,
+        change: controller.ordersChange,
         color: cs.primary,
         isInt: true,
       ),
@@ -322,7 +428,7 @@ class ReportScreen extends GetView<ReportController> {
         crossAxisCount: 2,
         mainAxisSpacing: 10.h,
         crossAxisSpacing: 10.w,
-        childAspectRatio: 1.4,
+        childAspectRatio: 1.7,
       ),
       itemCount: metrics.length,
       itemBuilder: (context, index) {
@@ -469,8 +575,9 @@ class _TabChip extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         decoration: BoxDecoration(
-          color: isSelected ? cs.primary : cs.surface,
-          borderRadius: BorderRadius.circular(12.r),
+          border: BoxBorder.fromLTRB(
+            bottom: BorderSide(color: isSelected ? cs.primary : cs.surface),
+          ),
         ),
         child: Text(
           label,
@@ -478,7 +585,7 @@ class _TabChip extends StatelessWidget {
             fontSize: 13.sp,
             fontWeight: FontWeight.w600,
             color: isSelected
-                ? cs.onPrimary
+                ? cs.primary
                 : cs.onSurface.withValues(alpha: 0.55),
           ),
         ),
@@ -531,8 +638,30 @@ class _MetricCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            metric.label,
+            style: TextStyle(
+              fontSize: 11.sp,
+              color: cs.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Obx(
+                () => Text(
+                  metric.isInt
+                      ? metric.value.value.toInt().toString()
+                      : '${metric.value.value.toStringAsFixed(2)} ر.ق',
+                  style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.bold,
+                    color: cs.onSurface,
+                  ),
+                ),
+              ),
               Container(
                 width: 32.w,
                 height: 32.h,
@@ -542,38 +671,22 @@ class _MetricCard extends StatelessWidget {
                 ),
                 child: Icon(metric.icon, color: metric.color, size: 16.sp),
               ),
-              const Spacer(),
+            ],
+          ),
+          SizedBox(height: 2.h),
+          Row(
+            children: [
               Obx(
                 () => Text(
-                  '${metric.change.value.toStringAsFixed(2)}%',
+                  '${metric.change.value.toStringAsFixed(2)}% عن الشهر الماضي',
                   style: TextStyle(
                     fontSize: 10.sp,
                     color: cs.onSurface.withValues(alpha: 0.4),
                   ),
                 ),
               ),
+              Icon(Icons.arrow_downward, size: 12.sp, color: cs.primary),
             ],
-          ),
-          SizedBox(height: 8.h),
-          Obx(
-            () => Text(
-              metric.isInt
-                  ? metric.value.value.toInt().toString()
-                  : '${metric.value.value.toStringAsFixed(2)} ر.ب',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: cs.onSurface,
-              ),
-            ),
-          ),
-          SizedBox(height: 2.h),
-          Text(
-            metric.label,
-            style: TextStyle(
-              fontSize: 10.sp,
-              color: cs.onSurface.withValues(alpha: 0.5),
-            ),
           ),
         ],
       ),

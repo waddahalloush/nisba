@@ -43,17 +43,17 @@ class LoginScreen extends GetView<LoginController> {
                           ),
                         ),
                       ),
-                      GestureDetector(
-                        onTap: controller.showColorPallet,
-                        child: Container(
-                          width: 30.w,
-                          height: 30.h,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: primaryColor,
-                          ),
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: controller.showColorPallet,
+                      //   child: Container(
+                      //     width: 30.w,
+                      //     height: 30.h,
+                      //     decoration: BoxDecoration(
+                      //       shape: BoxShape.circle,
+                      //       color: primaryColor,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

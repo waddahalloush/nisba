@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../../../generated/assets.gen.dart';
+
 class FavoriteItem {
   final String imageUrl;
   final String name;
@@ -22,22 +24,22 @@ class FavoriteController extends GetxController {
   final selectedTab = 0.obs; // 0 = restaurants, 1 = meals
 
   final restaurants = <FavoriteItem>[
-    const FavoriteItem(
-      imageUrl: 'assets/images/offer1.jpg',
+    FavoriteItem(
+      imageUrl: Assets.images.azSham.path,
       name: 'عز الشام',
       rating: 3.0,
       tags: ['مشويات', 'عربي'],
       deliveryTime: '30-40 دقيقة',
     ),
-    const FavoriteItem(
-      imageUrl: 'assets/images/offer2.jpg',
+    FavoriteItem(
+      imageUrl: Assets.images.burgerLand.path,
       name: 'برجر لاند',
       rating: 4.2,
       tags: ['برجر', 'أمريكي'],
       deliveryTime: '20-30 دقيقة',
     ),
-    const FavoriteItem(
-      imageUrl: 'assets/images/offer3.jpg',
+    FavoriteItem(
+      imageUrl: Assets.images.pastaItaly.path,
       name: 'باستا إيطاليا',
       rating: 4.6,
       tags: ['إيطالي', 'باستا'],
@@ -46,22 +48,22 @@ class FavoriteController extends GetxController {
   ];
 
   final meals = <FavoriteItem>[
-    const FavoriteItem(
-      imageUrl: 'assets/images/offer1.jpg',
+    FavoriteItem(
+      imageUrl: Assets.images.kfc.path,
       name: 'دجاج كنتاكي',
       rating: 4.7,
       tags: ['مقرمش', 'حار', 'أمريكي'],
       deliveryTime: '20-30 دقيقة',
     ),
-    const FavoriteItem(
-      imageUrl: 'assets/images/offer2.jpg',
+    FavoriteItem(
+      imageUrl: Assets.images.zinger.path,
       name: 'زنجر',
       rating: 4.5,
       tags: ['حار', 'مقرمش', 'أمريكي'],
       deliveryTime: '20-30 دقيقة',
     ),
-    const FavoriteItem(
-      imageUrl: 'assets/images/offer3.jpg',
+    FavoriteItem(
+      imageUrl: Assets.images.crispy.path,
       name: 'كريسبي',
       rating: 4.6,
       tags: ['مقرمش', 'حار', 'أمريكي'],

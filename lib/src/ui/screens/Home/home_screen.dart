@@ -33,7 +33,7 @@ class HomeScreen extends GetView<HomeController> {
           const HomeServices(),
 
           // مسافة أمان سفليّة
-          SliverToBoxAdapter(child: SizedBox(height: 200.h)),
+          SliverToBoxAdapter(child: SizedBox(height: 60.h)),
         ],
       ),
     );

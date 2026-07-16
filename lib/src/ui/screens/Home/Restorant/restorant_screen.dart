@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'restorant_controller.dart';
 
 class RestorantScreen extends GetView<RestorantController> {
@@ -14,80 +15,81 @@ class RestorantScreen extends GetView<RestorantController> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: cs.surfaceContainerHighest,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
-          ),
-          title: Obx(
-            () => Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  controller.categoryTitle.value,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: cs.onSurface,
-                  ),
-                ),
-                Text(
-                  'اكتشف أفضل ${controller.categoryTitle.value} القريبة منك',
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: cs.onSurface.withValues(alpha: 0.5),
-                    fontSize: 10.sp,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Iconsax.notification, color: cs.onSurface),
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: cs.surfaceContainerHighest,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+        title: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Promo cards ──
-              _buildPromoCards(theme),
-
-              SizedBox(height: 16.h),
-
-              // ── Search bar ──
-              _buildSearchBar(theme),
-
-              SizedBox(height: 14.h),
-
-              // ── Category icons ──
-              _buildCategoryIcons(theme),
-
-              SizedBox(height: 16.h),
-
-              // ── Discount banner ──
-              _buildDiscountBanner(theme),
-
-              SizedBox(height: 16.h),
-
-              // ── Nearby restaurants section ──
-              _buildNearbySection(theme),
-
-              SizedBox(height: 12.h),
-
-              // ── Footer actions ──
-              _buildFooterActions(theme),
-
-              SizedBox(height: 24.h),
+              Text(
+                controller.categoryTitle.value,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: cs.primary,
+                ),
+              ),
+              Text(
+                'اكتشف أفضل ${controller.categoryTitle.value} القريبة منك',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: cs.onSurface.withValues(alpha: 0.5),
+                  fontSize: 10.sp,
+                ),
+              ),
             ],
           ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Iconsax.notification, color: cs.primary),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // ── Promo cards ──
+            _buildPromoCards(theme),
+
+            SizedBox(height: 16.h),
+
+            // ── Search bar ──
+            _buildSearchBar(theme),
+
+            SizedBox(height: 14.h),
+
+            // ── Category icons ──
+            _buildCategoryIcons(theme),
+
+            SizedBox(height: 16.h),
+
+            // ── Discount banner ──
+            _buildDiscountBanner(theme),
+
+            SizedBox(height: 16.h),
+
+            // ── Nearby restaurants section ──
+            _buildNearbySection(theme, "المطاعم القريبة منك"),
+
+            SizedBox(height: 12.h),
+
+            // ── Footer actions ──
+            _buildFooterActions(theme),
+
+            SizedBox(height: 16.h),
+
+            // ── Nearby restaurants section ──
+            _buildNearbySection(theme, "أشهر المطاعم"),
+            SizedBox(height: 24.h),
+          ],
         ),
       ),
     );
@@ -97,124 +99,141 @@ class RestorantScreen extends GetView<RestorantController> {
     final cs = theme.colorScheme;
 
     return SizedBox(
-      height: 140.h,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        children: [
-          Container(
-            width: 260.w,
-            margin: EdgeInsets.only(left: 10.w),
-            padding: EdgeInsets.all(14.r),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [cs.primary, cs.primary.withValues(alpha: 0.75)],
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-              ),
-              borderRadius: BorderRadius.circular(20.r),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'وجبات',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                          color: cs.onPrimary,
+      height: 120.h,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Stack(
+                fit: StackFit.passthrough,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                      color: cs.primary.withAlpha(20),
+
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ClipOval(
+                          child: Assets.images.appIcon.image(
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        'ب 25 ر.س',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.bold,
-                          color: cs.onPrimary,
+                        Text(
+                          'وفر حتى 40%',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w900,
+                            color: cs.onSurface,
+                          ),
                         ),
-                      ),
-                    ],
+
+                        Text(
+                          'على طلبك الأول',
+                          style: TextStyle(fontSize: 9.sp, color: cs.onSurface),
+                        ),
+
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 6.w,
+                            vertical: 3.h,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.r),
+                            color: cs.primary.withAlpha(42),
+                          ),
+                          child: Text(
+                            'الكود : First40',
+                            style: TextStyle(
+                              fontSize: 9.sp,
+                              color: cs.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  width: 70.w,
-                  height: 70.h,
-                  decoration: BoxDecoration(
-                    color: cs.onPrimary.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(14.r),
+                  Positioned(
+                    bottom: 5,
+                    left: 8,
+                    child: Assets.images.resIcon.image(width: 80),
                   ),
-                  child: Icon(
-                    Icons.medical_information,
-                    color: cs.onPrimary,
-                    size: 34.sp,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 260.w,
-            padding: EdgeInsets.all(14.r),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  cs.primary.withValues(alpha: 0.85),
-                  cs.primary.withValues(alpha: 0.6),
                 ],
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
               ),
-              borderRadius: BorderRadius.circular(20.r),
             ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'وفر حتى 40%',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                          color: cs.onPrimary,
+            SizedBox(width: 8.w),
+
+            Expanded(
+              child: Stack(
+                fit: StackFit.passthrough,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(8.r),
+                    decoration: BoxDecoration(
+                      color: cs.primary.withAlpha(20),
+
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ClipOval(
+                          child: Assets.images.appIcon.image(
+                            width: 40,
+                            height: 40,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        'الكود FIRST40',
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                          color: cs.onPrimary,
+                        Text(
+                          'وجبات ب 25 ر.ق',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w900,
+                            color: cs.onSurface,
+                          ),
                         ),
-                      ),
-                    ],
+
+                        Text(
+                          'اختر من قائمة مميزة',
+                          style: TextStyle(fontSize: 9.sp, color: cs.onSurface),
+                        ),
+
+                        Row(
+                          children: [
+                            Icon(
+                              Iconsax.tick_circle,
+                              color: cs.error,
+                              size: 14.sp,
+                            ),
+                            Text(
+                              'ينتهي خلال 7 أيام',
+                              style: TextStyle(
+                                fontSize: 9.sp,
+                                color: cs.onSurface,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  width: 70.w,
-                  height: 70.h,
-                  decoration: BoxDecoration(
-                    color: cs.onPrimary.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(14.r),
+                  Positioned(
+                    bottom: 5,
+                    left: 8,
+                    child: Assets.images.resIcon2.image(width: 80),
                   ),
-                  child: Icon(
-                    Iconsax.discount_shape,
-                    color: cs.onPrimary,
-                    size: 34.sp,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -283,19 +302,15 @@ class RestorantScreen extends GetView<RestorantController> {
                     ),
                   ],
                 ),
-                child: Icon(
-                  cat['icon'] as IconData,
-                  color: cs.primary,
-                  size: 24.sp,
-                ),
+                child: Image.asset(cat['icon'] as String),
               ),
               SizedBox(height: 6.h),
               Text(
                 cat['label'] as String,
                 style: TextStyle(
                   fontSize: 10.sp,
-                  fontWeight: FontWeight.w500,
-                  color: cs.onSurface.withValues(alpha: 0.7),
+                  fontWeight: FontWeight.w600,
+                  color: cs.onSurface,
                 ),
               ),
             ],
@@ -309,9 +324,9 @@ class RestorantScreen extends GetView<RestorantController> {
     final cs = theme.colorScheme;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Container(
-        padding: EdgeInsets.all(14.r),
+        padding: EdgeInsets.all(10.r),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [cs.primary, cs.primary.withValues(alpha: 0.7)],
@@ -323,16 +338,17 @@ class RestorantScreen extends GetView<RestorantController> {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'خصم 20% على جميع الطلبات',
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
                       color: cs.onPrimary,
                     ),
                   ),
-                  SizedBox(height: 2.h),
+                  SizedBox(height: 4.h),
                   Text(
                     'فترة محدودة - اطلب الآن',
                     style: TextStyle(
@@ -340,17 +356,38 @@ class RestorantScreen extends GetView<RestorantController> {
                       color: cs.onPrimary.withValues(alpha: 0.85),
                     ),
                   ),
+                  SizedBox(height: 4.h),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 6.h,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      color: cs.onPrimary,
+                    ),
+                    child: Text(
+                      'اطلب الآن',
+                      style: TextStyle(fontSize: 11.sp, color: cs.primary),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Container(
-              width: 56.w,
-              height: 56.h,
-              decoration: BoxDecoration(
-                color: cs.onPrimary.withValues(alpha: 0.2),
-                borderRadius: BorderRadius.circular(14.r),
-              ),
-              child: Icon(Iconsax.home, color: cs.onPrimary, size: 28.sp),
+            Assets.images.resIcon.image(width: 80.w),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Assets.images.bubble.image(width: 80.w),
+                Text(
+                  'خصم\n20%',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    color: cs.primary,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -358,7 +395,7 @@ class RestorantScreen extends GetView<RestorantController> {
     );
   }
 
-  Widget _buildNearbySection(ThemeData theme) {
+  Widget _buildNearbySection(ThemeData theme, String title) {
     final cs = theme.colorScheme;
 
     return Column(
@@ -366,19 +403,17 @@ class RestorantScreen extends GetView<RestorantController> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Obx(
-            () => Text(
-              controller.nearbyTitle.value,
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: cs.onSurface,
-              ),
+          child: Text(
+            title,
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: cs.onSurface,
             ),
           ),
         ),
         SizedBox(height: 10.h),
         SizedBox(
-          height: 220.h,
+          height: 200.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -393,7 +428,6 @@ class RestorantScreen extends GetView<RestorantController> {
                   );
                 },
                 child: Container(
-                  width: 180.w,
                   margin: EdgeInsets.only(left: 10.w),
                   decoration: BoxDecoration(
                     color: cs.surface,
@@ -410,69 +444,90 @@ class RestorantScreen extends GetView<RestorantController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Image
-                      ClipRRect(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(16.r),
-                        ),
-                        child: Container(
-                          height: 110.h,
-                          width: double.infinity,
-                          color: cs.surfaceContainerHighest,
-                          child: Icon(
-                            Iconsax.shop,
-                            color: cs.primary.withValues(alpha: 0.4),
-                            size: 40.sp,
-                          ),
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16.r),
+                          child: Image.asset(r.imagePath),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(10.r),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              r.name,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: cs.onSurface,
-                              ),
-                            ),
-                            SizedBox(height: 4.h),
-                            Row(
-                              children: [
-                                Icon(
-                                  Iconsax.star1,
-                                  color: cs.primary,
-                                  size: 14.sp,
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.r),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                r.name,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: cs.onSurface,
                                 ),
-                                SizedBox(width: 3.w),
-                                Text(
-                                  r.rating.toString(),
-                                  style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w600,
+                              ),
+                              SizedBox(height: 4.h),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Iconsax.star1,
                                     color: cs.primary,
+                                    size: 14.sp,
                                   ),
-                                ),
-                                SizedBox(width: 8.w),
-                                Text(
-                                  '• ${r.deliveryTime}',
-                                  style: TextStyle(
-                                    fontSize: 10.sp,
-                                    color: cs.onSurface.withValues(alpha: 0.5),
+                                  Icon(
+                                    Iconsax.star1,
+                                    color: cs.primary,
+                                    size: 14.sp,
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 2.h),
-                            Text(
-                              r.distance,
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: cs.onSurface.withValues(alpha: 0.45),
+                                  SizedBox(width: 3.w),
+                                  Text(
+                                    r.rating.toString(),
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: cs.primary,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
+
+                              SizedBox(height: 2.h),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Iconsax.timer_14,
+                                    color: cs.onSurface,
+                                    size: 14.sp,
+                                  ),
+                                  SizedBox(width: 3.w),
+                                  Text(
+                                    r.deliveryTime,
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: cs.onSurface,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 2.h),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Iconsax.location,
+                                    color: cs.onSurface,
+                                    size: 14.sp,
+                                  ),
+                                  SizedBox(width: 3.w),
+                                  Text(
+                                    r.distance,
+                                    style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: cs.onSurface,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

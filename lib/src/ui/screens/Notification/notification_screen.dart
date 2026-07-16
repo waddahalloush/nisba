@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../widgets/back_circle_button.dart';
 import 'notification_controller.dart';
 
 class NotificationScreen extends GetView<NotificationnController> {
@@ -24,24 +25,13 @@ class NotificationScreen extends GetView<NotificationnController> {
             'الإشعارات',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
           automaticallyImplyLeading: false,
-          leading: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundColor: cs.primary,
-                child: Icon(
-                  Icons.arrow_back,
-                  color: cs.surfaceContainerHighest,
-                ),
-              ),
-            ),
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           actions: [
             IconButton(

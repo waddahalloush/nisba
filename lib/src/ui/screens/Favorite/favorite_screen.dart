@@ -20,11 +20,15 @@ class FavoriteScreen extends GetView<FavoriteController> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          ),
           title: Text(
             'المفضلة',
-            style: theme.textTheme.titleLarge?.copyWith(
+            style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
         ),
@@ -52,22 +56,36 @@ class FavoriteScreen extends GetView<FavoriteController> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Obx(
-        () => Row(
-          children: [
-            _buildTab(
-              theme,
-              label: 'المطاعم',
-              isSelected: controller.selectedTab.value == 0,
-              onTap: () => controller.selectTab(0),
-            ),
-            SizedBox(width: 8.w),
-            _buildTab(
-              theme,
-              label: 'الوجبات',
-              isSelected: controller.selectedTab.value == 1,
-              onTap: () => controller.selectTab(1),
-            ),
-          ],
+        () => Container(
+          padding: EdgeInsets.symmetric(vertical: 4.h),
+          decoration: BoxDecoration(
+            color: cs.primary.withAlpha(12),
+            borderRadius: BorderRadius.circular(45.r),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: _buildTab(
+                  theme,
+                  icon: Icons.restaurant_outlined,
+                  label: 'المطاعم',
+                  isSelected: controller.selectedTab.value == 0,
+                  onTap: () => controller.selectTab(0),
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Expanded(
+                child: _buildTab(
+                  theme,
+                  icon: Icons.soup_kitchen_outlined,
+                  label: 'الوجبات',
+                  isSelected: controller.selectedTab.value == 1,
+                  onTap: () => controller.selectTab(1),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -76,6 +94,7 @@ class FavoriteScreen extends GetView<FavoriteController> {
   Widget _buildTab(
     ThemeData theme, {
     required String label,
+    required IconData icon,
     required bool isSelected,
     required VoidCallback onTap,
   }) {
@@ -84,10 +103,11 @@ class FavoriteScreen extends GetView<FavoriteController> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
         decoration: BoxDecoration(
-          color: isSelected ? cs.primary : cs.surface,
-          borderRadius: BorderRadius.circular(14.r),
+          color: isSelected ? cs.primary : Colors.transparent,
+          borderRadius: BorderRadius.circular(45.r),
           boxShadow: isSelected
               ? [
                   BoxShadow(
@@ -98,15 +118,28 @@ class FavoriteScreen extends GetView<FavoriteController> {
                 ]
               : null,
         ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 13.sp,
-            fontWeight: FontWeight.w600,
-            color: isSelected
-                ? cs.onPrimary
-                : cs.onSurface.withValues(alpha: 0.6),
-          ),
+        child: Row(
+          spacing: 8.w,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: isSelected
+                  ? cs.onPrimary
+                  : cs.onSurface.withValues(alpha: 0.6),
+              size: 15.sp,
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w600,
+                color: isSelected
+                    ? cs.onPrimary
+                    : cs.onSurface.withValues(alpha: 0.6),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -204,9 +237,7 @@ class FavoriteScreen extends GetView<FavoriteController> {
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                 ),
                 child: Text(
-                  controller.selectedTab.value == 0
-                      ? 'استكشف'
-                      : 'استكشف الوجبات',
+                  'استكشف',
                   style: TextStyle(
                     fontSize: 11.sp,
                     fontWeight: FontWeight.bold,
@@ -233,6 +264,7 @@ class _FavoriteCard extends StatelessWidget {
 
     return Container(
       height: 110.h,
+      padding: EdgeInsets.all(8.r),
       decoration: BoxDecoration(
         color: cs.surface,
         borderRadius: BorderRadius.circular(16.r),
@@ -248,9 +280,9 @@ class _FavoriteCard extends StatelessWidget {
         children: [
           // ── Food image ──
           ClipRRect(
-            borderRadius: BorderRadius.horizontal(right: Radius.circular(16.r)),
+            borderRadius: BorderRadius.circular(16),
             child: SizedBox(
-              width: 110.w,
+              width: 120.w,
               height: double.infinity,
               child: Image.asset(item.imageUrl, fit: BoxFit.cover),
             ),
@@ -264,12 +296,31 @@ class _FavoriteCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Name
-                  Text(
-                    item.name,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: cs.onSurface,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        item.name,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: cs.onSurface,
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: cs.primary.withAlpha(35),
+                        ),
+                        child: Icon(
+                          item.isLiked ? Iconsax.heart5 : Iconsax.heart,
+                          color: item.isLiked
+                              ? cs.primary
+                              : cs.onSurface.withValues(alpha: 0.3),
+                          size: 20.sp,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 4.h),
 
@@ -324,18 +375,6 @@ class _FavoriteCard extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ),
-
-          // ── Heart icon ──
-          Padding(
-            padding: EdgeInsets.only(left: 12.w, top: 12.h),
-            child: Icon(
-              item.isLiked ? Iconsax.heart5 : Iconsax.heart,
-              color: item.isLiked
-                  ? cs.error
-                  : cs.onSurface.withValues(alpha: 0.3),
-              size: 20.sp,
             ),
           ),
         ],

@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
 import '../../../../../generated/assets.gen.dart';
+import '../../../widgets/back_circle_button.dart';
 import 'faq_controller.dart';
 
 class FaqScreen extends GetView<FaqController> {
@@ -21,7 +22,7 @@ class FaqScreen extends GetView<FaqController> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: IconButton(
+            leading: IconButton(
             onPressed: () => Get.back(),
             icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),

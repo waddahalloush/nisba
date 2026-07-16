@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
+import '../../../../../generated/assets.gen.dart';
 import 'about_controller.dart';
 
 class AboutScreen extends GetView<AboutController> {
@@ -13,45 +14,54 @@ class AboutScreen extends GetView<AboutController> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: cs.surfaceContainerHighest,
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              // ── Curved header banner ──
-              _buildHeaderBanner(theme),
-
-              // ── Body content ──
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  children: [
-                    // ── Contact info intro card ──
-                    _buildContactIntroCard(theme),
-
-                    SizedBox(height: 14.h),
-
-                    // ── "تواصل معنا" sub-card ──
-                    _buildContactUsCard(theme),
-
-                    SizedBox(height: 14.h),
-
-                    // ── Contact details card ──
-                    _buildContactDetailsCard(theme),
-
-                    SizedBox(height: 14.h),
-
-                    // ── Bottom note ──
-                    _buildBottomNote(theme),
-
-                    SizedBox(height: 24.h),
-                  ],
-                ),
-              ),
-            ],
+    return Scaffold(
+      backgroundColor: cs.surfaceContainerHighest,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+        ),
+        title: Text(
+          'عن التطبيق',
+          style: theme.textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: cs.primary,
           ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // ── Body content ──
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                children: [
+                  // ── Contact info intro card ──
+                  _buildContactIntroCard(theme),
+
+                  SizedBox(height: 14.h),
+
+                  // ── "تواصل معنا" sub-card ──
+                  _buildContactUsCard(theme),
+
+                  SizedBox(height: 14.h),
+
+                  // ── Contact details card ──
+                  _buildContactDetailsCard(theme),
+
+                  SizedBox(height: 14.h),
+
+                  // ── Bottom note ──
+                  _buildBottomNote(theme),
+
+                  SizedBox(height: 24.h),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -106,7 +116,7 @@ class AboutScreen extends GetView<AboutController> {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(18.r),
+      padding: EdgeInsets.symmetric(vertical: 15.w, horizontal: 32.w),
       decoration: BoxDecoration(
         color: cs.surface,
         borderRadius: BorderRadius.circular(20.r),
@@ -121,30 +131,20 @@ class AboutScreen extends GetView<AboutController> {
       child: Column(
         children: [
           // Headset icon
-          Container(
-            width: 52.w,
-            height: 52.h,
-            decoration: BoxDecoration(
-              color: cs.primary.withValues(alpha: 0.08),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(Iconsax.headphone, color: cs.primary, size: 26.sp),
-          ),
+          Assets.images.callCenter.image(width: 70.w, height: 70.w),
           SizedBox(height: 12.h),
           Text(
             'معلومات التواصل',
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
           SizedBox(height: 8.h),
           Text(
             'يمكنك استخدام النص التالي داخل تطبيق الطعام والمتاجر أو على الموقع الإلكتروني:',
             textAlign: TextAlign.center,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: cs.onSurface.withValues(alpha: 0.55),
-            ),
+            style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
           ),
         ],
       ),
@@ -181,7 +181,7 @@ class AboutScreen extends GetView<AboutController> {
                 Text(
                   'نحن سعداء دائماً بخدمتكم والإجابة على استفساراتكم أو استقبال اقتراحاتكم وشكاويكم.',
                   style: theme.textTheme.bodySmall?.copyWith(
-                    color: cs.onSurface.withValues(alpha: 0.55),
+                    color: cs.onSurface,
                   ),
                 ),
               ],
@@ -270,26 +270,25 @@ class AboutScreen extends GetView<AboutController> {
 
                       // Label + value
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               item.label,
                               style: TextStyle(
                                 fontSize: 11.sp,
-                                color: cs.onSurface.withValues(alpha: 0.5),
+                                color: cs.primary,
                               ),
                             ),
                             SizedBox(height: 2.h),
-                            Obx(
-                              () => Text(
-                                item.value is RxString
-                                    ? (item.value as RxString).value
-                                    : item.value as String,
-                                style: theme.textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: cs.onSurface,
-                                ),
+                            Text(
+                              item.value is RxString
+                                  ? (item.value as RxString).value
+                                  : item.value as String,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: cs.onSurface,
                               ),
                             ),
                           ],
@@ -317,27 +316,29 @@ class AboutScreen extends GetView<AboutController> {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(14.r),
+      padding: EdgeInsets.all(22.r),
       decoration: BoxDecoration(
-        color: cs.surface,
+        color: cs.primary.withAlpha(12),
         borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: cs.shadow.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
       ),
       child: Row(
         children: [
-          Icon(Iconsax.shield_tick, color: cs.primary, size: 22.sp),
+          Assets.images.privacy.image(width: 40.w, height: 40.w),
           SizedBox(width: 10.w),
           Expanded(
-            child: Text(
-              'كما يمكنكم التواصل معنا عبر نموذج \'اتصل بنا\' داخل التطبيق.',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: cs.onSurface.withValues(alpha: 0.6),
+            child: Text.rich(
+              TextSpan(
+                style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
+                children: [
+                  const TextSpan(text: 'كما يمكنكم التواصل معنا عبر نموذج '),
+                  TextSpan(
+                    text: '\'اتصل بنا\'\n',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: cs.primary,
+                    ),
+                  ),
+                  const TextSpan(text: 'داخل التطبيق'),
+                ],
               ),
             ),
           ),

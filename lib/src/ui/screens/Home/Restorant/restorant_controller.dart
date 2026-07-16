@@ -1,54 +1,68 @@
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:nisba_app/generated/assets.gen.dart';
 
 import '../../../../data/models/restorant_model.dart';
 
-
-
 class RestorantController extends GetxController {
-  final categoryTitle = ''.obs;
-  final nearbyTitle = ''.obs;
+  final categoryTitle = 'مطاعم'.obs;
+  final nearbyTitle = 'المطاعم القريبة منك'.obs;
 
   final categories = <Map<String, dynamic>>[
-    {'icon': Iconsax.bank, 'label': 'برجر'},
-    {'icon': Iconsax.cake, 'label': 'بيتزا'},
-    {'icon': Iconsax.coffee, 'label': 'مشاوي'},
-    {'icon': Iconsax.fatrows, 'label': 'بحري'},
-    {'icon': Iconsax.heart_circle, 'label': 'صحي'},
-    {'icon': Iconsax.cup, 'label': 'حلويات'},
+    {'icon': Assets.images.resCat1.path, 'label': 'حلويات'},
+    {'icon': Assets.images.resCat2.path, 'label': 'صحي'},
+    {'icon': Assets.images.resCat3.path, 'label': 'بحري'},
+    {'icon': Assets.images.resCat4.path, 'label': 'مشاوي'},
+    {'icon': Assets.images.resCat5.path, 'label': 'بيتزا'},
+    {'icon': Assets.images.resCat6.path, 'label': 'برجر'},
   ];
 
   final restaurants = <RestorantModel>[
-    const RestorantModel(
-      name: 'بحري',
-      rating: 4.5,
-      deliveryTime: '25-35 دقيقة',
-      distance: '1.2 كم',
-    ),
-    const RestorantModel(
-      name: 'بيتزا هت',
-      rating: 4.2,
-      deliveryTime: '20-30 دقيقة',
-      distance: '0.8 كم',
-    ),
-    const RestorantModel(
-      name: 'مشاوي الخليج',
-      rating: 4.0,
-      deliveryTime: '30-40 دقيقة',
-      distance: '1.5 كم',
-    ),
-    const RestorantModel(
+    RestorantModel(
       name: 'برجر فاكتوري',
+      rating: 4.5,
+      deliveryTime: '30-20 د',
+      distance: '1.1 كم',
+      imagePath: Assets.images.resBurger.path,
+      isFavorite: false,
+    ),
+    RestorantModel(
+      name: 'مشاوي الخليج',
+      rating: 4.7,
+      deliveryTime: '40-30 د',
+      distance: '1.8 كم',
+      imagePath: Assets.images.resMeat.path,
+      isFavorite: false,
+    ),
+    RestorantModel(
+      name: 'بيتزا هت',
+      rating: 4.4,
+      deliveryTime: '35-25 د',
+      distance: '1.5 كم',
+      imagePath: Assets.images.resPizza.path,
+      isFavorite: false,
+    ),
+    RestorantModel(
+      name: 'بحري',
       rating: 4.6,
-      deliveryTime: '15-25 دقيقة',
-      distance: '2.0 كم',
+      deliveryTime: '45-20 د',
+      distance: '1.2 كم',
+      imagePath: Assets.images.resSea.path,
+      isFavorite: false,
     ),
   ];
 
   @override
   void onInit() {
     super.onInit();
-    final type = Get.arguments as String? ?? 'مطاعم';
+    final args = Get.arguments;
+    final String type;
+    if (args is Map) {
+      type = args['title'] as String? ?? 'مطاعم';
+    } else if (args is String) {
+      type = args;
+    } else {
+      type = 'مطاعم';
+    }
     setCategory(type);
   }
 
