@@ -77,9 +77,9 @@ class RestorantScreen extends GetView<RestorantController> {
             SizedBox(height: 16.h),
 
             // ── Nearby restaurants section ──
-            _buildNearbySection(theme, "المطاعم القريبة منك"),
+            _buildNearbySection(theme),
 
-            SizedBox(height: 12.h),
+            SizedBox(height: 16.h),
 
             // ── Footer actions ──
             _buildFooterActions(theme),
@@ -87,7 +87,7 @@ class RestorantScreen extends GetView<RestorantController> {
             SizedBox(height: 16.h),
 
             // ── Nearby restaurants section ──
-            _buildNearbySection(theme, "أشهر المطاعم"),
+            _buildResturantSection(theme),
             SizedBox(height: 24.h),
           ],
         ),
@@ -395,7 +395,7 @@ class RestorantScreen extends GetView<RestorantController> {
     );
   }
 
-  Widget _buildNearbySection(ThemeData theme, String title) {
+  Widget _buildNearbySection(ThemeData theme) {
     final cs = theme.colorScheme;
 
     return Column(
@@ -403,20 +403,22 @@ class RestorantScreen extends GetView<RestorantController> {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Text(
-            title,
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+          child: Obx(
+            () => Text(
+              controller.nearbyTitle.value,
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: cs.onSurface,
+              ),
             ),
           ),
         ),
         SizedBox(height: 10.h),
         SizedBox(
-          height: 200.h,
+          height: 210.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
             itemCount: controller.restaurants.length,
             itemBuilder: (context, index) {
               final r = controller.restaurants[index];
@@ -541,27 +543,186 @@ class RestorantScreen extends GetView<RestorantController> {
     );
   }
 
+  Widget _buildResturantSection(ThemeData theme) {
+    final cs = theme.colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Obx(
+            () => Text(
+              controller.restorantTitle.value,
+              style: theme.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: cs.onSurface,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 10.h),
+        GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
+            childAspectRatio: 9 / 12,
+          ),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          itemCount: controller.restaurants.length,
+          itemBuilder: (context, index) {
+            final r = controller.restaurants[index];
+            return GestureDetector(
+              onTap: () {
+                Get.toNamed(
+                  AppRoutesNames.restorantDetails,
+                  arguments: controller.restaurants[index],
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: cs.surface,
+                  borderRadius: BorderRadius.circular(16.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: cs.shadow.withValues(alpha: 0.14),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Image
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.r),
+                        child: Image.asset(
+                          r.imagePath,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10.r),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            r.name,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: cs.onSurface,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Iconsax.star1,
+                                color: cs.primary,
+                                size: 14.sp,
+                              ),
+                              Icon(
+                                Iconsax.star1,
+                                color: cs.primary,
+                                size: 14.sp,
+                              ),
+                              SizedBox(width: 3.w),
+                              Text(
+                                r.rating.toString(),
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: cs.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 2.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Iconsax.timer_14,
+                                color: cs.onSurface,
+                                size: 14.sp,
+                              ),
+                              SizedBox(width: 3.w),
+                              Text(
+                                r.deliveryTime,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: cs.onSurface,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 2.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Iconsax.location,
+                                color: cs.onSurface,
+                                size: 14.sp,
+                              ),
+                              SizedBox(width: 3.w),
+                              Text(
+                                r.distance,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: cs.onSurface,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
   Widget _buildFooterActions(ThemeData theme) {
     final cs = theme.colorScheme;
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Row(
         children: [
           const Expanded(
+            child: _FooterChip(
+              icon: Icons.compare_arrows_rounded,
+              label: 'ترتيب حسب',
+            ),
+          ),
+          SizedBox(width: 4.w),
+          const Expanded(
+            child: _FooterChip(icon: Icons.restaurant_menu, label: 'المطابخ'),
+          ),
+          SizedBox(width: 4.w),
+          const Expanded(
+            child: _FooterChip(
+              icon: Icons.star_border_rounded,
+              label: 'تقييم 4.0+',
+            ),
+          ),
+          SizedBox(width: 4.w),
+          const Expanded(
             child: _FooterChip(icon: Iconsax.truck_fast, label: 'توصيل سريع'),
-          ),
-          SizedBox(width: 8.w),
-          const Expanded(
-            child: _FooterChip(icon: Iconsax.star1, label: 'تقييم 4.0+'),
-          ),
-          SizedBox(width: 8.w),
-          const Expanded(
-            child: _FooterChip(icon: Iconsax.category, label: 'المطابخ'),
-          ),
-          SizedBox(width: 8.w),
-          const Expanded(
-            child: _FooterChip(icon: Iconsax.sort, label: 'ترتيب حسب'),
           ),
         ],
       ),
@@ -580,7 +741,7 @@ class _FooterChip extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 6.w),
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 6.w),
       decoration: BoxDecoration(
         color: cs.surface,
         borderRadius: BorderRadius.circular(12.r),
@@ -592,10 +753,11 @@ class _FooterChip extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: cs.primary, size: 18.sp),
-          SizedBox(height: 4.h),
+          Icon(icon, color: cs.primary, size: 14.sp),
+          SizedBox(width: 2.h),
           Text(
             label,
             textAlign: TextAlign.center,

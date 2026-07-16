@@ -6,6 +6,7 @@ import '../../../../data/models/restorant_model.dart';
 class RestorantController extends GetxController {
   final categoryTitle = 'مطاعم'.obs;
   final nearbyTitle = 'المطاعم القريبة منك'.obs;
+  final restorantTitle = 'أشهر المطاعم'.obs;
 
   final categories = <Map<String, dynamic>>[
     {'icon': Assets.images.resCat1.path, 'label': 'حلويات'},
@@ -71,15 +72,19 @@ class RestorantController extends GetxController {
     switch (type) {
       case 'مطاعم':
         nearbyTitle.value = 'المطاعم القريبة منك';
+        restorantTitle.value = 'أشهر المطاعم';
         break;
       case 'بقالة':
         nearbyTitle.value = 'البقالات القريبة منك';
+        restorantTitle.value = 'أشهر البقالات';
         break;
       case 'مقاهي':
         nearbyTitle.value = 'المقاهي القريبة منك';
+        restorantTitle.value = 'أشهر المقاهي';
         break;
       default:
         nearbyTitle.value = '$type القريبة منك';
+        restorantTitle.value = 'أشهر $type';
     }
   }
 }
