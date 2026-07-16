@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
-import 'package:nisba_app/src/configs/theme_extensions.dart';
 
 import 'mall_controller.dart';
 
@@ -23,7 +22,7 @@ class MallScreen extends GetView<MallController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +31,7 @@ class MallScreen extends GetView<MallController> {
                 'مولات',
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: cs.onSurface,
+                  color: cs.primary,
                 ),
               ),
               Text(
@@ -84,139 +83,180 @@ class MallScreen extends GetView<MallController> {
   Widget _buildFeaturedMalls(ThemeData theme) {
     final cs = theme.colorScheme;
 
-    return SizedBox(
-      height: 190.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        itemCount: controller.featuredMalls.length,
-        itemBuilder: (context, index) {
-          final mall = controller.featuredMalls[index];
-          return Container(
-            width: 260.w,
-            margin: EdgeInsets.only(left: 12.w),
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.r),
-              boxShadow: [
-                BoxShadow(
-                  color: cs.shadow.withValues(alpha: 0.08),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+          child: Row(
+            spacing: 4,
+            children: [
+              Icon(Iconsax.location, color: cs.primary, size: 16.sp),
+              Text(
+                "القريبة منك",
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: cs.primary,
+                  fontSize: 12.sp,
                 ),
-              ],
-            ),
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                // ── Placeholder image ──
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        cs.primary.withValues(alpha: 0.85),
-                        cs.primary.withValues(alpha: 0.55),
-                      ],
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 210.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+            itemCount: controller.featuredMalls.length,
+            itemBuilder: (context, index) {
+              final mall = controller.featuredMalls[index];
+              return Container(
+                width: Get.width / 2.5,
+                margin: EdgeInsets.only(left: 10.w),
+                decoration: BoxDecoration(
+                  color: cs.surface,
+                  borderRadius: BorderRadius.circular(16.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: cs.shadow.withValues(alpha: 0.04),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
                     ),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Iconsax.shop,
-                      color: cs.onPrimary.withValues(alpha: 0.25),
-                      size: 80.sp,
-                    ),
-                  ),
+                  ],
                 ),
-
-                // ── Gradient overlay ──
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: 110.h,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.transparent,
-                          cs.shadow.withValues(alpha: 0.75),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                  ),
-                ),
-
-                // ── Content ──
-                Positioned(
-                  bottom: 12.h,
-                  left: 12.w,
-                  right: 12.w,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        mall.name,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                          color: cs.onPrimary,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Image
+                    Expanded(
+                      child: Stack(
                         children: [
-                          _buildInfoChip(Iconsax.location, mall.distance, cs),
-                          SizedBox(width: 8.w),
-                          _buildInfoChip(Iconsax.star, '${mall.rating}', cs),
-                          SizedBox(width: 8.w),
-                          if (mall.hours != null)
-                            _buildInfoChip(Iconsax.clock, mall.hours!, cs),
+                          ClipRRect(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(16.r),
+                            ),
+                            child: Image.asset(
+                              mall.imageUrl,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 6.w,
+                                    vertical: 4.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    color: cs.primary,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Iconsax.location,
+                                        color: cs.onPrimary,
+                                        size: 12.sp,
+                                      ),
+                                      SizedBox(width: 3.w),
+                                      Text(
+                                        mall.distance,
+                                        style: TextStyle(
+                                          fontSize: 10.sp,
+
+                                          color: cs.onPrimary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Icon(Iconsax.heart, color: cs.primary),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-
-                // ── Rating badge ──
-                Positioned(
-                  top: 10.h,
-                  left: 10.w,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
-                      vertical: 4.h,
                     ),
-                    decoration: BoxDecoration(
-                      color: cs.primary,
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Iconsax.star1, color: cs.onPrimary, size: 12.sp),
-                        SizedBox(width: 4.w),
-                        Text(
-                          '${mall.rating}',
-                          style: TextStyle(
-                            fontSize: 11.sp,
-                            fontWeight: FontWeight.bold,
-                            color: cs.onPrimary,
+                    Padding(
+                      padding: EdgeInsets.all(3.r),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            mall.name,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: cs.onSurface,
+                            ),
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 4.h),
+                          Text(
+                            mall.address,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: cs.onSurface,
+                              fontSize: 10.sp,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Row(
+                            children: [
+                              Text(
+                                mall.rating.toString(),
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: cs.primary,
+                                ),
+                              ),
+                              SizedBox(width: 3.w),
+                              Icon(
+                                Iconsax.star1,
+                                color: cs.primary,
+                                size: 14.sp,
+                              ),
+                              Icon(
+                                Iconsax.star1,
+                                color: cs.primary,
+                                size: 14.sp,
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 2.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Iconsax.timer_14,
+                                color: cs.onSurface,
+                                size: 12.sp,
+                              ),
+                              SizedBox(width: 3.w),
+                              Text(
+                                mall.hours ?? "",
+                                style: TextStyle(
+                                  fontSize: 9.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: cs.onSurface,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 2.h),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-      ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -253,10 +293,10 @@ class MallScreen extends GetView<MallController> {
               height: 48.h,
               decoration: BoxDecoration(
                 color: cs.surface,
-                borderRadius: BorderRadius.circular(14.r),
+                borderRadius: BorderRadius.circular(25.r),
                 boxShadow: [
                   BoxShadow(
-                    color: cs.shadow.withValues(alpha: 0.04),
+                    color: cs.shadow.withValues(alpha: 0.07),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -291,14 +331,21 @@ class MallScreen extends GetView<MallController> {
             height: 48.h,
             width: 48.w,
             decoration: BoxDecoration(
-              color: cs.primary,
-              borderRadius: BorderRadius.circular(14.r),
+              color: cs.onPrimary,
+              borderRadius: BorderRadius.circular(30.r),
+              boxShadow: [
+                BoxShadow(
+                  color: cs.shadow.withValues(alpha: 0.07),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: IconButton(
               onPressed: () {
                 // TODO: open filter bottom sheet
               },
-              icon: Icon(Iconsax.setting_4, color: cs.onPrimary, size: 20.sp),
+              icon: Icon(Iconsax.setting_4, color: cs.primary, size: 20.sp),
             ),
           ),
         ],
@@ -313,57 +360,62 @@ class MallScreen extends GetView<MallController> {
     final cs = theme.colorScheme;
 
     return SizedBox(
-      height: 38.h,
-      child: Obx(
-        () => ListView.builder(
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          itemCount: controller.categories.length,
-          itemBuilder: (context, index) {
-            final cat = controller.categories[index];
-            final isSelected = controller.selectedCategory.value == cat;
-            return Padding(
-              padding: EdgeInsets.only(left: 8.w),
-              child: GestureDetector(
-                onTap: () => controller.selectCategory(cat),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 18.w,
-                    vertical: 8.h,
+      height: 42.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 3.h),
+        itemCount: controller.categories.length,
+        itemBuilder: (context, index) {
+          final mallcat = controller.categories[index];
+          final isSelected = controller.selectedCategory.value == mallcat.name;
+          return Padding(
+            padding: EdgeInsets.only(left: 8.w),
+            child: GestureDetector(
+              onTap: () => controller.selectCategory(mallcat.name),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 8.h),
+                decoration: BoxDecoration(
+                  color: isSelected ? cs.primary : cs.surface,
+                  borderRadius: BorderRadius.circular(22.r),
+                  border: Border.all(
+                    color: isSelected ? cs.primary : cs.outlineVariant,
+                    width: 1,
                   ),
-                  decoration: BoxDecoration(
-                    color: isSelected ? cs.primary : cs.surface,
-                    borderRadius: BorderRadius.circular(22.r),
-                    border: Border.all(
-                      color: isSelected ? cs.primary : cs.outlineVariant,
-                      width: 1,
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: cs.primary.withValues(alpha: 0.3),
+                            blurRadius: 3,
+                            offset: const Offset(0, 3),
+                          ),
+                        ]
+                      : null,
+                ),
+                child: Row(
+                  spacing: 4.w,
+                  children: [
+                    Icon(
+                      mallcat.icon,
+                      color: isSelected ? cs.onPrimary : cs.outlineVariant,
+                      size: 16.sp,
                     ),
-                    boxShadow: isSelected
-                        ? [
-                            BoxShadow(
-                              color: cs.primary.withValues(alpha: 0.3),
-                              blurRadius: 8,
-                              offset: const Offset(0, 3),
-                            ),
-                          ]
-                        : null,
-                  ),
-                  child: Text(
-                    cat,
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: isSelected
-                          ? FontWeight.w700
-                          : FontWeight.w500,
-                      color: isSelected ? cs.onPrimary : cs.onSurface,
+                    Text(
+                      mallcat.name,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: isSelected
+                            ? FontWeight.w700
+                            : FontWeight.w500,
+                        color: isSelected ? cs.onPrimary : cs.onSurface,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -441,65 +493,16 @@ class MallScreen extends GetView<MallController> {
         children: [
           // ── Mall image ──
           SizedBox(
-            width: 110.w,
-            height: 130.h,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        cs.primary.withValues(alpha: 0.85),
-                        cs.primary.withValues(alpha: 0.5),
-                      ],
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                    ),
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Iconsax.shop,
-                      color: cs.onPrimary.withValues(alpha: 0.3),
-                      size: 44.sp,
-                    ),
-                  ),
+            width: 130.w,
+            height: 110.h,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.r),
+                image: DecorationImage(
+                  image: AssetImage(mall.imageUrl),
+                  fit: BoxFit.cover,
                 ),
-                // ── Distance badge ──
-                Positioned(
-                  top: 8.h,
-                  left: 8.w,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
-                      vertical: 3.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: cs.primary,
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Iconsax.location,
-                          color: cs.onPrimary,
-                          size: 10.sp,
-                        ),
-                        SizedBox(width: 3.w),
-                        Text(
-                          mall.distance,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w600,
-                            color: cs.onPrimary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
 
@@ -525,35 +528,7 @@ class MallScreen extends GetView<MallController> {
                         ),
                       ),
                       SizedBox(width: 6.w),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 7.w,
-                          vertical: 2.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: cs.primary.withAlpha(12),
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Iconsax.star1,
-                              color:cs.primary,
-                              size: 11.sp,
-                            ),
-                            SizedBox(width: 3.w),
-                            Text(
-                              '${mall.rating}',
-                              style: TextStyle(
-                                fontSize: 11.sp,
-                                fontWeight: FontWeight.bold,
-                                color: cs.primary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      Icon(Iconsax.heart, color: cs.primary),
                     ],
                   ),
 
@@ -573,6 +548,7 @@ class MallScreen extends GetView<MallController> {
 
                   // Stats row
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _buildStatChip(
                         Iconsax.shop,
@@ -592,6 +568,71 @@ class MallScreen extends GetView<MallController> {
                         _buildStatChip(Iconsax.video, 'سينما', cs, theme),
                     ],
                   ),
+                  SizedBox(height: 8.h),
+
+                  // Stats row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '${mall.rating}',
+                            style: TextStyle(
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.bold,
+                              color: cs.onSurface,
+                            ),
+                          ),
+                          SizedBox(width: 3.w),
+                          Icon(Iconsax.star1, color: cs.primary, size: 11.sp),
+                          Icon(Iconsax.star1, color: cs.primary, size: 11.sp),
+                          Icon(Iconsax.star1, color: cs.primary, size: 11.sp),
+                          Icon(Iconsax.star1, color: cs.primary, size: 11.sp),
+                          Icon(Iconsax.star1, color: cs.primary, size: 11.sp),
+                          SizedBox(width: 3.w),
+                          Text(
+                            '(445 تقييم)',
+                            style: TextStyle(
+                              fontSize: 9.sp,
+                              fontWeight: FontWeight.normal,
+                              color: cs.onSurface.withValues(alpha: 0.27),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 4.w,
+                          vertical: 2.h,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          border: Border.all(color: cs.primary, width: 0.5),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Iconsax.location,
+                              color: cs.primary,
+                              size: 11.sp,
+                            ),
+                            SizedBox(width: 3.w),
+                            Text(
+                              mall.distance,
+                              style: TextStyle(
+                                fontSize: 9.sp,
+                                fontWeight: FontWeight.normal,
+                                color: cs.primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -607,26 +648,19 @@ class MallScreen extends GetView<MallController> {
     ColorScheme cs,
     ThemeData theme,
   ) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 3.h),
-      decoration: BoxDecoration(
-        color: cs.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(7.r),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: cs.primary, size: 11.sp),
-          SizedBox(width: 3.w),
-          Text(
-            label,
-            style: theme.textTheme.labelSmall?.copyWith(
-              color: cs.onSurface.withValues(alpha: 0.6),
-              fontWeight: FontWeight.w500,
-            ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: cs.primary, size: 11.sp),
+        SizedBox(width: 3.w),
+        Text(
+          label,
+          style: theme.textTheme.labelSmall?.copyWith(
+            color: cs.onSurface.withValues(alpha: 0.6),
+            fontWeight: FontWeight.w500,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

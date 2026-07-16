@@ -92,6 +92,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo3d.png
   AssetGenImage get logo3d => const AssetGenImage('assets/images/logo3d.png');
 
+  /// File path: assets/images/mall11.jpg
+  AssetGenImage get mall11 => const AssetGenImage('assets/images/mall11.jpg');
+
+  /// File path: assets/images/mall22.jpg
+  AssetGenImage get mall22 => const AssetGenImage('assets/images/mall22.jpg');
+
+  /// File path: assets/images/mall33.jpg
+  AssetGenImage get mall33 => const AssetGenImage('assets/images/mall33.jpg');
+
+  /// File path: assets/images/mall44.jpg
+  AssetGenImage get mall44 => const AssetGenImage('assets/images/mall44.jpg');
+
   /// File path: assets/images/money.png
   AssetGenImage get money => const AssetGenImage('assets/images/money.png');
 
@@ -254,6 +266,10 @@ class $AssetsImagesGen {
     logo,
     logo2d,
     logo3d,
+    mall11,
+    mall22,
+    mall33,
+    mall44,
     money,
     offer1,
     offer2,

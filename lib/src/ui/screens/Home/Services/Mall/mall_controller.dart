@@ -1,4 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+
+import '../../../../../../generated/assets.gen.dart';
+
+/// Data model for a mall category.
+class MallCategoryModel {
+  final String name;
+  final IconData icon;
+
+  const MallCategoryModel({required this.name, required this.icon});
+}
 
 /// Data model for a mall.
 class Mall {
@@ -34,13 +46,19 @@ class MallController extends GetxController {
   final isLoading = false.obs;
 
   // ── Category list ──
-  final categories = <String>['الكل', 'ترفيه', 'مطاعم', 'أزياء', 'إلكترونيات'];
+  final categories = <MallCategoryModel>[
+    const MallCategoryModel(name: 'الكل', icon: Iconsax.category),
+    const MallCategoryModel(name: 'ترفيه', icon: Iconsax.music),
+    const MallCategoryModel(name: 'مطاعم', icon: Iconsax.coffee),
+    const MallCategoryModel(name: 'أزياء', icon: Iconsax.shop),
+    const MallCategoryModel(name: 'إلكترونيات', icon: Iconsax.mobile),
+  ];
 
   // ── Featured malls ──
   final featuredMalls = <Mall>[
-    const Mall(
+    Mall(
       name: 'قطر مول',
-      imageUrl: '',
+      imageUrl: Assets.images.mall11.path,
       address: 'طريق الدوحة السريع',
       rating: 4.8,
       stores: 350,
@@ -50,9 +68,9 @@ class MallController extends GetxController {
       hours: '10:00 ص - 12:00 م',
       category: 'الكل',
     ),
-    const Mall(
+    Mall(
       name: 'لاند مارك مول',
-      imageUrl: '',
+      imageUrl: Assets.images.mall22.path,
       address: 'طريق سلوى',
       rating: 4.6,
       stores: 280,
@@ -62,9 +80,9 @@ class MallController extends GetxController {
       hours: '9:00 ص - 11:00 م',
       category: 'الكل',
     ),
-    const Mall(
+    Mall(
       name: 'جلف مول',
-      imageUrl: '',
+      imageUrl: Assets.images.mall44.path,
       address: 'منطقة الخليج الغربي',
       rating: 4.5,
       stores: 200,
@@ -78,9 +96,9 @@ class MallController extends GetxController {
 
   // ── All malls ──
   final allMalls = <Mall>[
-    const Mall(
+    Mall(
       name: 'قطر مول',
-      imageUrl: '',
+      imageUrl: Assets.images.mall11.path,
       address: 'طريق الدوحة السريع، الريان',
       rating: 4.8,
       stores: 350,
@@ -89,9 +107,9 @@ class MallController extends GetxController {
       distance: '2.5 كم',
       category: 'ترفيه',
     ),
-    const Mall(
+    Mall(
       name: 'لاند مارك مول',
-      imageUrl: '',
+      imageUrl: Assets.images.mall22.path,
       address: 'طريق سلوى، أبو هامور',
       rating: 4.6,
       stores: 280,
@@ -100,9 +118,9 @@ class MallController extends GetxController {
       distance: '5.0 كم',
       category: 'أزياء',
     ),
-    const Mall(
+    Mall(
       name: 'جلف مول',
-      imageUrl: '',
+      imageUrl: Assets.images.mall44.path,
       address: 'منطقة الخليج الغربي، الدوحة',
       rating: 4.5,
       stores: 200,
@@ -111,9 +129,9 @@ class MallController extends GetxController {
       distance: '3.2 كم',
       category: 'ترفيه',
     ),
-    const Mall(
+    Mall(
       name: 'فيلاجيو مول',
-      imageUrl: '',
+      imageUrl: Assets.images.mall33.path,
       address: 'منطقة أسباير زون، الدوحة',
       rating: 4.7,
       stores: 220,
@@ -122,9 +140,9 @@ class MallController extends GetxController {
       distance: '4.1 كم',
       category: 'ترفيه',
     ),
-    const Mall(
+    Mall(
       name: 'مول قطر',
-      imageUrl: '',
+      imageUrl: Assets.images.service6.path,
       address: 'طريق سلوى، الريان',
       rating: 4.4,
       stores: 190,
@@ -133,9 +151,9 @@ class MallController extends GetxController {
       distance: '6.3 كم',
       category: 'مطاعم',
     ),
-    const Mall(
+    Mall(
       name: 'إزدان مول',
-      imageUrl: '',
+      imageUrl: Assets.images.service7.path,
       address: 'الوكرة، الدوحة',
       rating: 4.3,
       stores: 150,
@@ -144,28 +162,7 @@ class MallController extends GetxController {
       distance: '8.0 كم',
       category: 'إلكترونيات',
     ),
-    const Mall(
-      name: 'سيتي سنتر الدوحة',
-      imageUrl: '',
-      address: 'منطقة الدفنة، الدوحة',
-      rating: 4.5,
-      stores: 300,
-      restaurants: 40,
-      hasCinema: true,
-      distance: '3.8 كم',
-      category: 'أزياء',
-    ),
-    const Mall(
-      name: 'الحزم مول',
-      imageUrl: '',
-      address: 'منطقة اللؤلؤة، الدوحة',
-      rating: 4.6,
-      stores: 100,
-      restaurants: 25,
-      hasCinema: false,
-      distance: '2.9 كم',
-      category: 'مطاعم',
-    ),
+    
   ];
 
   /// Filtered list based on search & selected category.
