@@ -25,6 +25,34 @@ class $AssetsImagesGen {
   AssetGenImage get bannerImg =>
       const AssetGenImage('assets/images/banner-img.jpg');
 
+  /// File path: assets/images/beauty1.jpeg
+  AssetGenImage get beauty1 =>
+      const AssetGenImage('assets/images/beauty1.jpeg');
+
+  /// File path: assets/images/beauty2.jpeg
+  AssetGenImage get beauty2 =>
+      const AssetGenImage('assets/images/beauty2.jpeg');
+
+  /// File path: assets/images/beauty3.jpeg
+  AssetGenImage get beauty3 =>
+      const AssetGenImage('assets/images/beauty3.jpeg');
+
+  /// File path: assets/images/beauty4.jpeg
+  AssetGenImage get beauty4 =>
+      const AssetGenImage('assets/images/beauty4.jpeg');
+
+  /// File path: assets/images/beauty5.jpeg
+  AssetGenImage get beauty5 =>
+      const AssetGenImage('assets/images/beauty5.jpeg');
+
+  /// File path: assets/images/beauty6.jpeg
+  AssetGenImage get beauty6 =>
+      const AssetGenImage('assets/images/beauty6.jpeg');
+
+  /// File path: assets/images/beauty7.jpeg
+  AssetGenImage get beauty7 =>
+      const AssetGenImage('assets/images/beauty7.jpeg');
+
   /// File path: assets/images/box.png
   AssetGenImage get box => const AssetGenImage('assets/images/box.png');
 
@@ -38,6 +66,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/call-center.png
   AssetGenImage get callCenter =>
       const AssetGenImage('assets/images/call-center.png');
+
+  /// File path: assets/images/cart-item1.jpg
+  AssetGenImage get cartItem1 =>
+      const AssetGenImage('assets/images/cart-item1.jpg');
+
+  /// File path: assets/images/cart-item2.jpg
+  AssetGenImage get cartItem2 =>
+      const AssetGenImage('assets/images/cart-item2.jpg');
 
   /// File path: assets/images/cat-cafee.jpg
   AssetGenImage get catCafee =>
@@ -55,6 +91,22 @@ class $AssetsImagesGen {
   AssetGenImage get catVigi =>
       const AssetGenImage('assets/images/cat-vigi.jpg');
 
+  /// File path: assets/images/coupon-deliver-icon.png
+  AssetGenImage get couponDeliverIcon =>
+      const AssetGenImage('assets/images/coupon-deliver-icon.png');
+
+  /// File path: assets/images/coupon-discount-icon.png
+  AssetGenImage get couponDiscountIcon =>
+      const AssetGenImage('assets/images/coupon-discount-icon.png');
+
+  /// File path: assets/images/coupon-offer-icon.png
+  AssetGenImage get couponOfferIcon =>
+      const AssetGenImage('assets/images/coupon-offer-icon.png');
+
+  /// File path: assets/images/cover-image.jpg
+  AssetGenImage get coverImage =>
+      const AssetGenImage('assets/images/cover-image.jpg');
+
   /// File path: assets/images/credit-offer.png
   AssetGenImage get creditOffer =>
       const AssetGenImage('assets/images/credit-offer.png');
@@ -66,6 +118,50 @@ class $AssetsImagesGen {
   AssetGenImage get deliveryMan =>
       const AssetGenImage('assets/images/delivery-man.png');
 
+  /// File path: assets/images/details-car-icon.png
+  AssetGenImage get detailsCarIcon =>
+      const AssetGenImage('assets/images/details-car-icon.png');
+
+  /// File path: assets/images/details-delivery-icon.png
+  AssetGenImage get detailsDeliveryIcon =>
+      const AssetGenImage('assets/images/details-delivery-icon.png');
+
+  /// File path: assets/images/details-motor-icon.png
+  AssetGenImage get detailsMotorIcon =>
+      const AssetGenImage('assets/images/details-motor-icon.png');
+
+  /// File path: assets/images/details-table-icon.png
+  AssetGenImage get detailsTableIcon =>
+      const AssetGenImage('assets/images/details-table-icon.png');
+
+  /// File path: assets/images/entertain1.jpeg
+  AssetGenImage get entertain1 =>
+      const AssetGenImage('assets/images/entertain1.jpeg');
+
+  /// File path: assets/images/entertain2.jpeg
+  AssetGenImage get entertain2 =>
+      const AssetGenImage('assets/images/entertain2.jpeg');
+
+  /// File path: assets/images/entertain3.jpeg
+  AssetGenImage get entertain3 =>
+      const AssetGenImage('assets/images/entertain3.jpeg');
+
+  /// File path: assets/images/entertain4.jpeg
+  AssetGenImage get entertain4 =>
+      const AssetGenImage('assets/images/entertain4.jpeg');
+
+  /// File path: assets/images/entertain5.jpeg
+  AssetGenImage get entertain5 =>
+      const AssetGenImage('assets/images/entertain5.jpeg');
+
+  /// File path: assets/images/entertain6.jpeg
+  AssetGenImage get entertain6 =>
+      const AssetGenImage('assets/images/entertain6.jpeg');
+
+  /// File path: assets/images/entertain7.jpeg
+  AssetGenImage get entertain7 =>
+      const AssetGenImage('assets/images/entertain7.jpeg');
+
   /// File path: assets/images/faq-bg.png
   AssetGenImage get faqBg => const AssetGenImage('assets/images/faq-bg.png');
 
@@ -76,12 +172,75 @@ class $AssetsImagesGen {
   /// File path: assets/images/gift.png
   AssetGenImage get gift => const AssetGenImage('assets/images/gift.png');
 
+  /// File path: assets/images/gifts1.jpeg
+  AssetGenImage get gifts1 => const AssetGenImage('assets/images/gifts1.jpeg');
+
+  /// File path: assets/images/gifts2.jpeg
+  AssetGenImage get gifts2 => const AssetGenImage('assets/images/gifts2.jpeg');
+
+  /// File path: assets/images/gifts3.jpeg
+  AssetGenImage get gifts3 => const AssetGenImage('assets/images/gifts3.jpeg');
+
+  /// File path: assets/images/gifts4.jpeg
+  AssetGenImage get gifts4 => const AssetGenImage('assets/images/gifts4.jpeg');
+
+  /// File path: assets/images/gifts5.jpeg
+  AssetGenImage get gifts5 => const AssetGenImage('assets/images/gifts5.jpeg');
+
+  /// File path: assets/images/gifts6.png
+  AssetGenImage get gifts6 => const AssetGenImage('assets/images/gifts6.png');
+
+  /// File path: assets/images/gifts7.jpeg
+  AssetGenImage get gifts7 => const AssetGenImage('assets/images/gifts7.jpeg');
+
   /// File path: assets/images/google-logo.png
   AssetGenImage get googleLogo =>
       const AssetGenImage('assets/images/google-logo.png');
 
+  /// File path: assets/images/hotel1.jpeg
+  AssetGenImage get hotel1 => const AssetGenImage('assets/images/hotel1.jpeg');
+
+  /// File path: assets/images/hotel2.jpeg
+  AssetGenImage get hotel2 => const AssetGenImage('assets/images/hotel2.jpeg');
+
+  /// File path: assets/images/hotel3.jpeg
+  AssetGenImage get hotel3 => const AssetGenImage('assets/images/hotel3.jpeg');
+
+  /// File path: assets/images/hotel4.jpeg
+  AssetGenImage get hotel4 => const AssetGenImage('assets/images/hotel4.jpeg');
+
+  /// File path: assets/images/hotel5.jpeg
+  AssetGenImage get hotel5 => const AssetGenImage('assets/images/hotel5.jpeg');
+
+  /// File path: assets/images/hotel6.jpeg
+  AssetGenImage get hotel6 => const AssetGenImage('assets/images/hotel6.jpeg');
+
+  /// File path: assets/images/hotel7.jpeg
+  AssetGenImage get hotel7 => const AssetGenImage('assets/images/hotel7.jpeg');
+
   /// File path: assets/images/kfc.jpg
   AssetGenImage get kfc => const AssetGenImage('assets/images/kfc.jpg');
+
+  /// File path: assets/images/kiosk1.jpeg
+  AssetGenImage get kiosk1 => const AssetGenImage('assets/images/kiosk1.jpeg');
+
+  /// File path: assets/images/kiosk2.jpeg
+  AssetGenImage get kiosk2 => const AssetGenImage('assets/images/kiosk2.jpeg');
+
+  /// File path: assets/images/kiosk3.jpeg
+  AssetGenImage get kiosk3 => const AssetGenImage('assets/images/kiosk3.jpeg');
+
+  /// File path: assets/images/kiosk4.jpeg
+  AssetGenImage get kiosk4 => const AssetGenImage('assets/images/kiosk4.jpeg');
+
+  /// File path: assets/images/kiosk5.jpeg
+  AssetGenImage get kiosk5 => const AssetGenImage('assets/images/kiosk5.jpeg');
+
+  /// File path: assets/images/kiosk6.jpeg
+  AssetGenImage get kiosk6 => const AssetGenImage('assets/images/kiosk6.jpeg');
+
+  /// File path: assets/images/kiosk7.jpeg
+  AssetGenImage get kiosk7 => const AssetGenImage('assets/images/kiosk7.jpeg');
 
   /// File path: assets/images/logo+.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo+.png');
@@ -123,6 +282,21 @@ class $AssetsImagesGen {
   /// File path: assets/images/pasta-italy.jpg
   AssetGenImage get pastaItaly =>
       const AssetGenImage('assets/images/pasta-italy.jpg');
+
+  /// File path: assets/images/pay-google.png
+  AssetGenImage get payGoogle =>
+      const AssetGenImage('assets/images/pay-google.png');
+
+  /// File path: assets/images/pay-on-deliver.png
+  AssetGenImage get payOnDeliver =>
+      const AssetGenImage('assets/images/pay-on-deliver.png');
+
+  /// File path: assets/images/pay-visa.png
+  AssetGenImage get payVisa =>
+      const AssetGenImage('assets/images/pay-visa.png');
+
+  /// File path: assets/images/paypal.png
+  AssetGenImage get paypal => const AssetGenImage('assets/images/paypal.png');
 
   /// File path: assets/images/point-bg.png
   AssetGenImage get pointBg =>
@@ -190,6 +364,14 @@ class $AssetsImagesGen {
   AssetGenImage get resPizza =>
       const AssetGenImage('assets/images/res-pizza.jpg');
 
+  /// File path: assets/images/res-product1.jpg
+  AssetGenImage get resProduct1 =>
+      const AssetGenImage('assets/images/res-product1.jpg');
+
+  /// File path: assets/images/res-product2.jpg
+  AssetGenImage get resProduct2 =>
+      const AssetGenImage('assets/images/res-product2.jpg');
+
   /// File path: assets/images/res-sea.jpg
   AssetGenImage get resSea => const AssetGenImage('assets/images/res-sea.jpg');
 
@@ -228,8 +410,57 @@ class $AssetsImagesGen {
   AssetGenImage get service8 =>
       const AssetGenImage('assets/images/service8.jpg');
 
+  /// File path: assets/images/sooq1.jpeg
+  AssetGenImage get sooq1 => const AssetGenImage('assets/images/sooq1.jpeg');
+
+  /// File path: assets/images/sooq2.jpeg
+  AssetGenImage get sooq2 => const AssetGenImage('assets/images/sooq2.jpeg');
+
+  /// File path: assets/images/sooq3.jpeg
+  AssetGenImage get sooq3 => const AssetGenImage('assets/images/sooq3.jpeg');
+
+  /// File path: assets/images/sooq4.jpeg
+  AssetGenImage get sooq4 => const AssetGenImage('assets/images/sooq4.jpeg');
+
+  /// File path: assets/images/sooq5.jpeg
+  AssetGenImage get sooq5 => const AssetGenImage('assets/images/sooq5.jpeg');
+
+  /// File path: assets/images/sooq6.jpeg
+  AssetGenImage get sooq6 => const AssetGenImage('assets/images/sooq6.jpeg');
+
+  /// File path: assets/images/sooq7.jpeg
+  AssetGenImage get sooq7 => const AssetGenImage('assets/images/sooq7.jpeg');
+
   /// File path: assets/images/ticket.png
   AssetGenImage get ticket => const AssetGenImage('assets/images/ticket.png');
+
+  /// File path: assets/images/tourism1.jpeg
+  AssetGenImage get tourism1 =>
+      const AssetGenImage('assets/images/tourism1.jpeg');
+
+  /// File path: assets/images/tourism2.jpeg
+  AssetGenImage get tourism2 =>
+      const AssetGenImage('assets/images/tourism2.jpeg');
+
+  /// File path: assets/images/tourism3.jpeg
+  AssetGenImage get tourism3 =>
+      const AssetGenImage('assets/images/tourism3.jpeg');
+
+  /// File path: assets/images/tourism4.jpeg
+  AssetGenImage get tourism4 =>
+      const AssetGenImage('assets/images/tourism4.jpeg');
+
+  /// File path: assets/images/tourism5.jpeg
+  AssetGenImage get tourism5 =>
+      const AssetGenImage('assets/images/tourism5.jpeg');
+
+  /// File path: assets/images/tourism6.jpeg
+  AssetGenImage get tourism6 =>
+      const AssetGenImage('assets/images/tourism6.jpeg');
+
+  /// File path: assets/images/tourism7.jpeg
+  AssetGenImage get tourism7 =>
+      const AssetGenImage('assets/images/tourism7.jpeg');
 
   /// File path: assets/images/wallet-bg.png
   AssetGenImage get walletBg =>
@@ -247,22 +478,67 @@ class $AssetsImagesGen {
     appIcon,
     azSham,
     bannerImg,
+    beauty1,
+    beauty2,
+    beauty3,
+    beauty4,
+    beauty5,
+    beauty6,
+    beauty7,
     box,
     bubble,
     burgerLand,
     callCenter,
+    cartItem1,
+    cartItem2,
     catCafee,
     catFood,
     catOffer,
     catVigi,
+    couponDeliverIcon,
+    couponDiscountIcon,
+    couponOfferIcon,
+    coverImage,
     creditOffer,
     crispy,
     deliveryMan,
+    detailsCarIcon,
+    detailsDeliveryIcon,
+    detailsMotorIcon,
+    detailsTableIcon,
+    entertain1,
+    entertain2,
+    entertain3,
+    entertain4,
+    entertain5,
+    entertain6,
+    entertain7,
     faqBg,
     giftMoney,
     gift,
+    gifts1,
+    gifts2,
+    gifts3,
+    gifts4,
+    gifts5,
+    gifts6,
+    gifts7,
     googleLogo,
+    hotel1,
+    hotel2,
+    hotel3,
+    hotel4,
+    hotel5,
+    hotel6,
+    hotel7,
     kfc,
+    kiosk1,
+    kiosk2,
+    kiosk3,
+    kiosk4,
+    kiosk5,
+    kiosk6,
+    kiosk7,
     logo,
     logo2d,
     logo3d,
@@ -276,6 +552,10 @@ class $AssetsImagesGen {
     offer3,
     orderNoti,
     pastaItaly,
+    payGoogle,
+    payOnDeliver,
+    payVisa,
+    paypal,
     pointBg,
     pointIconSmall,
     pointIcon,
@@ -293,6 +573,8 @@ class $AssetsImagesGen {
     resIcon2,
     resMeat,
     resPizza,
+    resProduct1,
+    resProduct2,
     resSea,
     rewards,
     service1,
@@ -303,7 +585,21 @@ class $AssetsImagesGen {
     service6,
     service7,
     service8,
+    sooq1,
+    sooq2,
+    sooq3,
+    sooq4,
+    sooq5,
+    sooq6,
+    sooq7,
     ticket,
+    tourism1,
+    tourism2,
+    tourism3,
+    tourism4,
+    tourism5,
+    tourism6,
+    tourism7,
     walletBg,
     walletIcon,
     zinger,

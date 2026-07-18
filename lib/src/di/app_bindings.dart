@@ -3,8 +3,13 @@ import 'package:get/get.dart';
 import 'package:nisba_app/src/ui/screens/Auth/OTP/otp_verify_controller.dart';
 import 'package:nisba_app/src/ui/screens/Auth/Register/register_controller.dart';
 import 'package:nisba_app/src/ui/screens/Home/Restorant/restorant_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Base%20Service/PlaceDetails/place_details_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Beauty/beauty_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Entertain/entertainment_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Gifts/gift_controller.dart';
 import 'package:nisba_app/src/ui/screens/Home/Services/Hotels/hotel_controller.dart';
 import 'package:nisba_app/src/ui/screens/Home/Services/Mall/mall_controller.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/Markets/market_controller.dart';
 import 'package:nisba_app/src/ui/screens/Home/Services/kioks/kioks_controller.dart';
 import 'package:nisba_app/src/ui/screens/Home/controller/home_controller.dart';
 import 'package:nisba_app/src/ui/screens/Notification/notification_controller.dart';
@@ -29,6 +34,7 @@ import '../ui/screens/Home/Products/Product Details/product_details_controller.d
 import '../ui/screens/Home/Restorant/Restorant Details/restorant_details_controller.dart';
 import '../ui/screens/Home/Services/Hotels/Hotel Details/hotel_details_controller.dart';
 import '../ui/screens/Home/Services/Mall/Mall Details/mall_details_controller.dart';
+import '../ui/screens/Home/Services/Tourism/tourism_controller.dart';
 import '../ui/screens/Offer/offer_controller.dart';
 import '../ui/screens/Order/controller/order_controller.dart';
 import '../ui/screens/Settings/About/about_controller.dart';
@@ -85,7 +91,13 @@ class AppBinding extends Bindings {
     Get.lazyPut(() => MallDetailsController(), fenix: true);
     Get.lazyPut(() => HotelController(), fenix: true);
     Get.lazyPut(() => HotelDetailsController(), fenix: true);
-    Get.lazyPut(() => KioksController(), fenix: true);
+    Get.lazyPut(() => KioskController(), fenix: true);
+    Get.lazyPut(() => GiftController(), fenix: true);
+    Get.lazyPut(() => EntertainmentController(), fenix: true);
+    Get.lazyPut(() => TourismController(), fenix: true);
+    Get.lazyPut(() => BeautyController(), fenix: true);
+    Get.lazyPut(() => MarketController(), fenix: true);
+    Get.lazyPut(() => PlaceDetailsController(), fenix: true);
 
     //! -----------------------
     Get.lazyPut(

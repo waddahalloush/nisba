@@ -34,4 +34,10 @@ class AppRoutesNames {
   static String hotel = "/hotel";
   static String hotelDetails = "/hotel-details";
   static String kioks = "/kioks";
+  static String gift = "/gift";
+  static String entertain = "/entertain";
+  static String tourism = "/tourism";
+  static String beauty = "/beauty";
+  static String market = "/market";
+  // static String placeDetails = "/placeDetails";
 }

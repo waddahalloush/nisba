@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
+import 'package:nisba_app/src/data/models/product_model.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
 
 /// قسم "عروض اليوم القريبة منك" مع كروت المنتجات الأفقية
@@ -102,7 +103,19 @@ class HomeDailyOffers extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Get.toNamed(AppRoutesNames.productDetails);
+        final product = Product(
+          name: title,
+          description: title,
+          price: double.tryParse(price.replaceAll(' ر.ق', '')) ?? 0,
+          oldPrice: double.tryParse(oldPrice.replaceAll(' ر.ق', '')) ?? 0,
+          savings: savings,
+          deliveryTime: deliveryMeta.split(' ').first,
+          distance: deliveryMeta.split('•').last.trim().split(' ').first,
+          imagePath: imageUrl,
+          rating: 4.8,
+          ratingCount: 253,
+        );
+        Get.toNamed(AppRoutesNames.productDetails, arguments: product);
       },
       child: Container(
         width: 120.w,

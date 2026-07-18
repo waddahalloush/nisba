@@ -1,3 +1,4 @@
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -13,71 +14,81 @@ class CartScreen extends GetView<CartController> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        backgroundColor: cs.surfaceContainerHighest,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'سلة المشتريات',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: cs.onSurface,
+    return Scaffold(
+      backgroundColor: cs.surfaceContainerHighest,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'سلة المشتريات',
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: cs.onSurface,
+              ),
+            ),
+            GetBuilder<CartController>(
+              builder: (_) => Text(
+                '${controller.itemCount} منتجات',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: cs.onSurface.withValues(alpha: 0.5),
                 ),
               ),
-              GetBuilder<CartController>(
-                builder: (_) => Text(
-                  '${controller.itemCount} منتجات',
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: cs.onSurface.withValues(alpha: 0.5),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Iconsax.trash, color: cs.error, size: 20.sp),
             ),
           ],
         ),
-        bottomNavigationBar: _buildBottomBar(theme),
-        body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // ── Product cards ──
-              _buildProductList(theme),
-
-              SizedBox(height: 16.h),
-
-              // ── Coupon section ──
-              _buildCouponSection(theme),
-
-              SizedBox(height: 16.h),
-
-              // ── Order summary ──
-              _buildOrderSummary(theme),
-
-              SizedBox(height: 16.h),
-
-              // ── Delivery options ──
-              _buildDeliveryOptions(theme),
-
-              SizedBox(height: 16.h),
-            ],
+        centerTitle: true,
+        actions: [
+          Container(
+            padding: EdgeInsets.all(10.r),
+            margin: EdgeInsets.symmetric(horizontal: 16.w),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: cs.onPrimary,
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0, 2),
+                  color: Colors.grey.shade300,
+                  blurRadius: 3,
+                ),
+              ],
+            ),
+            child: Icon(Iconsax.trash, color: cs.primary, size: 20.sp),
           ),
+        ],
+      ),
+      bottomNavigationBar: _buildBottomBar(theme),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // ── Product cards ──
+            _buildProductList(theme),
+
+            SizedBox(height: 16.h),
+
+            // ── Coupon section ──
+            _buildCouponSection(theme),
+
+            SizedBox(height: 16.h),
+
+            // ── Order summary ──
+            _buildOrderSummary(theme),
+
+            SizedBox(height: 16.h),
+
+            // ── Delivery options ──
+            _buildDeliveryOptions(theme),
+
+            SizedBox(height: 16.h),
+          ],
         ),
       ),
     );
@@ -108,17 +119,13 @@ class CartScreen extends GetView<CartController> {
               child: Row(
                 children: [
                   // Product image
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12.r),
-                    child: Container(
-                      width: 70.w,
-                      height: 70.h,
+                  Container(
+                    width: 70.w,
+                    height: 70.h,
+                    decoration: BoxDecoration(
                       color: cs.surfaceContainerHighest,
-                      child: Icon(
-                        Iconsax.bag_2,
-                        color: cs.primary.withValues(alpha: 0.5),
-                        size: 28.sp,
-                      ),
+                      borderRadius: BorderRadius.circular(12.r),
+                      image: DecorationImage(image: AssetImage(item.imageUrl)),
                     ),
                   ),
                   SizedBox(width: 10.w),
@@ -151,7 +158,7 @@ class CartScreen extends GetView<CartController> {
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold,
-                            color: cs.primary,
+                            color: cs.onSurface,
                           ),
                         ),
                       ],
@@ -270,13 +277,7 @@ class CartScreen extends GetView<CartController> {
                         ),
                         child: Column(
                           children: [
-                            Icon(
-                              c.icon,
-                              color: isSelected
-                                  ? cs.primary
-                                  : cs.onSurface.withValues(alpha: 0.45),
-                              size: 18.sp,
-                            ),
+                            Image.asset(c.icon, width: 30, height: 30),
                             SizedBox(height: 4.h),
                             Text(
                               c.title,
@@ -306,7 +307,9 @@ class CartScreen extends GetView<CartController> {
             () => Text(
               controller.selectedCoupon.value == 'قسيمة التسوق'
                   ? 'خصم على جميع المشتريات مثال 15%'
-                  : '',
+                  : controller.selectedCoupon.value == 'قسيمة الشحن'
+                  ? 'شحن مجاني مدة 7 أيام'
+                  : 'خصومات على المطاعم و الفنادق و مراكز التسوق',
               style: TextStyle(
                 fontSize: 10.sp,
                 color: cs.primary,
@@ -456,77 +459,141 @@ class CartScreen extends GetView<CartController> {
             ),
           ),
           SizedBox(height: 10.h),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                  decoration: BoxDecoration(
-                    color: cs.primary,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Iconsax.truck_fast,
-                        color: cs.onPrimary,
-                        size: 22.sp,
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        'حجز الآن',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.bold,
-                          color: cs.onPrimary,
+          Obx(
+            () => Row(
+              children: [
+                // Order Now
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => controller.selectDeliveryMethod(
+                      DeliveryMethod.orderNow,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      decoration: BoxDecoration(
+                        color:
+                            controller.deliveryMethod.value ==
+                                DeliveryMethod.orderNow
+                            ? cs.primary.withValues(alpha: 0.08)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                          color:
+                              controller.deliveryMethod.value ==
+                                  DeliveryMethod.orderNow
+                              ? cs.primary
+                              : Colors.transparent,
                         ),
                       ),
-                      Text(
-                        'استلام فوري',
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          color: cs.onPrimary.withValues(alpha: 0.8),
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(
+                            Iconsax.truck_fast,
+                            color: cs.primary,
+                            size: 22.sp,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                'حجز الآن',
+                                style: theme.textTheme.titleSmall!.copyWith(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: cs.onSurface,
+                                ),
+                              ),
+                              Text(
+                                'استلام فوري',
+                                style: theme.textTheme.titleSmall!.copyWith(
+                                  fontSize: 8.sp,
+                                  fontWeight: FontWeight.normal,
+                                  color: cs.onSurface.withValues(alpha: 0.8),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(width: 8),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(width: 10.w),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                  decoration: BoxDecoration(
-                    color: cs.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(
-                      color: cs.outlineVariant.withValues(alpha: 0.5),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Iconsax.calendar_1,
-                        color: cs.onSurface.withValues(alpha: 0.5),
-                        size: 22.sp,
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        'جدولة الطلب',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
-                          color: cs.onSurface.withValues(alpha: 0.55),
+                ),
+                SizedBox(width: 10.w),
+                // Order Later
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      controller.selectDeliveryMethod(
+                        DeliveryMethod.orderLater,
+                      );
+                      _showScheduledDeliverySheet();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      decoration: BoxDecoration(
+                        color:
+                            controller.deliveryMethod.value ==
+                                DeliveryMethod.orderLater
+                            ? cs.primary.withValues(alpha: 0.08)
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                          color:
+                              controller.deliveryMethod.value ==
+                                  DeliveryMethod.orderLater
+                              ? cs.primary
+                              : Colors.transparent,
                         ),
                       ),
-                    ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(
+                            Iconsax.calendar_1,
+                            color: cs.primary,
+                            size: 22.sp,
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                'جدولة الطلب',
+                                style: theme.textTheme.titleSmall!.copyWith(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: cs.onSurface,
+                                ),
+                              ),
+                              Text(
+                                'اختر وقت و تاريخ مناسب',
+                                style: theme.textTheme.titleSmall!.copyWith(
+                                  fontSize: 8.sp,
+                                  color: cs.onSurface.withValues(alpha: 0.8),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(width: 8),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  // ── Scheduled Delivery Bottom Sheet ──
+  void _showScheduledDeliverySheet() {
+    showModalBottomSheet(
+      context: Get.context!,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _ScheduledDeliverySheet(controller: controller),
     );
   }
 
@@ -546,7 +613,7 @@ class CartScreen extends GetView<CartController> {
             foregroundColor: cs.onPrimary,
             elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14.r),
+              borderRadius: BorderRadius.circular(25.r),
             ),
           ),
           child: Text(
@@ -594,6 +661,361 @@ class _SummaryRow extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+// ── Scheduled Delivery Bottom Sheet ──
+class _ScheduledDeliverySheet extends StatelessWidget {
+  final CartController controller;
+
+  const _ScheduledDeliverySheet({required this.controller});
+
+  static const _arabicMonths = [
+    'يناير',
+    'فبراير',
+    'مارس',
+    'أبريل',
+    'مايو',
+    'يونيو',
+    'يوليو',
+    'أغسطس',
+    'سبتمبر',
+    'أكتوبر',
+    'نوفمبر',
+    'ديسمبر',
+  ];
+
+  static const _weekdaySymbols = ['ح', 'ن', 'ث', 'ر', 'خ', 'ج', 'س'];
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+
+    return Container(
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24.r),
+          topRight: Radius.circular(24.r),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Handle bar
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(top: 12.h),
+              width: 40.w,
+              height: 4.h,
+              decoration: BoxDecoration(
+                color: cs.onSurface.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(2.r),
+              ),
+            ),
+          ),
+          // Title row
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(Icons.close, color: cs.onSurface, size: 22.sp),
+                ),
+                Text(
+                  'جدولة الطلب',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: cs.onSurface,
+                  ),
+                ),
+                const SizedBox(width: 22),
+              ],
+            ),
+          ),
+          // Calendar
+          _buildCalendar(theme, cs),
+          SizedBox(height: 16.h),
+          // Time slots
+          _buildTimeSlots(theme, cs),
+          SizedBox(height: 16.h),
+          // Confirm button
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: SizedBox(
+              width: double.infinity,
+              height: 48.h,
+              child: ElevatedButton(
+                onPressed: () {
+                  Get.back();
+                  Get.snackbar(
+                    'تم',
+                    'تم جدولة الطلب في ${controller.scheduledSlotLabel}',
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: cs.primary,
+                  foregroundColor: cs.onPrimary,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+                child: Text(
+                  'تأكيد الموعد',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).padding.bottom + 12.h),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCalendar(ThemeData theme, ColorScheme cs) {
+    // حساب التواريخ السابقة لتعطيلها (مثلاً: آخر 90 يوم قبل اليوم الحالي)
+    final today = DateTime.now();
+    final disabledDates = List<DateTime>.generate(
+      90,
+      (index) => DateTime(today.year, today.month, today.day - (index + 1)),
+    );
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Obx(
+        () => EasyDateTimeLine(
+          initialDate: controller.selectedDate.value,
+          locale: "ar",
+          disabledDates:
+              disabledDates, // تمرير قائمة التواريخ المراد تعطيلها هنا
+          headerProps: EasyHeaderProps(
+            monthPickerType: MonthPickerType.switcher,
+            selectedDateStyle: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: cs.onSurface,
+            ),
+          ),
+          dayProps: EasyDayProps(
+            dayStructure: DayStructure.dayStrDayNum,
+            height: 70.h,
+            width: 48.w,
+            // تصميم الأيام المعطلة (قبل اليوم الحالي)
+            disabledDayStyle: DayStyle(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              dayNumStyle: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w400,
+                color: cs.onSurface.withValues(
+                  alpha: 0.25,
+                ), // لون باهت للدلالة على التعطيل
+                decoration: TextDecoration.lineThrough, // خط فوق الرقم اختياري
+              ),
+              dayStrStyle: TextStyle(
+                fontSize: 11.sp,
+                fontWeight: FontWeight.w400,
+                color: cs.onSurface.withValues(alpha: 0.2),
+              ),
+            ),
+            // تصميم اليوم النشط/المحدد
+            activeDayStyle: DayStyle(
+              decoration: BoxDecoration(
+                color: cs.primary,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              dayNumStyle: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.bold,
+                color: cs.onPrimary,
+              ),
+              dayStrStyle: TextStyle(
+                fontSize: 11.sp,
+                fontWeight: FontWeight.bold,
+                color: cs.onPrimary,
+              ),
+            ),
+            // تصميم الأيام العادية المتاحة
+            inactiveDayStyle: DayStyle(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              dayNumStyle: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: cs.onSurface,
+              ),
+              dayStrStyle: TextStyle(
+                fontSize: 11.sp,
+                fontWeight: FontWeight.w500,
+                color: cs.onSurface.withValues(alpha: 0.5),
+              ),
+            ),
+          ),
+          onDateChange: (selectedDate) {
+            controller.selectScheduledDate(selectedDate);
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTimeSlots(ThemeData theme, ColorScheme cs) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'اختر الوقت المناسب',
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: cs.onSurface,
+            ),
+          ),
+          SizedBox(height: 10.h),
+          Obx(
+            () => Column(
+              children: controller.timeSlots.map((slot) {
+                final isSelected = controller.selectedTimeSlot.value == slot;
+                return GestureDetector(
+                  onTap: () => controller.selectTimeSlot(slot),
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 6.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 12.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: isSelected
+                          ? cs.primary.withValues(alpha: 0.08)
+                          : cs.surface,
+                      borderRadius: BorderRadius.circular(10.r),
+                      border: Border.all(
+                        color: isSelected
+                            ? cs.primary
+                            : cs.outlineVariant.withValues(alpha: 0.4),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          slot,
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.w500,
+                            color: isSelected
+                                ? cs.primary
+                                : cs.onSurface.withValues(alpha: 0.7),
+                          ),
+                        ),
+                        Container(
+                          width: 20.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: isSelected
+                                  ? cs.primary
+                                  : cs.outlineVariant.withValues(alpha: 0.6),
+                              width: 2,
+                            ),
+                          ),
+                          child: isSelected
+                              ? Center(
+                                  child: Container(
+                                    width: 10.w,
+                                    height: 10.h,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: cs.primary,
+                                    ),
+                                  ),
+                                )
+                              : null,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CalendarCell extends StatelessWidget {
+  final int? day;
+  final bool isSelected;
+  final bool isToday;
+  final ColorScheme cs;
+  final VoidCallback? onTap;
+
+  const _CalendarCell({
+    this.day,
+    this.isSelected = false,
+    this.isToday = false,
+    required this.cs,
+    this.onTap,
+  });
+
+  const _CalendarCell.empty()
+    : day = null,
+      isSelected = false,
+      isToday = false,
+      cs = const ColorScheme.light(),
+      onTap = null;
+
+  @override
+  Widget build(BuildContext context) {
+    if (day == null) return const Expanded(child: SizedBox());
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          margin: EdgeInsets.all(2.r),
+          decoration: BoxDecoration(
+            color: isSelected ? cs.primary : Colors.transparent,
+            shape: BoxShape.circle,
+            border: isToday && !isSelected
+                ? Border.all(color: cs.primary, width: 1.5)
+                : null,
+          ),
+          padding: EdgeInsets.all(8.r),
+          child: Center(
+            child: Text(
+              '$day',
+              style: TextStyle(
+                fontSize: 13.sp,
+                fontWeight: isSelected || isToday
+                    ? FontWeight.bold
+                    : FontWeight.w500,
+                color: isSelected
+                    ? cs.onPrimary
+                    : cs.onSurface.withValues(alpha: 0.8),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

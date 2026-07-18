@@ -52,13 +52,17 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
       children: [
         // Product image placeholder
         Container(
-          height: 260.h,
+          height: 230.h,
           width: double.infinity,
           color: cs.surfaceContainerHighest,
-          child: Icon(
-            Iconsax.hospital,
-            color: cs.primary.withValues(alpha: 0.3),
-            size: 80.sp,
+          child: Image.asset(
+            controller.product.imagePath,
+            fit: BoxFit.cover,
+            errorBuilder: (_, __, ___) => Icon(
+              Iconsax.hospital,
+              color: cs.primary.withValues(alpha: 0.3),
+              size: 80.sp,
+            ),
           ),
         ),
 
@@ -70,7 +74,23 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Favorite
+              // Back
+              GestureDetector(
+                onTap: () => Get.back(),
+                child: Container(
+                  width: 38.w,
+                  height: 38.h,
+                  decoration: BoxDecoration(
+                    color: cs.surface.withValues(alpha: 0.9),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Iconsax.arrow_right_1,
+                    color: cs.onSurface,
+                    size: 18.sp,
+                  ),
+                ),
+              ), // Favorite
               Obx(
                 () => GestureDetector(
                   onTap: controller.toggleFavorite,
@@ -93,32 +113,14 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                   ),
                 ),
               ),
-
-              // Back
-              GestureDetector(
-                onTap: () => Get.back(),
-                child: Container(
-                  width: 38.w,
-                  height: 38.h,
-                  decoration: BoxDecoration(
-                    color: cs.surface.withValues(alpha: 0.9),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Iconsax.arrow_right_1,
-                    color: cs.onSurface,
-                    size: 18.sp,
-                  ),
-                ),
-              ),
             ],
           ),
         ),
 
         // "الأكثر طلباً" badge
         Positioned(
-          top: 100.h,
-          right: 12.w,
+          bottom: 20.h,
+          left: 20.w,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
             decoration: BoxDecoration(
@@ -190,7 +192,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'ستريبس الدجاج الحار',
+            controller.product.name,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -198,7 +200,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
           ),
           SizedBox(height: 4.h),
           Text(
-            'ستربس الدجاج الحار مع بطاطا ومشروب غازي',
+            controller.product.description,
             style: TextStyle(
               fontSize: 12.sp,
               color: cs.onSurface.withValues(alpha: 0.55),
@@ -210,7 +212,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
               Icon(Iconsax.star1, color: cs.primary, size: 16.sp),
               SizedBox(width: 4.w),
               Text(
-                '4.8 (253 تقييم)',
+                '${controller.product.rating} (${controller.product.ratingCount} تقييم)',
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
@@ -473,12 +475,14 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                   color: cs.onSurface.withValues(alpha: 0.5),
                 ),
               ),
-              Text(
-                '25.00 ر.ق',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.bold,
-                  color: cs.onSurface,
+              Obx(
+                () => Text(
+                  '${controller.totalPrice.toStringAsFixed(2)} ر.ق',
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.bold,
+                    color: cs.onSurface,
+                  ),
                 ),
               ),
             ],
@@ -494,7 +498,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
               icon: Icon(Iconsax.shopping_cart, size: 18.sp),
               label: Obx(
                 () => Text(
-                  'أضف للسلة ${(controller.price.value * controller.quantity.value).toStringAsFixed(2)} ر.ق',
+                  'أضف للسلة ${controller.totalPrice.toStringAsFixed(2)} ر.ق',
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,

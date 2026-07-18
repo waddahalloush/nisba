@@ -64,6 +64,7 @@ dependencies:
   timeago: ^3.7.1
   iconsax: ^0.0.8
   fl_chart: ^1.2.0
+  easy_date_timeline: ^2.0.9
 
 
 dev_dependencies:

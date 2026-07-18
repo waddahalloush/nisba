@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:nisba_app/src/data/models/product_model.dart';
 
 class MealContent {
   final String name;
@@ -19,7 +20,8 @@ class NutritionInfo {
 class ProductDetailsController extends GetxController {
   final quantity = 1.obs;
   final isFavorite = false.obs;
-  final price = 25.00.obs;
+
+  late final Product product;
 
   final contents = const [
     MealContent(name: 'مشروب غازي متوسط', icon: Iconsax.cup),
@@ -34,6 +36,12 @@ class ProductDetailsController extends GetxController {
     NutritionInfo(value: '35 غ', label: 'دهون'),
   ];
 
+  @override
+  void onInit() {
+    super.onInit();
+    product = Get.arguments as Product;
+  }
+
   void increment() => quantity.value++;
   void decrement() {
     if (quantity.value > 1) quantity.value--;
@@ -44,4 +52,6 @@ class ProductDetailsController extends GetxController {
   void addToCart() {
     Get.snackbar('تم', 'تمت إضافة المنتج إلى السلة');
   }
+
+  double get totalPrice => product.price * quantity.value;
 }

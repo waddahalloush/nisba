@@ -1,143 +1,164 @@
-import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:nisba_app/generated/assets.gen.dart'; // تأكد من استيراد الـ Assets الخاص بمشروعك
+import '../../../../../data/models/service_model.dart';
+import '../Base Service/base_service_controller.dart';
 
-/// Data model for a hotel.
-class Hotel {
-  final String name;
-  final String imageUrl;
-  final String address;
-  final double rating;
-  final double price;
-  final String distance;
-  final List<String> amenities;
-
-  const Hotel({
-    required this.name,
-    required this.imageUrl,
-    required this.address,
-    required this.rating,
-    required this.price,
-    required this.distance,
-    required this.amenities,
-  });
-}
-
-class HotelController extends GetxController {
-  // ── Reactive state ──
-  final searchQuery = ''.obs;
-  final selectedFilter = 'الكل'.obs;
-  final isLoading = false.obs;
-
-  // ── Filter list ──
-  final filters = <String>[
-    'الكل',
-    'الأقرب إلي',
-    'الأعلى تقييماً',
-    'السعر',
-    'المزيد',
+class HotelController extends BaseServiceController {
+  
+  // ── 1. تصنيفات الفنادق والإقامة في قطر ──
+  @override
+  final List<ServiceCategory> categories = const [
+    ServiceCategory(name: 'الكل', icon: Iconsax.category),
+    ServiceCategory(name: 'منتجعات شاطئية', icon: Iconsax.sun_1),
+    ServiceCategory(name: 'فنادق 5 نجوم', icon: Iconsax.crown),
+    ServiceCategory(name: 'فنادق 4 نجوم', icon: Iconsax.award),
+    ServiceCategory(name: 'شقق فندقية', icon: Iconsax.house),
   ];
 
-  // ── All hotels ──
-  final allHotels = <Hotel>[
-    const Hotel(
-      name: 'فندق الماسة',
-      imageUrl: '',
-      address: 'شارع الوعب، الدوحة',
-      rating: 4.6,
-      price: 340,
-      distance: '2.4 كم',
-      amenities: ['واي فاي مجاني', 'موقف سيارات', 'مسبح'],
+  // ── 2. الفنادق المميزة (الظاهرة في السكرول الأفقي العلوي) ──
+  @override
+  final List<BaseServiceItem> featuredItems = [
+    BaseServiceItem(
+      name: 'جزيرة الموز',
+      imageUrl: Assets.images.hotel1.path,
+      address: 'جزيرة الموز، قبالة كورنيش الدوحة',
+      rating: 4.9,
+      distance: '11.0 كم (بالقارب)',
+      category: 'منتجعات شاطئية',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.sun_1, label: 'شاطئ خاص ممتد'),
+        ServiceFeature(icon: Iconsax.activity, label: 'فيلات فوق الماء ومسبح أمواج'),
+      ],
     ),
-    const Hotel(
-      name: 'فندق الريان',
-      imageUrl: '',
-      address: 'طريق سلوى، الدوحة',
-      rating: 4.5,
-      price: 420,
-      distance: '3.1 كم',
-      amenities: ['واي فاي مجاني', 'موقف سيارات', 'مطعم'],
-    ),
-    const Hotel(
-      name: 'فندق الخليج',
-      imageUrl: '',
-      address: 'منطقة الخليج الغربي، الدوحة',
-      rating: 4.4,
-      price: 300,
-      distance: '5.2 كم',
-      amenities: ['واي فاي مجاني', 'موقف سيارات', 'نادي رياضي'],
-    ),
-    const Hotel(
-      name: 'فندق سيتي سنتر',
-      imageUrl: '',
-      address: 'الريان، الدوحة',
-      rating: 4.7,
-      price: 300,
-      distance: '6.8 كم',
-      amenities: ['واي فاي مجاني', 'موقف سيارات', 'سبا'],
-    ),
-    const Hotel(
-      name: 'فندق شيراتون',
-      imageUrl: '',
-      address: 'منطقة الدفنة، الدوحة',
+    BaseServiceItem(
+      name: 'مرسى ملاذ كمبينسكي',
+      imageUrl: Assets.images.hotel2.path,
+      address: 'جزيرة اللؤلؤة، الدوحة',
       rating: 4.8,
-      price: 550,
-      distance: '1.8 كم',
-      amenities: ['واي فاي مجاني', 'موقف سيارات', 'مسبح', 'سبا'],
+      distance: '8.2 كم',
+      category: 'منتجعات شاطئية',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.crown, label: 'تصميم قصر أوروبي فاخر'),
+        ServiceFeature(icon: Iconsax.cup, label: 'مطاعم حائزة على جوائز'),
+      ],
     ),
-    const Hotel(
-      name: 'فندق ماريوت',
-      imageUrl: '',
-      address: 'طريق المطار، الدوحة',
-      rating: 4.3,
-      price: 280,
-      distance: '7.5 كم',
-      amenities: ['واي فاي مجاني', 'موقف سيارات', 'مطعم'],
+    BaseServiceItem(
+      name: ' موندريان الدوحة',
+      imageUrl: Assets.images.hotel3.path,
+      address: 'منطقة غرب خليج لوسيل، الدوحة',
+      rating: 4.8,
+      distance: '9.0 كم',
+      category: 'فنادق 5 نجوم',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.paintbucket, label: 'تصميم داخلي عصري مذهل'),
+        ServiceFeature(icon: Iconsax.music, label: 'حمام سباحة بانورامي في السطح'),
+      ],
     ),
   ];
 
-  /// Filtered list based on search & selected filter.
-  List<Hotel> get filteredHotels {
-    var list = allHotels;
-
-    // Apply filter chip
-    switch (selectedFilter.value) {
-      case 'الأقرب إلي':
-        list = list.toList()
-          ..sort((a, b) {
-            final da = double.tryParse(a.distance.replaceAll(' كم', '')) ?? 0;
-            final db = double.tryParse(b.distance.replaceAll(' كم', '')) ?? 0;
-            return da.compareTo(db);
-          });
-        break;
-      case 'الأعلى تقييماً':
-        list = list.toList()..sort((a, b) => b.rating.compareTo(a.rating));
-        break;
-      case 'السعر':
-        list = list.toList()..sort((a, b) => a.price.compareTo(b.price));
-        break;
-      case 'المزيد':
-        // TODO: open more filters bottom sheet
-        break;
-    }
-
-    // Apply search
-    if (searchQuery.value.isNotEmpty) {
-      list = list
-          .where(
-            (h) =>
-                h.name.contains(searchQuery.value) ||
-                h.address.contains(searchQuery.value),
-          )
-          .toList();
-    }
-
-    return list;
-  }
-
-  void selectFilter(String filter) {
-    selectedFilter.value = filter;
-  }
-
-  void setSearchQuery(String query) {
-    searchQuery.value = query;
-  }
+  // ── 3. قائمة جميع الفنادق والمنتجعات (الظاهرة في القائمة الرأسية) ──
+  @override
+  final List<BaseServiceItem> allItems = [
+    // 1. جزيرة الموز
+    BaseServiceItem(
+      name: 'جزيرة الموز',
+      imageUrl: Assets.images.hotel1.path,
+      address: 'جزيرة الموز، قبالة كورنيش الدوحة',
+      rating: 4.9,
+      distance: '11.0 كم (بالقارب)',
+      category: 'منتجعات شاطئية',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.activity, label: 'أنشطة غوص ورياضات مائية'),
+        ServiceFeature(icon: Iconsax.shield_security, label: 'خصوصية تامة وهدوء مثالي'),
+      ],
+    ),
+    // 2. مرسى ملاذ كمبينسكي
+    BaseServiceItem(
+      name: 'مرسى ملاذ كمبينسكي',
+      imageUrl: Assets.images.hotel2.path,
+      address: 'جزيرة اللؤلؤة، الدوحة',
+      rating: 4.8,
+      distance: '8.2 كم',
+      category: 'منتجعات شاطئية',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.coffee, label: 'سبا هادئ ونادٍ صحي متكامل'),
+        ServiceFeature(icon: Iconsax.building_3, label: 'إطلالات ساحرة على الخليج العربي'),
+      ],
+    ),
+    // 3. موندريان الدوحة
+    BaseServiceItem(
+      name: ' موندريان الدوحة',
+      imageUrl: Assets.images.hotel3.path,
+      address: 'منطقة غرب خليج لوسيل، الدوحة',
+      rating: 4.8,
+      distance: '9.0 كم',
+      category: 'فنادق 5 نجوم',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.cup, label: 'تجربة طعام يابانية من شيف عالمي'),
+        ServiceFeature(icon: Iconsax.flash_1, label: 'قاعة احتفالات ضخمة وراقية'),
+      ],
+    ),
+    // 4. شيراتون جراند الدوحة
+    BaseServiceItem(
+      name: ' شيراتون جراند',
+      imageUrl: Assets.images.hotel4.path,
+      address: 'كورنيش الدوحة، الخليج الغربي',
+      rating: 4.9,
+      distance: '3.0 كم',
+      category: 'منتجعات شاطئية',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.map, label: 'أيقونة الدوحة التراثية على الكورنيش'),
+        ServiceFeature(icon: Iconsax.tree, label: 'حدائق واسعة ممتدة وملاعب تنس'),
+      ],
+    ),
+    // 5. فندق راديسون بلو (Radisson Blu)
+    BaseServiceItem(
+      name: 'راديسون بلو',
+      imageUrl: Assets.images.hotel5.path,
+      address: 'تقاطع طريق سلوى مع الدائري الثالث',
+      rating: 4.5,
+      distance: '2.5 كم',
+      category: 'فنادق 4 نجوم',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.routing, label: 'موقع حيوي ممتاز وسط العاصمة'),
+        ServiceFeature(icon: Iconsax.coffee, label: 'أكثر من 10 مطاعم تقدم أطباق متنوعة'),
+      ],
+    ),
+    // 6. شقق فندقية فريزر سويتس (Fraser Suites)
+    BaseServiceItem(
+      name: 'فريزر سويتس',
+      imageUrl: Assets.images.hotel6.path,
+      address: 'طريق الكورنيش، الدوحة',
+      rating: 4.6,
+      distance: '1.2 كم',
+      category: 'شقق فندقية',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.house, label: 'شقق واسعة ومجهزة بالكامل للعائلات'),
+        ServiceFeature(icon: Iconsax.teacher, label: 'منطقة لعب مخصصة وآمنة للأطفال'),
+      ],
+    ),
+    // 7. فندق روتانا سيتي سنتر (City Centre Rotana)
+    BaseServiceItem(
+      name: 'سيتي سنتر روتانا',
+      imageUrl: Assets.images.hotel7.path,
+      address: 'الخليج الغربي، الدوحة',
+      rating: 4.7,
+      distance: '4.0 كم',
+      category: 'فنادق 5 نجوم',
+      hours: 'استقبال 24 ساعة',
+      features: const [
+        ServiceFeature(icon: Iconsax.shop, label: 'اتصال مباشر بمجمع سيتي سنتر مول'),
+        ServiceFeature(icon: Iconsax.activity, label: 'قريب جداً من محطة مترو الخليج الغربي'),
+      ],
+    ),
+  ];
 }

@@ -22,13 +22,13 @@ class PaymentScreen extends GetView<PaymentController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
           ),
           title: Text(
             'إتمام الدفع',
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
-              color: cs.onSurface,
+              color: cs.primary,
             ),
           ),
         ),
@@ -42,6 +42,9 @@ class PaymentScreen extends GetView<PaymentController> {
               _buildDeliveryInfo(theme),
 
               SizedBox(height: 14.h),
+
+              // ── Delivery Address ──
+              _buildDeliveryAddress(theme),
 
               // ── Points section ──
               _buildPointsSection(theme),
@@ -92,18 +95,19 @@ class PaymentScreen extends GetView<PaymentController> {
                   color: cs.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: Icon(Iconsax.shop, color: cs.primary, size: 22.sp),
+                child: Icon(
+                  Iconsax.shopping_bag,
+                  color: cs.primary,
+                  size: 22.sp,
+                ),
               ),
               SizedBox(width: 12.w),
-              Expanded(
-                child: Obx(
-                  () => Text(
-                    controller.restaurantName.value,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: cs.onSurface,
-                    ),
-                  ),
+              Text(
+                "ملخص الطلب",
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: cs.onSurface,
+                  fontSize: 14.sp,
                 ),
               ),
             ],
@@ -114,6 +118,13 @@ class PaymentScreen extends GetView<PaymentController> {
 
           // Delivery time
           _InfoRow(
+            icon: Iconsax.shop,
+            label: 'اسم المطعم',
+            value: controller.restaurantName,
+          ),
+          SizedBox(height: 8.h),
+          // Delivery time
+          _InfoRow(
             icon: Iconsax.clock,
             label: 'وقت التوصيل',
             value: controller.deliveryTime,
@@ -122,9 +133,214 @@ class PaymentScreen extends GetView<PaymentController> {
 
           // Address
           _InfoRow(
-            icon: Iconsax.location,
-            label: 'عنوان التوصيل',
-            value: controller.deliveryAddress,
+            icon: Icons.pedal_bike_rounded,
+            label: 'مسؤول التوصيل',
+            value: controller.deliveryManager,
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Address Change Bottom Sheet ──
+  void _showAddressSheet() {
+    controller.addressController.text = controller.deliveryAddress.value;
+    final theme = Theme.of(Get.context!);
+    final cs = theme.colorScheme;
+
+    Get.bottomSheet(
+      Container(
+        decoration: BoxDecoration(
+          color: cs.surface,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24.r),
+            topRight: Radius.circular(24.r),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Handle bar
+            Center(
+              child: Container(
+                margin: EdgeInsets.only(top: 12.h),
+                width: 40.w,
+                height: 4.h,
+                decoration: BoxDecoration(
+                  color: cs.onSurface.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              ),
+            ),
+            // Title row
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Icon(Icons.close, color: cs.onSurface, size: 22.sp),
+                  ),
+                  Text(
+                    'تغيير عنوان التوصيل',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: cs.onSurface,
+                    ),
+                  ),
+                  const SizedBox(width: 22),
+                ],
+              ),
+            ),
+            // Address input
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: TextFormField(
+                controller: controller.addressController,
+                maxLines: 3,
+                textDirection: TextDirection.rtl,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: cs.onSurface,
+                ),
+                decoration: InputDecoration(
+                  hintText: 'أدخل عنوان التوصيل الجديد',
+                  hintStyle: TextStyle(
+                    color: cs.onSurface.withValues(alpha: 0.35),
+                    fontSize: 13.sp,
+                  ),
+                  filled: true,
+                  fillColor: cs.primary.withValues(alpha: 0.045),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.all(14.r),
+                ),
+              ),
+            ),
+            SizedBox(height: 16.h),
+            // Save button
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: SizedBox(
+                width: double.infinity,
+                height: 48.h,
+                child: ElevatedButton(
+                  onPressed: controller.updateAddress,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: cs.primary,
+                    foregroundColor: cs.onPrimary,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                  ),
+                  child: Text(
+                    'حفظ العنوان',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 16.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDeliveryAddress(ThemeData theme) {
+    final cs = theme.colorScheme;
+
+    return Container(
+      padding: EdgeInsets.all(14.r),
+      margin: EdgeInsets.only(bottom: 14.h),
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: cs.shadow.withValues(alpha: 0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 42.w,
+                height: 42.h,
+                decoration: BoxDecoration(
+                  color: cs.primary.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Icon(Iconsax.location, color: cs.primary, size: 22.sp),
+              ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Text(
+                  'عنوان التوصيل',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: cs.onSurface,
+                    fontSize: 14.sp,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: _showAddressSheet,
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 12.w,
+                    vertical: 6.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: cs.primary.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Text(
+                    'تغيير',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.bold,
+                      color: cs.primary,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10.h),
+          Divider(color: cs.outlineVariant.withValues(alpha: 0.4)),
+          SizedBox(height: 10.h),
+          Obx(
+            () => Row(
+              children: [
+                Icon(
+                  Iconsax.map_1,
+                  color: cs.onSurface.withValues(alpha: 0.5),
+                  size: 18.sp,
+                ),
+                SizedBox(width: 8.w),
+                Expanded(
+                  child: Text(
+                    controller.deliveryAddress.value,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: cs.onSurface.withValues(alpha: 0.75),
+                      fontSize: 13.sp,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -152,7 +368,15 @@ class PaymentScreen extends GetView<PaymentController> {
         children: [
           Row(
             children: [
-              Icon(Iconsax.cup, color: cs.primary, size: 20.sp),
+              Container(
+                width: 42.w,
+                height: 42.h,
+                decoration: BoxDecoration(
+                  color: cs.primary.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Icon(Iconsax.cup, color: cs.primary, size: 20.sp),
+              ),
               SizedBox(width: 8.w),
               Obx(
                 () => Text(
@@ -190,7 +414,7 @@ class PaymentScreen extends GetView<PaymentController> {
 
           Obx(
             () => Text(
-              'استخدام ${controller.pointsToUse.value.toInt()} نقطة',
+              'استخدام ${controller.pointsToUse.value.toInt()} نقطة يخصم ${controller.pointsDiscount.toStringAsFixed(2)} ريال من الفاتورة',
               style: TextStyle(
                 fontSize: 11.sp,
                 color: cs.primary,
@@ -251,22 +475,19 @@ class PaymentScreen extends GetView<PaymentController> {
                         child: Row(
                           children: [
                             Container(
-                              width: 38.w,
-                              height: 38.h,
+                              width: 20.w,
+                              height: 20.h,
                               decoration: BoxDecoration(
-                                color: isSelected
-                                    ? cs.primary.withValues(alpha: 0.1)
-                                    : cs.surfaceContainerHighest,
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              child: Icon(
-                                method.icon,
-                                color: isSelected
-                                    ? cs.primary
-                                    : cs.onSurface.withValues(alpha: 0.45),
-                                size: 18.sp,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: isSelected
+                                      ? cs.primary
+                                      : cs.onSurface.withValues(alpha: 0.3),
+                                  width: isSelected ? 6 : 1.5,
+                                ),
                               ),
                             ),
+
                             SizedBox(width: 12.w),
                             Expanded(
                               child: Column(
@@ -292,18 +513,11 @@ class PaymentScreen extends GetView<PaymentController> {
                                 ],
                               ),
                             ),
-                            Container(
-                              width: 20.w,
-                              height: 20.h,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: isSelected
-                                      ? cs.primary
-                                      : cs.onSurface.withValues(alpha: 0.3),
-                                  width: isSelected ? 6 : 1.5,
-                                ),
-                              ),
+                            Image.asset(
+                              method.icon,
+                              width: 50.w,
+                              height: 30.w,
+                              fit: BoxFit.contain,
                             ),
                           ],
                         ),
@@ -355,8 +569,14 @@ class PaymentScreen extends GetView<PaymentController> {
             ),
             SizedBox(height: 6.h),
             _PriceRow(
-              label: 'الخصم',
+              label: 'خصم القسيمة',
               value: '- ${controller.discount.value.toStringAsFixed(2)} ريال',
+              isDiscount: true,
+            ),
+            SizedBox(height: 6.h),
+            _PriceRow(
+              label: 'خصم النقاط',
+              value: '- ${controller.pointsDiscount.toStringAsFixed(2)} ريال',
               isDiscount: true,
             ),
             SizedBox(height: 6.h),
@@ -367,7 +587,7 @@ class PaymentScreen extends GetView<PaymentController> {
             Divider(color: cs.outlineVariant.withValues(alpha: 0.5)),
             _PriceRow(
               label: 'الإجمالي',
-              value: '${controller.total.value.toStringAsFixed(2)} ريال',
+              value: '${controller.total.toStringAsFixed(2)} ريال',
               isTotal: true,
             ),
           ],
@@ -408,7 +628,7 @@ class PaymentScreen extends GetView<PaymentController> {
                 ),
                 SizedBox(width: 8.w),
                 Text(
-                  '${controller.total.value.toStringAsFixed(2)} ريال',
+                  '${controller.total.toStringAsFixed(2)} ريال',
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
@@ -500,7 +720,7 @@ class _PriceRow extends StatelessWidget {
             fontSize: isTotal ? 16.sp : 12.sp,
             fontWeight: FontWeight.bold,
             color: isDiscount
-                ? cs.error
+                ? Colors.teal
                 : isTotal
                 ? cs.primary
                 : cs.onSurface,
