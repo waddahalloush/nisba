@@ -122,13 +122,7 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
             itemBuilder: (context, index) {
               final item = controller.featuredItems[index];
               return InkWell(
-                onTap: () {
-                  // Get.toNamed(
-                  //   AppRoutesNames
-                  //       .placeDetails, // تأكد من إضافة هذا الروت في ملف الروابط
-                  //   arguments: item, // نمرر كائن الـ BaseServiceItem بالكامل
-                  // );
-                },
+                onTap: () => _navigateToDetail(item),
                 child: Container(
                   width: Get.width / 2.5,
                   margin: EdgeInsets.only(left: 10.w),
@@ -241,7 +235,7 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
                                 ),
                               ],
                             ),
-                            if (item.hours != null) ...[
+                            if (item.hours != null ) ...[
                               SizedBox(height: 2.h),
                               Row(
                                 children: [
@@ -441,12 +435,7 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
     final cs = theme.colorScheme;
 
     return InkWell(
-      onTap: () {
-        // Get.toNamed(
-        //   AppRoutesNames.placeDetails, // تأكد من إضافة هذا الروت في ملف الروابط
-        //   arguments: item, // نمرر كائن الـ BaseServiceItem بالكامل
-        // );
-      },
+      onTap: () => _navigateToDetail(item),
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
@@ -579,5 +568,25 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
         ),
       ),
     );
+  }
+
+  // ── التوجيه إلى صفحة التفاصيل بناءً على نوع الخدمة ──
+  void _navigateToDetail(BaseServiceItem item) {
+    // final String? routeName = switch (item.serviceType) {
+    //   'Mall' => AppRoutesNames.mallDetails,
+    //   'Hotel' => AppRoutesNames.hotelDetails,
+    //   'Kioks' => AppRoutesNames.kioksDetails,
+    //   'Gift' => AppRoutesNames.giftDetails,
+    //   'Entertain' => AppRoutesNames.entertainDetails,
+    //   'Tourism' => AppRoutesNames.tourismDetails,
+    //   'Beauty' => AppRoutesNames.beautyDetails,
+    //   'Market' => AppRoutesNames.marketDetails,
+    //   _ => null,
+    // };
+
+    // if (routeName != null) {
+    //   Get.toNamed(routeName, arguments: item);
+    // }
+    Get.toNamed(AppRoutesNames.placeDetails, arguments: item);
   }
 }

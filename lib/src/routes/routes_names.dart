@@ -34,10 +34,17 @@ class AppRoutesNames {
   static String hotel = "/hotel";
   static String hotelDetails = "/hotel-details";
   static String kioks = "/kioks";
+  static String kioksDetails = "/kioks-details";
   static String gift = "/gift";
+  static String giftDetails = "/gift-details";
   static String entertain = "/entertain";
+  static String entertainDetails = "/entertain-details";
   static String tourism = "/tourism";
+  static String tourismDetails = "/tourism-details";
   static String beauty = "/beauty";
+  static String beautyDetails = "/beauty-details";
   static String market = "/market";
-  // static String placeDetails = "/placeDetails";
+  static String marketDetails = "/market-details";
+  static String allHomeServices = "/allHomeServices";
+  static String placeDetails = "/placeDetails";
 }

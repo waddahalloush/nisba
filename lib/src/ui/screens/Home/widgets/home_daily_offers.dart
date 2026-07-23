@@ -1,122 +1,81 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/data/models/product_model.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
 
-/// قسم "عروض اليوم القريبة منك" مع كروت المنتجات الأفقية
+/// قسم عروض أفقي قابل لإعادة الاستخدام مع كروت المنتجات
 class HomeDailyOffers extends StatelessWidget {
-  const HomeDailyOffers({super.key});
+  final String title;
+  final List<Product> productList;
+
+  const HomeDailyOffers({
+    super.key,
+    required this.title,
+    required this.productList,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = theme.colorScheme.primary;
 
-    return SliverToBoxAdapter(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // صف العنوان
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'عروض اليوم القريبة منك',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurface,
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 10.h),
+      sliver: SliverToBoxAdapter(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // صف العنوان
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 2.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.onSurface,
+                    ),
                   ),
-                ),
-                Text(
-                  'عرض الكل',
-                  style: TextStyle(
-                    color: primaryColor,
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.bold,
+                  Text(
+                    'عرض الكل',
+                    style: TextStyle(
+                      color: primaryColor,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          // قائمة أفقية للعروض
-          SizedBox(
-            height: 156.h,
-            child: ListView(
-              reverse: true,
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
-              children: [
-                _buildCard(
-                  theme,
-                  primaryColor,
-                  'شواية الخليج',
-                  '53 ر.ق',
-                  '76 ر.ق',
-                  '25%',
-                  '330 دقيقة • 1.2 كم',
-                  Assets.images.offer1.path,
-                ),
-                _buildCard(
-                  theme,
-                  primaryColor,
-                  'سوشي يوشي',
-                  '44 ر.ق',
-                  '59 ر.ق',
-                  '25%',
-                  '395 دقيقة • 1.5 كم',
-                  Assets.images.offer2.path,
-                ),
-                _buildCard(
-                  theme,
-                  primaryColor,
-                  'باستا ريمو',
-                  '37 ر.ق',
-                  '49 ر.ق',
-                  '25%',
-                  '330 دقيقة • 1.1 كم',
-                  Assets.images.offer3.path,
-                ),
-              ],
+            // قائمة أفقية للعروض
+            SizedBox(
+              height: 156.h,
+              child: ListView.builder(
+                reverse: true,
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                itemCount: productList.length,
+                itemBuilder: (context, index) =>
+                    _buildCard(theme, primaryColor, productList[index]),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildCard(
-    ThemeData theme,
-    Color primaryColor,
-    String title,
-    String price,
-    String oldPrice,
-    String savings,
-    String deliveryMeta,
-    String imageUrl,
-  ) {
+  Widget _buildCard(ThemeData theme, Color primaryColor, Product product) {
     final onSurface = theme.colorScheme.onSurface;
 
     return GestureDetector(
-      onTap: () {
-        final product = Product(
-          name: title,
-          description: title,
-          price: double.tryParse(price.replaceAll(' ر.ق', '')) ?? 0,
-          oldPrice: double.tryParse(oldPrice.replaceAll(' ر.ق', '')) ?? 0,
-          savings: savings,
-          deliveryTime: deliveryMeta.split(' ').first,
-          distance: deliveryMeta.split('•').last.trim().split(' ').first,
-          imagePath: imageUrl,
-          rating: 4.8,
-          ratingCount: 253,
-        );
-        Get.toNamed(AppRoutesNames.productDetails, arguments: product);
-      },
+      onTap: () =>
+          Get.toNamed(AppRoutesNames.productDetails, arguments: product),
       child: Container(
         width: 120.w,
         margin: EdgeInsets.symmetric(horizontal: 3.w),
@@ -144,7 +103,7 @@ class HomeDailyOffers extends StatelessWidget {
                   child: SizedBox(
                     height: 95.h,
                     width: double.infinity,
-                    child: Image.asset(imageUrl, fit: BoxFit.cover),
+                    child: Image.asset(product.imagePath, fit: BoxFit.cover),
                   ),
                 ),
                 Positioned(
@@ -160,7 +119,7 @@ class HomeDailyOffers extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6.r),
                     ),
                     child: Text(
-                      "وفر\n$savings",
+                      "وفر\n${product.savings}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: theme.colorScheme.onPrimary,
@@ -178,7 +137,7 @@ class HomeDailyOffers extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    product.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 9.sp,
@@ -192,7 +151,7 @@ class HomeDailyOffers extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        oldPrice,
+                        '${product.oldPrice.toInt()} ر.ق',
                         style: TextStyle(
                           color: onSurface.withValues(alpha: 0.45),
                           fontSize: 10.sp,
@@ -200,11 +159,11 @@ class HomeDailyOffers extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        price,
+                        '${product.price.toInt()} ر.ق',
                         style: TextStyle(
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
-                          fontSize: 11,
+                          fontSize: 11.sp,
                         ),
                       ),
                     ],
@@ -213,7 +172,7 @@ class HomeDailyOffers extends StatelessWidget {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      deliveryMeta,
+                      product.deliveryMeta,
                       style: TextStyle(
                         color: onSurface.withValues(alpha: 0.5),
                         fontSize: 9.sp,

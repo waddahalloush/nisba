@@ -40,29 +40,45 @@ class HomeHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // السلة مع الإشعار
+        // البروفايل مع شارة PRO
         GestureDetector(
           onTap: () {
-            Get.toNamed(AppRoutesNames.cart);
+            Get.toNamed(AppRoutesNames.userAccount);
           },
           child: Stack(
+            clipBehavior: Clip.none,
             children: [
-              Icon(Iconsax.shopping_cart, color: onPrimary, size: 22.sp),
+              Container(
+                width: 36.w,
+                height: 36.h,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: onPrimary.withValues(alpha: 0.24),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(18.r),
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
               Positioned(
-                top: 0,
-                right: 0,
+                bottom: -4.h,
+                right: -4.w,
                 child: Container(
-                  padding: const EdgeInsets.all(3),
+                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.error,
-                    shape: BoxShape.circle,
+                    color: AppColors.star,
+                    borderRadius: BorderRadius.circular(6.r),
                   ),
                   child: Text(
-                    '2',
+                    'PRO',
                     style: TextStyle(
-                      color: theme.colorScheme.onError,
-                      fontSize: 8.sp,
+                      fontSize: 7.sp,
                       fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                 ),
@@ -70,6 +86,7 @@ class HomeHeader extends StatelessWidget {
             ],
           ),
         ),
+
         // العنوان (Pill)
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
@@ -99,43 +116,66 @@ class HomeHeader extends StatelessWidget {
             ],
           ),
         ),
-        // البروفايل مع شارة PRO
-        Stack(
-          clipBehavior: Clip.none,
+        // السلة مع الإشعار
+        Row(
+          spacing: 4.w,
           children: [
-            Container(
-              width: 36.w,
-              height: 36.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: onPrimary.withValues(alpha: 0.24),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(18.r),
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
-                  fit: BoxFit.cover,
-                ),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(AppRoutesNames.notification);
+              },
+              child: Stack(
+                children: [
+                  Icon(Iconsax.notification, color: onPrimary, size: 22.sp),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.error,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        '2',
+                        style: TextStyle(
+                          color: theme.colorScheme.onError,
+                          fontSize: 8.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            Positioned(
-              bottom: -4.h,
-              right: -4.w,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
-                decoration: BoxDecoration(
-                  color: AppColors.star,
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-                child: Text(
-                  'PRO',
-                  style: TextStyle(
-                    fontSize: 7.sp,
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurface,
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(AppRoutesNames.cart);
+              },
+              child: Stack(
+                children: [
+                  Icon(Iconsax.shopping_cart, color: onPrimary, size: 22.sp),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.error,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        '2',
+                        style: TextStyle(
+                          color: theme.colorScheme.onError,
+                          fontSize: 8.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           ],

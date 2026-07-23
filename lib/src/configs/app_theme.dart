@@ -36,6 +36,7 @@ class ThemesData {
       shadow: Colors.black,
       inverseSurface: const Color(0xFF1E2740),
       onInverseSurface: Colors.white,
+      primaryFixed: AppColors.primaryRose,
     );
 
     return ThemeData(

@@ -56,6 +56,51 @@ class $AssetsImagesGen {
   /// File path: assets/images/box.png
   AssetGenImage get box => const AssetGenImage('assets/images/box.png');
 
+  /// File path: assets/images/brand1.jpg
+  AssetGenImage get brand1 => const AssetGenImage('assets/images/brand1.jpg');
+
+  /// File path: assets/images/brand10.jpg
+  AssetGenImage get brand10 => const AssetGenImage('assets/images/brand10.jpg');
+
+  /// File path: assets/images/brand11.jpg
+  AssetGenImage get brand11 => const AssetGenImage('assets/images/brand11.jpg');
+
+  /// File path: assets/images/brand12.jpg
+  AssetGenImage get brand12 => const AssetGenImage('assets/images/brand12.jpg');
+
+  /// File path: assets/images/brand13.jpg
+  AssetGenImage get brand13 => const AssetGenImage('assets/images/brand13.jpg');
+
+  /// File path: assets/images/brand14.jpg
+  AssetGenImage get brand14 => const AssetGenImage('assets/images/brand14.jpg');
+
+  /// File path: assets/images/brand15.jpg
+  AssetGenImage get brand15 => const AssetGenImage('assets/images/brand15.jpg');
+
+  /// File path: assets/images/brand2.jpg
+  AssetGenImage get brand2 => const AssetGenImage('assets/images/brand2.jpg');
+
+  /// File path: assets/images/brand3.jpg
+  AssetGenImage get brand3 => const AssetGenImage('assets/images/brand3.jpg');
+
+  /// File path: assets/images/brand4.jpg
+  AssetGenImage get brand4 => const AssetGenImage('assets/images/brand4.jpg');
+
+  /// File path: assets/images/brand5.jpg
+  AssetGenImage get brand5 => const AssetGenImage('assets/images/brand5.jpg');
+
+  /// File path: assets/images/brand6.jpg
+  AssetGenImage get brand6 => const AssetGenImage('assets/images/brand6.jpg');
+
+  /// File path: assets/images/brand7.jpg
+  AssetGenImage get brand7 => const AssetGenImage('assets/images/brand7.jpg');
+
+  /// File path: assets/images/brand8.jpg
+  AssetGenImage get brand8 => const AssetGenImage('assets/images/brand8.jpg');
+
+  /// File path: assets/images/brand9.jpg
+  AssetGenImage get brand9 => const AssetGenImage('assets/images/brand9.jpg');
+
   /// File path: assets/images/bubble.png
   AssetGenImage get bubble => const AssetGenImage('assets/images/bubble.png');
 
@@ -196,6 +241,34 @@ class $AssetsImagesGen {
   /// File path: assets/images/google-logo.png
   AssetGenImage get googleLogo =>
       const AssetGenImage('assets/images/google-logo.png');
+
+  /// File path: assets/images/home-foryou1.jpeg
+  AssetGenImage get homeForyou1 =>
+      const AssetGenImage('assets/images/home-foryou1.jpeg');
+
+  /// File path: assets/images/home-foryou2.jpeg
+  AssetGenImage get homeForyou2 =>
+      const AssetGenImage('assets/images/home-foryou2.jpeg');
+
+  /// File path: assets/images/home-foryou3.jpeg
+  AssetGenImage get homeForyou3 =>
+      const AssetGenImage('assets/images/home-foryou3.jpeg');
+
+  /// File path: assets/images/home-meals1.jpeg
+  AssetGenImage get homeMeals1 =>
+      const AssetGenImage('assets/images/home-meals1.jpeg');
+
+  /// File path: assets/images/home-meals2.jpeg
+  AssetGenImage get homeMeals2 =>
+      const AssetGenImage('assets/images/home-meals2.jpeg');
+
+  /// File path: assets/images/home-meals3.jpeg
+  AssetGenImage get homeMeals3 =>
+      const AssetGenImage('assets/images/home-meals3.jpeg');
+
+  /// File path: assets/images/hotel-dual-room.jpg
+  AssetGenImage get hotelDualRoom =>
+      const AssetGenImage('assets/images/hotel-dual-room.jpg');
 
   /// File path: assets/images/hotel1.jpeg
   AssetGenImage get hotel1 => const AssetGenImage('assets/images/hotel1.jpeg');
@@ -378,6 +451,33 @@ class $AssetsImagesGen {
   /// File path: assets/images/rewards.png
   AssetGenImage get rewards => const AssetGenImage('assets/images/rewards.png');
 
+  /// File path: assets/images/serv1.jpg
+  AssetGenImage get serv1 => const AssetGenImage('assets/images/serv1.jpg');
+
+  /// File path: assets/images/serv2.jpg
+  AssetGenImage get serv2 => const AssetGenImage('assets/images/serv2.jpg');
+
+  /// File path: assets/images/serv3.jpg
+  AssetGenImage get serv3 => const AssetGenImage('assets/images/serv3.jpg');
+
+  /// File path: assets/images/serv4.jpg
+  AssetGenImage get serv4 => const AssetGenImage('assets/images/serv4.jpg');
+
+  /// File path: assets/images/serv5.jpg
+  AssetGenImage get serv5 => const AssetGenImage('assets/images/serv5.jpg');
+
+  /// File path: assets/images/serv6.jpg
+  AssetGenImage get serv6 => const AssetGenImage('assets/images/serv6.jpg');
+
+  /// File path: assets/images/serv7.jpg
+  AssetGenImage get serv7 => const AssetGenImage('assets/images/serv7.jpg');
+
+  /// File path: assets/images/serv8.jpg
+  AssetGenImage get serv8 => const AssetGenImage('assets/images/serv8.jpg');
+
+  /// File path: assets/images/serv9.jpg
+  AssetGenImage get serv9 => const AssetGenImage('assets/images/serv9.jpg');
+
   /// File path: assets/images/service1.jpg
   AssetGenImage get service1 =>
       const AssetGenImage('assets/images/service1.jpg');
@@ -486,6 +586,21 @@ class $AssetsImagesGen {
     beauty6,
     beauty7,
     box,
+    brand1,
+    brand10,
+    brand11,
+    brand12,
+    brand13,
+    brand14,
+    brand15,
+    brand2,
+    brand3,
+    brand4,
+    brand5,
+    brand6,
+    brand7,
+    brand8,
+    brand9,
     bubble,
     burgerLand,
     callCenter,
@@ -524,6 +639,13 @@ class $AssetsImagesGen {
     gifts6,
     gifts7,
     googleLogo,
+    homeForyou1,
+    homeForyou2,
+    homeForyou3,
+    homeMeals1,
+    homeMeals2,
+    homeMeals3,
+    hotelDualRoom,
     hotel1,
     hotel2,
     hotel3,
@@ -577,6 +699,15 @@ class $AssetsImagesGen {
     resProduct2,
     resSea,
     rewards,
+    serv1,
+    serv2,
+    serv3,
+    serv4,
+    serv5,
+    serv6,
+    serv7,
+    serv8,
+    serv9,
     service1,
     service2,
     service3,

@@ -4,6 +4,7 @@ import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/ui/screens/Home/widgets/home_categories.dart';
 import 'package:nisba_app/src/ui/screens/Home/widgets/home_daily_offers.dart';
 import 'package:nisba_app/src/ui/screens/Home/widgets/home_header.dart';
+import 'package:nisba_app/src/ui/screens/Home/widgets/home_meals.dart';
 import 'package:nisba_app/src/ui/screens/Home/widgets/home_services.dart';
 
 import 'controller/home_controller.dart';
@@ -24,13 +25,24 @@ class HomeScreen extends GetView<HomeController> {
           HomeHeader(controller: controller),
 
           // ─── 3. التصنيفات ───
-          const HomeCategories(),
+          HomeCategories(categories: controller.homeCategoryList),
+          HomeCategories(categories: controller.homeServiceList),
 
           // ─── 4. عروض اليوم القريبة منك ───
-          const HomeDailyOffers(),
+          HomeDailyOffers(
+            title: 'عروض اليوم القريبة منك',
+            productList: controller.dailyOfferList,
+          ),
+
+          HomeDailyOffers(
+            title: 'مختارة لك ',
+            productList: controller.selectedForYouList,
+          ),
 
           // ─── 5. الخدمات ───
-          const HomeServices(),
+          const HomeBrands(),
+          // ─── 5. وجبات ب 25 ريال  ───
+          const HomeMeals(title: "وجبات بـ 25 ريال "),
 
           // مسافة أمان سفليّة
           SliverToBoxAdapter(child: SizedBox(height: 60.h)),

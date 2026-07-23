@@ -6,41 +6,44 @@ import 'package:nisba_app/src/routes/routes_names.dart';
 
 /// Data model representing a service item
 class ServiceItem {
-  final String title;
   final String imagePath;
   final String routeName;
 
-  const ServiceItem({
-    required this.title,
-    required this.imagePath,
-    required this.routeName,
-  });
+  const ServiceItem({required this.imagePath, required this.routeName});
 }
 
 /// قسم الخدمات الأفقي ثنائي الأسطر (كل سطر يعرض خدمات مختلفة)
-class HomeServices extends StatelessWidget {
-  const HomeServices({super.key});
+class HomeBrands extends StatelessWidget {
+  const HomeBrands({super.key});
 
   // خدمات الصف الأول (العلوي) - معرّفة كثوابت خارج الـ build لتحسين الأداء
   static final List<ServiceItem> _firstRowServices = [
     ServiceItem(
-      title: 'الترفيه',
-      imagePath: Assets.images.service1.path,
+      imagePath: Assets.images.brand1.path,
       routeName: AppRoutesNames.entertain,
     ),
     ServiceItem(
-      title: 'الهدايا',
-      imagePath: Assets.images.service2.path,
+      imagePath: Assets.images.brand2.path,
       routeName: AppRoutesNames.gift,
     ),
     ServiceItem(
-      title: 'السياحة',
-      imagePath: Assets.images.service3.path,
+      imagePath: Assets.images.brand4.path,
       routeName: AppRoutesNames.tourism,
     ),
     ServiceItem(
-      title: 'الأسواق',
-      imagePath: Assets.images.service4.path,
+      imagePath: Assets.images.brand5.path,
+      routeName: AppRoutesNames.market,
+    ),
+    ServiceItem(
+      imagePath: Assets.images.brand10.path,
+      routeName: AppRoutesNames.market,
+    ),
+    ServiceItem(
+      imagePath: Assets.images.brand12.path,
+      routeName: AppRoutesNames.market,
+    ),
+    ServiceItem(
+      imagePath: Assets.images.brand14.path,
       routeName: AppRoutesNames.market,
     ),
   ];
@@ -48,23 +51,31 @@ class HomeServices extends StatelessWidget {
   // خدمات الصف الثاني (السفلي)
   static final List<ServiceItem> _secondRowServices = [
     ServiceItem(
-      title: 'Kioks',
-      imagePath: Assets.images.service5.path,
+      imagePath: Assets.images.brand6.path,
       routeName: AppRoutesNames.kioks,
     ),
     ServiceItem(
-      title: 'الفنادق',
-      imagePath: Assets.images.service6.path,
+      imagePath: Assets.images.brand7.path,
       routeName: AppRoutesNames.hotel,
     ),
     ServiceItem(
-      title: 'المولات',
-      imagePath: Assets.images.service7.path,
+      imagePath: Assets.images.brand8.path,
       routeName: AppRoutesNames.mall,
     ),
     ServiceItem(
-      title: 'التجميل',
-      imagePath: Assets.images.service8.path,
+      imagePath: Assets.images.brand9.path,
+      routeName: AppRoutesNames.beauty,
+    ),
+    ServiceItem(
+      imagePath: Assets.images.brand11.path,
+      routeName: AppRoutesNames.beauty,
+    ),
+    ServiceItem(
+      imagePath: Assets.images.brand13.path,
+      routeName: AppRoutesNames.beauty,
+    ),
+    ServiceItem(
+      imagePath: Assets.images.brand15.path,
       routeName: AppRoutesNames.beauty,
     ),
   ];
@@ -78,64 +89,67 @@ class HomeServices extends StatelessWidget {
         ? _firstRowServices.length
         : _secondRowServices.length;
 
-    return SliverToBoxAdapter(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // عنوان القسم
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
-            child: Text(
-              'الخدمات',
-              style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.bold,
-                color: theme.colorScheme.onSurface,
+    return SliverPadding(
+      padding: EdgeInsets.only(top: 6.h),
+      sliver: SliverToBoxAdapter(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // عنوان القسم
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
+              child: Text(
+                'العلامات المشهورة',
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.onSurface,
+                ),
               ),
             ),
-          ),
 
-          // القائمة الأفقية للخدمات بصفين مختلفين ومربوطين بنفس التمرير
-          SizedBox(
-            height:
-                270.h, // الارتفاع الكلي المناسب ليتسع للصفين بالتساوي مع الفاصل
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 4.w),
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // كارت الصف الأول (العلوي)
-                      if (index < _firstRowServices.length)
-                        _ServiceCard(item: _firstRowServices[index])
-                      else
-                        SizedBox(
-                          width: 90.w,
-                          height: 120.h,
-                        ), // مساحة فارغة للمحافظة على الأبعاد
+            // القائمة الأفقية للخدمات بصفين مختلفين ومربوطين بنفس التمرير
+            SizedBox(
+              height: 140
+                  .h, // الارتفاع الكلي المناسب ليتسع للصفين بالتساوي مع الفاصل
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.symmetric(horizontal: 4.w),
+                itemCount: itemCount,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 3.w),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // كارت الصف الأول (العلوي)
+                        if (index < _firstRowServices.length)
+                          _ServiceCard(item: _firstRowServices[index])
+                        else
+                          SizedBox(
+                            width: 90.w,
+                            height: 120.h,
+                          ), // مساحة فارغة للمحافظة على الأبعاد
 
-                      SizedBox(
-                        height: 10.h,
-                      ), // مسافة رأسية تفصل بين الصف العلوي والسفلي
-                      // كارت الصف الثاني (السفلي)
-                      if (index < _secondRowServices.length)
-                        _ServiceCard(item: _secondRowServices[index])
-                      else
                         SizedBox(
-                          width: 90.w,
-                          height: 120.h,
-                        ), // مساحة فارغة للمحافظة على الأبعاد
-                    ],
-                  ),
-                );
-              },
+                          height: 12.h,
+                        ), // مسافة رأسية تفصل بين الصف العلوي والسفلي
+                        // كارت الصف الثاني (السفلي)
+                        if (index < _secondRowServices.length)
+                          _ServiceCard(item: _secondRowServices[index])
+                        else
+                          SizedBox(
+                            width: 90.w,
+                            height: 120.h,
+                          ), // مساحة فارغة للمحافظة على الأبعاد
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -152,8 +166,8 @@ class _ServiceCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return SizedBox(
-      width: 90.w,
-      height: 120.h, // الارتفاع الثابت لكل كارت لضمان اتساق المظهر
+      width: 60.w,
+      height: 60.h, // الارتفاع الثابت لكل كارت لضمان اتساق المظهر
       child: Material(
         color: Colors.transparent, // يضمن تفاعل تأثير الضغط (Ripple) بشكل سليم
         child: InkWell(
@@ -161,43 +175,25 @@ class _ServiceCard extends StatelessWidget {
             16.r,
           ), // لتحديد تأثير الضغط بنفس تدوير زوايا الكرت
           onTap: () => Get.toNamed(item.routeName),
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: theme.colorScheme.shadow.withValues(alpha: 0.03),
-                        blurRadius: 6,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.r),
-                    child: Image.asset(
-                      item.imagePath,
-                      fit: BoxFit.cover,
-                      width: double.infinity, // تضمن ملء مساحة العرض بالكامل
-                    ),
-                  ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.r),
+              boxShadow: [
+                BoxShadow(
+                  color: theme.colorScheme.shadow.withValues(alpha: 0.03),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
                 ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: Image.asset(
+                item.imagePath,
+                fit: BoxFit.cover,
+                width: double.infinity, // تضمن ملء مساحة العرض بالكامل
               ),
-              SizedBox(height: 6.h),
-              Text(
-                item.title,
-                style: TextStyle(
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onSurface.withValues(alpha: 0.87),
-                ),
-                maxLines: 1,
-                overflow: TextOverflow
-                    .ellipsis, // لضمان عدم حدوث تجاوز في النصوص الطويلة
-              ),
-            ],
+            ),
           ),
         ),
       ),

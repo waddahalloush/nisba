@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:nisba_app/src/ui/screens/Home/Products/Product%20Details/product_details.dart';
 import 'package:nisba_app/src/ui/screens/Home/Restorant/restorant_screen.dart';
+import 'package:nisba_app/src/ui/screens/Home/Services/AllServices/all_home_services_screen.dart';
 import 'package:nisba_app/src/ui/screens/Home/Services/Beauty/beauty_screen.dart';
 import 'package:nisba_app/src/ui/screens/Home/Services/Gifts/gift_screen.dart';
 import 'package:nisba_app/src/ui/screens/Home/Services/Hotels/hotel_screen.dart';
@@ -26,11 +27,17 @@ import '../ui/screens/Cart/cart_screen.dart';
 import '../ui/screens/Favorite/favorite_screen.dart';
 import '../ui/screens/Home/Restorant/Restorant Details/restorant_details_screen.dart';
 import '../ui/screens/Home/Services/Base Service/PlaceDetails/place_details_screen.dart';
+import '../ui/screens/Home/Services/Beauty/BeautyDetails/beauty_details_screen.dart';
+import '../ui/screens/Home/Services/Entertain/EntertainDetails/entertain_details_screen.dart';
 import '../ui/screens/Home/Services/Entertain/entertainment_screen.dart';
+import '../ui/screens/Home/Services/Gifts/GiftDetails/gift_details_screen.dart';
 import '../ui/screens/Home/Services/Hotels/Hotel Details/hotel_details_screen.dart';
 import '../ui/screens/Home/Services/Mall/Mall Details/mall_details_screen.dart';
 import '../ui/screens/Home/Services/Mall/mall_screen.dart';
+import '../ui/screens/Home/Services/Markets/MarketDetails/market_details_screen.dart';
+import '../ui/screens/Home/Services/Tourism/TourismDetails/tourism_details_screen.dart';
 import '../ui/screens/Home/Services/Tourism/tourism_screen.dart';
+import '../ui/screens/Home/Services/kioks/KioksDetails/kioks_details_screen.dart';
 import '../ui/screens/Offer/offer_screen.dart';
 import '../ui/screens/Settings/About/about_screen.dart';
 import '../ui/screens/Settings/FAQs/faq_screen.dart';
@@ -205,7 +212,7 @@ abstract class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
-      name: AppRoutesNames.hotel,
+      name: AppRoutesNames.hotelDetails,
       page: () => const HotelDetailsScreen(),
       transition: Transition.fadeIn,
     ),
@@ -215,8 +222,18 @@ abstract class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
+      name: AppRoutesNames.kioksDetails,
+      page: () => const KioksDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
       name: AppRoutesNames.gift,
       page: () => const GiftScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.giftDetails,
+      page: () => const GiftDetailsScreen(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -225,8 +242,18 @@ abstract class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
+      name: AppRoutesNames.entertainDetails,
+      page: () => const EntertainDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
       name: AppRoutesNames.tourism,
       page: () => const TourismScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.tourismDetails,
+      page: () => const TourismDetailsScreen(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -235,14 +262,29 @@ abstract class AppPages {
       transition: Transition.fadeIn,
     ),
     GetPage(
+      name: AppRoutesNames.beautyDetails,
+      page: () => const BeautyDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
       name: AppRoutesNames.market,
       page: () => const MarketScreen(),
       transition: Transition.fadeIn,
     ),
-    // GetPage(
-    //   name: AppRoutesNames.placeDetails,
-    //   page: () => const PlaceDetailsScreen(),
-    //   transition: Transition.fadeIn,
-    // ),
+    GetPage(
+      name: AppRoutesNames.marketDetails,
+      page: () => const MarketDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.allHomeServices,
+      page: () => const AllHomeServicesScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: AppRoutesNames.placeDetails,
+      page: () => const PlaceDetailsScreen(),
+      transition: Transition.fadeIn,
+    ),
   ];
 }

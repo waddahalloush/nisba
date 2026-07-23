@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
-import 'package:nisba_app/src/routes/routes_names.dart';
+import 'package:nisba_app/src/data/models/home_category_model.dart';
 
-/// شريط التصنيفات الأفقي (مطاعم، بقالة، مقاهي، عروض)
+/// شريط تصنيفات أفقي قابل لإعادة الاستخدام
 class HomeCategories extends StatelessWidget {
-  const HomeCategories({super.key});
+  final List<HomeCategoryModel> categories;
+
+  const HomeCategories({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context) {
@@ -15,47 +15,19 @@ class HomeCategories extends StatelessWidget {
     return SliverToBoxAdapter(
       child: SizedBox(
         height: 105.h,
-        child: ListView(
+        child: ListView.builder(
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 12.w),
-          children: [
-            _buildItem(theme, 'مطاعم', Assets.images.catFood.path, () {
-              Get.toNamed(AppRoutesNames.restorant , arguments: {
-                'title':"المطاعم"
-              });
-            }),
-            _buildItem(theme, 'بقالة', Assets.images.catVigi.path, () {
-                Get.toNamed(AppRoutesNames.restorant , arguments: {
-                'title':"بقالة"
-              });
-            }),
-            _buildItem(theme, 'مقاهي', Assets.images.catCafee.path, () {
-                Get.toNamed(AppRoutesNames.restorant , arguments: {
-                'title':"مقاهي"
-              });
-            }),
-            _buildItem(
-              theme,
-              'العروض اليومية',
-              Assets.images.catOffer.path,
-              () {
-                Get.toNamed(AppRoutesNames.offer);
-              },
-            ),
-          ],
+          itemCount: categories.length,
+          itemBuilder: (context, index) => _buildItem(theme, categories[index]),
         ),
       ),
     );
   }
 
-  Widget _buildItem(
-    ThemeData theme,
-    String title,
-    String imageUrl,
-    VoidCallback onTap,
-  ) {
+  Widget _buildItem(ThemeData theme, HomeCategoryModel item) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: item.onTap,
       child: Container(
         width: 81.w,
         margin: EdgeInsets.symmetric(horizontal: 5.w),
@@ -74,12 +46,15 @@ class HomeCategories extends StatelessWidget {
                     offset: const Offset(0, 3),
                   ),
                 ],
-                image: DecorationImage(image: AssetImage(imageUrl)),
+                image: DecorationImage(
+                  image: AssetImage(item.catIcon),
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
             SizedBox(height: 6.h),
             Text(
-              title,
+              item.catName,
               style: TextStyle(
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
