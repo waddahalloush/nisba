@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -15,14 +19,14 @@ class InboxScreen extends GetView<InboxController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
           backgroundColor: cs.surface,
           elevation: 0,
           title: Text(
-            'صندوق الرسائل',
+            'inbox_messages'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -31,7 +35,7 @@ class InboxScreen extends GetView<InboxController> {
           automaticallyImplyLeading: false,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
         ),
         body: Obx(() => _buildBody(theme)),
@@ -64,7 +68,7 @@ class InboxScreen extends GetView<InboxController> {
             ElevatedButton.icon(
               onPressed: controller.loadInitialInboxes,
               icon: const Icon(Iconsax.refresh),
-              label: const Text('إعادة المحاولة'),
+              label: Text('auto_key_243'.tr),
             ),
           ],
         ),
@@ -86,7 +90,7 @@ class InboxScreen extends GetView<InboxController> {
             ),
             SizedBox(height: 12.h),
             Text(
-              'لا توجد رسائل',
+              'auto_key_413'.tr,
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.5),
@@ -130,7 +134,7 @@ class InboxScreen extends GetView<InboxController> {
                 child: TextButton.icon(
                   onPressed: () => controller.pagination.loadMore(),
                   label: Text(
-                    'عرض الرسائل القديمة',
+                    'auto_key_414'.tr,
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w500,
                       color: cs.primary,
@@ -247,7 +251,7 @@ class _InboxCard extends StatelessWidget {
     if (dt == null) return rawDate;
     final hour = dt.hour > 12 ? dt.hour - 12 : (dt.hour == 0 ? 12 : dt.hour);
     final min = dt.minute.toString().padLeft(2, '0');
-    final period = dt.hour >= 12 ? 'م' : 'ص';
+    final period = dt.hour >= 12 ? 'auto_key_415'.tr : 'auto_key_416'.tr;
     return '$hour:$min $period';
   }
 }

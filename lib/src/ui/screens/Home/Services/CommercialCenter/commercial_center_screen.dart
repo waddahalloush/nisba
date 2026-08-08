@@ -12,11 +12,11 @@ class CommercialCenterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final section = _sectionFromArgs();
     final name =
-        section?.name.isNotEmpty == true ? section!.name : 'مراكز تجارية';
+        section?.name.isNotEmpty == true ? section!.name : 'auto_key_379'.tr;
     return BaseServiceScreen<CommercialCenterController>(
       title: name,
-      subtitle: 'اكتشف $name القريبة — ثم تصفّح المتاجر داخل كل مركز',
-      searchHint: 'ابحث عن مركز تجاري...',
+      subtitle: 'auto_key_381'.tr,
+      searchHint: 'auto_key_382'.tr,
     );
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
 import 'package:nisba_app/src/ui/screens/Settings/widgets/app_footer.dart';
@@ -20,7 +22,7 @@ class AppSettingScreen extends GetView<AppSettingController> {
     final cs = Theme.of(context).colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         body: CustomScrollView(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +16,7 @@ class AccountSettingScreen extends GetView<AccountSettingController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         body: SafeArea(
@@ -50,9 +52,8 @@ class AccountSettingScreen extends GetView<AccountSettingController> {
 
                 SizedBox(height: 16.h),
 
-                // ── Quick Actions ──
-                _buildQuickActions(theme),
-
+                // // ── Quick Actions ──
+                // _buildQuickActions(theme),
                 SizedBox(height: 16.h),
 
                 // ── Settings List ──
@@ -152,7 +153,11 @@ class AccountSettingScreen extends GetView<AccountSettingController> {
                             color: cs.primary.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(10.r),
                           ),
-                          child: Icon(item.icon, color: cs.primary, size: 18.sp),
+                          child: Icon(
+                            item.icon,
+                            color: cs.primary,
+                            size: 18.sp,
+                          ),
                         ),
                         SizedBox(width: 12.w),
                         Expanded(
@@ -235,7 +240,7 @@ class AccountSettingScreen extends GetView<AccountSettingController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'دعوة الأصدقاء',
+                  'auto_key_14'.tr,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.onSurface,
@@ -243,7 +248,7 @@ class AccountSettingScreen extends GetView<AccountSettingController> {
                 ),
                 SizedBox(height: 2.h),
                 Text(
-                  'ادعُ أصدقائك واحصل على مكافآت مجانية',
+                  'auto_key_15'.tr,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: cs.onSurface.withValues(alpha: 0.5),
                   ),
@@ -279,7 +284,7 @@ class AccountSettingScreen extends GetView<AccountSettingController> {
           onPressed: controller.logout,
           icon: Icon(Iconsax.logout, size: 18.sp),
           label: Text(
-            'تسجيل الخروج',
+            'logout'.tr,
             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
           ),
           style: OutlinedButton.styleFrom(

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -82,7 +83,7 @@ class NearbyPartnerCard extends StatelessWidget {
                 SizedBox(height: 2.h),
                 // المسافة
                 Text(
-                  '${partner.distanceKm.toStringAsFixed(1)} كم',
+                  'auto_key_550'.tr,
                   style: theme.textTheme.labelSmall?.copyWith(
                     color: cs.onSurface.withValues(alpha: 0.55),
                   ),

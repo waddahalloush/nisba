@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +18,7 @@ class FavoriteScreen extends GetView<FavoriteController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -22,10 +26,10 @@ class FavoriteScreen extends GetView<FavoriteController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'المفضلة',
+            'favorite'.tr,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -69,7 +73,7 @@ class FavoriteScreen extends GetView<FavoriteController> {
                 child: _buildTab(
                   theme,
                   icon: Icons.restaurant_outlined,
-                  label: 'المطاعم',
+                  label: 'auto_key_179'.tr,
                   isSelected: controller.selectedTab.value == 0,
                   onTap: () => controller.selectTab(0),
                 ),
@@ -79,7 +83,7 @@ class FavoriteScreen extends GetView<FavoriteController> {
                 child: _buildTab(
                   theme,
                   icon: Icons.soup_kitchen_outlined,
-                  label: 'الوجبات',
+                  label: 'auto_key_180'.tr,
                   isSelected: controller.selectedTab.value == 1,
                   onTap: () => controller.selectTab(1),
                 ),
@@ -206,8 +210,8 @@ class FavoriteScreen extends GetView<FavoriteController> {
                 children: [
                   Text(
                     controller.selectedTab.value == 0
-                        ? 'إضافة مطاعمك المفضلة'
-                        : 'إضافة مأكولاتك المفضلة',
+                        ? 'auto_key_181'.tr
+                        : 'auto_key_182'.tr,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: cs.onSurface,
@@ -216,8 +220,8 @@ class FavoriteScreen extends GetView<FavoriteController> {
                   SizedBox(height: 2.h),
                   Text(
                     controller.selectedTab.value == 0
-                        ? 'احفظ مطاعمك المفضلة للوصول السريع لها'
-                        : 'احفظ وجباتك المفضلة للوصول السريع لها',
+                        ? 'auto_key_183'.tr
+                        : 'auto_key_184'.tr,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.onSurface.withValues(alpha: 0.5),
                     ),
@@ -241,7 +245,7 @@ class FavoriteScreen extends GetView<FavoriteController> {
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                 ),
                 child: Text(
-                  'استكشف',
+                  'auto_key_185'.tr,
                   style: TextStyle(
                     fontSize: 11.sp,
                     fontWeight: FontWeight.bold,

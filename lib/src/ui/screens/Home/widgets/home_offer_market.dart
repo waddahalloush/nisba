@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -49,7 +50,7 @@ class HomeOfferMarket extends StatelessWidget {
                           ),
                         ),
                         // Text(
-                        //   'عرض الكل',
+                        //   'view_all'.tr,
                         //   style: TextStyle(
                         //     color: primaryColor,
                         //     fontSize: 12.sp,
@@ -97,7 +98,7 @@ class HomeOfferMarket extends StatelessWidget {
             rating: market.rating.toDouble(),
             reviewsCount: 0,
             distance: market.distance != null
-                ? '${market.distance!.toStringAsFixed(1)} كم'
+                ? 'auto_key_410'.tr
                 : '',
             category: market.marketType.desc,
             serviceType: type,
@@ -186,7 +187,7 @@ class HomeOfferMarket extends StatelessWidget {
                   ),
                   SizedBox(height: 2.h),
                   Text(
-                    'تكلفة التوصيل : ${market.deliveryPrice} ر.ق',
+                    'auto_key_411'.tr,
                     style: TextStyle(
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
@@ -195,7 +196,7 @@ class HomeOfferMarket extends StatelessWidget {
                   ),
                   SizedBox(height: 2.h),
                   Text(
-                    market.isOpen ? market.location : 'مغلق',
+                    market.isOpen ? market.location : 'auto_key_281'.tr,
                     style: TextStyle(
                       color: market.isOpen ? Colors.green : Colors.red,
                       fontSize: 9.sp,

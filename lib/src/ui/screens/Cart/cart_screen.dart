@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -22,13 +24,13 @@ class CartScreen extends GetView<CartController> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          icon: Icon(backIconData(context), color: cs.primary),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'سلة المشتريات',
+              'auto_key_147'.tr,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -36,7 +38,7 @@ class CartScreen extends GetView<CartController> {
             ),
             GetBuilder<CartController>(
               builder: (_) => Text(
-                '${controller.itemCount} منتجات',
+                'auto_key_148'.tr,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: cs.onSurface.withValues(alpha: 0.5),
                 ),
@@ -173,7 +175,7 @@ class CartScreen extends GetView<CartController> {
                         ],
                         SizedBox(height: 4.h),
                         Text(
-                          'ريال ${item.price.toStringAsFixed(2)}',
+                          'auto_key_149'.tr,
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold,
@@ -260,7 +262,7 @@ class CartScreen extends GetView<CartController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'قسيمة الخصم (اختياري)',
+            'auto_key_150'.tr,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -279,7 +281,7 @@ class CartScreen extends GetView<CartController> {
                         color: cs.onSurface,
                       ),
                       decoration: InputDecoration(
-                        hintText: 'أدخل كود القسيمة',
+                        hintText: 'enter_coupon_code'.tr,
                         hintStyle: TextStyle(
                           color: cs.onSurface.withValues(alpha: 0.35),
                           fontSize: 11.sp,
@@ -314,7 +316,7 @@ class CartScreen extends GetView<CartController> {
                         padding: EdgeInsets.symmetric(horizontal: 14.w),
                       ),
                       child: Text(
-                        controller.isApplyingCoupon.value ? '...' : 'تفعيل',
+                        controller.isApplyingCoupon.value ? '...' : 'auto_key_151'.tr,
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.bold,
@@ -344,7 +346,7 @@ class CartScreen extends GetView<CartController> {
                         Text(
                           controller.appliedCouponName.value.isNotEmpty
                               ? controller.appliedCouponName.value
-                              : 'قسيمة مفعّلة',
+                              : 'auto_key_152'.tr,
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
@@ -352,7 +354,7 @@ class CartScreen extends GetView<CartController> {
                           ),
                         ),
                         Text(
-                          'الكود: ${controller.appliedCouponCode.value} • خصم ${controller.couponValue.value.toStringAsFixed(2)} ر.ق',
+                          'auto_key_153'.tr,
                           style: TextStyle(fontSize: 11.sp, color: cs.primary),
                         ),
                       ],
@@ -361,7 +363,7 @@ class CartScreen extends GetView<CartController> {
                   TextButton(
                     onPressed: controller.clearCoupon,
                     child: Text(
-                      'إزالة',
+                      'auto_key_154'.tr,
                       style: TextStyle(
                         fontSize: 11.sp,
                         color: cs.error,
@@ -399,7 +401,7 @@ class CartScreen extends GetView<CartController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'ملخص الطلب',
+              'order_summary'.tr,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -407,41 +409,41 @@ class CartScreen extends GetView<CartController> {
             ),
             SizedBox(height: 10.h),
             _SummaryRow(
-              label: 'المجموع الفرعي',
-              value: '${controller.subtotal.toStringAsFixed(2)} ريال',
+              label: 'subtotal'.tr,
+              value: 'auto_key_155'.tr,
             ),
             SizedBox(height: 6.h),
             _SummaryRow(
-              label: 'رسوم التوصيل',
-              value: '${controller.deliveryFee.toStringAsFixed(2)} ريال',
+              label: 'delivery_fee'.tr,
+              value: 'auto_key_156'.tr,
             ),
             if (controller.customerDiscount > 0) ...[
               SizedBox(height: 6.h),
               _SummaryRow(
-                label: 'خصم العميل',
+                label: 'auto_key_157'.tr,
                 value:
-                    '- ${controller.customerDiscount.toStringAsFixed(2)} ريال',
+                    'auto_key_158'.tr,
               ),
             ],
             if (controller.couponValue.value > 0) ...[
               SizedBox(height: 6.h),
               _SummaryRow(
-                label: 'خصم القسيمة',
+                label: 'auto_key_159'.tr,
                 value:
-                    '- ${controller.couponValue.value.toStringAsFixed(2)} ريال',
+                    'auto_key_160'.tr,
               ),
             ],
             if (controller.earnedPoints > 0) ...[
               SizedBox(height: 6.h),
               _SummaryRow(
-                label: 'نقاط ستُحسب لك',
+                label: 'auto_key_161'.tr,
                 value: controller.earnedPoints.toStringAsFixed(2),
               ),
             ],
             Divider(color: cs.outlineVariant.withValues(alpha: 0.5)),
             _SummaryRow(
-              label: 'الإجمالي',
-              value: 'ريال ${controller.total.toStringAsFixed(2)}',
+              label: 'auto_key_162'.tr,
+              value: 'auto_key_163'.tr,
               isTotal: true,
             ),
           ],
@@ -474,7 +476,7 @@ class CartScreen extends GetView<CartController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'طريقة الاستلام',
+              'auto_key_164'.tr,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -542,7 +544,7 @@ class CartScreen extends GetView<CartController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'وقت الطلب',
+            'auto_key_165'.tr,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -586,7 +588,7 @@ class CartScreen extends GetView<CartController> {
                           Column(
                             children: [
                               Text(
-                                'الآن',
+                                'auto_key_166'.tr,
                                 style: theme.textTheme.titleSmall!.copyWith(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.bold,
@@ -594,7 +596,7 @@ class CartScreen extends GetView<CartController> {
                                 ),
                               ),
                               Text(
-                                'استلام فوري',
+                                'auto_key_167'.tr,
                                 style: theme.textTheme.titleSmall!.copyWith(
                                   fontSize: 8.sp,
                                   fontWeight: FontWeight.normal,
@@ -647,7 +649,7 @@ class CartScreen extends GetView<CartController> {
                           Column(
                             children: [
                               Text(
-                                'جدولة',
+                                'auto_key_168'.tr,
                                 style: theme.textTheme.titleSmall!.copyWith(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.bold,
@@ -655,7 +657,7 @@ class CartScreen extends GetView<CartController> {
                                 ),
                               ),
                               Text(
-                                'اختر وقت وتاريخ',
+                                'auto_key_169'.tr,
                                 style: theme.textTheme.titleSmall!.copyWith(
                                   fontSize: 8.sp,
                                   color: cs.onSurface.withValues(alpha: 0.8),
@@ -707,7 +709,7 @@ class CartScreen extends GetView<CartController> {
             ),
           ),
           child: Text(
-            'إتمام الطلب',
+            'checkout'.tr,
             style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
           ),
         ),
@@ -731,7 +733,7 @@ class CartScreen extends GetView<CartController> {
             ),
             SizedBox(height: 20.h),
             Text(
-              'السلة فارغة',
+              'auto_key_170'.tr,
               style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface.withValues(alpha: 0.5),
@@ -739,7 +741,7 @@ class CartScreen extends GetView<CartController> {
             ),
             SizedBox(height: 8.h),
             Text(
-              'لم تقم بإضافة أي منتجات إلى سلة التسوق بعد',
+              'auto_key_171'.tr,
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.35),
@@ -749,7 +751,7 @@ class CartScreen extends GetView<CartController> {
             ElevatedButton.icon(
               onPressed: () => Get.back(),
               icon: const Icon(Iconsax.shop),
-              label: const Text('تصفح المنتجات'),
+              label: Text('auto_key_172'.tr),
               style: ElevatedButton.styleFrom(
                 backgroundColor: cs.primary,
                 foregroundColor: cs.onPrimary,
@@ -851,7 +853,7 @@ class _ScheduledDeliverySheet extends StatelessWidget {
                   child: Icon(Icons.close, color: cs.onSurface, size: 22.sp),
                 ),
                 Text(
-                  'جدولة الطلب',
+                  'auto_key_173'.tr,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.onSurface,
@@ -877,8 +879,8 @@ class _ScheduledDeliverySheet extends StatelessWidget {
                 onPressed: () {
                   Get.back();
                   Get.snackbar(
-                    'تم',
-                    'تم جدولة الطلب في ${controller.scheduledSlotLabel}',
+                    'auto_key_102'.tr,
+                    'auto_key_174'.tr,
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -890,7 +892,7 @@ class _ScheduledDeliverySheet extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'تأكيد الموعد',
+                  'auto_key_175'.tr,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,
@@ -1002,7 +1004,7 @@ class _ScheduledDeliverySheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'اختر الوقت المناسب',
+            'auto_key_176'.tr,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,

@@ -9,6 +9,7 @@ class RestorantModel {
   final bool isFavorite;
   final bool isOpen;
   final double? deliveryPrice;
+
   /// Backend keys: to_home, at_provider, book_table, to_car, throw_in, all
   final List<String> deliveryTypes;
   final List<String> paymentMethods;
@@ -44,32 +45,28 @@ class RestorantModel {
     List<String>? deliveryTypes,
     List<String>? paymentMethods,
     String? serviceType,
-  }) =>
-      RestorantModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        description: description ?? this.description,
-        rating: rating ?? this.rating,
-        deliveryTime: deliveryTime ?? this.deliveryTime,
-        distance: distance ?? this.distance,
-        imagePath: imagePath ?? this.imagePath,
-        isFavorite: isFavorite ?? this.isFavorite,
-        isOpen: isOpen ?? this.isOpen,
-        deliveryPrice: deliveryPrice ?? this.deliveryPrice,
-        deliveryTypes: deliveryTypes ?? this.deliveryTypes,
-        paymentMethods: paymentMethods ?? this.paymentMethods,
-        serviceType: serviceType ?? this.serviceType,
-      );
+  }) => RestorantModel(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    description: description ?? this.description,
+    rating: rating ?? this.rating,
+    deliveryTime: deliveryTime ?? this.deliveryTime,
+    distance: distance ?? this.distance,
+    imagePath: imagePath ?? this.imagePath,
+    isFavorite: isFavorite ?? this.isFavorite,
+    isOpen: isOpen ?? this.isOpen,
+    deliveryPrice: deliveryPrice ?? this.deliveryPrice,
+    deliveryTypes: deliveryTypes ?? this.deliveryTypes,
+    paymentMethods: paymentMethods ?? this.paymentMethods,
+    serviceType: serviceType ?? this.serviceType,
+  );
 
   static List<String> _parseStringList(dynamic raw) {
     if (raw is! List) return [];
     return raw.map((e) => e.toString()).where((e) => e.isNotEmpty).toList();
   }
 
-  factory RestorantModel.fromApiMap(
-    Map raw, {
-    String fallbackImage = '',
-  }) {
+  factory RestorantModel.fromApiMap(Map raw, {String fallbackImage = ''}) {
     final map = Map<String, dynamic>.from(raw);
     return RestorantModel(
       id: int.tryParse(map['id']?.toString() ?? ''),
@@ -78,7 +75,8 @@ class RestorantModel {
       rating: (map['rating'] as num?)?.toDouble() ?? 0,
       deliveryTime: map['preparation_time']?.toString() ?? '',
       distance: map['distance']?.toString() ?? '',
-      imagePath: map['main_image']?.toString() ??
+      imagePath:
+          map['main_image']?.toString() ??
           map['image']?.toString() ??
           map['logo']?.toString() ??
           fallbackImage,
@@ -87,7 +85,10 @@ class RestorantModel {
       deliveryPrice: double.tryParse(map['delivery_price']?.toString() ?? ''),
       deliveryTypes: _parseStringList(map['delivery_types']),
       paymentMethods: _parseStringList(map['payment_methods']),
-      serviceType: map['service_type']?.toString() ?? map['market_type']?.toString() ?? 'restaurant',
+      serviceType:
+          map['service_type']?.toString() ??
+          map['market_type']?.toString() ??
+          'restaurant',
     );
   }
 }

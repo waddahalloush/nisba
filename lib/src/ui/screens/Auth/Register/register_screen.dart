@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:nisba_app/src/configs/api_response.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -19,7 +21,7 @@ class RegisterScreen extends GetView<RegisterController> {
       backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Get.find<LocaleService>().textDirection,
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Form(

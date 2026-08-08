@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 class ProductDetailsResponse {
@@ -227,7 +228,7 @@ class ProductDetails {
 
   String get savings {
     if (oldPrice > price && oldPrice > 0) {
-      return 'وفر ${(oldPrice - price).toStringAsFixed(0)} ر.ق';
+      return 'auto_key_1'.tr;
     }
     return '';
   }

@@ -18,6 +18,11 @@ class LocaleService extends GetxService {
     locale.value = Locale(code);
   }
 
+  bool get isRtl => locale.value.languageCode == LocaleConstants.arabic;
+
+  TextDirection get textDirection =>
+      isRtl ? TextDirection.rtl : TextDirection.ltr;
+
   /// Human-readable label for the settings row (native names, not translated).
   String get currentLanguageLabel {
     switch (locale.value.languageCode) {

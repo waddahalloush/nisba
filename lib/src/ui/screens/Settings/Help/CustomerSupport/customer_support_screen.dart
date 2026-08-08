@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +18,7 @@ class CustomerSupportScreen extends GetView<CustomerSupportController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -22,7 +26,7 @@ class CustomerSupportScreen extends GetView<CustomerSupportController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onPrimary),
+            icon: Icon(backIconData(context), color: cs.onPrimary),
           ),
           title: Row(
             children: [
@@ -45,7 +49,7 @@ class CustomerSupportScreen extends GetView<CustomerSupportController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'الدعم الفني',
+                      'auto_key_622'.tr,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
@@ -53,7 +57,7 @@ class CustomerSupportScreen extends GetView<CustomerSupportController> {
                       ),
                     ),
                     Text(
-                      'متصل الآن',
+                      'auto_key_623'.tr,
                       style: TextStyle(
                         fontSize: 10.sp,
                         color: cs.onPrimary.withValues(alpha: 0.8),
@@ -68,7 +72,7 @@ class CustomerSupportScreen extends GetView<CustomerSupportController> {
             TextButton(
               onPressed: controller.endChat,
               child: Text(
-                'إنهاء المحادثة',
+                'auto_key_624'.tr,
                 style: TextStyle(
                   color: cs.onPrimary,
                   fontSize: 12.sp,
@@ -151,7 +155,7 @@ class CustomerSupportScreen extends GetView<CustomerSupportController> {
                   color: cs.onSurface,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'اكتب رسالتك...',
+                  hintText: 'auto_key_455'.tr,
                   hintStyle: TextStyle(
                     color: cs.onSurface.withValues(alpha: 0.35),
                     fontSize: 13.sp,

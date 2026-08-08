@@ -33,7 +33,7 @@ class ChangeAccountPasswordController extends GetxController {
   Map<String, dynamic>? _otpIdentity() {
     final user = storageHelper.getUser;
     if (user == null) {
-      AppSnackbar.showError(message: 'تعذر تحميل بيانات المستخدم');
+      AppSnackbar.showError(message: 'auto_key_75'.tr);
       return null;
     }
     return {
@@ -58,7 +58,7 @@ class ChangeAccountPasswordController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم إرسال رمز التحقق',
+            : 'auto_key_76'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -76,7 +76,7 @@ class ChangeAccountPasswordController extends GetxController {
     if (!(formKey.currentState?.validate() ?? false)) return;
     if (newPasswordController.text.trim() !=
         confirmPasswordController.text.trim()) {
-      AppSnackbar.showError(message: 'كلمة المرور الجديدة غير متطابقة');
+      AppSnackbar.showError(message: 'auto_key_77'.tr);
       return;
     }
     final identity = _otpIdentity();
@@ -98,7 +98,7 @@ class ChangeAccountPasswordController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تغيير كلمة مرور الحساب',
+            : 'auto_key_78'.tr,
       );
       Get.back();
     } on ApiException catch (e) {

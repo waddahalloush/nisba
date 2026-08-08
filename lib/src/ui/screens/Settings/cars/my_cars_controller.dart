@@ -144,19 +144,19 @@ class MyCarsController extends GetxController {
 
   Future<void> addCar() async {
     if (plateController.text.trim().isEmpty) {
-      AppSnackbar.showError(message: 'يرجى إدخال رقم اللوحة');
+      AppSnackbar.showError(message: 'auto_key_570'.tr);
       return;
     }
     if (selectedBrandId.value == null) {
-      AppSnackbar.showError(message: 'يرجى اختيار الماركة');
+      AppSnackbar.showError(message: 'auto_key_571'.tr);
       return;
     }
     if (selectedCategoryId.value == null) {
-      AppSnackbar.showError(message: 'يرجى اختيار الفئة');
+      AppSnackbar.showError(message: 'auto_key_572'.tr);
       return;
     }
     if (selectedColorId.value == null) {
-      AppSnackbar.showError(message: 'يرجى اختيار اللون');
+      AppSnackbar.showError(message: 'auto_key_573'.tr);
       return;
     }
     if (!await connectionChecker.hasConnection) {
@@ -185,7 +185,7 @@ class MyCarsController extends GetxController {
       Get.back();
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تمت إضافة السيارة بنجاح',
+            'auto_key_574'.tr,
       );
       await fetchCars();
     } on ApiException catch (e) {
@@ -217,7 +217,7 @@ class MyCarsController extends GetxController {
       cars.removeAt(index);
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم حذف السيارة',
+            'auto_key_575'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -250,10 +250,10 @@ class MyCarsController extends GetxController {
       );
 
   void showBrandPicker() =>
-      _showPicker('الماركة', brands, selectBrand);
+      _showPicker('auto_key_576'.tr, brands, selectBrand);
   void showCategoryPicker() =>
-      _showPicker('الفئة', categories, selectCategory);
-  void showColorPicker() => _showPicker('اللون', colors, selectColor);
+      _showPicker('auto_key_577'.tr, categories, selectCategory);
+  void showColorPicker() => _showPicker('auto_key_578'.tr, colors, selectColor);
 
   void _showPicker(
     String title,
@@ -270,12 +270,12 @@ class MyCarsController extends GetxController {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
+            Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(height: 12),
             if (options.isEmpty)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(16),
-                child: Text('لا توجد خيارات'),
+                child: Text('auto_key_579'.tr),
               )
             else
               ...options.map(

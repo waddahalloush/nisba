@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
-
-import 'scanner_controller.dart';
+import 'package:nisba_app/src/ui/screens/Scanner/scanner_controller.dart';
 
 class ScannerScreen extends GetView<ScannerController> {
   const ScannerScreen({super.key});
@@ -14,7 +15,7 @@ class ScannerScreen extends GetView<ScannerController> {
     final theme = Theme.of(context);
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: theme.colorScheme.surface,
         body: SafeArea(
@@ -47,18 +48,11 @@ class ScannerScreen extends GetView<ScannerController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(
-          onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: theme.colorScheme.onPrimary),
-          style: IconButton.styleFrom(
-            backgroundColor: primaryColor,
-            padding: EdgeInsets.all(12.r),
-          ),
-        ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'مسح الباركود',
+              'auto_key_520'.tr,
               style: TextStyle(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.bold,
@@ -67,7 +61,7 @@ class ScannerScreen extends GetView<ScannerController> {
             ),
             SizedBox(height: 4.h),
             Text(
-              'وجّه الكاميرا نحو الباركود داخل الإطار',
+              'auto_key_521'.tr,
               style: TextStyle(
                 fontSize: 13.sp,
                 color: onSurface.withValues(alpha: 0.55),
@@ -127,7 +121,7 @@ class ScannerScreen extends GetView<ScannerController> {
                     color: theme.colorScheme.onSurface,
                   ),
                   label: Text(
-                    'فلاش',
+                    'auto_key_522'.tr,
                     style: TextStyle(
                       color: theme.colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
@@ -167,7 +161,7 @@ class ScannerScreen extends GetView<ScannerController> {
                     ),
                     SizedBox(width: 8.w),
                     Text(
-                      'سيتعرف تلقائياً على الباركود',
+                      'auto_key_523'.tr,
                       style: TextStyle(
                         color: theme.colorScheme.surface,
                         fontSize: 13.sp,
@@ -190,7 +184,7 @@ class ScannerScreen extends GetView<ScannerController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'نصائح للمسح',
+          'auto_key_524'.tr,
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
@@ -204,8 +198,8 @@ class ScannerScreen extends GetView<ScannerController> {
               child: _buildTipCard(
                 theme,
                 icon: Iconsax.scan_barcode,
-                title: 'وضوح الباركود',
-                desc: 'تأكد من أن الباركود واضح وخالي من التشويش',
+                title: 'auto_key_525'.tr,
+                desc: 'auto_key_526'.tr,
               ),
             ),
             SizedBox(width: 8.w),
@@ -213,8 +207,8 @@ class ScannerScreen extends GetView<ScannerController> {
               child: _buildTipCard(
                 theme,
                 icon: Iconsax.sun_1,
-                title: 'إضاءة مناسبة',
-                desc: 'تأكد من وجود إضاءة كافية وتجنب الانعكاسات',
+                title: 'auto_key_527'.tr,
+                desc: 'auto_key_528'.tr,
               ),
             ),
             SizedBox(width: 8.w),
@@ -222,8 +216,8 @@ class ScannerScreen extends GetView<ScannerController> {
               child: _buildTipCard(
                 theme,
                 icon: Iconsax.mobile,
-                title: 'ثبت الجهاز',
-                desc: 'حافظ على ثبات الجهاز للحصول على أفضل نتيجة',
+                title: 'auto_key_529'.tr,
+                desc: 'auto_key_530'.tr,
               ),
             ),
           ],
@@ -313,7 +307,7 @@ class ScannerScreen extends GetView<ScannerController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'يدعم أنواع متعددة',
+                  'auto_key_531'.tr,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14.sp,
@@ -322,7 +316,7 @@ class ScannerScreen extends GetView<ScannerController> {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'يدعم التطبيق مسح جميع أنواع الباركود بما في ذلك QR و Code2 و EAN ووغيرها',
+                  'auto_key_532'.tr,
                   style: TextStyle(
                     fontSize: 11.sp,
                     color: onSurface.withValues(alpha: 0.55),

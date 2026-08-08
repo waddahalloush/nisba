@@ -18,7 +18,7 @@ class PaymentWebViewController extends GetxController {
 
   final isLoading = true.obs;
   final isCheckingStatus = false.obs;
-  final statusLabel = 'بانتظار إتمام الدفع...'.obs;
+  final statusLabel = 'auto_key_512'.tr.obs;
 
   String payUrl = '';
   String paymentRef = '';
@@ -55,8 +55,8 @@ class PaymentWebViewController extends GetxController {
       webViewController.loadRequest(Uri.parse(payUrl));
       _startPolling();
     } else {
-      statusLabel.value = 'رابط الدفع غير متوفر';
-      AppSnackbar.showError(message: 'رابط الدفع غير متوفر');
+      statusLabel.value = 'auto_key_513'.tr;
+      AppSnackbar.showError(message: 'auto_key_513'.tr);
     }
   }
 
@@ -76,7 +76,7 @@ class PaymentWebViewController extends GetxController {
   void _onUrl(String url) {
     if (_finished) return;
     if (PaymentFlowHelper.isReturnUrl(url)) {
-      statusLabel.value = 'جارٍ التحقق من حالة الدفع...';
+      statusLabel.value = 'auto_key_514'.tr;
       _checkStatus(force: true);
     }
   }
@@ -94,7 +94,7 @@ class PaymentWebViewController extends GetxController {
     if (isCheckingStatus.value && !force) return;
     if (_pollAttempts >= _maxPollAttempts) {
       _pollTimer?.cancel();
-      statusLabel.value = 'انتهت مهلة التحقق. يمكنك المحاولة لاحقاً من الطلبات.';
+      statusLabel.value = 'auto_key_515'.tr;
       return;
     }
     _pollAttempts++;
@@ -111,7 +111,7 @@ class PaymentWebViewController extends GetxController {
           await _onSuccess(
             ApiResult.message(res).isNotEmpty
                 ? ApiResult.message(res)
-                : 'تم شحن المحفظة بنجاح',
+                : 'auto_key_68'.tr,
           );
           return;
         }
@@ -119,7 +119,7 @@ class PaymentWebViewController extends GetxController {
           await _onFailure(
             ApiResult.message(res).isNotEmpty
                 ? ApiResult.message(res)
-                : 'فشلت عملية الدفع',
+                : 'auto_key_516'.tr,
           );
           return;
         }
@@ -132,7 +132,7 @@ class PaymentWebViewController extends GetxController {
           await _onSuccess(
             ApiResult.message(res).isNotEmpty
                 ? ApiResult.message(res)
-                : 'تم الدفع بنجاح',
+                : 'auto_key_486'.tr,
           );
           return;
         }
@@ -140,12 +140,12 @@ class PaymentWebViewController extends GetxController {
           await _onFailure(
             ApiResult.message(res).isNotEmpty
                 ? ApiResult.message(res)
-                : 'فشلت عملية الدفع',
+                : 'auto_key_516'.tr,
           );
           return;
         }
       }
-      statusLabel.value = 'بانتظار إتمام الدفع...';
+      statusLabel.value = 'auto_key_512'.tr;
     } on DioException catch (e) {
       log('payment webview status: $e');
     } on ApiException catch (e) {

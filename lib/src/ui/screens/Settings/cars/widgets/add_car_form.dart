@@ -50,7 +50,7 @@ class AddCarForm extends GetView<MyCarsController> {
             Align(
               alignment: Alignment.center,
               child: Text(
-                'إضافة سيارة',
+                'auto_key_493'.tr,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.onSurface,
@@ -64,7 +64,7 @@ class AddCarForm extends GetView<MyCarsController> {
               theme,
               isInput: true,
               icon: Iconsax.car,
-              hint: 'رقم اللوحة',
+              hint: 'auto_key_581'.tr,
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 controller: controller.plateController,
@@ -72,7 +72,7 @@ class AddCarForm extends GetView<MyCarsController> {
                   color: cs.onSurface,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'رقم اللوحة',
+                  hintText: 'auto_key_581'.tr,
                   hintStyle: TextStyle(
                     color: cs.onSurface.withValues(alpha: 0.35),
                     fontSize: 13.sp,
@@ -89,9 +89,9 @@ class AddCarForm extends GetView<MyCarsController> {
             _buildDropdownRow(
               theme,
               icon: Iconsax.shield,
-              label: 'الماركة',
+              label: 'auto_key_576'.tr,
               value: controller.selectedBrand,
-              hint: 'اختر الماركة',
+              hint: 'auto_key_582'.tr,
               onTap: controller.showBrandPicker,
             ),
 
@@ -101,9 +101,9 @@ class AddCarForm extends GetView<MyCarsController> {
             _buildDropdownRow(
               theme,
               icon: Iconsax.category,
-              label: 'الفئة',
+              label: 'auto_key_577'.tr,
               value: controller.selectedCategory,
-              hint: 'اختر الفئة',
+              hint: 'auto_key_583'.tr,
               onTap: controller.showCategoryPicker,
             ),
 
@@ -113,9 +113,9 @@ class AddCarForm extends GetView<MyCarsController> {
             _buildDropdownRow(
               theme,
               icon: Iconsax.colorfilter,
-              label: 'اللون',
+              label: 'auto_key_578'.tr,
               value: controller.selectedColor,
-              hint: 'اختر اللون',
+              hint: 'auto_key_584'.tr,
               onTap: controller.showColorPicker,
             ),
 
@@ -131,7 +131,7 @@ class AddCarForm extends GetView<MyCarsController> {
                 },
                 icon: Icon(Iconsax.add_circle, size: 20.sp),
                 label: Text(
-                  'إضافة سيارة',
+                  'auto_key_493'.tr,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.bold,

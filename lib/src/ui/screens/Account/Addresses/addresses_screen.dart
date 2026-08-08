@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +18,7 @@ class AddressesScreen extends GetView<AddressesController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -22,10 +26,10 @@ class AddressesScreen extends GetView<AddressesController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'العناوين',
+            'addresses'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -44,7 +48,7 @@ class AddressesScreen extends GetView<AddressesController> {
           if (controller.addresses.isEmpty) {
             return Center(
               child: Text(
-                'لا توجد عناوين محفوظة',
+                'auto_key_31'.tr,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: cs.onSurface.withValues(alpha: 0.6),
                 ),

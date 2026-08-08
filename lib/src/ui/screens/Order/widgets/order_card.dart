@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -108,7 +109,7 @@ class OrderCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'رقم الطلب ${order.orderId}',
+                                'auto_key_464'.tr,
                                 style: theme.textTheme.labelSmall?.copyWith(
                                   color: cs.onSurface.withValues(alpha: 0.5),
                                 ),
@@ -158,14 +159,14 @@ class OrderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'الإجمالي',
+                      'auto_key_162'.tr,
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: cs.onSurface.withValues(alpha: 0.5),
                       ),
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      '${order.totalPrice.toStringAsFixed(2)} ر.ق',
+                      'auto_key_465'.tr,
                       style: theme.textTheme.titleSmall?.copyWith(
                         color: cs.primary,
                         fontWeight: FontWeight.bold,
@@ -221,7 +222,7 @@ class OrderCard extends StatelessWidget {
           child: ElevatedButton.icon(
             onPressed: onPay,
             icon: Icon(Icons.payment_rounded, size: 16.r),
-            label: const Text('إكمال الدفع'),
+            label: Text('auto_key_466'.tr),
             style: ElevatedButton.styleFrom(
               backgroundColor: cs.primary,
               foregroundColor: cs.onPrimary,
@@ -239,7 +240,7 @@ class OrderCard extends StatelessWidget {
           child: OutlinedButton.icon(
             onPressed: onCancel,
             icon: Icon(Icons.cancel_outlined, size: 16.r),
-            label: const Text('إلغاء'),
+            label: Text('cancel'.tr),
             style: OutlinedButton.styleFrom(
               foregroundColor: cs.error,
               side: BorderSide(color: cs.error.withValues(alpha: 0.4)),
@@ -256,7 +257,7 @@ class OrderCard extends StatelessWidget {
           child: OutlinedButton.icon(
             onPressed: onRate,
             icon: Icon(Icons.star_outline, size: 16.r),
-            label: const Text('تقييم'),
+            label: Text('rating'.tr),
             style: OutlinedButton.styleFrom(foregroundColor: cs.primary),
           ),
         ),
@@ -270,7 +271,7 @@ class OrderCard extends StatelessWidget {
           child: ElevatedButton.icon(
             onPressed: onChat,
             icon: Icon(Icons.chat_outlined, size: 16.r),
-            label: const Text('محادثة'),
+            label: Text('auto_key_467'.tr),
             style: ElevatedButton.styleFrom(
               backgroundColor: cs.primary,
               foregroundColor: cs.onPrimary,
@@ -304,14 +305,14 @@ class OrderCard extends StatelessWidget {
           Icon(Icons.error_outline, color: cs.error, size: 20.r),
           SizedBox(height: 4.h),
           Text(
-            'تعذر تحميل التفاصيل',
+            'auto_key_445'.tr,
             style: theme.textTheme.labelSmall?.copyWith(color: cs.error),
           ),
           if (onRetryDetail != null) ...[
             SizedBox(height: 6.h),
             TextButton(
               onPressed: onRetryDetail,
-              child: const Text('إعادة المحاولة'),
+              child: Text('auto_key_243'.tr),
             ),
           ],
         ],
@@ -337,30 +338,30 @@ class OrderCard extends StatelessWidget {
           _detailRow(
             context,
             icon: Icons.payment_rounded,
-            label: 'طريقة الدفع',
+            label: 'payment_method'.tr,
             value: d.paymentMethod.desc,
           ),
           SizedBox(height: 6.h),
           _detailRow(
             context,
             icon: Icons.local_shipping_rounded,
-            label: 'نوع التوصيل',
+            label: 'auto_key_468'.tr,
             value: d.deliveryType.desc,
           ),
           SizedBox(height: 6.h),
           _detailRow(
             context,
             icon: Icons.payments_outlined,
-            label: 'الإجمالي',
-            value: '${d.grandTotal} ر.ق',
+            label: 'auto_key_162'.tr,
+            value: 'auto_key_469'.tr,
           ),
           if (d.deliveryPrice != '0' && d.deliveryPrice.isNotEmpty) ...[
             SizedBox(height: 6.h),
             _detailRow(
               context,
               icon: Icons.delivery_dining_outlined,
-              label: 'التوصيل',
-              value: '${d.deliveryPrice} ر.ق',
+              label: 'delivery'.tr,
+              value: 'auto_key_470'.tr,
             ),
           ],
           if (d.note != null && d.note.toString().isNotEmpty) ...[
@@ -368,7 +369,7 @@ class OrderCard extends StatelessWidget {
             _detailRow(
               context,
               icon: Icons.note_alt_rounded,
-              label: 'ملاحظة',
+              label: 'auto_key_471'.tr,
               value: d.note.toString(),
             ),
           ],
@@ -379,7 +380,7 @@ class OrderCard extends StatelessWidget {
             const DottedDivider(),
             SizedBox(height: 8.h),
             Text(
-              'المنتجات',
+              'auto_key_472'.tr,
               style: theme.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -395,7 +396,7 @@ class OrderCard extends StatelessWidget {
             const DottedDivider(),
             SizedBox(height: 8.h),
             Text(
-              'حالة الطلب',
+              'order_status'.tr,
               style: theme.textTheme.labelMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -480,7 +481,7 @@ class OrderCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '${cart.product.price} ر.ق',
+                  'auto_key_473'.tr,
                   style: theme.textTheme.labelSmall?.copyWith(
                     color: cs.primary,
                   ),

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -18,7 +19,7 @@ class MenuItemCard extends StatelessWidget {
     this.oldPrice,
     required this.imagePath,
     this.isPopular = false,
-    this.prepTime = '0-0 دقيقة',
+    this.prepTime = 'auto_key_425',
     this.onTapAdd,
   });
 
@@ -55,27 +56,27 @@ class MenuItemCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
                 ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15.r),
-                    child: imagePath.startsWith('http')
-                        ? Image.network(
-                            imagePath,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
-                            errorBuilder: (_, __, ___) => Icon(
-                              Iconsax.image,
-                              color: cs.primary.withValues(alpha: 0.4),
-                            ),
-                          )
-                        : Image.asset(
-                            imagePath,
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: double.infinity,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.r),
+                  child: imagePath.startsWith('http')
+                      ? Image.network(
+                          imagePath,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          errorBuilder: (_, __, ___) => Icon(
+                            Iconsax.image,
+                            color: cs.primary.withValues(alpha: 0.4),
                           ),
-                  ),
+                        )
+                      : Image.asset(
+                          imagePath,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
                 ),
+              ),
 
               // Plus Button (Bottom-Left overlap)
               Positioned(
@@ -125,7 +126,7 @@ class MenuItemCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'الأكثر طلباً',
+                          'auto_key_441'.tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 7.sp,
@@ -191,7 +192,7 @@ class MenuItemCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${price.toStringAsFixed(2)} ريال',
+                      'auto_key_442'.tr,
                       style: textTheme.labelMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: cs.primary,

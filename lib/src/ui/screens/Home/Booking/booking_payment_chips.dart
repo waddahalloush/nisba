@@ -23,7 +23,7 @@ class BookingPaymentChips extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('طريقة الدفع', style: theme.textTheme.titleMedium),
+        Text('payment_method'.tr, style: theme.textTheme.titleMedium),
         SizedBox(height: 8.h),
         Obx(
           () => Wrap(

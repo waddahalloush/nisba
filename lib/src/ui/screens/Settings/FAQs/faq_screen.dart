@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -15,7 +19,7 @@ class FaqScreen extends GetView<FaqController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,10 +27,10 @@ class FaqScreen extends GetView<FaqController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'الأسئلة الشائعة',
+            'faqs'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -78,7 +82,7 @@ class FaqScreen extends GetView<FaqController> {
         onChanged: controller.onSearch,
         style: theme.textTheme.bodyMedium?.copyWith(color: cs.onSurface),
         decoration: InputDecoration(
-          hintText: 'ابحث عن سؤال أو موضوع...',
+          hintText: 'auto_key_606'.tr,
           hintStyle: TextStyle(
             color: cs.onSurface.withValues(alpha: 0.35),
             fontSize: 13.sp,
@@ -156,7 +160,7 @@ class FaqScreen extends GetView<FaqController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'لم تجد إجابتك؟',
+                    'auto_key_607'.tr,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -165,7 +169,7 @@ class FaqScreen extends GetView<FaqController> {
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    'فريق الدعم لدينا جاهز لمساعدتك',
+                    'auto_key_608'.tr,
                     style: TextStyle(
                       fontSize: 12.sp,
                       color: cs.onPrimary.withValues(alpha: 0.85),
@@ -189,7 +193,7 @@ class FaqScreen extends GetView<FaqController> {
               ),
             ),
             child: Text(
-              'تواصل معنا',
+              'auto_key_560'.tr,
               style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
             ),
           ),

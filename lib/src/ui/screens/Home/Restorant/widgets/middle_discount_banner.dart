@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
@@ -65,7 +66,7 @@ class MiddleDiscountBanner extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'خصم',
+                            'discount'.tr,
                             style: TextStyle(
                               color: cs.primary,
                               fontSize: 7.sp,
@@ -101,7 +102,7 @@ class MiddleDiscountBanner extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'خصم 20% على جميع الطلبات',
+                  'auto_key_268'.tr,
                   style: textTheme.labelLarge?.copyWith(
                     fontWeight: FontWeight.w900,
                     color: Colors.white,
@@ -113,7 +114,7 @@ class MiddleDiscountBanner extends StatelessWidget {
                 ),
                 SizedBox(height: 2.h),
                 Text(
-                  'لفترة محدودة - اطلب الآن!',
+                  'auto_key_293'.tr,
                   style: textTheme.labelSmall?.copyWith(
                     color: Colors.white.withValues(alpha: 0.85),
                     fontSize: 9.5.sp,
@@ -121,7 +122,7 @@ class MiddleDiscountBanner extends StatelessWidget {
                   textAlign: TextAlign.right,
                 ),
                 SizedBox(height: 8.h),
-                // White "اطلب الآن" Button
+                // White 'auto_key_270'.tr Button
                 GestureDetector(
                   onTap: onTapOrder,
                   child: Container(
@@ -138,7 +139,7 @@ class MiddleDiscountBanner extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      'اطلب الآن',
+                      'auto_key_270'.tr,
                       style: TextStyle(
                         color: cs.primary,
                         fontWeight: FontWeight.bold,

@@ -78,19 +78,14 @@ class CustomerSupportController extends GetxController {
         mapped.add(
           ChatMessage(
             text:
-                'يمكنك التواصل معنا عبر\n${contactPhone.value.isNotEmpty ? 'الهاتف: ${contactPhone.value}\n' : ''}${contactEmail.value.isNotEmpty ? 'البريد: ${contactEmail.value}' : ''}',
+                '${contactPhone.value.isNotEmpty ? "${'phone_number_hint'.tr}: ${contactPhone.value}\n" : ""}${contactEmail.value.isNotEmpty ? "${'email'.tr}: ${contactEmail.value}" : ""}',
             isUser: false,
             time: '',
           ),
         );
       } else {
         mapped.add(
-          const ChatMessage(
-            text:
-                'مرحباً، كيف يمكنني مساعدتك اليوم؟ أرسل استفسارك وسنرد عليك قريباً.',
-            isUser: false,
-            time: '',
-          ),
+          ChatMessage(text: 'auto_key_620'.tr, isUser: false, time: ''),
         );
       }
 
@@ -132,14 +127,13 @@ class CustomerSupportController extends GetxController {
     try {
       // Valid InquiryType values: contact, faq, complaint
       final type = inquiryType.value == 'complaint' ? 'complaint' : 'contact';
-      final res = await repository.storeInquiry(data: {
-        'type': type,
-        'msg': text,
-      });
+      final res = await repository.storeInquiry(
+        data: {'type': type, 'msg': text},
+      );
       ApiResult.ensureSuccess(res);
       messages.add(
         ChatMessage(
-          text: 'شكراً لتواصلك معنا. سنقوم بالرد عليك في أقرب وقت ممكن.',
+          text: 'auto_key_621'.tr,
           isUser: false,
           time: _formatTime(DateTime.now()),
         ),
@@ -158,8 +152,10 @@ class CustomerSupportController extends GetxController {
   void endChat() => Get.back();
 
   String _formatTime(DateTime now) {
-    final hour = now.hour > 12 ? now.hour - 12 : (now.hour == 0 ? 12 : now.hour);
-    final period = now.hour >= 12 ? 'م' : 'ص';
+    final hour = now.hour > 12
+        ? now.hour - 12
+        : (now.hour == 0 ? 12 : now.hour);
+    final period = now.hour >= 12 ? 'auto_key_415'.tr : 'auto_key_416'.tr;
     return '${hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')} $period';
   }
 

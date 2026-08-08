@@ -34,7 +34,7 @@ class HotelBookingController extends GetxController {
   final guests = 2.obs;
   final available = RxnBool();
   final price = RxnDouble();
-  final title = 'حجز فندق'.obs;
+  final title = 'auto_key_224'.tr.obs;
 
   final checkout = BookingCheckoutOptions().obs;
   final selectedPayment = 'wallet'.obs;
@@ -145,7 +145,7 @@ class HotelBookingController extends GetxController {
 
   Future<void> loadResources() async {
     if (marketId <= 0) {
-      AppSnackbar.showError(message: 'معرّف السوق غير صالح');
+      AppSnackbar.showError(message: 'auto_key_191'.tr);
       return;
     }
     isLoading.value = true;
@@ -244,7 +244,7 @@ class HotelBookingController extends GetxController {
   Future<void> checkAvailability() async {
     final resourceId = selectedResourceId.value;
     if (resourceId == null) {
-      AppSnackbar.showError(message: 'اختر غرفة أولاً');
+      AppSnackbar.showError(message: 'auto_key_225'.tr);
       return;
     }
     isChecking.value = true;
@@ -276,11 +276,11 @@ class HotelBookingController extends GetxController {
 
   Future<void> submit() async {
     if (selectedResourceId.value == null) {
-      AppSnackbar.showError(message: 'اختر غرفة أولاً');
+      AppSnackbar.showError(message: 'auto_key_225'.tr);
       return;
     }
     if (available.value != true) {
-      AppSnackbar.showError(message: 'تحقق من التوفر أولاً قبل تأكيد الحجز');
+      AppSnackbar.showError(message: 'auto_key_226'.tr);
       return;
     }
     isSubmitting.value = true;
@@ -304,7 +304,7 @@ class HotelBookingController extends GetxController {
       await BookingOrderSubmit.storeAndSettle(
         repository: repository,
         body: body,
-        successFallback: 'تم إنشاء حجز الفندق بنجاح',
+        successFallback: 'auto_key_227'.tr,
       );
     } on DioException catch (e) {
       AppSnackbar.showError(message: DioErrorUtil.handleError(e));

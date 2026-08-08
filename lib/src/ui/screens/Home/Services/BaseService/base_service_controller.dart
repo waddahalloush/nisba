@@ -18,7 +18,7 @@ abstract class BaseServiceController extends GetxController {
   // ── الحالة التفاعلية (Reactive State) ──
   final isLoading = false.obs;
   final searchQuery = ''.obs;
-  final selectedCategory = 'الكل'.obs;
+  final selectedCategory = 'all'.tr.obs;
   final errorMessage = ''.obs;
 
   // ── القوائم الأساسية ──
@@ -44,7 +44,7 @@ abstract class BaseServiceController extends GetxController {
     var list = allItems.toList(); // أخذ نسخة من القائمة
 
     // 1. الفلترة حسب التصنيف
-    if (selectedCategory.value != 'الكل') {
+    if (selectedCategory.value != 'all'.tr) {
       list = list.where((item) => item.category == selectedCategory.value).toList();
     }
 

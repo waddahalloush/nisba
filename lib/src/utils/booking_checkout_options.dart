@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:nisba_app/src/data/repository.dart';
 import 'package:nisba_app/src/utils/api_result.dart';
 
@@ -57,13 +58,13 @@ class BookingCheckoutOptions {
   static String labelForPayment(String value) {
     switch (value) {
       case 'wallet':
-        return 'المحفظة';
+        return 'wallet'.tr;
       case 'cash':
-        return 'نقداً';
+        return 'cash'.tr;
       case 'card':
-        return 'بطاقة';
+        return 'card'.tr;
       case 'point':
-        return 'نقاط';
+        return 'points'.tr;
       case 'google_pay':
         return 'Google Pay';
       case 'apple_pay':
@@ -76,13 +77,13 @@ class BookingCheckoutOptions {
   static String labelForDelivery(String value) {
     switch (value) {
       case 'at_provider':
-        return 'في المكان';
+        return 'at_provider'.tr;
       case 'to_home':
-        return 'توصيل';
+        return 'auto_key_282'.tr;
       case 'to_car':
-        return 'للسيارة';
+        return 'to_car'.tr;
       case 'pickup':
-        return 'استلام';
+        return 'pickup'.tr;
       default:
         return value;
     }

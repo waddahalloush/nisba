@@ -58,42 +58,42 @@ class AppSettingController extends GetxController {
 
   final walletPoints = 0;
   final appVersion = '1.0.0';
-  final appName = 'تطبيق نسبة';
-  final selectedPaymentMethod = 'المحفظة'.obs;
+  final appName = 'nisba_app_name'.tr;
+  final selectedPaymentMethod = 'wallet'.tr.obs;
   final myPoints = 0.obs;
 
   // ---- إجراءات سريعة ----
   final quickActions = [
     QuickAction(
-      label: 'مكافآت',
+      label: 'rewards'.tr,
       icon: Iconsax.gift,
       onTap: () {
         Get.toNamed(AppRoutesNames.points);
       },
     ),
     QuickAction(
-      label: 'القسائم',
+      label: 'coupons'.tr,
       icon: Iconsax.card,
       onTap: () {
         Get.toNamed(AppRoutesNames.coupon);
       },
     ),
     QuickAction(
-      label: 'المفضلة',
+      label: 'favorite'.tr,
       icon: Iconsax.heart,
       onTap: () {
         Get.toNamed(AppRoutesNames.favorite);
       },
     ),
     QuickAction(
-      label: 'سيارتي',
+      label: 'my_cars'.tr,
       icon: Iconsax.car,
       onTap: () {
         Get.toNamed(AppRoutesNames.myCars);
       },
     ),
     QuickAction(
-      label: 'التقارير',
+      label: 'reports'.tr,
       icon: Iconsax.document,
       onTap: () {
         Get.toNamed(AppRoutesNames.report);
@@ -117,25 +117,25 @@ class AppSettingController extends GetxController {
   List<RewardModel> _buildRewards() {
     return [
       RewardModel(
-        title: 'هدية ترحيبية',
+        title: 'welcome_gift'.tr,
         subtitle: '100',
         isPoints: true,
-        buttonLabel: 'استخدم الآن',
+        buttonLabel: 'use_now'.tr,
         bgColor: const Color(0xff67021e),
         icon: Assets.images.gift.path,
       ),
 
       RewardModel(
-        title: 'استرجاع نقدي',
+        title: 'cashback'.tr,
         subtitle: '15%',
-        buttonLabel: 'استخدم الآن',
+        buttonLabel: 'use_now'.tr,
         bgColor: Colors.black,
         icon: Assets.images.giftMoney.path,
       ),
       RewardModel(
-        title: 'خصم خاص',
+        title: 'special_discount'.tr,
         subtitle: '25%',
-        buttonLabel: 'استخدم الآن',
+        buttonLabel: 'use_now'.tr,
         bgColor: Colors.black,
         icon: Assets.images.money.path,
       ),
@@ -145,28 +145,28 @@ class AppSettingController extends GetxController {
   List<SettingsItem> _buildSettings() {
     return [
       SettingsItem(
-        title: 'مركز المساعدة',
+        title: 'help_center'.tr,
         icon: Icons.help_outline_rounded,
         onTap: () {
           Get.toNamed(AppRoutesNames.support);
         },
       ),
       SettingsItem(
-        title: 'صندوق الرسائل',
+        title: 'inbox_messages'.tr,
         icon: Iconsax.message,
         onTap: () {
           Get.toNamed(AppRoutesNames.inbox);
         },
       ),
       SettingsItem(
-        title: 'عن التطبيق',
+        title: 'about_app'.tr,
         icon: Icons.info_outline_rounded,
         onTap: () {
           Get.toNamed(AppRoutesNames.about);
         },
       ),
       SettingsItem(
-        title: 'الشروط والخدمات',
+        title: 'terms_and_services'.tr,
         icon: Icons.description_outlined,
         onTap: () {
           Get.toNamed(AppRoutesNames.privacy);
@@ -174,13 +174,13 @@ class AppSettingController extends GetxController {
       ),
 
       SettingsItem(
-        title: 'الأسئلة الشائعة',
+        title: 'faqs'.tr,
         icon: Icons.quiz_outlined,
         onTap: () {
           Get.toNamed(AppRoutesNames.faq);
         },
       ),
-      const SettingsItem(title: 'أبدِ رأيك', icon: Icons.rate_review_outlined),
+      SettingsItem(title: 'give_feedback'.tr, icon: Icons.rate_review_outlined),
     ];
   }
 }

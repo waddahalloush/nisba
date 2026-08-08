@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -26,7 +30,7 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -34,7 +38,7 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +108,7 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
             children: [
               Icon(Iconsax.location, color: cs.primary, size: 16.sp),
               Text(
-                "القريبة منك",
+                'auto_key_188'.tr,
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.primary,
@@ -412,7 +416,7 @@ class BaseServiceScreen<T extends BaseServiceController> extends GetView<T> {
             ),
             SizedBox(height: 14.h),
             Text(
-              'لا توجد نتائج مطابقة لبحثك',
+              'auto_key_295'.tr,
               style: theme.textTheme.bodyLarge,
             ),
           ],

@@ -28,7 +28,7 @@ class KioskController extends BaseServiceController {
   final Rx<ApiResponse<dynamic>> kioksResponse =
       ApiResponse<dynamic>.init().obs;
 
-  String get sectionName => section?.name ?? 'الأكشاك السريعة';
+  String get sectionName => section?.name ?? 'auto_key_383'.tr;
 
   @override
   void onInit() {
@@ -51,8 +51,8 @@ class KioskController extends BaseServiceController {
     kioksResponse.value = ApiResponse<dynamic>.loading('');
     allItems.clear();
     featuredItems.clear();
-    categories.assignAll(const [
-      ServiceCategory(name: 'الكل', icon: Iconsax.category),
+    categories.assignAll([
+      ServiceCategory(name: 'all'.tr, icon: Iconsax.category),
     ]);
 
     if (!await connectionChecker.hasConnection) {
@@ -96,7 +96,7 @@ class KioskController extends BaseServiceController {
           .toSet();
       if (labels.length > 1) {
         categories.assignAll([
-          const ServiceCategory(name: 'الكل', icon: Iconsax.category),
+          ServiceCategory(name: 'all'.tr, icon: Iconsax.category),
           ...labels.map(
             (name) => ServiceCategory(name: name, icon: Iconsax.shop),
           ),

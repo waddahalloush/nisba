@@ -26,8 +26,8 @@ class HomeController extends GetxController {
   InternetConnectionChecker connectionChecker = Get.find();
   GetStorageHelper storageHelper = Get.find();
 
-
- Rx<ApiResponse<HomeResponse>> homeResponse = ApiResponse<HomeResponse>.init().obs;
+  Rx<ApiResponse<HomeResponse>> homeResponse =
+      ApiResponse<HomeResponse>.init().obs;
   @override
   void onInit() {
     super.onInit();
@@ -37,7 +37,8 @@ class HomeController extends GetxController {
   }
 
   List<BannerItem> get banners => homeResponse.value.data.data.banners;
-  List<Section> get marketSections => homeResponse.value.data.data.marketSections;
+  List<Section> get marketSections =>
+      homeResponse.value.data.data.marketSections;
   List<Section> get serviceSections =>
       homeResponse.value.data.data.serviceSections;
   List<Market> get brands => homeResponse.value.data.data.popularBrand;
@@ -57,7 +58,7 @@ class HomeController extends GetxController {
         lat: storageHelper.getUserLatitude,
         lng: storageHelper.getUserLongtude,
       );
-      if (res.status != 'success' && res.status != 'true') {
+      if (res.status != 'success' && res.status != 'ue') {
         homeResponse.value = ApiResponse<HomeResponse>.error(
           res.message.isNotEmpty ? res.message : 'Request failed',
         );

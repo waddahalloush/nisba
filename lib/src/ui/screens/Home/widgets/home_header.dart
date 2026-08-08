@@ -8,6 +8,7 @@ import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/data/local/get_storage_helper.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
 import 'package:nisba_app/src/ui/screens/Home/home_controller.dart';
+import 'package:nisba_app/src/ui/screens/dashboard/dashboard_controller.dart';
 
 /// الهيدر العلوي للشاشة الرئيسية - SliverAppBar متدرج مع بانر وبحث
 class HomeHeader extends StatelessWidget {
@@ -87,7 +88,7 @@ class HomeHeader extends StatelessWidget {
               Icon(Iconsax.location, color: onPrimary, size: 12.sp),
               SizedBox(width: 4.w),
               Text(
-                'توصيل إلى: ${user?.country.name ?? 'موقعك الحالي'}',
+                'current_location'.tr,
                 style: TextStyle(
                   color: onPrimary,
                   fontSize: 10.sp,
@@ -220,10 +221,14 @@ class HomeHeader extends StatelessWidget {
               ),
               // [ب] السيرش بار
               TextFormField(
+                readOnly: true,
+                onTap: () {
+                  Get.find<DashboardController>().changeTabIndex(3);
+                },
                 decoration: InputDecoration(
                   fillColor: surface,
                   filled: true,
-                  hintText: 'ابحث عن المطاعم، الوجبات، أو المقادير...',
+                  hintText: 'auto_key_408'.tr,
                   hintStyle: TextStyle(
                     color: onSurface.withValues(alpha: 0.55),
                     fontSize: 11.sp,
@@ -249,8 +254,11 @@ class HomeHeader extends StatelessWidget {
               ),
               SizedBox(height: 10.h),
               // [ج] بانر كارد - يتلاشى تدريجياً عند السحب للأعلى
-              Obx(
-                () => AnimatedOpacity(
+              Obx(() {
+                final banners = controller.banners;
+                if (banners.isEmpty) return const SizedBox.shrink();
+
+                return AnimatedOpacity(
                   duration: const Duration(milliseconds: 150),
                   opacity: (1.0 - (controller.scrollOffset.value / 200.h))
                       .clamp(0.0, 1.0),
@@ -263,177 +271,156 @@ class HomeHeader extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16.r),
                         border: Border.all(color: onPrimary),
                       ),
-                      child: Stack(
-                        children: [
-                          // صورة العرض متراكبة في اليسار (RTL)
-                          Positioned(
-                            right: 0.w,
-                            bottom: 0,
-                            top: 0,
-                            child: SizedBox(
-                              width: 220.w,
-                              height: double.infinity,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.horizontal(
-                                  right: Radius.circular(16.r),
-                                ),
-                                child: Assets.images.bannerImg.image(
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          // التدرج اللوني المتراكب
-                          Container(
-                            width: double.infinity,
-                            height: double.infinity,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.horizontal(
-                                left: Radius.circular(16.r),
-                              ),
-                              gradient: LinearGradient(
-                                colors: [
-                                  primaryColor,
-                                  primaryColor,
-                                  primaryColor,
-                                  Colors.transparent,
-                                ],
-                                stops: const [0.0, 0.25, 0.40, 1.0],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                            ),
-                          ),
-                          // النصوص وزر اشترك الآن
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16.w,
-                              vertical: 12.h,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.r),
+                        child: Stack(
+                          children: [
+                            // PageView للبانرات
+                            PageView.builder(
+                              itemCount: banners.length,
+                              onPageChanged: (i) =>
+                                  controller.changeBannerIndex(i),
+                              itemBuilder: (_, index) {
+                                final banner = banners[index];
+                                return Stack(
                                   children: [
-                                    Column(
-                                      children: [
-                                        Text(
-                                          'NISBAA',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: onPrimary,
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'REWARDS',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: onPrimary,
-                                            fontSize: 8.sp,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
+                                    // صورة البانر
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      bottom: 0,
+                                      child: CachedNetworkImage(
+                                        width: 220.w,
+                                        height: double.infinity,
+                                        imageUrl: banner.image,
+                                        fit: BoxFit.cover,
+                                        errorWidget: (_, __, ___) => Assets
+                                            .images
+                                            .bannerImg
+                                            .image(fit: BoxFit.cover),
+                                      ),
                                     ),
-                                    SizedBox(width: 4.w),
-                                    Icon(
-                                      Icons.star_rounded,
-                                      color: onPrimary,
-                                      size: 12.sp,
+                                    // التدرج اللوني المتراكب
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            primaryColor,
+                                            primaryColor,
+                                            primaryColor,
+                                            Colors.transparent,
+                                          ],
+                                          stops: const [0.0, 0.25, 0.40, 1.0],
+                                          begin: Alignment.centerLeft,
+                                          end: Alignment.centerRight,
+                                        ),
+                                      ),
+                                    ),
+                                    // النصوص وزر الإجراء
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16.w,
+                                        vertical: 12.h,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          // نص وصف البانر
+                                          Expanded(
+                                            child: Text(
+                                              banner.description,
+                                              style: TextStyle(
+                                                color: onPrimary,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                                height: 1.3,
+                                              ),
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          SizedBox(height: 8.h),
+                                          // زر الإجراء
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 20.w,
+                                              vertical: 6.h,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.darken(
+                                                primaryColor,
+                                                0.25,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
+                                            ),
+                                            child: Text(
+                                              'auto_key_409'.tr,
+                                              style: TextStyle(
+                                                color: onPrimary,
+                                                fontSize: 11.sp,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
-                                ),
-                                SizedBox(height: 6.h),
-                                Text(
-                                  'كافئ نفسك بخصم',
-                                  style: TextStyle(
-                                    color: onPrimary,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Text(
-                                  '40%',
-                                  style: TextStyle(
-                                    color: onPrimary,
-                                    fontSize: 36.sp,
-                                    fontWeight: FontWeight.w600,
-                                    height: 0.95,
-                                  ),
-                                ),
-                                Text(
-                                  'على طلبك التالي!',
-                                  style: TextStyle(
-                                    color: onPrimary,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                SizedBox(height: 10.h),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 20.w,
-                                    vertical: 6.h,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.darken(primaryColor, 0.25),
-                                    borderRadius: BorderRadius.circular(20.r),
-                                  ),
-                                  child: Text(
-                                    'اشترك الآن',
-                                    style: TextStyle(
-                                      color: onPrimary,
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                                );
+                              },
                             ),
-                          ),
-                          // Dots Indicator
-                          Positioned(
-                            bottom: 12.h,
-                            right: 0,
-                            left: 0,
-                            child: Obx(
-                              () => Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: List.generate(4, (index) {
-                                  return AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: 2.w,
-                                    ),
-                                    width:
-                                        controller.currentBannerIndex.value ==
-                                            index
-                                        ? 14.w
-                                        : 5.w,
-                                    height: 5.h,
-                                    decoration: BoxDecoration(
-                                      color:
+                            // Dots Indicator
+                            Positioned(
+                              bottom: 12.h,
+                              right: 0,
+                              left: 0,
+                              child: Obx(
+                                () => Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: List.generate(banners.length, (
+                                    index,
+                                  ) {
+                                    return AnimatedContainer(
+                                      duration: const Duration(
+                                        milliseconds: 200,
+                                      ),
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: 2.w,
+                                      ),
+                                      width:
                                           controller.currentBannerIndex.value ==
                                               index
-                                          ? onPrimary
-                                          : onPrimary.withValues(alpha: 0.4),
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                  );
-                                }),
+                                          ? 14.w
+                                          : 5.w,
+                                      height: 5.h,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            controller
+                                                    .currentBannerIndex
+                                                    .value ==
+                                                index
+                                            ? onPrimary
+                                            : onPrimary.withValues(alpha: 0.4),
+                                        borderRadius: BorderRadius.circular(
+                                          10.r,
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
+                );
+              }),
             ],
           ),
         ),

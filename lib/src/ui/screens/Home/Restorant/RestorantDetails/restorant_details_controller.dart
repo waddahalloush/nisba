@@ -35,7 +35,7 @@ class ReviewItem {
         : {};
     return ReviewItem(
       userName:
-          user['name']?.toString() ?? map['user_name']?.toString() ?? 'مستخدم',
+          user['name']?.toString() ?? map['user_name']?.toString() ?? 'auto_key_276'.tr,
       userImage: user['image']?.toString(),
       rating:
           (map['rating'] as num?)?.toDouble() ??
@@ -89,7 +89,7 @@ class RestorantDetailsController extends GetxController {
     distance: '',
     imagePath: Assets.images.resBurger.path,
   ).obs;
-  final tabs = <String>['الكل'].obs;
+  final tabs = <String>['all'.tr].obs;
   final categoryIds = <int?>[null].obs;
   final meals = <MealItem>[].obs;
   final categoriesRaw = <Map>[].obs;
@@ -231,7 +231,7 @@ class RestorantDetailsController extends GetxController {
   void _applyCategoryTabs() {
     if (categoriesRaw.isEmpty) return;
     tabs.assignAll([
-      'الكل',
+      'all'.tr,
       ...categoriesRaw.map((c) => c['name']?.toString() ?? ''),
     ]);
     categoryIds.assignAll([
@@ -295,7 +295,7 @@ class RestorantDetailsController extends GetxController {
 
   void openProduct(MealItem meal) {
     if (meal.id == null) {
-      AppSnackbar.showError(message: 'معرف المنتج غير متوفر');
+      AppSnackbar.showError(message: 'auto_key_252'.tr);
       return;
     }
     if (Get.isRegistered<ProductDetailsController>()) {
@@ -320,7 +320,7 @@ class RestorantDetailsController extends GetxController {
     if (meals.isNotEmpty) {
       openProduct(meals.first);
     } else {
-      AppSnackbar.showInfo(message: 'لا توجد منتجات حالياً');
+      AppSnackbar.showInfo(message: 'auto_key_277'.tr);
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/api_response.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/data/models/product_details_model.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
 
 import 'product_details_controller.dart';
 import 'product_details_shimmer.dart';
@@ -17,7 +18,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         bottomNavigationBar: _buildBottomBar(theme),
@@ -62,7 +63,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
             Icon(Iconsax.warning_2, size: 48.r, color: cs.error),
             SizedBox(height: 12.h),
             Text(
-              message.isNotEmpty ? message : 'حدث خطأ ما',
+              message.isNotEmpty ? message : 'auto_key_242'.tr,
               style: theme.textTheme.bodyLarge?.copyWith(color: cs.error),
               textAlign: TextAlign.center,
             ),
@@ -70,7 +71,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
             ElevatedButton.icon(
               onPressed: controller.fetchProductDetails,
               icon: const Icon(Iconsax.refresh),
-              label: const Text('إعادة المحاولة'),
+              label: Text('auto_key_243'.tr),
               style: ElevatedButton.styleFrom(
                 backgroundColor: cs.primary,
                 foregroundColor: cs.onPrimary,
@@ -169,7 +170,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                 borderRadius: BorderRadius.circular(8.r),
               ),
               child: Text(
-                'طُلب $sold مرة',
+                'auto_key_244'.tr,
                 style: TextStyle(
                   fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
@@ -186,8 +187,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
     final cs = theme.colorScheme;
 
     final name = details?.name ?? controller.fallbackName;
-    final description =
-        details?.description ?? controller.fallbackDescription;
+    final description = details?.description ?? controller.fallbackDescription;
     final rating = details?.market.rating ?? 0.0;
     final soldCount = details?.soldCount ?? 0;
     final oldPrice = details?.oldPrice;
@@ -277,7 +277,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
               Icon(Iconsax.star1, color: cs.primary, size: 16.sp),
               SizedBox(width: 4.w),
               Text(
-                '${rating.toStringAsFixed(1)} ($soldCount طلب)',
+                'auto_key_245'.tr,
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
@@ -292,7 +292,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
             return Row(
               children: [
                 Text(
-                  '${unit.toStringAsFixed(2)} ر.ق',
+                  'auto_key_246'.tr,
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
@@ -302,7 +302,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                 if (oldPrice != null && oldPrice > price) ...[
                   SizedBox(width: 8.w),
                   Text(
-                    '${oldPrice.toStringAsFixed(2)} ر.ق',
+                    'auto_key_247'.tr,
                     style: TextStyle(
                       fontSize: 12.sp,
                       decoration: TextDecoration.lineThrough,
@@ -384,7 +384,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                       borderRadius: BorderRadius.circular(6.r),
                     ),
                     child: Text(
-                      option.isRequired ? 'مطلوب' : 'اختياري',
+                      option.isRequired ? 'auto_key_85'.tr : 'auto_key_248'.tr,
                       style: TextStyle(
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w600,
@@ -410,14 +410,14 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                 final _ = controller.selectedByOption.length;
                 return Column(
                   children: option.values.map((choice) {
-                    final selected = option.id != null &&
+                    final selected =
+                        option.id != null &&
                         choice.id != null &&
                         controller.isChoiceSelected(option.id!, choice.id!);
                     return Padding(
                       padding: EdgeInsets.only(bottom: 8.h),
                       child: InkWell(
-                        onTap: () =>
-                            controller.toggleChoice(option, choice),
+                        onTap: () => controller.toggleChoice(option, choice),
                         borderRadius: BorderRadius.circular(12.r),
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -440,11 +440,11 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                               Icon(
                                 option.isSingleSelect
                                     ? (selected
-                                        ? Icons.radio_button_checked
-                                        : Icons.radio_button_off)
+                                          ? Icons.radio_button_checked
+                                          : Icons.radio_button_off)
                                     : (selected
-                                        ? Icons.check_box
-                                        : Icons.check_box_outline_blank),
+                                          ? Icons.check_box
+                                          : Icons.check_box_outline_blank),
                                 size: 20.sp,
                                 color: selected
                                     ? cs.primary
@@ -463,7 +463,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
                               ),
                               if (choice.price > 0)
                                 Text(
-                                  '+${choice.price.toStringAsFixed(2)} ر.ق',
+                                  'auto_key_249'.tr,
                                   style: TextStyle(
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w600,
@@ -550,7 +550,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'السعر',
+                'price'.tr,
                 style: TextStyle(
                   fontSize: 10.sp,
                   color: cs.onSurface.withValues(alpha: 0.5),
@@ -558,7 +558,7 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
               ),
               Obx(
                 () => Text(
-                  '${controller.totalPrice.toStringAsFixed(2)} ر.ق',
+                  'auto_key_250'.tr,
                   style: TextStyle(
                     fontSize: 13.sp,
                     fontWeight: FontWeight.bold,
@@ -573,11 +573,12 @@ class ProductDetailsScreen extends GetView<ProductDetailsController> {
             height: 44.h,
             child: Obx(
               () => ElevatedButton.icon(
-                onPressed:
-                    controller.isAdding.value ? null : controller.addToCart,
+                onPressed: controller.isAdding.value
+                    ? null
+                    : controller.addToCart,
                 icon: Icon(Iconsax.shopping_cart, size: 18.sp),
                 label: Text(
-                  'أضف للسلة ${controller.totalPrice.toStringAsFixed(2)} ر.ق',
+                  'auto_key_251'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,

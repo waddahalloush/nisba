@@ -15,8 +15,8 @@ class ServiceSectionScreen extends StatelessWidget {
 
     return BaseServiceScreen<ServiceSectionController>(
       title: name,
-      subtitle: 'اكتشف أفضل $name القريبة منك',
-      searchHint: 'ابحث في $name...',
+      subtitle: 'auto_key_402'.tr,
+      searchHint: 'auto_key_385'.tr,
     );
   }
 }

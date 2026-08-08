@@ -52,7 +52,7 @@ class AddVisaController extends GetxController {
       ApiResult.ensureSuccess(res);
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تمت إضافة البطاقة بنجاح',
+            'auto_key_103'.tr,
       );
       Get.back(result: true);
     } on ApiException catch (e) {

@@ -162,7 +162,7 @@ class _MapViewSheetState extends State<MapViewSheet> {
                           GestureDetector(
                             onTap: () => controller.setMapView(false),
                             child: Text(
-                              'عرض الكل',
+                              'view_all'.tr,
                               style: theme.textTheme.labelLarge?.copyWith(
                                 color: cs.primary,
                                 fontWeight: FontWeight.w600,
@@ -171,7 +171,7 @@ class _MapViewSheetState extends State<MapViewSheet> {
                             ),
                           ),
                           Text(
-                            'أقرب الشركاء إليك',
+                            'auto_key_548'.tr,
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.bold,
                               fontSize: 14.sp,
@@ -186,7 +186,7 @@ class _MapViewSheetState extends State<MapViewSheet> {
                         return Padding(
                           padding: EdgeInsets.all(24.r),
                           child: Text(
-                            'لا يوجد شركاء في هذه المنطقة',
+                            'auto_key_549'.tr,
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: cs.onSurface.withValues(alpha: 0.5),
                             ),

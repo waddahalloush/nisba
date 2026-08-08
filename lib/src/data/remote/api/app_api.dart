@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide FormData, MultipartFile;
 
+import '../../../utils/api_result.dart';
 import '../../models/Auth/profile_model.dart';
 import '../../models/Auth/user_model.dart';
 import '../../models/Home/home_model.dart';
@@ -11,7 +12,6 @@ import '../../models/product_details_model.dart';
 import '../../models/section_details_model.dart';
 import '../constants/endpoints.dart';
 import 'dio_client.dart';
-import '../../../utils/api_result.dart';
 
 class AppApi {
   // ignore: unused_field
@@ -312,13 +312,13 @@ class AppApi {
       queryParameters: {'status': filter, 'page': page},
     );
     if (res is! Map) {
-      throw ApiException('Invalid orders response');
+      throw ApiException('invalid_orders_response'.tr);
     }
     final map = Map<String, dynamic>.from(res);
     final parsed = OrderResponse.fromJson(map);
     if (!parsed.isSuccess) {
       throw ApiException(
-        parsed.message.isNotEmpty ? parsed.message : 'Failed to load orders',
+        parsed.message.isNotEmpty ? parsed.message : 'failed_to_load_orders'.tr,
       );
     }
     return parsed;
@@ -327,7 +327,7 @@ class AppApi {
   Future<OrderDetailResponse> getDetailedOrder({required int id}) async {
     final res = await _dioClient.get('${EndPoints.getMyOrders}/$id');
     if (res is! Map) {
-      throw ApiException('Invalid order detail response');
+      throw ApiException('invalid_order_detail_response'.tr);
     }
     final map = Map<String, dynamic>.from(res);
     final parsed = OrderDetailResponse.fromJson(map);
@@ -335,7 +335,7 @@ class AppApi {
       throw ApiException(
         parsed.message.isNotEmpty
             ? parsed.message
-            : 'Failed to load order details',
+            : 'failed_to_load_order_details'.tr,
       );
     }
     return parsed;

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 /// يمثل حالة الطلب في النظام
@@ -18,17 +19,17 @@ extension OrderStatusExtension on OrderStatus {
   String get title {
     switch (this) {
       case OrderStatus.waitingPayment:
-        return 'بانتظار الدفع';
+        return 'auto_key_456'.tr;
       case OrderStatus.newOrder:
-        return 'طلب جديد';
+        return 'new_order'.tr;
       case OrderStatus.preparing:
-        return 'جاري التحضير';
+        return 'order_stepper_preparing'.tr;
       case OrderStatus.delivering:
-        return 'جاري التوصيل';
+        return 'auto_key_457'.tr;
       case OrderStatus.delivered:
-        return 'تم التوصيل';
+        return 'auto_key_458'.tr;
       case OrderStatus.cancelled:
-        return 'ملغي';
+        return 'auto_key_459'.tr;
     }
   }
 

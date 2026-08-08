@@ -76,7 +76,7 @@ class MallStoreOrRestaurant {
   final String imageUrl;
   final double rating;
   final int reviewsCount;
-  final String? actionLabel; // مثال: "احجز طاولة" أو "استلام من المتجر"
+  final String? actionLabel; // مثال: 'auto_key_3'.tr أو 'auto_key_4'.tr
   final String? priceDescription;
   final double? price;
 
@@ -155,7 +155,7 @@ class BaseServiceItem {
     required this.category,
     required this.serviceType,
     required this.aboutText,
-    this.currency = 'ر.ق',
+    this.currency = 'currency_qar',
     this.images = const [],
     this.features,
     this.highlights,

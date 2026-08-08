@@ -84,7 +84,7 @@ class RestorantController extends GetxController {
           id: m.id,
           name: m.name,
           rating: m.rating.toDouble(),
-          deliveryTime: '${m.preparationTime} دقيقة',
+          deliveryTime: 'auto_key_259'.tr,
           distance: m.distance?.toStringAsFixed(1) ?? '',
           imagePath: m.mainImage,
           isFavorite: m.isFav,

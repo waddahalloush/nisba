@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -23,32 +24,32 @@ class RewardsSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'مكافآت',
+              'rewards'.tr,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 12.sp,
               ),
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Row(
-                children: [
-                  Text(
-                    'عرض الكل',
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: cs.primary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 10.sp,
-                    ),
-                  ),
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    size: 14.sp,
-                    color: cs.primary,
-                  ),
-                ],
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {},
+            //   child: Row(
+            //     children: [
+            //       Text(
+            //         'view_all'.tr,
+            //         style: theme.textTheme.labelMedium?.copyWith(
+            //           color: cs.primary,
+            //           fontWeight: FontWeight.w600,
+            //           fontSize: 10.sp,
+            //         ),
+            //       ),
+            //       Icon(
+            //         Icons.chevron_right_rounded,
+            //         size: 14.sp,
+            //         color: cs.primary,
+            //       ),
+            //     ],
+            //   ),
+            // ),
           ],
         ),
         SizedBox(height: 12.h),
@@ -60,7 +61,7 @@ class RewardsSection extends StatelessWidget {
             primary: true,
             shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
-            itemCount: rewards.length + 1, // +1 لبطاقة "المزيد من المكافآت"
+            itemCount: rewards.length + 1, // +1 لبطاقة 'auto_key_683'.tr
             itemBuilder: (_, i) {
               if (i == 0) return const _MoreRewardsCard();
               return _RewardCard(
@@ -75,7 +76,7 @@ class RewardsSection extends StatelessWidget {
   }
 }
 
-/// بطاقة "المزيد من المكافآت" الثابتة
+/// بطاقة 'auto_key_683'.tr الثابتة
 class _MoreRewardsCard extends StatelessWidget {
   const _MoreRewardsCard();
 
@@ -96,7 +97,7 @@ class _MoreRewardsCard extends StatelessWidget {
           Icon(Iconsax.gift4, size: 32.sp, color: Colors.white),
           SizedBox(height: 8.h),
           Text(
-            'المزيد من\nالمكافآت',
+            'auto_key_684'.tr,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 9.sp,
@@ -156,7 +157,7 @@ class _RewardCard extends StatelessWidget {
           ),
           reward.isPoints
               ? Text(
-                  "نقطة",
+                  'auto_key_640'.tr,
                   style: theme.textTheme.labelLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.onSurface,

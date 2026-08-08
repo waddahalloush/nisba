@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +18,7 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -22,10 +26,10 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'شحن الرصيد',
+            'auto_key_69'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -73,7 +77,7 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'المبلغ',
+          'amount'.tr,
           style: theme.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.onSurface,
@@ -104,7 +108,7 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
             decoration: InputDecoration(
               filled: true,
               fillColor: cs.primary.withAlpha(15),
-              hintText: 'أدخل المبلغ 0.00 (ر.ق)',
+              hintText: 'auto_key_70'.tr,
               hintStyle: TextStyle(
                 color: cs.onSurface.withValues(alpha: 0.3),
                 fontSize: 14.sp,
@@ -137,7 +141,7 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
         Icon(Iconsax.info_circle, color: cs.onSurface, size: 14.sp),
         SizedBox(width: 6.w),
         Text(
-          'الحد الأدنى للشحن: ${controller.minAmount.toInt()} (ر.ق)',
+          'auto_key_71'.tr,
           style: TextStyle(fontSize: 11.sp, color: cs.onSurface),
         ),
       ],
@@ -172,7 +176,7 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'الشحن من خلال',
+          'auto_key_72'.tr,
           style: theme.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.onSurface,
@@ -206,7 +210,7 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
               SizedBox(width: 12.w),
               Expanded(
                 child: Text(
-                  'اختر طريقة الشحن المناسبة لك',
+                  'auto_key_73'.tr,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: cs.onSurface.withValues(alpha: 0.55),
                   ),
@@ -244,7 +248,7 @@ class RechargeWalletScreen extends GetView<RechargeWalletController> {
             ),
           ),
           child: Text(
-            'التالي',
+            'next'.tr,
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
           ),
         ),
@@ -302,7 +306,7 @@ class _PresetCard extends StatelessWidget {
 
             // Amount
             Text(
-              '(ر.ق) $amount',
+              'auto_key_74'.tr,
               style: TextStyle(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.bold,

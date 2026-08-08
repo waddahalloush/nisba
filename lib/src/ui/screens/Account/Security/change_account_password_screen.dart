@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -15,7 +19,7 @@ class ChangeAccountPasswordScreen
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,10 +27,10 @@ class ChangeAccountPasswordScreen
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'تغيير كلمة مرور الحساب',
+            'auto_key_79'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -68,7 +72,7 @@ class ChangeAccountPasswordScreen
           Icon(Iconsax.sms, color: cs.primary, size: 40.sp),
           SizedBox(height: 12.h),
           Text(
-            'سنرسل رمز تحقق إلى رقم هاتفك لتغيير كلمة مرور الحساب',
+            'auto_key_80'.tr,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: cs.onSurface.withValues(alpha: 0.7),
@@ -99,7 +103,7 @@ class ChangeAccountPasswordScreen
                       ),
                     )
                   : Text(
-                      'إرسال رمز التحقق',
+                      'auto_key_81'.tr,
                       style: TextStyle(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
@@ -122,36 +126,36 @@ class ChangeAccountPasswordScreen
         children: [
           SizedBox(height: 8.h),
           _InputCard(
-            label: 'رمز التحقق',
+            label: 'auto_key_82'.tr,
             controller: controller.codeController,
             icon: Iconsax.password_check,
             keyboardType: TextInputType.number,
             maxLength: 6,
             validator: (v) {
               if (v == null || v.trim().length != 6) {
-                return 'أدخل رمزًا من 6 أرقام';
+                return 'auto_key_83'.tr;
               }
               return null;
             },
           ),
           SizedBox(height: 12.h),
           _PasswordCard(
-            label: 'كلمة المرور الجديدة',
+            label: 'auto_key_84'.tr,
             controller: controller.newPasswordController,
             obscure: controller.obscureNew,
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return 'مطلوب';
-              if (v.trim().length < 8) return '8 أحرف على الأقل';
+              if (v == null || v.trim().isEmpty) return 'auto_key_85'.tr;
+              if (v.trim().length < 8) return 'auto_key_86'.tr;
               return null;
             },
           ),
           SizedBox(height: 12.h),
           _PasswordCard(
-            label: 'تأكيد كلمة المرور',
+            label: 'auto_key_87'.tr,
             controller: controller.confirmPasswordController,
             obscure: controller.obscureConfirm,
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return 'مطلوب';
+              if (v == null || v.trim().isEmpty) return 'auto_key_85'.tr;
               return null;
             },
           ),
@@ -161,7 +165,7 @@ class ChangeAccountPasswordScreen
               onPressed:
                   controller.isSendingOtp.value ? null : controller.sendOtp,
               child: Text(
-                'إعادة إرسال الرمز',
+                'auto_key_88'.tr,
                 style: TextStyle(color: cs.primary, fontSize: 13.sp),
               ),
             ),
@@ -192,7 +196,7 @@ class ChangeAccountPasswordScreen
                         ),
                       )
                     : Text(
-                        'تأكيد التغيير',
+                        'auto_key_89'.tr,
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,

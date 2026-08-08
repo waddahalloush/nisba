@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -15,7 +19,7 @@ class ChangePaymentPasswordScreen
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,10 +27,10 @@ class ChangePaymentPasswordScreen
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'كلمة مرور الدفع',
+            'auto_key_58'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -75,13 +79,13 @@ class ChangePaymentPasswordScreen
         () => Row(
           children: [
             _TabChip(
-              label: 'كلمة المرور الحالية',
+              label: 'auto_key_95'.tr,
               isSelected: controller.selectedTab.value == 0,
               onTap: () => controller.selectTab(0),
             ),
             SizedBox(width: 4.w),
             _TabChip(
-              label: 'نسيت كلمة المرور',
+              label: 'auto_key_96'.tr,
               isSelected: controller.selectedTab.value == 1,
               onTap: () => controller.selectTab(1),
             ),
@@ -100,36 +104,36 @@ class ChangePaymentPasswordScreen
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           _PasswordField(
-            label: 'كلمة المرور الحالية',
+            label: 'auto_key_95'.tr,
             controller: controller.oldPasswordController,
             obscure: controller.obscureOld,
             icon: Iconsax.lock,
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return 'مطلوب';
-              if (v.trim().length < 8) return '8 أحرف على الأقل';
+              if (v == null || v.trim().isEmpty) return 'auto_key_85'.tr;
+              if (v.trim().length < 8) return 'auto_key_86'.tr;
               return null;
             },
           ),
           SizedBox(height: 12.h),
           _PasswordField(
-            label: 'كلمة المرور الجديدة',
+            label: 'auto_key_84'.tr,
             controller: controller.newPasswordController,
             obscure: controller.obscureNew,
             icon: Iconsax.lock_1,
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return 'مطلوب';
-              if (v.trim().length < 8) return '8 أحرف على الأقل';
+              if (v == null || v.trim().isEmpty) return 'auto_key_85'.tr;
+              if (v.trim().length < 8) return 'auto_key_86'.tr;
               return null;
             },
           ),
           SizedBox(height: 12.h),
           _PasswordField(
-            label: 'تأكيد كلمة المرور',
+            label: 'auto_key_87'.tr,
             controller: controller.confirmPasswordController,
             obscure: controller.obscureConfirm,
             icon: Iconsax.lock_1,
             validator: (v) {
-              if (v == null || v.trim().isEmpty) return 'مطلوب';
+              if (v == null || v.trim().isEmpty) return 'auto_key_85'.tr;
               return null;
             },
           ),
@@ -159,7 +163,7 @@ class ChangePaymentPasswordScreen
                         ),
                       )
                     : Text(
-                        'تغيير كلمة المرور',
+                        'change_password'.tr,
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
@@ -196,7 +200,7 @@ class ChangePaymentPasswordScreen
               Icon(Iconsax.sms, color: cs.primary, size: 40.sp),
               SizedBox(height: 12.h),
               Text(
-                'سنرسل رمز تحقق إلى رقم هاتفك المسجّل',
+                'auto_key_97'.tr,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: cs.onSurface.withValues(alpha: 0.7),
@@ -227,7 +231,7 @@ class ChangePaymentPasswordScreen
                           ),
                         )
                       : Text(
-                          'إرسال رمز التحقق',
+                          'auto_key_81'.tr,
                           style: TextStyle(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.bold,
@@ -246,38 +250,38 @@ class ChangePaymentPasswordScreen
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             _InputField(
-              label: 'رمز التحقق',
+              label: 'auto_key_82'.tr,
               controller: controller.otpCodeController,
               icon: Iconsax.password_check,
               keyboardType: TextInputType.number,
               maxLength: 6,
               validator: (v) {
                 if (v == null || v.trim().length != 6) {
-                  return 'أدخل رمزًا من 6 أرقام';
+                  return 'auto_key_83'.tr;
                 }
                 return null;
               },
             ),
             SizedBox(height: 12.h),
             _PasswordField(
-              label: 'كلمة المرور الجديدة',
+              label: 'auto_key_84'.tr,
               controller: controller.otpNewPasswordController,
               obscure: controller.obscureOtpNew,
               icon: Iconsax.lock_1,
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'مطلوب';
-                if (v.trim().length < 8) return '8 أحرف على الأقل';
+                if (v == null || v.trim().isEmpty) return 'auto_key_85'.tr;
+                if (v.trim().length < 8) return 'auto_key_86'.tr;
                 return null;
               },
             ),
             SizedBox(height: 12.h),
             _PasswordField(
-              label: 'تأكيد كلمة المرور',
+              label: 'auto_key_87'.tr,
               controller: controller.otpConfirmPasswordController,
               obscure: controller.obscureOtpConfirm,
               icon: Iconsax.lock_1,
               validator: (v) {
-                if (v == null || v.trim().isEmpty) return 'مطلوب';
+                if (v == null || v.trim().isEmpty) return 'auto_key_85'.tr;
                 return null;
               },
             ),
@@ -285,7 +289,7 @@ class ChangePaymentPasswordScreen
             TextButton(
               onPressed: controller.isSendingOtp.value ? null : controller.sendOtp,
               child: Text(
-                'إعادة إرسال الرمز',
+                'auto_key_88'.tr,
                 style: TextStyle(color: cs.primary, fontSize: 13.sp),
               ),
             ),
@@ -314,7 +318,7 @@ class ChangePaymentPasswordScreen
                         ),
                       )
                     : Text(
-                        'تأكيد التغيير',
+                        'auto_key_89'.tr,
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,

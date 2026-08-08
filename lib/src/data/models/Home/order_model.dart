@@ -41,24 +41,24 @@ class OrderMarket {
   });
 
   factory OrderMarket.fromJson(Map<String, dynamic> json) => OrderMarket(
-        id: _i(json['id']),
-        name: _s(json['name']),
-        mainImage: _s(json['main_image']),
-        locationTitle: _s(json['location_title']),
-        contactPhone: _s(json['contact_phone']),
-        contactWhatsapp: _s(json['contact_whatsapp']),
-        rating: _s(json['rating'], '0'),
-      );
+    id: _i(json['id']),
+    name: _s(json['name']),
+    mainImage: _s(json['main_image']),
+    locationTitle: _s(json['location_title']),
+    contactPhone: _s(json['contact_phone']),
+    contactWhatsapp: _s(json['contact_whatsapp']),
+    rating: _s(json['rating'], '0'),
+  );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'main_image': mainImage,
-        'location_title': locationTitle,
-        'contact_phone': contactPhone,
-        'contact_whatsapp': contactWhatsapp,
-        'rating': rating,
-      };
+    'id': id,
+    'name': name,
+    'main_image': mainImage,
+    'location_title': locationTitle,
+    'contact_phone': contactPhone,
+    'contact_whatsapp': contactWhatsapp,
+    'rating': rating,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -159,19 +159,19 @@ class OrderResponse {
   bool get isSuccess => status == 'success';
 
   factory OrderResponse.fromJson(Map<String, dynamic> json) => OrderResponse(
-        status: _s(json['status']),
-        message: _s(json['message']),
-        data: json['data'] is Map
-            ? OrdersData.fromJson(Map<String, dynamic>.from(json['data'] as Map))
-            : const OrdersData(
-                orders: [],
-                pagination: Pagination(
-                  total: 0,
-                  count: 0,
-                  perPage: 10,
-                  currentPage: 1,
-                  totalPages: 1,
-                ),
-              ),
-      );
+    status: _s(json['status']),
+    message: _s(json['message']),
+    data: json['data'] is Map
+        ? OrdersData.fromJson(Map<String, dynamic>.from(json['data'] as Map))
+        : const OrdersData(
+            orders: [],
+            pagination: Pagination(
+              total: 0,
+              count: 0,
+              perPage: 10,
+              currentPage: 1,
+              totalPages: 1,
+            ),
+          ),
+  );
 }

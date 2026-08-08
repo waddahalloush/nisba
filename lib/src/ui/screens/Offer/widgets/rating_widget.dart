@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/app_colors.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -23,7 +24,7 @@ class RatingWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          '($reviewsCount تقييمات)',
+          'auto_key_443'.tr,
           style: textTheme.bodySmall?.copyWith(
             color: cs.onSurface.withValues(alpha: 0.4),
             fontSize: 10.sp,

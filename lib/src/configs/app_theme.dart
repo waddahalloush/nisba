@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:nisba_app/generated/fonts.gen.dart';
 import 'package:nisba_app/src/configs/app_colors.dart';

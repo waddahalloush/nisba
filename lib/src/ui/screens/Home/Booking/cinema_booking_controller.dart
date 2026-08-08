@@ -60,7 +60,7 @@ class CinemaBookingController extends GetxController {
   final selectedResourceId = RxnInt();
   final selectedSlotId = RxnInt();
   final seatsPerRow = 8.obs;
-  final title = 'حجز سينما'.obs;
+  final title = 'auto_key_190'.tr.obs;
 
   final checkout = BookingCheckoutOptions().obs;
   final selectedPayment = 'wallet'.obs;
@@ -142,7 +142,7 @@ class CinemaBookingController extends GetxController {
 
   Future<void> loadResources() async {
     if (marketId <= 0) {
-      AppSnackbar.showError(message: 'معرّف السوق غير صالح');
+      AppSnackbar.showError(message: 'auto_key_191'.tr);
       return;
     }
     isLoading.value = true;
@@ -247,7 +247,7 @@ class CinemaBookingController extends GetxController {
       return;
     }
     if (selectedSeats.length >= 8) {
-      AppSnackbar.showInfo(message: 'الحد الأقصى 8 مقاعد لكل حجز');
+      AppSnackbar.showInfo(message: 'auto_key_192'.tr);
       return;
     }
     selectedSeats.add(code);
@@ -255,11 +255,11 @@ class CinemaBookingController extends GetxController {
 
   Future<void> submit() async {
     if (selectedSlotId.value == null) {
-      AppSnackbar.showError(message: 'اختر موعداً أولاً');
+      AppSnackbar.showError(message: 'auto_key_193'.tr);
       return;
     }
     if (selectedSeats.isEmpty) {
-      AppSnackbar.showError(message: 'اختر مقعداً واحداً على الأقل');
+      AppSnackbar.showError(message: 'auto_key_194'.tr);
       return;
     }
     isSubmitting.value = true;
@@ -288,7 +288,7 @@ class CinemaBookingController extends GetxController {
       await BookingOrderSubmit.storeAndSettle(
         repository: repository,
         body: body,
-        successFallback: 'تم إنشاء الحجز بنجاح',
+        successFallback: 'auto_key_195'.tr,
       );
     } on DioException catch (e) {
       AppSnackbar.showError(message: DioErrorUtil.handleError(e));

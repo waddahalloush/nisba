@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/api_response.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
+import 'package:nisba_app/src/ui/screens/Order/order_screen_shimmer.dart';
 
 import 'order_controller.dart';
 import 'widgets/order_card.dart';
@@ -22,7 +23,7 @@ class OrderScreen extends GetView<OrderController> {
       body: Obx(() {
         // ── Full‑page loading ──
         if (controller.pageStatus.value == Status.loading) {
-          return const Center(child: CircularProgressIndicator());
+          return const OrderScreenShimmer();
         }
 
         // ── Full‑page error ──
@@ -42,7 +43,7 @@ class OrderScreen extends GetView<OrderController> {
                 ElevatedButton.icon(
                   onPressed: () => controller.onInit(),
                   icon: const Icon(Iconsax.refresh),
-                  label: const Text('إعادة المحاولة'),
+                  label: Text('auto_key_243'.tr),
                 ),
               ],
             ),
@@ -75,7 +76,7 @@ class OrderScreen extends GetView<OrderController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 16.h),
-              Text('طلباتك', style: theme.textTheme.headlineSmall),
+              Text('auto_key_448'.tr, style: theme.textTheme.headlineSmall),
               SizedBox(height: 12.h),
               OrdersTabBar(
                 selectedTab: controller.selectedTab,
@@ -101,7 +102,7 @@ class OrderScreen extends GetView<OrderController> {
                       child: Padding(
                         padding: EdgeInsets.all(40.r),
                         child: Text(
-                          'لا توجد طلبات لعرضها حالياً',
+                          'auto_key_449'.tr,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color: cs.onSurface.withValues(alpha: 0.5),
                           ),
@@ -125,13 +126,13 @@ class OrderScreen extends GetView<OrderController> {
                             onToggleExpand: () =>
                                 controller.toggleOrderExpand(order),
                             detail: controller.detailFor(order.apiId),
-                            isLoadingDetail:
-                                controller.isDetailLoading(order.apiId),
+                            isLoadingDetail: controller.isDetailLoading(
+                              order.apiId,
+                            ),
                             onCancel: () =>
                                 _confirmCancel(context, order.apiId),
                             onRate: () => _showRateDialog(context, order.apiId),
-                            onChat: () =>
-                                controller.openOrderChat(order.apiId),
+                            onChat: () => controller.openOrderChat(order.apiId),
                             onPay: () =>
                                 controller.payPendingOrder(order.apiId),
                             onRetryDetail: () =>
@@ -161,16 +162,19 @@ class OrderScreen extends GetView<OrderController> {
   void _confirmCancel(BuildContext context, int apiId) {
     Get.dialog(
       AlertDialog(
-        title: const Text('إلغاء الطلب'),
-        content: const Text('هل أنت متأكد من إلغاء هذا الطلب؟'),
+        title: Text('cancel_order'.tr),
+        content: Text('auto_key_450'.tr),
         actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('تراجع')),
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text('auto_key_13'.tr),
+          ),
           TextButton(
             onPressed: () {
               Get.back();
               controller.cancelOrder(apiId);
             },
-            child: const Text('إلغاء الطلب'),
+            child: Text('cancel_order'.tr),
           ),
         ],
       ),
@@ -183,14 +187,18 @@ class OrderScreen extends GetView<OrderController> {
 
     Get.dialog(
       AlertDialog(
-        title: const Text('تقييم الطلب'),
+        title: Text('auto_key_451'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Obx(
               () => Column(
                 children: [
-                  Text('${rate.value.toStringAsFixed(1)} / 5'),
+                  Text(
+                    'rating_out_of_5'.trParams({
+                      'rating': rate.value.toStringAsFixed(1),
+                    }),
+                  ),
                   Slider(
                     value: rate.value,
                     min: 0,
@@ -204,14 +212,15 @@ class OrderScreen extends GetView<OrderController> {
             TextField(
               controller: commentCtrl,
               maxLines: 2,
-              decoration: const InputDecoration(
-                labelText: 'تعليق (اختياري)',
-              ),
+              decoration: InputDecoration(labelText: 'auto_key_452'.tr),
             ),
           ],
         ),
         actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('تراجع')),
+          TextButton(
+            onPressed: () => Get.back(),
+            child: Text('auto_key_13'.tr),
+          ),
           TextButton(
             onPressed: () {
               Get.back();
@@ -221,7 +230,7 @@ class OrderScreen extends GetView<OrderController> {
                 comment: commentCtrl.text,
               );
             },
-            child: const Text('إرسال'),
+            child: Text('send'.tr),
           ),
         ],
       ),

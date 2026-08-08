@@ -24,7 +24,7 @@ class OfferItem {
     this.oldPrice,
     required this.imagePath,
     this.isPopular = false,
-    this.prepTime = '0-0 دقيقة',
+    this.prepTime = 'auto_key_425',
   });
 }
 
@@ -62,7 +62,7 @@ class OfferRestaurant {
 
 class OfferController extends GetxController {
   final selectedTab = 0.obs;
-  final location = 'شارع الملك فهد'.obs;
+  final location = 'auto_key_426'.tr.obs;
   final restaurants = <OfferRestaurant>[].obs;
   final isLoading = false.obs;
 
@@ -157,7 +157,7 @@ class OfferController extends GetxController {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () => Get.back(),
-                  child: const Text('إغلاق'),
+                  child: Text('auto_key_427'.tr),
                 ),
               ),
             ],
@@ -189,9 +189,9 @@ class OfferController extends GetxController {
         rating: 0,
         reviewsCount: 0,
         logoPath: Assets.images.azSham.path,
-        discountTitle: 'قيمة الخصم',
+        discountTitle: 'auto_key_428'.tr,
         discountDesc: '',
-        deliveryTitle: 'توصيل',
+        deliveryTitle: 'auto_key_282'.tr,
         deliveryDesc: '',
         deliveryTime: '—',
         deliveryBy: 'Nisba',
@@ -254,11 +254,11 @@ class OfferController extends GetxController {
           ) ??
           0,
       logoPath: image.isNotEmpty ? image : Assets.images.azSham.path,
-      discountTitle: 'قيمة الخصم',
+      discountTitle: 'auto_key_428'.tr,
       discountDesc: desc,
-      deliveryTitle: 'توصيل',
-      deliveryDesc: desc.isNotEmpty ? desc : 'عرض خاص',
-      deliveryTime: time.contains('دقيقة') ? time : '$time دقيقة',
+      deliveryTitle: 'auto_key_282'.tr,
+      deliveryDesc: desc.isNotEmpty ? desc : 'auto_key_429'.tr,
+      deliveryTime: time.contains('minutes'.tr) ? time : 'auto_key_430'.tr,
       deliveryBy: 'Nisba',
       satisfactionRate: int.tryParse('${map['satisfaction'] ?? 90}') ?? 90,
       items: items,

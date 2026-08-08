@@ -45,7 +45,7 @@ class HomeDailyOffers extends StatelessWidget {
                     ),
                   ),
                   // Text(
-                  //   'عرض الكل',
+                  //   'view_all'.tr,
                   //   style: TextStyle(
                   //     color: primaryColor,
                   //     fontSize: 12.sp,
@@ -159,7 +159,7 @@ class HomeDailyOffers extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${product.oldPrice} ر.ق',
+                        'auto_key_403'.tr,
                         style: TextStyle(
                           color: onSurface.withValues(alpha: 0.45),
                           fontSize: 10.sp,
@@ -167,7 +167,7 @@ class HomeDailyOffers extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${product.price} ر.ق',
+                        'auto_key_404'.tr,
                         style: TextStyle(
                           color: primaryColor,
                           fontWeight: FontWeight.bold,
@@ -202,8 +202,8 @@ String _buildSavingsText(String priceStr, String oldPriceStr) {
   final price = double.tryParse(priceStr);
   final oldPrice = double.tryParse(oldPriceStr);
   if (price == null || oldPrice == null || oldPrice <= 0 || price >= oldPrice) {
-    return 'وفر';
+    return 'auto_key_405'.tr;
   }
   final savingsPercent = ((oldPrice - price) / oldPrice * 100).round();
-  return 'وفر\n$savingsPercent%';
+  return 'auto_key_406'.tr;
 }

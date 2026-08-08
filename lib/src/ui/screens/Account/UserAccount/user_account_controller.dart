@@ -16,7 +16,7 @@ class UserAccountController extends GetxController {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final birthDate = ''.obs;
-  final selectedGender = 'ذكر'.obs;
+  final selectedGender = 'male'.tr.obs;
   final isLoading = false.obs;
   final isSaving = false.obs;
 
@@ -41,7 +41,7 @@ class UserAccountController extends GetxController {
     emailController.text = user.email ?? '';
     birthDate.value = user.birthday ?? '';
     final g = user.gender.value.toLowerCase();
-    selectedGender.value = g == 'female' ? 'أنثى' : 'ذكر';
+    selectedGender.value = g == 'female' ? 'female'.tr : 'male'.tr;
   }
 
   Future<void> fetchProfile() async {
@@ -62,7 +62,7 @@ class UserAccountController extends GetxController {
             ? gender['value']?.toString() ?? ''
             : gender?.toString() ?? '';
         selectedGender.value =
-            genderValue.toLowerCase() == 'female' ? 'أنثى' : 'ذكر';
+            genderValue.toLowerCase() == 'female' ? 'female'.tr : 'male'.tr;
         try {
           storageHelper.saveUser(User.fromJson(map));
         } catch (_) {}
@@ -124,7 +124,7 @@ class UserAccountController extends GetxController {
           if (emailController.text.trim().isNotEmpty)
             'email': emailController.text.trim(),
           if (birthDate.value.isNotEmpty) 'birthday': birthDate.value,
-          'gender': selectedGender.value == 'أنثى' ? 'female' : 'male',
+          'gender': selectedGender.value == 'female'.tr ? 'female' : 'male',
         },
       );
       final data = ApiResult.ensureSuccess(res);
@@ -138,7 +138,7 @@ class UserAccountController extends GetxController {
       }
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم حفظ البيانات',
+            'auto_key_98'.tr,
       );
       Get.back();
     } on ApiException catch (e) {

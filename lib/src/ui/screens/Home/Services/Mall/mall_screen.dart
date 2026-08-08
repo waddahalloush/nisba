@@ -11,11 +11,11 @@ class MallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final section = _sectionFromArgs();
-    final name = section?.name.isNotEmpty == true ? section!.name : 'مولات';
+    final name = section?.name.isNotEmpty == true ? section!.name : 'auto_key_388'.tr;
     return BaseServiceScreen<MallController>(
       title: name,
-      subtitle: 'اكتشف أفضل $name القريبة منك — ثم تصفّح المتاجر داخل كل مول',
-      searchHint: 'ابحث عن مول...',
+      subtitle: 'auto_key_389'.tr,
+      searchHint: 'auto_key_390'.tr,
     );
   }
 

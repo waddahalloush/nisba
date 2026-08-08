@@ -1,6 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -16,7 +20,7 @@ class ReportScreen extends GetView<ReportController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -24,10 +28,10 @@ class ReportScreen extends GetView<ReportController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'التقارير',
+            'reports'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -81,19 +85,19 @@ class ReportScreen extends GetView<ReportController> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _TabChip(
-            label: 'شهري',
+            label: 'auto_key_661'.tr,
             isSelected: controller.selectedTab.value == 0,
             onTap: () => controller.selectTab(0),
           ),
           SizedBox(width: 6.w),
           _TabChip(
-            label: 'ربعى',
+            label: 'auto_key_662'.tr,
             isSelected: controller.selectedTab.value == 1,
             onTap: () => controller.selectTab(1),
           ),
           SizedBox(width: 6.w),
           _TabChip(
-            label: 'سنوى',
+            label: 'auto_key_663'.tr,
             isSelected: controller.selectedTab.value == 2,
             onTap: () => controller.selectTab(2),
           ),
@@ -130,7 +134,7 @@ class ReportScreen extends GetView<ReportController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'المبلغ الكلي',
+            'auto_key_664'.tr,
             style: TextStyle(
               fontSize: 13.sp,
               color: cs.onPrimary.withValues(alpha: 0.85),
@@ -139,7 +143,7 @@ class ReportScreen extends GetView<ReportController> {
           SizedBox(height: 4.h),
           Obx(
             () => Text(
-              '${controller.totalAmount.value.toStringAsFixed(2)} ر.ق',
+              'auto_key_665'.tr,
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -153,7 +157,7 @@ class ReportScreen extends GetView<ReportController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  '${controller.totalChange.value.toStringAsFixed(2)}% عن الشهر الماضي',
+                  'auto_key_666'.tr,
                   style: TextStyle(
                     fontSize: 11.sp,
                     color: cs.onPrimary.withValues(alpha: 0.8),
@@ -200,7 +204,7 @@ class ReportScreen extends GetView<ReportController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'نظرة عامة على الأداء',
+                      'auto_key_667'.tr,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: cs.onSurface,
@@ -208,7 +212,7 @@ class ReportScreen extends GetView<ReportController> {
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      'آخر 30 يوم',
+                      'auto_key_668'.tr,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: cs.onSurface.withValues(alpha: 0.5),
                       ),
@@ -242,15 +246,15 @@ class ReportScreen extends GetView<ReportController> {
                       ),
                       dropdownColor: cs.surface,
                       borderRadius: BorderRadius.circular(10.r),
-                      items: const [
-                        DropdownMenuItem(value: '7 يوم', child: Text('7 يوم')),
+                      items: [
+                        DropdownMenuItem(value: 'auto_key_669'.tr, child: Text('auto_key_669'.tr)),
                         DropdownMenuItem(
-                          value: '30 يوم',
-                          child: Text('30 يوم'),
+                          value: 'auto_key_658'.tr,
+                          child: Text('auto_key_658'.tr),
                         ),
                         DropdownMenuItem(
-                          value: '90 يوم',
-                          child: Text('90 يوم'),
+                          value: 'auto_key_670'.tr,
+                          child: Text('auto_key_670'.tr),
                         ),
                       ],
                       onChanged: (val) {
@@ -273,7 +277,7 @@ class ReportScreen extends GetView<ReportController> {
                 height: 180.h,
                 child: Center(
                   child: Text(
-                    'لا توجد بيانات للرسم',
+                    'auto_key_671'.tr,
                     style: TextStyle(
                       color: cs.onSurface.withValues(alpha: 0.4),
                     ),
@@ -398,21 +402,21 @@ class ReportScreen extends GetView<ReportController> {
     final metrics = [
       _MetricData(
         icon: Iconsax.discount_shape,
-        label: 'مجموع الخصومات',
+        label: 'auto_key_672'.tr,
         value: controller.discountsValue,
         change: controller.discountsChange,
         color: cs.primary,
       ),
       _MetricData(
         icon: Iconsax.shopping_bag,
-        label: 'قيمة التوفير',
+        label: 'auto_key_673'.tr,
         value: controller.savingsValue,
         change: controller.savingsChange,
         color: cs.primary,
       ),
       _MetricData(
         icon: Iconsax.medal_star,
-        label: 'عدد النقاط المكتسبة',
+        label: 'auto_key_674'.tr,
         value: controller.earnedPoints,
         change: controller.pointsChange,
         color: cs.primary,
@@ -420,7 +424,7 @@ class ReportScreen extends GetView<ReportController> {
       ),
       _MetricData(
         icon: Iconsax.shopping_cart,
-        label: 'عدد الطلبات المنجزة',
+        label: 'auto_key_675'.tr,
         value: controller.completedOrders,
         change: controller.ordersChange,
         color: cs.primary,
@@ -452,7 +456,7 @@ class ReportScreen extends GetView<ReportController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'تفاصيل الأشهر',
+          'auto_key_676'.tr,
           style: theme.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.onSurface,
@@ -477,7 +481,7 @@ class ReportScreen extends GetView<ReportController> {
               return Padding(
                 padding: EdgeInsets.all(16.r),
                 child: Text(
-                  'لا توجد تفاصيل',
+                  'auto_key_677'.tr,
                   style: TextStyle(
                     color: cs.onSurface.withValues(alpha: 0.45),
                   ),
@@ -533,7 +537,7 @@ class ReportScreen extends GetView<ReportController> {
                               ),
                             ),
                             Text(
-                              '${detail.orders} طلب',
+                              'auto_key_678'.tr,
                               style: TextStyle(
                                 fontSize: 10.sp,
                                 color: cs.onSurface.withValues(alpha: 0.45),
@@ -565,7 +569,7 @@ class ReportScreen extends GetView<ReportController> {
 
     return Obx(
       () => Text(
-        'جميع البيانات محدثة حتى اليوم ${controller.lastUpdate.value}',
+        'auto_key_679'.tr,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 10.sp,
@@ -675,7 +679,7 @@ class _MetricCard extends StatelessWidget {
                 () => Text(
                   metric.isInt
                       ? metric.value.value.toInt().toString()
-                      : '${metric.value.value.toStringAsFixed(2)} ر.ق',
+                      : 'auto_key_680'.tr,
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
@@ -699,7 +703,7 @@ class _MetricCard extends StatelessWidget {
             children: [
               Obx(
                 () => Text(
-                  '${metric.change.value.toStringAsFixed(2)}% عن الشهر الماضي',
+                  'auto_key_681'.tr,
                   style: TextStyle(
                     fontSize: 10.sp,
                     color: cs.onSurface.withValues(alpha: 0.4),

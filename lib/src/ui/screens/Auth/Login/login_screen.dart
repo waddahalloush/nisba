@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:nisba_app/src/configs/dimensions.dart';
 
 import '../../../../configs/api_response.dart';
@@ -20,7 +22,7 @@ class LoginScreen extends GetView<LoginController> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Directionality(
-          textDirection: TextDirection.rtl,
+          textDirection: Get.find<LocaleService>().textDirection,
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Column(

@@ -35,7 +35,7 @@ class RechargeWalletController extends GetxController {
   Future<void> proceed() async {
     final amount = double.tryParse(amountController.text.trim());
     if (amount == null || amount < minAmount) {
-      Get.snackbar('خطأ', 'الحد الأدنى للشحن هو ${minAmount.toInt()} ر.ق');
+      Get.snackbar('snackbar_error'.tr, 'auto_key_65'.tr);
       return;
     }
     isSubmitting.value = true;
@@ -58,18 +58,18 @@ class RechargeWalletController extends GetxController {
         return;
       }
       if (gateway == PaymentGatewayResult.dismissed) {
-        AppSnackbar.showInfo(message: 'الشحن لم يكتمل بعد');
+        AppSnackbar.showInfo(message: 'auto_key_66'.tr);
         return;
       }
       if (gateway == PaymentGatewayResult.unavailable) {
-        AppSnackbar.showError(message: 'تعذر فتح صفحة الدفع');
+        AppSnackbar.showError(message: 'auto_key_67'.tr);
         return;
       }
 
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم شحن المحفظة بنجاح',
+            : 'auto_key_68'.tr,
       );
     } on DioException catch (e) {
       log(e.toString());

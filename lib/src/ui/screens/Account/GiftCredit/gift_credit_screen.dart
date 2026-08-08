@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -16,7 +20,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -24,10 +28,10 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'إهداء رصيد',
+            'gift_credit'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -79,7 +83,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
                       SizedBox(width: 8.w),
                       Expanded(
                         child: Text(
-                          'المستلم: ${controller.recipientName.value}',
+                          'auto_key_37'.tr,
                           style: theme.textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: cs.onSurface,
@@ -127,7 +131,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
         () => Row(
           children: [
             _TabChip(
-              label: 'رقم الهاتف',
+              label: 'phone_number_hint'.tr,
               icon: Icons.mobile_screen_share,
               isSelected: controller.selectedTab.value == 0,
               onTap: () => controller.selectTab(0),
@@ -166,7 +170,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
           Assets.images.qrCode.image(width: 50, height: 50),
           SizedBox(height: 12.h),
           Text(
-            'اطلب من المستلم مسح الرمز',
+            'auto_key_38'.tr,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: cs.onSurface.withValues(alpha: 0.6),
             ),
@@ -254,7 +258,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
           SizedBox(width: 10.w),
           Expanded(
             child: Text(
-              'سيتم إرسال رسالة للمستلم تحتوي على رصيد الإهداء',
+              'auto_key_39'.tr,
               style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
             ),
           ),
@@ -270,7 +274,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'اختر المبلغ',
+          'auto_key_40'.tr,
           style: theme.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.onSurface,
@@ -284,7 +288,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
             children: [
               ...controller.presetAmounts.map(
                 (amount) => _AmountChip(
-                  label: '${amount.toInt()} ر.ق',
+                  label: 'auto_key_41'.tr,
                   isSelected: controller.selectedAmount.value == amount,
                   onTap: () => controller.selectAmount(amount),
                 ),
@@ -308,7 +312,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'ملاحظة (اختياري)',
+          'auto_key_42'.tr,
           style: theme.textTheme.bodySmall?.copyWith(
             color: cs.onSurface,
             fontWeight: FontWeight.bold,
@@ -333,7 +337,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
             maxLines: 2,
             style: theme.textTheme.bodyMedium?.copyWith(color: cs.onSurface),
             decoration: InputDecoration(
-              hintText: 'اكتب ملاحظة للمستلم...',
+              hintText: 'auto_key_43'.tr,
               hintStyle: TextStyle(
                 color: cs.onSurface.withValues(alpha: 0.35),
                 fontSize: 12.sp,
@@ -366,7 +370,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
           SizedBox(width: 10.w),
           Expanded(
             child: Text(
-              'عملية آمنة و سريعة \n رصيد الإهداء يصل فورا للمستلم',
+              'auto_key_44'.tr,
               style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface ),
             ),
           ),
@@ -395,7 +399,7 @@ class GiftCreditScreen extends GetView<GiftCreditController> {
             ),
           ),
           child: Text(
-            'التالي',
+            'next'.tr,
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
           ),
         ),

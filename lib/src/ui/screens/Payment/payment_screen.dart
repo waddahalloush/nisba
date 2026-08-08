@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
@@ -15,7 +19,7 @@ class PaymentScreen extends GetView<PaymentController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,10 +27,10 @@ class PaymentScreen extends GetView<PaymentController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'إتمام الدفع',
+            'auto_key_487'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -99,7 +103,7 @@ class PaymentScreen extends GetView<PaymentController> {
               ),
               SizedBox(width: 12.w),
               Text(
-                'ملخص الطلب',
+                'order_summary'.tr,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.onSurface,
@@ -118,7 +122,7 @@ class PaymentScreen extends GetView<PaymentController> {
               children: [
                 _InfoRow(
                   icon: Iconsax.shop,
-                  label: 'المتجر',
+                  label: 'auto_key_488'.tr,
                   value: controller.restaurantName,
                 ),
                 SizedBox(height: 8.h),
@@ -132,7 +136,7 @@ class PaymentScreen extends GetView<PaymentController> {
                 Icon(Iconsax.truck_fast, color: cs.primary, size: 16.sp),
                 SizedBox(width: 8.w),
                 Text(
-                  'طريقة الاستلام: ',
+                  'auto_key_489'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: cs.onSurface.withValues(alpha: 0.55),
@@ -194,7 +198,7 @@ class PaymentScreen extends GetView<PaymentController> {
                     child: Icon(Icons.close, color: cs.onSurface, size: 22.sp),
                   ),
                   Text(
-                    'اختر عنوان التوصيل',
+                    'auto_key_490'.tr,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: cs.onSurface,
@@ -212,14 +216,14 @@ class PaymentScreen extends GetView<PaymentController> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text('لا توجد عناوين محفوظة'),
+                        Text('auto_key_31'.tr),
                         SizedBox(height: 12.h),
                         TextButton(
                           onPressed: () {
                             Get.back();
                             Get.toNamed(AppRoutesNames.addresses);
                           },
-                          child: const Text('إضافة عنوان'),
+                          child: Text('auto_key_16'.tr),
                         ),
                       ],
                     ),
@@ -315,7 +319,7 @@ class PaymentScreen extends GetView<PaymentController> {
                     child: Icon(Icons.close, color: cs.onSurface, size: 22.sp),
                   ),
                   Text(
-                    'اختر السيارة',
+                    'auto_key_491'.tr,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: cs.onSurface,
@@ -333,14 +337,14 @@ class PaymentScreen extends GetView<PaymentController> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text('لا توجد سيارات محفوظة'),
+                        Text('auto_key_492'.tr),
                         SizedBox(height: 12.h),
                         TextButton(
                           onPressed: () {
                             Get.back();
                             Get.toNamed(AppRoutesNames.myCars);
                           },
-                          child: const Text('إضافة سيارة'),
+                          child: Text('auto_key_493'.tr),
                         ),
                       ],
                     ),
@@ -427,7 +431,7 @@ class PaymentScreen extends GetView<PaymentController> {
               SizedBox(width: 12.w),
               Expanded(
                 child: Text(
-                  'عنوان التوصيل',
+                  'auto_key_494'.tr,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.onSurface,
@@ -447,7 +451,7 @@ class PaymentScreen extends GetView<PaymentController> {
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Text(
-                    'اختيار',
+                    'auto_key_495'.tr,
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
@@ -465,7 +469,7 @@ class PaymentScreen extends GetView<PaymentController> {
             () => Text(
               controller.deliveryAddress.value.isNotEmpty
                   ? controller.deliveryAddress.value
-                  : 'اختر عنواناً للتوصيل',
+                  : 'auto_key_496'.tr,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.75),
                 fontSize: 13.sp,
@@ -511,7 +515,7 @@ class PaymentScreen extends GetView<PaymentController> {
               SizedBox(width: 12.w),
               Expanded(
                 child: Text(
-                  'السيارة',
+                  'auto_key_497'.tr,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.onSurface,
@@ -531,7 +535,7 @@ class PaymentScreen extends GetView<PaymentController> {
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Text(
-                    'اختيار',
+                    'auto_key_495'.tr,
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
@@ -549,7 +553,7 @@ class PaymentScreen extends GetView<PaymentController> {
             () => Text(
               controller.selectedCarLabel.value.isNotEmpty
                   ? controller.selectedCarLabel.value
-                  : 'اختر سيارة للاستلام',
+                  : 'auto_key_498'.tr,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.75),
                 fontSize: 13.sp,
@@ -599,7 +603,7 @@ class PaymentScreen extends GetView<PaymentController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'رصيدك: ${controller.availablePoints.value.toStringAsFixed(0)} نقطة',
+                        'auto_key_499'.tr,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: cs.onSurface,
@@ -608,8 +612,8 @@ class PaymentScreen extends GetView<PaymentController> {
                       SizedBox(height: 4.h),
                       Text(
                         controller.earnedPoints.value > 0
-                            ? 'ستحصل على حوالي ${controller.earnedPoints.value.toStringAsFixed(2)} نقطة من هذا الطلب'
-                            : 'النقاط تُحتسب بعد الدفع حسب عمولة المتجر',
+                            ? 'auto_key_500'.tr
+                            : 'auto_key_501'.tr,
                         style: TextStyle(
                           fontSize: 11.sp,
                           color: cs.onSurface.withValues(alpha: 0.55),
@@ -622,7 +626,7 @@ class PaymentScreen extends GetView<PaymentController> {
             ),
             SizedBox(height: 10.h),
             Text(
-              'للدفع بالنقاط اختر «الدفع بالنقاط» — يلزم حوالي ${controller.pointsRequiredToPay.toStringAsFixed(0)} نقطة لكامل الفاتورة',
+              'auto_key_502'.tr,
               style: TextStyle(
                 fontSize: 11.sp,
                 color: cs.primary,
@@ -656,7 +660,7 @@ class PaymentScreen extends GetView<PaymentController> {
           Padding(
             padding: EdgeInsets.fromLTRB(14.w, 14.h, 14.w, 0),
             child: Text(
-              'طريقة الدفع',
+              'payment_method'.tr,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -766,52 +770,52 @@ class PaymentScreen extends GetView<PaymentController> {
         child: Column(
           children: [
             _PriceRow(
-              label: 'المجموع الفرعي',
-              value: '${controller.subtotal.value.toStringAsFixed(2)} ريال',
+              label: 'subtotal'.tr,
+              value: 'auto_key_503'.tr,
             ),
             SizedBox(height: 6.h),
             _PriceRow(
-              label: 'رسوم التوصيل',
-              value: '${controller.deliveryFee.value.toStringAsFixed(2)} ريال',
+              label: 'delivery_fee'.tr,
+              value: 'auto_key_504'.tr,
             ),
             if (controller.couponDiscount.value > 0) ...[
               SizedBox(height: 6.h),
               _PriceRow(
-                label: 'خصم القسيمة',
+                label: 'auto_key_159'.tr,
                 value:
-                    '- ${controller.couponDiscount.value.toStringAsFixed(2)} ريال',
+                    'auto_key_505'.tr,
                 isDiscount: true,
               ),
             ],
             if (controller.offerDiscount.value > 0) ...[
               SizedBox(height: 6.h),
               _PriceRow(
-                label: 'خصم العرض',
+                label: 'auto_key_506'.tr,
                 value:
-                    '- ${controller.offerDiscount.value.toStringAsFixed(2)} ريال',
+                    'auto_key_507'.tr,
                 isDiscount: true,
               ),
             ],
             if (controller.customerDiscount.value > 0) ...[
               SizedBox(height: 6.h),
               _PriceRow(
-                label: 'خصم العميل',
+                label: 'auto_key_157'.tr,
                 value:
-                    '- ${controller.customerDiscount.value.toStringAsFixed(2)} ريال',
+                    'auto_key_508'.tr,
                 isDiscount: true,
               ),
             ],
             if (controller.earnedPoints.value > 0) ...[
               SizedBox(height: 6.h),
               _PriceRow(
-                label: 'نقاط مكتسبة (تقدير)',
+                label: 'auto_key_509'.tr,
                 value: controller.earnedPoints.value.toStringAsFixed(2),
               ),
             ],
             Divider(color: cs.outlineVariant.withValues(alpha: 0.5)),
             _PriceRow(
-              label: 'الإجمالي',
-              value: '${controller.total.toStringAsFixed(2)} ريال',
+              label: 'auto_key_162'.tr,
+              value: 'auto_key_510'.tr,
               isTotal: true,
             ),
           ],
@@ -844,7 +848,7 @@ class PaymentScreen extends GetView<PaymentController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'ادفع الآن',
+                  'auto_key_511'.tr,
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
@@ -852,7 +856,7 @@ class PaymentScreen extends GetView<PaymentController> {
                 ),
                 SizedBox(width: 8.w),
                 Text(
-                  '${controller.total.toStringAsFixed(2)} ريال',
+                  'auto_key_510'.tr,
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,

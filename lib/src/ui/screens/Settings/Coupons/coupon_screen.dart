@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -15,7 +19,7 @@ class CouponScreen extends GetView<CouponController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,13 +27,13 @@ class CouponScreen extends GetView<CouponController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'قسائم التوفير',
+                'auto_key_593'.tr,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.primary,
@@ -37,7 +41,7 @@ class CouponScreen extends GetView<CouponController> {
               ),
               SizedBox(height: 2.h),
               Text(
-                'اختر القسيمة الأنسب لاحتياجاتك وابدأ التوفير الآن.',
+                'auto_key_594'.tr,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: cs.onSurface,
                   fontSize: 10.sp,
@@ -58,7 +62,7 @@ class CouponScreen extends GetView<CouponController> {
 
               // ── Section title ──
               Text(
-                'القسائم المتاحة',
+                'auto_key_595'.tr,
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.onSurface,
@@ -158,7 +162,7 @@ class CouponScreen extends GetView<CouponController> {
               Icon(Iconsax.ticket_discount, color: cs.primary, size: 20.sp),
               SizedBox(width: 8.w),
               Text(
-                'ولديك قسيمة أخرى؟',
+                'auto_key_596'.tr,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.onSurface,
@@ -168,7 +172,7 @@ class CouponScreen extends GetView<CouponController> {
           ),
           SizedBox(height: 8.h),
           Text(
-            'أدخل رمز القسيمة الخاصة بك للحصول على خصم إضافي.',
+            'auto_key_597'.tr,
             style: theme.textTheme.bodySmall?.copyWith(
               color: cs.onSurface.withValues(alpha: 0.5),
             ),
@@ -183,7 +187,7 @@ class CouponScreen extends GetView<CouponController> {
                     color: cs.onSurface,
                   ),
                   decoration: InputDecoration(
-                    hintText: 'أدخل رمز القسيمة',
+                    hintText: 'auto_key_598'.tr,
                     hintStyle: TextStyle(
                       color: cs.onSurface.withValues(alpha: 0.3),
                       fontSize: 12.sp,
@@ -215,7 +219,7 @@ class CouponScreen extends GetView<CouponController> {
                     ),
                   ),
                   child: Text(
-                    'تطبيق',
+                    'apply'.tr,
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
@@ -247,16 +251,16 @@ class _CouponCard extends StatelessWidget {
 
     // تحديد الأيقونة المناسبة للبطاقة بناءً على العنوان
     IconData couponIcon = Iconsax.percentage_square;
-    String prefixText = 'وفر';
+    String prefixText = 'auto_key_405'.tr;
     String discountValue = '15%';
 
-    if (coupon.title.contains('شحن')) {
+    if (coupon.title.contains('auto_key_599'.tr)) {
       couponIcon = Iconsax.truck_fast;
-      prefixText = 'شحن مجاني';
+      prefixText = 'auto_key_600'.tr;
       discountValue = '100%';
-    } else if (coupon.title.contains('عروض')) {
+    } else if (coupon.title.contains('auto_key_601'.tr)) {
       couponIcon = Iconsax.gift;
-      prefixText = 'وفر';
+      prefixText = 'auto_key_405'.tr;
       discountValue = '20%';
     }
 
@@ -378,7 +382,7 @@ class _CouponCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'الحد الأدنى للطلب',
+                        'auto_key_602'.tr,
                         style: TextStyle(fontSize: 8.sp, color: grayTextColor),
                       ),
                       Text(
@@ -411,11 +415,11 @@ class _CouponCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'ينتهي خلال',
+                        'auto_key_603'.tr,
                         style: TextStyle(fontSize: 8.sp, color: grayTextColor),
                       ),
                       Text(
-                        coupon.expiry.replaceAll('ينتهي خلال ', ''),
+                        coupon.expiry.replaceAll('auto_key_604'.tr, ''),
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.bold,
@@ -442,7 +446,7 @@ class _CouponCard extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                   ),
                   child: Text(
-                    'استخدم القسيمة',
+                    'auto_key_605'.tr,
                     style: TextStyle(
                       fontSize: 11.sp,
                       fontWeight: FontWeight.bold,

@@ -42,8 +42,7 @@ class CheckoutAddress {
     required this.details,
   });
 
-  String get display =>
-      [title, details].where((e) => e.isNotEmpty).join(' — ');
+  String get display => [title, details].where((e) => e.isNotEmpty).join(' — ');
 
   factory CheckoutAddress.fromApiMap(Map raw) {
     final map = Map<String, dynamic>.from(raw);
@@ -51,10 +50,10 @@ class CheckoutAddress {
       map['street']?.toString() ?? '',
       map['info']?.toString() ?? '',
       if ((map['building_number']?.toString() ?? '').isNotEmpty)
-        'مبنى ${map['building_number']}',
+        '${'auto_key_476'.tr} ${map['building_number']}',
       if ((map['apartment_number']?.toString() ?? '').isNotEmpty)
-        'شقة ${map['apartment_number']}',
-    ].where((e) => e.isNotEmpty).join('، ');
+        '${'auto_key_477'.tr} ${map['apartment_number']}',
+    ].where((e) => e.isNotEmpty).join('auto_key_478'.tr);
     return CheckoutAddress(
       id: int.tryParse(map['id']?.toString() ?? '') ?? 0,
       title: map['name']?.toString() ?? '',
@@ -81,11 +80,7 @@ class CheckoutCar {
     final plate = map['plate_number']?.toString() ?? '';
     return CheckoutCar(
       id: int.tryParse(map['id']?.toString() ?? '') ?? 0,
-      label: [
-        brand,
-        color,
-        plate,
-      ].where((e) => e.isNotEmpty).join(' • '),
+      label: [brand, color, plate].where((e) => e.isNotEmpty).join(' • '),
     );
   }
 }
@@ -96,7 +91,7 @@ class PaymentController extends GetxController {
   final CartStorage cartStorage = CartStorage();
   final GetStorageHelper storage = Get.find();
 
-  final selectedPayment = 'بطاقة بنكية'.obs;
+  final selectedPayment = 'auto_key_479'.tr.obs;
   final isPaying = false.obs;
 
   final restaurantName = ''.obs;
@@ -132,38 +127,37 @@ class PaymentController extends GetxController {
       deliveryType.value == 'to_car' || deliveryType.value == 'throw_in';
 
   String get deliveryTypeLabel =>
-      CartController.deliveryTypeMeta[deliveryType.value] ??
-      deliveryType.value;
+      CartController.deliveryTypeMeta[deliveryType.value] ?? deliveryType.value;
 
   double get pointsRequiredToPay => OrderPricing.pointsRequiredToPay(
-        grandTotal: grandTotal.value,
-        conversionRatePointMoney: conversionRate.value,
-      );
+    grandTotal: grandTotal.value,
+    conversionRatePointMoney: conversionRate.value,
+  );
 
   double get total => grandTotal.value;
 
   final paymentMethods = <PaymentMethod>[
     PaymentMethod(
       icon: Assets.images.payVisa.path,
-      label: 'بطاقة بنكية',
+      label: 'auto_key_479'.tr,
       subtitle: 'Visa, Mastercard — SkipCash',
       apiValue: 'card',
     ),
     PaymentMethod(
       icon: Assets.images.payGoogle.path,
-      label: 'المحفظة الإلكترونية',
-      subtitle: 'محفظة نسبة',
+      label: 'electronic_wallet'.tr,
+      subtitle: 'auto_key_480'.tr,
       apiValue: 'wallet',
     ),
     PaymentMethod(
       icon: Assets.images.paypal.path,
-      label: 'الدفع بالنقاط',
-      subtitle: 'خصم كامل الفاتورة بالنقاط',
+      label: 'auto_key_481'.tr,
+      subtitle: 'auto_key_482'.tr,
       apiValue: 'point',
     ),
     PaymentMethod(
       icon: Assets.images.payOnDeliver.path,
-      label: 'الدفع عند الاستلام',
+      label: 'auto_key_483'.tr,
       apiValue: 'cash',
     ),
   ];
@@ -197,17 +191,17 @@ class PaymentController extends GetxController {
 
       if (_selectedApiPayment == 'point' &&
           availablePoints.value < pointsRequiredToPay) {
-        AppSnackbar.showError(message: 'ليس لديك نقاط كافية لدفع الفاتورة');
+        AppSnackbar.showError(message: 'auto_key_484'.tr);
         return;
       }
 
       if (scannedOrderId == null) {
         if (needsAddress && selectedAddressId.value == null) {
-          AppSnackbar.showError(message: 'يرجى اختيار عنوان التوصيل');
+          AppSnackbar.showError(message: 'auto_key_143'.tr);
           return;
         }
         if (needsCar && selectedCarId.value == null) {
-          AppSnackbar.showError(message: 'يرجى اختيار السيارة');
+          AppSnackbar.showError(message: 'auto_key_144'.tr);
           return;
         }
       }
@@ -232,18 +226,18 @@ class PaymentController extends GetxController {
           return;
         }
         if (gateway == PaymentGatewayResult.dismissed) {
-          AppSnackbar.showInfo(message: 'الدفع لم يكتمل بعد');
+          AppSnackbar.showInfo(message: 'auto_key_485'.tr);
           return;
         }
         if (gateway == PaymentGatewayResult.unavailable) {
-          AppSnackbar.showError(message: 'تعذر فتح صفحة الدفع');
+          AppSnackbar.showError(message: 'auto_key_67'.tr);
           return;
         }
 
         AppSnackbar.showSuccess(
           message: ApiResult.message(payRes).isNotEmpty
               ? ApiResult.message(payRes)
-              : 'تم الدفع بنجاح',
+              : 'auto_key_486'.tr,
         );
         Get.offNamedUntil(AppRoutesNames.dashboard, (route) => false);
         return;
@@ -264,7 +258,8 @@ class PaymentController extends GetxController {
         }
       }
 
-      final mid = marketId ??
+      final mid =
+          marketId ??
           (Get.arguments is Map
               ? int.tryParse(
                   (Get.arguments as Map)['market_id']?.toString() ?? '',
@@ -272,7 +267,7 @@ class PaymentController extends GetxController {
               : null);
       final products = cartStorage.buildOrderProducts(marketId: mid);
       if (mid == null || products.isEmpty) {
-        AppSnackbar.showInfo(message: 'السلة فارغة');
+        AppSnackbar.showInfo(message: 'auto_key_170'.tr);
         return;
       }
 
@@ -303,10 +298,10 @@ class PaymentController extends GetxController {
           return;
         }
         if (gateway == PaymentGatewayResult.unavailable) {
-          AppSnackbar.showError(message: 'تعذر فتح صفحة الدفع');
+          AppSnackbar.showError(message: 'auto_key_67'.tr);
           return;
         }
-        AppSnackbar.showInfo(message: 'الطلب أُنشئ وبانتظار إتمام الدفع');
+        AppSnackbar.showInfo(message: 'auto_key_145'.tr);
         Get.offNamedUntil(AppRoutesNames.dashboard, (route) => false);
         return;
       }
@@ -315,7 +310,7 @@ class PaymentController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم الدفع بنجاح',
+            : 'auto_key_486'.tr,
       );
       Get.offNamedUntil(AppRoutesNames.dashboard, (route) => false);
     } on DioException catch (e) {
@@ -353,7 +348,8 @@ class PaymentController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    conversionRate.value = double.tryParse(
+    conversionRate.value =
+        double.tryParse(
           storage.getUser?.country.conversionRatePointMoney ?? '',
         ) ??
         1;
@@ -367,7 +363,9 @@ class PaymentController extends GetxController {
       if (preAddress != null) selectedAddressId.value = preAddress;
 
       scannedOrderId = int.tryParse(
-        args['order_id']?.toString() ?? args['pending_order_id']?.toString() ?? '',
+        args['order_id']?.toString() ??
+            args['pending_order_id']?.toString() ??
+            '',
       );
 
       final order = args['order'];
@@ -400,8 +398,7 @@ class PaymentController extends GetxController {
       }
     } else {
       _fetchOrderInfo();
-      if (scannedOrderId != null &&
-          (args is! Map || args['order'] is! Map)) {
+      if (scannedOrderId != null && (args is! Map || args['order'] is! Map)) {
         _hydratePendingOrder(scannedOrderId!);
       }
     }

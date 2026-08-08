@@ -35,7 +35,7 @@ class BookingOrderSubmit {
 
     switch (gateway) {
       case PaymentGatewayResult.paid:
-        AppSnackbar.showSuccess(message: 'تم الدفع بنجاح');
+        AppSnackbar.showSuccess(message: 'auto_key_486'.tr);
         Get.back();
         return true;
       case PaymentGatewayResult.notNeeded:
@@ -47,12 +47,12 @@ class BookingOrderSubmit {
         return true;
       case PaymentGatewayResult.dismissed:
         AppSnackbar.showInfo(
-          message: 'تم إنشاء الحجز — أكمل الدفع لاحقاً من الطلبات',
+          message: 'auto_key_692'.tr,
         );
         Get.back();
         return false;
       case PaymentGatewayResult.unavailable:
-        AppSnackbar.showError(message: 'تعذر فتح صفحة الدفع');
+        AppSnackbar.showError(message: 'auto_key_67'.tr);
         return false;
     }
   }

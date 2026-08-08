@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -42,7 +43,7 @@ class DeliveryInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'وقت التوصيل',
+                    'auto_key_438'.tr,
                     style: textTheme.labelSmall?.copyWith(
                       color: cs.onSurface.withValues(alpha: 0.4),
                       fontSize: 9.sp,
@@ -72,7 +73,7 @@ class DeliveryInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'التوصيل بواسطة',
+                    'auto_key_439'.tr,
                     style: textTheme.labelSmall?.copyWith(
                       color: cs.onSurface.withValues(alpha: 0.4),
                       fontSize: 9.sp,
@@ -106,7 +107,7 @@ class DeliveryInfo extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'نسبة رضا العملاء',
+                    'auto_key_440'.tr,
                     style: textTheme.labelSmall?.copyWith(
                       color: cs.onSurface.withValues(alpha: 0.4),
                       fontSize: 9.sp,

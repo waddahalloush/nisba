@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -16,7 +20,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -24,13 +28,13 @@ class UserAccountScreen extends GetView<UserAccountController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'معلومات الحساب',
+                'auto_key_5'.tr,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.primary,
@@ -38,7 +42,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
               ),
               SizedBox(height: 2.h),
               Text(
-                'قم بتحديث معلوماتك الشخصية',
+                'auto_key_99'.tr,
                 style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
               ),
             ],
@@ -60,32 +64,32 @@ class UserAccountScreen extends GetView<UserAccountController> {
                 // ── Input fields ──
                 _buildInputCard(
                   theme,
-                  label: 'الاسم الأول',
+                  label: 'first_name'.tr,
                   controller: controller.firstNameController,
                   icon: Iconsax.user,
-                  validator: (v) => v!.isEmpty ? 'الاسم الأول مطلوب' : null,
+                  validator: (v) => v!.isEmpty ? 'auto_key_100'.tr : null,
                 ),
                 SizedBox(height: 12.h),
 
                 _buildInputCard(
                   theme,
-                  label: 'اسم العائلة',
+                  label: 'last_name'.tr,
                   controller: controller.lastNameController,
                   icon: Iconsax.user,
-                  validator: (v) => v!.isEmpty ? 'اسم العائلة مطلوب' : null,
+                  validator: (v) => v!.isEmpty ? 'auto_key_101'.tr : null,
                 ),
                 SizedBox(height: 12.h),
 
                 _buildInputCard(
                   theme,
-                  label: 'البريد الإلكتروني',
+                  label: 'email'.tr,
                   controller: controller.emailController,
                   icon: Iconsax.sms,
                   keyboardType: TextInputType.emailAddress,
                   validator: (v) {
-                    if (v!.isEmpty) return 'البريد الإلكتروني مطلوب';
+                    if (v!.isEmpty) return 'email_is_required'.tr;
                     if (!GetUtils.isEmail(v)) {
-                      return 'أدخل بريدًا صحيحًا';
+                      return 'auto_key_93'.tr;
                     }
                     return null;
                   },
@@ -254,7 +258,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'تاريخ الميلاد',
+                      'date_of_birth'.tr,
                       style: TextStyle(color: cs.onSurface, fontSize: 12.sp),
                     ),
                     SizedBox(height: 4.h),
@@ -295,7 +299,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'الجنس',
+            'gender'.tr,
             style: TextStyle(
               color: cs.onSurface.withValues(alpha: 0.45),
               fontSize: 12.sp,
@@ -307,19 +311,19 @@ class UserAccountScreen extends GetView<UserAccountController> {
               children: [
                 Expanded(
                   child: _GenderOption(
-                    label: 'ذكر',
+                    label: 'male'.tr,
                     biologicalIcon: Icons.male_rounded,
-                    isSelected: controller.selectedGender.value == 'ذكر',
-                    onTap: () => controller.selectGender('ذكر'),
+                    isSelected: controller.selectedGender.value == 'male'.tr,
+                    onTap: () => controller.selectGender('male'.tr),
                   ),
                 ),
                 SizedBox(width: 12.w),
                 Expanded(
                   child: _GenderOption(
-                    label: 'أنثى',
+                    label: 'female'.tr,
                     biologicalIcon: Icons.female_rounded,
-                    isSelected: controller.selectedGender.value == 'أنثى',
-                    onTap: () => controller.selectGender('أنثى'),
+                    isSelected: controller.selectedGender.value == 'female'.tr,
+                    onTap: () => controller.selectGender('female'.tr),
                   ),
                 ),
               ],
@@ -335,13 +339,13 @@ class UserAccountScreen extends GetView<UserAccountController> {
       children: [
         _SecurityActionCard(
           icon: Iconsax.sms,
-          label: 'تغيير البريد الإلكتروني',
+          label: 'change_email'.tr,
           onTap: () => Get.toNamed(AppRoutesNames.changeEmail),
         ),
         SizedBox(height: 12.h),
         _SecurityActionCard(
           icon: Iconsax.lock_1,
-          label: 'تغيير كلمة مرور الحساب',
+          label: 'auto_key_79'.tr,
           onTap: () => Get.toNamed(AppRoutesNames.changeAccountPassword),
         ),
       ],
@@ -365,7 +369,7 @@ class UserAccountScreen extends GetView<UserAccountController> {
           ),
         ),
         child: Text(
-          'تم',
+          'auto_key_102'.tr,
           style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
         ),
       ),

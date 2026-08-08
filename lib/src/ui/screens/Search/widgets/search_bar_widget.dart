@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/ui/screens/Search/search_controller.dart';
 
@@ -20,13 +22,13 @@ class SearchBarWidget extends GetView<SearchhController> {
       ),
       child: TextField(
         controller: controller.searchTextController,
-        textDirection: TextDirection.rtl,
+        textDirection: Get.find<LocaleService>().textDirection,
         textAlign: TextAlign.right,
         style: theme.textTheme.bodyMedium?.copyWith(color: cs.onSurface),
         onChanged: controller.onSearchChanged,
         onSubmitted: controller.onSearchSubmitted,
         decoration: InputDecoration(
-          hintText: 'ابحث عن مطعم أو شريك',
+          hintText: 'auto_key_552'.tr,
           hintStyle: theme.textTheme.bodyMedium?.copyWith(
             color: cs.onSurface.withValues(alpha: 0.4),
           ),

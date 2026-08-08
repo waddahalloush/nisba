@@ -36,7 +36,7 @@ class ReportController extends GetxController {
   final lastUpdate = ''.obs;
   final isLoading = false.obs;
 
-  final chartPeriod = '30 يوم'.obs;
+  final chartPeriod = 'auto_key_658'.tr.obs;
   final chartSpots = <FlSpot>[].obs;
   final monthDetails = <MonthDetail>[].obs;
 
@@ -55,9 +55,9 @@ class ReportController extends GetxController {
   void selectTab(int index) {
     selectedTab.value = index;
     chartPeriod.value = switch (index) {
-      1 => 'ربع سنوي',
-      2 => 'سنوي',
-      _ => '30 يوم',
+      1 => 'auto_key_659'.tr,
+      2 => 'auto_key_660'.tr,
+      _ => 'auto_key_658'.tr,
     };
     fetchReports();
   }
@@ -138,7 +138,7 @@ class ReportController extends GetxController {
   String _nowLabel() {
     final now = DateTime.now();
     final hour = now.hour > 12 ? now.hour - 12 : (now.hour == 0 ? 12 : now.hour);
-    final period = now.hour >= 12 ? 'م' : 'ص';
+    final period = now.hour >= 12 ? 'auto_key_415'.tr : 'auto_key_416'.tr;
     return '$hour:${now.minute.toString().padLeft(2, '0')} $period';
   }
 }

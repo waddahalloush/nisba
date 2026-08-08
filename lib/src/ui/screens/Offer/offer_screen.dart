@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:nisba_app/src/configs/dimensions.dart';
 
 import 'offer_controller.dart';
@@ -16,7 +18,7 @@ class OfferScreen extends GetView<OfferController> {
     final textTheme = theme.textTheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         body: SingleChildScrollView(
@@ -60,7 +62,7 @@ class OfferScreen extends GetView<OfferController> {
                           clipBehavior: Clip.none,
                           children: [
                             Text(
-                              'عروض بالقرب منك',
+                              'auto_key_431'.tr,
                               style: textTheme.headlineSmall?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 color: cs.onSurface,
@@ -71,7 +73,7 @@ class OfferScreen extends GetView<OfferController> {
                         ),
                         SizedBox(height: 6.h),
                         Text(
-                          'عروض حصرية بأفضل الأسعار وتوصيل سريع',
+                          'auto_key_432'.tr,
                           style: textTheme.bodySmall?.copyWith(
                             color: cs.onSurface.withValues(alpha: 0.45),
                             fontSize: 11.sp,
@@ -111,7 +113,7 @@ class OfferScreen extends GetView<OfferController> {
                               ),
                               SizedBox(height: 12.h),
                               Text(
-                                'لا توجد عروض حالياً لهذه الفئة',
+                                'auto_key_433'.tr,
                                 style: textTheme.bodyMedium?.copyWith(
                                   color: cs.onSurface.withValues(alpha: 0.4),
                                 ),
@@ -194,7 +196,7 @@ class OfferScreen extends GetView<OfferController> {
               ),
               SizedBox(width: 10.w),
               Text(
-                'العروض',
+                'auto_key_189'.tr,
                 style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.primary,
@@ -232,7 +234,7 @@ class OfferScreen extends GetView<OfferController> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'التوصيل إلى',
+                      'auto_key_434'.tr,
                       style: textTheme.labelSmall?.copyWith(
                         color: cs.onSurface.withValues(alpha: 0.4),
                         fontSize: 8.sp,

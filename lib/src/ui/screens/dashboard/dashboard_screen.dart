@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
@@ -28,7 +30,7 @@ class DashboardScreen extends GetView<DashboardController> {
     final primaryColor = theme.colorScheme.primary;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Obx(() => _tabs[controller.currentIndex.value]),
@@ -95,26 +97,26 @@ class DashboardScreen extends GetView<DashboardController> {
                     _buildTabItem(
                       context,
                       index: 0,
-                      label: 'الرئيسية',
+                      label: 'home'.tr,
                       icon: Iconsax.home_1,
                     ),
                     _buildTabItem(
                       context,
                       index: 1,
-                      label: 'الطلبات',
+                      label: 'orders'.tr,
                       icon: Iconsax.bag_24,
                     ),
                     SizedBox(width: 45.w),
                     _buildTabItem(
                       context,
                       index: 3,
-                      label: 'بحث',
+                      label: 'auto_key_177'.tr,
                       icon: Iconsax.search_normal_14,
                     ),
                     _buildTabItem(
                       context,
                       index: 4,
-                      label: 'المزيد',
+                      label: 'auto_key_178'.tr,
                       icon: Icons.more_horiz_rounded,
                       onTap: () => Get.toNamed(AppRoutesNames.appSetting),
                     ),

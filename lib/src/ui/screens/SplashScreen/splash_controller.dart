@@ -75,9 +75,9 @@ class SplashController extends GetxController {
       PopScope(
         canPop: false,
         child: AlertDialog(
-          title: const Text('يتوفر تحديث جديد'),
-          content: const Text(
-            'يرجى تحديث التطبيق إلى أحدث إصدار للمتابعة في استخدام التطبيق.',
+          title: Text('auto_key_688'.tr),
+          content: Text(
+            'auto_key_689'.tr,
           ),
           actions: [
             TextButton(
@@ -88,7 +88,7 @@ class SplashController extends GetxController {
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 }
               },
-              child: const Text('تحديث الآن'),
+              child: Text('auto_key_690'.tr),
             ),
           ],
         ),

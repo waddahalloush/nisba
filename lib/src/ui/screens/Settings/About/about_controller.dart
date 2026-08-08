@@ -6,8 +6,8 @@ class AboutController extends GetxController {
   final email = 'support@yourapp.com'.obs;
   final phone = '+974 41 123 456'.obs;
   final whatsapp = '+974 41 123 456'.obs;
-  final address = 'الدوحة، قطر'.obs;
-  final workingHours = 'يومياً من 9 صباحاً حتى 11 مساءً'.obs;
+  final address = 'auto_key_556'.tr.obs;
+  final workingHours = 'auto_key_557'.tr.obs;
 
   void openEmail() async {
     final uri = Uri.parse('mailto:${email.value}');

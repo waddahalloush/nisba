@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +18,7 @@ class PrivacyScreen extends GetView<PrivacyController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -22,10 +26,10 @@ class PrivacyScreen extends GetView<PrivacyController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(backIconData(context), color: cs.onSurface),
           ),
           title: Text(
-            'الشروط و الخدمات',
+            'auto_key_616'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -89,7 +93,7 @@ class PrivacyScreen extends GetView<PrivacyController> {
           SizedBox(width: 12.w),
           Expanded(
             child: Text(
-              'مرحباً بك في مركز المساعدة. تصفح الأقسام أدناه للتعرف على سياسات وشروط استخدام تطبيق نسبة.',
+              'auto_key_617'.tr,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.65),
               ),

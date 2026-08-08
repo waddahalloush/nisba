@@ -36,14 +36,14 @@ class OrdersTabBar extends StatelessWidget {
           children: [
             _buildTab(
               context,
-              title: 'الحالية',
+              title: 'auto_key_462'.tr,
               index: 0,
               cs: cs,
               theme: theme,
             ),
             _buildTab(
               context,
-              title: 'السابقة',
+              title: 'auto_key_463'.tr,
               index: 1,
               cs: cs,
               theme: theme,

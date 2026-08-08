@@ -29,7 +29,7 @@ class ChangeEmailController extends GetxController {
   Map<String, dynamic>? _otpIdentity() {
     final user = storageHelper.getUser;
     if (user == null) {
-      AppSnackbar.showError(message: 'تعذر تحميل بيانات المستخدم');
+      AppSnackbar.showError(message: 'auto_key_75'.tr);
       return null;
     }
     return {
@@ -54,7 +54,7 @@ class ChangeEmailController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم إرسال رمز التحقق',
+            : 'auto_key_76'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -89,7 +89,7 @@ class ChangeEmailController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تغيير البريد الإلكتروني',
+            : 'auto_key_90'.tr,
       );
       Get.back();
     } on ApiException catch (e) {

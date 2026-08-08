@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -113,8 +114,8 @@ class RestaurantCard extends StatelessWidget {
                       SizedBox(width: 2.w),
                       Text(
                         partner.location.isNotEmpty
-                            ? '${partner.location} · ${partner.distanceKm.toStringAsFixed(1)} كم'
-                            : '${partner.distanceKm.toStringAsFixed(1)} كم',
+                            ? 'auto_key_551'.tr
+                            : 'auto_key_550'.tr,
                         style: theme.textTheme.headlineSmall?.copyWith(
                           fontSize: 8.sp,
                         ),

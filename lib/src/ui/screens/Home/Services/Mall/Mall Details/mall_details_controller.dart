@@ -63,7 +63,7 @@ class MallDetailsController extends GetxController {
   final InternetConnectionChecker connectionChecker = Get.find();
   final GetStorageHelper storageHelper = Get.find();
 
-  final selectedTab = 'نظرة عامة'.obs;
+  final selectedTab = 'auto_key_391'.tr.obs;
   final isLoading = false.obs;
   final errorMessage = ''.obs;
 
@@ -80,27 +80,27 @@ class MallDetailsController extends GetxController {
   final aboutText = ''.obs;
 
   final tabs = <String>[
-    'نظرة عامة',
-    'المتاجر',
-    'المطاعم',
+    'auto_key_391'.tr,
+    'auto_key_377'.tr,
+    'auto_key_179'.tr,
   ];
 
   final infoCards = <_InfoCard>[].obs;
   final actions = <String>[
-    'خدمة العملاء',
-    'خريطة المول',
-    'العروض والفعاليات',
-    'الوصول للمول',
+    'auto_key_354'.tr,
+    'auto_key_353'.tr,
+    'auto_key_352'.tr,
+    'auto_key_351'.tr,
   ];
 
   final featuredRestaurants = <MallVendorCard>[].obs;
   final featuredStores = <MallVendorCard>[].obs;
   final facilities = <String>[
-    'مصاعد',
-    'منطقة أطفال',
-    'واي فاي مجاني',
-    'غرفة صلاة',
-    'دورات مياه',
+    'auto_key_376'.tr,
+    'auto_key_392'.tr,
+    'auto_key_306'.tr,
+    'auto_key_393'.tr,
+    'auto_key_372'.tr,
   ].obs;
 
   @override
@@ -110,7 +110,7 @@ class MallDetailsController extends GetxController {
     if (mallId != null && mallId! > 0) {
       fetchMallDetail();
     } else {
-      errorMessage.value = 'معرّف المول غير صالح';
+      errorMessage.value = 'auto_key_394'.tr;
     }
   }
 
@@ -168,9 +168,9 @@ class MallDetailsController extends GetxController {
         if (open.isNotEmpty || close.isNotEmpty) {
           workingHours.value = '$open - $close'.trim();
         } else if (mall['is_open'] == true) {
-          workingHours.value = 'مفتوح الآن';
+          workingHours.value = 'auto_key_395'.tr;
         } else if (mall['is_open'] == false) {
-          workingHours.value = 'مغلق الآن';
+          workingHours.value = 'auto_key_396'.tr;
         }
         hasFreeParking.value = mall['has_parking'] != false;
       }
@@ -252,15 +252,15 @@ class MallDetailsController extends GetxController {
     storesCount.value = '${cards.length}';
     infoCards.assignAll([
       _InfoCard(
-        title: 'المتاجر',
+        title: 'auto_key_377'.tr,
         value: '${cards.length}',
-        iconLabel: 'تسوق',
+        iconLabel: 'auto_key_316'.tr,
       ),
       if (mallImage.value.isNotEmpty)
-        const _InfoCard(
-          title: 'المول',
-          value: 'مفتوح',
-          iconLabel: 'مول',
+        _InfoCard(
+          title: 'auto_key_397'.tr,
+          value: 'auto_key_280'.tr,
+          iconLabel: 'auto_key_320'.tr,
         ),
     ]);
   }

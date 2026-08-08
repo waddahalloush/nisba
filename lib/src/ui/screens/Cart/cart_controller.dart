@@ -55,7 +55,7 @@ class CartController extends GetxController {
   final selectedTimeSlot = ''.obs;
   final currentCalendarMonth = DateTime.now().obs;
 
-  final marketRates = MarketPricingRates().obs;
+  final marketRates = const MarketPricingRates().obs;
   final couponValue = 0.0.obs;
   final offerDiscount = 0.0.obs;
   final isApplyingCoupon = false.obs;
@@ -69,12 +69,12 @@ class CartController extends GetxController {
   /// Backend delivery_type keys supported by the current market.
   final availableDeliveryTypes = <String>[].obs;
 
-  static const deliveryTypeMeta = <String, String>{
-    'to_home': 'توصيل للمنزل',
-    'at_provider': 'عند المزود',
-    'book_table': 'حجز طاولة',
-    'to_car': 'إلى السيارة',
-    'throw_in': 'تناول في المكان',
+  static final deliveryTypeMeta = <String, String>{
+    'to_home': 'auto_key_134'.tr,
+    'at_provider': 'at_provider'.tr,
+    'book_table': 'book_table'.tr,
+    'to_car': 'to_car'.tr,
+    'throw_in': 'auto_key_135'.tr,
   };
 
   static const _defaultDeliveryOrder = [
@@ -324,7 +324,7 @@ class CartController extends GetxController {
 
   String get scheduledSlotLabel => selectedTimeSlot.value.isNotEmpty
       ? selectedTimeSlot.value
-      : 'لم يتم تحديد موعد';
+      : 'auto_key_136'.tr;
 
   void _recalculateCouponValue() {
     if (appliedCouponId == null || appliedDiscountType == null) {
@@ -346,12 +346,12 @@ class CartController extends GetxController {
   Future<void> applyCouponCode() async {
     final code = couponController.text.trim();
     if (code.isEmpty) {
-      AppSnackbar.showError(message: 'يرجى إدخال رمز القسيمة');
+      AppSnackbar.showError(message: 'auto_key_137'.tr);
       return;
     }
     final mid = primaryMarketId;
     if (mid == null) {
-      AppSnackbar.showError(message: 'معرّف المتجر غير متوفر');
+      AppSnackbar.showError(message: 'auto_key_138'.tr);
       return;
     }
     if (!await connectionChecker.hasConnection) {
@@ -369,13 +369,13 @@ class CartController extends GetxController {
       );
       final data = ApiResult.ensureSuccess(res);
       if (data is! Map) {
-        AppSnackbar.showError(message: 'استجابة القسيمة غير صالحة');
+        AppSnackbar.showError(message: 'auto_key_139'.tr);
         return;
       }
 
       final id = int.tryParse(data['id']?.toString() ?? '');
       if (id == null) {
-        AppSnackbar.showError(message: 'القسيمة بدون معرف');
+        AppSnackbar.showError(message: 'auto_key_140'.tr);
         return;
       }
 
@@ -397,7 +397,7 @@ class CartController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تفعيل القسيمة بنجاح',
+            : 'auto_key_141'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -441,17 +441,17 @@ class CartController extends GetxController {
     final marketId = primaryMarketId;
     final products = cartStorage.buildOrderProducts(marketId: marketId);
     if (marketId == null || products.isEmpty) {
-      AppSnackbar.showError(message: 'السلة فارغة أو معرّف المتجر غير متوفر');
+      AppSnackbar.showError(message: 'auto_key_142'.tr);
       return;
     }
     if (deliveryType.value == 'to_home' && addressId == null) {
-      AppSnackbar.showError(message: 'يرجى اختيار عنوان التوصيل');
+      AppSnackbar.showError(message: 'auto_key_143'.tr);
       return;
     }
     if ((deliveryType.value == 'to_car' ||
             deliveryType.value == 'throw_in') &&
         userCarId == null) {
-      AppSnackbar.showError(message: 'يرجى اختيار السيارة');
+      AppSnackbar.showError(message: 'auto_key_144'.tr);
       return;
     }
     isSubmitting.value = true;
@@ -488,11 +488,11 @@ class CartController extends GetxController {
           return;
         }
         if (gateway == PaymentGatewayResult.unavailable) {
-          AppSnackbar.showError(message: 'تعذر فتح صفحة الدفع');
+          AppSnackbar.showError(message: 'auto_key_67'.tr);
           return;
         }
         AppSnackbar.showInfo(
-          message: 'الطلب أُنشئ وبانتظار إتمام الدفع',
+          message: 'auto_key_145'.tr,
         );
         Get.offNamedUntil(AppRoutesNames.dashboard, (route) => false);
         return;
@@ -504,7 +504,7 @@ class CartController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم إنشاء الطلب بنجاح',
+            : 'auto_key_146'.tr,
       );
       Get.offNamedUntil(AppRoutesNames.dashboard, (route) => false);
     } on DioException catch (e) {

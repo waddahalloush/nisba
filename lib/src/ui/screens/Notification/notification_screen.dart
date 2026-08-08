@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -21,7 +23,7 @@ class NotificationScreen extends GetView<NotificationnController> {
         backgroundColor: cs.surface,
         elevation: 0,
         title: Text(
-          'الإشعارات',
+          'notifications'.tr,
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.primary,
@@ -30,7 +32,7 @@ class NotificationScreen extends GetView<NotificationnController> {
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          icon: Icon(backIconData(context), color: cs.primary),
         ),
         actions: [
           IconButton(
@@ -38,7 +40,7 @@ class NotificationScreen extends GetView<NotificationnController> {
             icon: Icon(Iconsax.search_normal_1, color: cs.onSurface),
           ),
           IconButton(
-            tooltip: 'حذف الكل',
+            tooltip: 'auto_key_421'.tr,
             onPressed: () => _confirmDeleteAll(context),
             icon: Icon(Iconsax.trash, color: cs.error),
           ),
@@ -50,10 +52,10 @@ class NotificationScreen extends GetView<NotificationnController> {
 
   void _confirmDeleteAll(BuildContext context) {
     Get.defaultDialog(
-      title: 'حذف الكل',
-      middleText: 'هل أنت متأكد من حذف جميع الإشعارات؟',
-      textConfirm: 'حذف',
-      textCancel: 'إلغاء',
+      title: 'auto_key_421'.tr,
+      middleText: 'auto_key_422'.tr,
+      textConfirm: 'delete'.tr,
+      textCancel: 'cancel'.tr,
       confirmTextColor: Colors.white,
       onConfirm: () {
         Get.back();
@@ -89,7 +91,7 @@ class NotificationScreen extends GetView<NotificationnController> {
             ElevatedButton.icon(
               onPressed: controller.loadInitialNotifications,
               icon: const Icon(Iconsax.refresh),
-              label: const Text('إعادة المحاولة'),
+              label: Text('auto_key_243'.tr),
             ),
           ],
         ),
@@ -129,7 +131,7 @@ class NotificationScreen extends GetView<NotificationnController> {
                       color: cs.error,
                       borderRadius: BorderRadius.circular(16.r),
                     ),
-                    child: const Icon(Iconsax.trash, color: Colors.white),
+                    child: Icon(Iconsax.trash, color: Colors.white),
                   ),
                   onDismissed: (_) => controller.deleteOneNotification(notif.id),
                   child: GestureDetector(
@@ -159,7 +161,7 @@ class NotificationScreen extends GetView<NotificationnController> {
                 child: TextButton.icon(
                   onPressed: () => controller.pagination.loadMore(),
                   label: Text(
-                    'عرض الإشعارات القديمة',
+                    'auto_key_423'.tr,
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w500,
                       color: cs.primary,
@@ -194,13 +196,13 @@ class NotificationScreen extends GetView<NotificationnController> {
       child: Row(
         children: [
           _TabChip(
-            label: 'اليوم',
+            label: 'auto_key_424'.tr,
             isSelected: controller.selectedTab.value == 0,
             onTap: () => controller.selectTab(0),
           ),
           SizedBox(width: 4.w),
           _TabChip(
-            label: 'الكل',
+            label: 'all'.tr,
             isSelected: controller.selectedTab.value == 1,
             onTap: () => controller.selectTab(1),
           ),
@@ -410,7 +412,7 @@ class _NotificationCard extends StatelessWidget {
     if (dt == null) return '';
     final hour = dt.hour > 12 ? dt.hour - 12 : (dt.hour == 0 ? 12 : dt.hour);
     final min = dt.minute.toString().padLeft(2, '0');
-    final period = dt.hour >= 12 ? 'م' : 'ص';
+    final period = dt.hour >= 12 ? 'auto_key_415'.tr : 'auto_key_416'.tr;
     return '$hour:$min $period';
   }
 }

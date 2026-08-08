@@ -1,5 +1,9 @@
 ﻿import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -45,7 +49,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         bottomNavigationBar: Obx(
@@ -57,7 +61,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
           final item = controller.item;
           final isHotel =
               item.serviceType.toLowerCase() == 'hotel' ||
-              item.serviceType.toLowerCase() == 'فندق';
+              item.serviceType.toLowerCase() == 'auto_key_301'.tr;
 
           return Stack(
             children: [
@@ -115,7 +119,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '${controller.selectedCount.value} عناصر مختارة',
+                'auto_key_302'.tr,
                 style: theme.textTheme.labelSmall?.copyWith(
                   fontSize: 11.sp,
                   color: cs.onSurface.withValues(alpha: 0.55),
@@ -155,7 +159,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
                     ),
                   )
                 : Text(
-                    'متابعة الطلب',
+                    'auto_key_303'.tr,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: cs.onPrimary,
@@ -174,7 +178,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
     final cs = theme.colorScheme;
     final isHotel =
         item.serviceType.toLowerCase() == 'hotel' ||
-        item.serviceType.toLowerCase() == 'فندق';
+        item.serviceType.toLowerCase() == 'auto_key_301'.tr;
     final img = controller.item.images.isNotEmpty
         ? controller.item.images.first
         : item.imageUrl;
@@ -230,7 +234,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
                         child: IconButton(
                           padding: EdgeInsets.zero,
                           icon: Icon(
-                            Iconsax.arrow_right_1,
+                            backIconData(),
                             color: cs.onPrimary,
                             size: 20.sp,
                           ),
@@ -455,7 +459,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
                     Text(
                       item.category.isNotEmpty
                           ? item.category
-                          : 'فندق خمس نجوم',
+                          : 'auto_key_304'.tr,
                       style: theme.textTheme.bodySmall?.copyWith(
                         fontSize: 11.sp,
                         color: cs.onSurface.withValues(alpha: 0.55),
@@ -483,7 +487,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
                     ),
                   ),
                   Text(
-                    'ممتاز',
+                    'auto_key_305'.tr,
                     style: theme.textTheme.labelSmall?.copyWith(
                       fontSize: 10.sp,
                       fontWeight: FontWeight.bold,
@@ -500,10 +504,10 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _iconFeature(Iconsax.wifi, 'واي فاي مجاني', theme),
-            _iconFeature(Iconsax.activity, 'مسبح', theme),
-            _iconFeature(Iconsax.coffee, 'إفطار مجاني', theme),
-            _iconFeature(Iconsax.car, 'مواقف سيارات', theme),
+            _iconFeature(Iconsax.wifi, 'auto_key_306'.tr, theme),
+            _iconFeature(Iconsax.activity, 'auto_key_307'.tr, theme),
+            _iconFeature(Iconsax.coffee, 'auto_key_308'.tr, theme),
+            _iconFeature(Iconsax.car, 'auto_key_309'.tr, theme),
           ],
         ),
         SizedBox(height: 14.h),
@@ -524,8 +528,8 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             ),
             child: Text(
               controller.selectedCount.value > 0
-                  ? 'متابعة الطلب'
-                  : 'اختر خدمة للمتابعة',
+                  ? 'auto_key_303'.tr
+                  : 'auto_key_310'.tr,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.bold,
@@ -546,7 +550,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             ),
             SizedBox(width: 4.w),
             Text(
-              '30 دقيقة',
+              'auto_key_311'.tr,
               style: theme.textTheme.labelSmall?.copyWith(
                 fontSize: 10.sp,
                 color: cs.onSurface.withValues(alpha: 0.5),
@@ -556,7 +560,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             Icon(Iconsax.flash_1, size: 12.sp, color: cs.primary),
             SizedBox(width: 4.w),
             Text(
-              'تأكيد فوري',
+              'auto_key_312'.tr,
               style: theme.textTheme.labelSmall?.copyWith(
                 fontSize: 10.sp,
                 color: cs.primary,
@@ -602,17 +606,17 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
         stats.add(_Stat(s.icon, s.value, s.title));
       }
     } else {
-      stats.add(const _Stat(Iconsax.car, 'مواقف مجانية', 'توفير مواقف'));
-      stats.add(const _Stat(Iconsax.shop, '+300 متجر', 'تسوق'));
+      stats.add(_Stat(Iconsax.car, 'auto_key_313'.tr, 'auto_key_314'.tr));
+      stats.add(_Stat(Iconsax.shop, 'auto_key_315'.tr, 'auto_key_316'.tr));
       stats.add(
         _Stat(
           Iconsax.location,
-          item.distance.isNotEmpty ? item.distance : 'الدوحة',
-          'الموقع',
+          item.distance.isNotEmpty ? item.distance : 'auto_key_317'.tr,
+          'auto_key_318'.tr,
         ),
       );
       stats.add(
-        _Stat(Iconsax.clock, item.hours ?? '10:00 - 11:00', 'ساعات العمل'),
+        _Stat(Iconsax.clock, item.hours ?? '10:00 - 11:00', 'auto_key_319'.tr),
       );
     }
     return stats
@@ -650,9 +654,9 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
   Widget _tabBody(ThemeData theme, BaseServiceItem item) {
     final type = item.serviceType.toLowerCase();
 
-    if (type == 'hotel' || type == 'فندق') {
+    if (type == 'hotel' || type == 'auto_key_301'.tr) {
       return _buildHotelView(theme, item);
-    } else if (type == 'mall' || type == 'مول') {
+    } else if (type == 'mall' || type == 'auto_key_320'.tr) {
       return _buildMallView(theme, item);
     } else {
       return _buildGenericView(theme, item);
@@ -663,51 +667,51 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
   //  1. HOTEL VIEW
   // ═══════════════════════════════════════════
   Widget _buildHotelView(ThemeData theme, BaseServiceItem item) {
-    const rooms = [
+    final rooms = [
       _RoomInfo(
         id: 'room_double',
-        name: 'غرفة دبل',
-        subtitle: 'راحة وأناقة مثالية لإقامة مرحة',
-        capacity: 'شخصان',
-        bed: 'سرير مزدوج',
-        area: '28 م²',
-        view: 'إطلالة على المدينة',
+        name: 'auto_key_321'.tr,
+        subtitle: 'auto_key_322'.tr,
+        capacity: 'auto_key_323'.tr,
+        bed: 'auto_key_324'.tr,
+        area: 'auto_key_325'.tr,
+        view: 'auto_key_326'.tr,
         price: 450,
         image:
             'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500&q=80',
       ),
       _RoomInfo(
         id: 'room_single',
-        name: 'غرفة فردية',
-        subtitle: 'مساحة هادئة ومثالية للمسافر المنفرد',
-        capacity: 'شخص واحد',
-        bed: 'سرير فردي',
-        area: '22 م²',
-        view: 'إطلالة على الحديقة',
+        name: 'auto_key_327'.tr,
+        subtitle: 'auto_key_328'.tr,
+        capacity: 'auto_key_329'.tr,
+        bed: 'auto_key_330'.tr,
+        area: 'auto_key_331'.tr,
+        view: 'auto_key_332'.tr,
         price: 300,
         image:
             'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=500&q=80',
       ),
       _RoomInfo(
         id: 'room_suite',
-        name: 'جناح',
-        subtitle: 'فخامة ورحابة لإقامة لا تنسى',
-        capacity: 'شخصان',
-        bed: 'سرير كينغ',
-        area: '45 م²',
-        view: 'إطلالة بانورامية',
+        name: 'auto_key_333'.tr,
+        subtitle: 'auto_key_334'.tr,
+        capacity: 'auto_key_323'.tr,
+        bed: 'auto_key_335'.tr,
+        area: 'auto_key_336'.tr,
+        view: 'auto_key_337'.tr,
         price: 750,
         image:
             'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500&q=80',
       ),
       _RoomInfo(
         id: 'room_royal',
-        name: 'جناح ملكي',
-        subtitle: 'أرقى مستويات الفخامة والخصوصية',
-        capacity: '4 أشخاص',
-        bed: 'سريرين كينغ',
-        area: '80 م²',
-        view: 'إطلالة على البحر',
+        name: 'auto_key_338'.tr,
+        subtitle: 'auto_key_339'.tr,
+        capacity: 'auto_key_340'.tr,
+        bed: 'auto_key_341'.tr,
+        area: 'auto_key_342'.tr,
+        view: 'auto_key_343'.tr,
         price: 1200,
         image:
             'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=500&q=80',
@@ -825,12 +829,12 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _roomSpecItem('مساحة الغرفة: ${room.area}', theme),
+                          _roomSpecItem('auto_key_344'.tr, theme),
                           _roomSpecItem(room.view, theme),
-                          _roomSpecItem('تكييف هواء', theme),
-                          _roomSpecItem('تلفزيون ذكي', theme),
-                          _roomSpecItem('ميني بار', theme),
-                          _roomSpecItem('حمام خاص مع لوازم مجانية', theme),
+                          _roomSpecItem('auto_key_345'.tr, theme),
+                          _roomSpecItem('auto_key_346'.tr, theme),
+                          _roomSpecItem('auto_key_347'.tr, theme),
+                          _roomSpecItem('auto_key_348'.tr, theme),
                         ],
                       ),
                     ),
@@ -846,7 +850,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'السعر لليلة',
+                          'auto_key_349'.tr,
                           style: theme.textTheme.labelSmall?.copyWith(
                             fontSize: 10.sp,
                             color: cs.onSurface.withValues(alpha: 0.55),
@@ -893,7 +897,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
                         elevation: 0,
                       ),
                       child: Text(
-                        'احجز الآن',
+                        'book_now'.tr,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -941,7 +945,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // About Section with side image
-        _secTitle('عن ${item.name}', theme),
+        _secTitle('auto_key_350'.tr, theme),
         SizedBox(height: 10.h),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -981,21 +985,17 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _quickLinkItem(Iconsax.send_2, 'الوصول للمول', theme),
-              _quickLinkItem(
-                Iconsax.discount_shape,
-                'العروض والفعاليات',
-                theme,
-              ),
-              _quickLinkItem(Iconsax.map, 'خريطة المول', theme),
-              _quickLinkItem(Iconsax.headphone, 'خدمة العملاء', theme),
+              _quickLinkItem(Iconsax.send_2, 'auto_key_351'.tr, theme),
+              _quickLinkItem(Iconsax.discount_shape, 'auto_key_352'.tr, theme),
+              _quickLinkItem(Iconsax.map, 'auto_key_353'.tr, theme),
+              _quickLinkItem(Iconsax.headphone, 'auto_key_354'.tr, theme),
             ],
           ),
         ),
         SizedBox(height: 24.h),
 
         // Featured Restaurants Horizontal Cards
-        _horizontalSectionTitle('المطاعم المميزة', theme),
+        _horizontalSectionTitle('auto_key_355'.tr, theme),
         SizedBox(height: 12.h),
         SizedBox(
           height: 165.h,
@@ -1003,29 +1003,29 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             scrollDirection: Axis.horizontal,
             children: [
               _restaurantCard(
-                'ذا تشيز كيك فاكتوري',
-                'عالمي',
+                'auto_key_356'.tr,
+                'auto_key_357'.tr,
                 4.8,
                 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&q=80',
                 theme,
               ),
               _restaurantCard(
-                'شاي ورد',
-                'كافيه',
+                'auto_key_358'.tr,
+                'auto_key_359'.tr,
                 4.6,
                 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80',
                 theme,
               ),
               _restaurantCard(
-                'ماكدونالدز',
-                'وجبات سريعة',
+                'auto_key_360'.tr,
+                'auto_key_361'.tr,
                 4.4,
                 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&q=80',
                 theme,
               ),
               _restaurantCard(
                 'KFC',
-                'وجبات سريعة',
+                'auto_key_361'.tr,
                 4.2,
                 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&q=80',
                 theme,
@@ -1036,7 +1036,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
         SizedBox(height: 24.h),
 
         // Featured Stores Horizontal Cards
-        _horizontalSectionTitle('المتاجر المميزة', theme),
+        _horizontalSectionTitle('auto_key_362'.tr, theme),
         SizedBox(height: 12.h),
         SizedBox(
           height: 165.h,
@@ -1044,26 +1044,26 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             scrollDirection: Axis.horizontal,
             children: [
               _storeCard(
-                'نايك',
-                'رياضة',
+                'auto_key_363'.tr,
+                'auto_key_364'.tr,
                 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80',
                 theme,
               ),
               _storeCard(
-                'أبل',
-                'إلكترونيات',
+                'auto_key_365'.tr,
+                'auto_key_366'.tr,
                 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=500&q=80',
                 theme,
               ),
               _storeCard(
-                'سيفورا',
-                'تجميل',
+                'auto_key_367'.tr,
+                'auto_key_368'.tr,
                 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80',
                 theme,
               ),
               _storeCard(
-                'زارا',
-                'أزياء',
+                'auto_key_369'.tr,
+                'auto_key_370'.tr,
                 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=500&q=80',
                 theme,
               ),
@@ -1073,16 +1073,16 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
         SizedBox(height: 24.h),
 
         // Services & Facilities
-        _secTitle('الخدمات والمرافق', theme),
+        _secTitle('auto_key_371'.tr, theme),
         SizedBox(height: 14.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _facilityItem(Iconsax.man, 'دورات مياه', theme),
-            _facilityItem(Iconsax.lamp_1, 'غرف صلاة', theme),
-            _facilityItem(Iconsax.wifi, 'خدمة واي فاي', theme),
-            _facilityItem(Iconsax.emoji_happy, 'مناطق أطفال', theme),
-            _facilityItem(Iconsax.building, 'مصاعد', theme),
+            _facilityItem(Iconsax.man, 'auto_key_372'.tr, theme),
+            _facilityItem(Iconsax.lamp_1, 'auto_key_373'.tr, theme),
+            _facilityItem(Iconsax.wifi, 'auto_key_374'.tr, theme),
+            _facilityItem(Iconsax.emoji_happy, 'auto_key_375'.tr, theme),
+            _facilityItem(Iconsax.building, 'auto_key_376'.tr, theme),
           ],
         ),
       ],
@@ -1121,7 +1121,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
           ),
         ),
         Text(
-          'عرض الكل',
+          'view_all'.tr,
           style: theme.textTheme.labelMedium?.copyWith(
             fontSize: 11.sp,
             fontWeight: FontWeight.bold,
@@ -1180,7 +1180,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             ),
             alignment: Alignment.center,
             child: Text(
-              'احجز طاولة',
+              'auto_key_3'.tr,
               style: theme.textTheme.labelSmall?.copyWith(
                 fontSize: 10.sp,
                 fontWeight: FontWeight.bold,
@@ -1240,7 +1240,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             ),
             alignment: Alignment.center,
             child: Text(
-              'استلام من المتجر',
+              'auto_key_4'.tr,
               style: theme.textTheme.labelSmall?.copyWith(
                 fontSize: 9.5.sp,
                 fontWeight: FontWeight.bold,
@@ -1282,7 +1282,7 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _secTitle('عن ${item.name}', theme),
+        _secTitle('auto_key_350'.tr, theme),
         SizedBox(height: 8.h),
         Text(
           item.aboutText,
@@ -1297,8 +1297,8 @@ class PlaceDetailsScreen extends GetView<PlaceDetailsController> {
             item.productsOrServices!.isNotEmpty) ...[
           _secTitle(
             controller.item.serviceType.toLowerCase() == 'commercial_center'
-                ? 'المتاجر'
-                : 'الخدمات والمنتجات',
+                ? 'auto_key_377'.tr
+                : 'auto_key_378'.tr,
             theme,
           ),
 

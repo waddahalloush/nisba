@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -15,7 +17,7 @@ class PaymentWebViewScreen extends GetView<PaymentWebViewController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: PopScope(
         canPop: false,
         onPopInvokedWithResult: (didPop, _) {
@@ -31,7 +33,7 @@ class PaymentWebViewScreen extends GetView<PaymentWebViewController> {
               icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
             ),
             title: Text(
-              'إتمام الدفع',
+              'auto_key_487'.tr,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.primary,
@@ -45,8 +47,8 @@ class PaymentWebViewScreen extends GetView<PaymentWebViewController> {
                       : controller.manualCheck,
                   child: Text(
                     controller.isCheckingStatus.value
-                        ? 'جاري التحقق...'
-                        : 'تحقق الآن',
+                        ? 'auto_key_517'.tr
+                        : 'auto_key_518'.tr,
                   ),
                 ),
               ),

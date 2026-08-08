@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 
 import '../data/models/service_model.dart';
@@ -15,21 +16,18 @@ class BaseServiceMapper {
     final typeValue = marketType is Map
         ? marketType['value']?.toString()
         : marketType?.toString();
-    final typeDesc = marketType is Map
-        ? marketType['desc']?.toString()
-        : null;
+    final typeDesc = marketType is Map ? marketType['desc']?.toString() : null;
 
     final distanceRaw = map['distance'];
-    final distance = distanceRaw == null
-        ? ''
-        : '${(double.tryParse(distanceRaw.toString()) ?? 0).toStringAsFixed(1)} كم';
+    final distance = distanceRaw == null ? '' : 'auto_key_691'.tr;
 
     return BaseServiceItem(
       id: map['id']?.toString() ?? '',
       name: map['name']?.toString() ?? '',
       subTitle: map['location']?.toString() ?? '',
       aboutText: map['location']?.toString() ?? '',
-      imageUrl: map['main_image']?.toString() ??
+      imageUrl:
+          map['main_image']?.toString() ??
           map['image']?.toString() ??
           fallbackImage ??
           Assets.images.sooq1.path,
@@ -39,7 +37,7 @@ class BaseServiceMapper {
       distance: distance,
       category: category ?? typeDesc ?? serviceType,
       serviceType: typeValue ?? serviceType,
-      hours: map['is_open'] == true ? 'مفتوح' : 'مغلق',
+      hours: map['is_open'] == true ? 'auto_key_280'.tr : 'auto_key_281'.tr,
       features: const [],
     );
   }
@@ -48,34 +46,34 @@ class BaseServiceMapper {
     Map raw,
     dynamic iconsax, {
     required String serviceType,
-    String category = 'الكل',
+    String category = 'all',
     String? fallbackImage,
   }) {
     final map = Map<String, dynamic>.from(raw);
-    final location = map['location']?.toString() ??
-        map['location_title']?.toString() ??
-        '';
+    final location =
+        map['location']?.toString() ?? map['location_title']?.toString() ?? '';
     final distanceRaw = map['distance'];
-    final distance = distanceRaw == null
-        ? ''
-        : '${(double.tryParse(distanceRaw.toString()) ?? 0).toStringAsFixed(1)} كم';
+    final distance = distanceRaw == null ? '' : 'auto_key_691'.tr;
     final isOpen = map['is_open'];
     String? hours;
     if (isOpen == true) {
-      hours = 'مفتوح';
+      hours = 'auto_key_280'.tr;
     } else if (isOpen == false) {
-      hours = 'مغلق';
+      hours = 'auto_key_281'.tr;
     } else if (map['opening_time'] != null || map['close_time'] != null) {
-      hours =
-          '${map['opening_time'] ?? ''} - ${map['close_time'] ?? ''}'.trim();
+      hours = '${map['opening_time'] ?? ''} - ${map['close_time'] ?? ''}'
+          .trim();
     }
 
     return BaseServiceItem(
       id: map['id']?.toString() ?? '',
       name: map['name']?.toString() ?? '',
-      subTitle: location.isNotEmpty ? location : (map['name']?.toString() ?? ''),
+      subTitle: location.isNotEmpty
+          ? location
+          : (map['name']?.toString() ?? ''),
       aboutText: map['description']?.toString() ?? location,
-      imageUrl: map['image']?.toString() ??
+      imageUrl:
+          map['image']?.toString() ??
           map['main_image']?.toString() ??
           fallbackImage ??
           Assets.images.mall11.path,
@@ -87,7 +85,8 @@ class BaseServiceMapper {
       serviceType: serviceType,
       hours: hours,
       features: [
-        if (map['has_parking'] == true) ServiceFeature(icon: iconsax.car, label: 'مواقف سيارات'),
+        if (map['has_parking'] == true)
+          ServiceFeature(icon: iconsax.car, label: 'auto_key_309'.tr),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -33,7 +34,7 @@ class HomeBrands extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 6.h),
               child: Text(
-                'العلامات المشهورة',
+                'auto_key_412'.tr,
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.bold,
@@ -107,7 +108,7 @@ class _MarketBrandCard extends StatelessWidget {
                 rating: market.rating.toDouble(),
                 reviewsCount: 0,
                 distance: market.distance != null
-                    ? '${market.distance!.toStringAsFixed(1)} كم'
+                    ? 'auto_key_410'.tr
                     : '',
                 category: market.marketType.desc,
                 serviceType: type,

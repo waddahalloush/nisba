@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 class Product {
   final int? id;
   final int? marketId;
@@ -27,7 +28,7 @@ class Product {
     required this.ratingCount,
   });
 
-  String get deliveryMeta => '$deliveryTime دقيقة • $distance كم';
+  String get deliveryMeta => 'auto_key_2'.tr;
 
   Product copyWith({
     int? id,
@@ -70,7 +71,7 @@ class Product {
     final price = double.tryParse(map['price']?.toString() ?? '') ?? 0;
     final oldPrice = double.tryParse(map['old_price']?.toString() ?? '') ?? 0;
     final savings = oldPrice > price && oldPrice > 0
-        ? 'وفر ${(oldPrice - price).toStringAsFixed(0)} ر.ق'
+        ? 'auto_key_1'.tr
         : '';
     return Product(
       id: int.tryParse(map['id']?.toString() ?? ''),

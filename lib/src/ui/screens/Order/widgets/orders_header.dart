@@ -17,7 +17,7 @@ class OrdersHeader extends StatelessWidget {
     final cs = theme.colorScheme;
     final storage = Get.find<GetStorageHelper>();
     final user = storage.getUser;
-    final userName = user?.name ?? 'مستخدم';
+    final userName = user?.name ?? 'auto_key_276'.tr;
     final userImage = user?.image;
 
     return Container(
@@ -73,14 +73,14 @@ class OrdersHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'مرحباً $userName',
+                    'auto_key_460'.tr,
                     style: theme.textTheme.titleSmall?.copyWith(
                       color: cs.onPrimary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'أهلاً بك مجدداً 👋🏼',
+                    'auto_key_461'.tr,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.onPrimary.withValues(alpha: 0.8),
                     ),

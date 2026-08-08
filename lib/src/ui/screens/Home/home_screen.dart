@@ -49,7 +49,7 @@ class HomeScreen extends GetView<HomeController> {
         HomeHeader(controller: controller),
 
         if (controller.marketSections.isNotEmpty) ...[
-          _buildSectionTitle('أقسام الماركت', false),
+          _buildSectionTitle('auto_key_186'.tr, false),
           HomeCategories(
             categories: controller.marketSections,
             trailing: _buildOfferTile(theme),
@@ -65,7 +65,7 @@ class HomeScreen extends GetView<HomeController> {
         ],
 
         if (controller.serviceSections.isNotEmpty) ...[
-          _buildSectionTitle('أقسام الخدمات', true),
+          _buildSectionTitle('auto_key_187'.tr, true),
           HomeCategories(
             categories: controller.serviceSections,
             onSectionTap: (section) {
@@ -95,7 +95,7 @@ class HomeScreen extends GetView<HomeController> {
         HomeBrands(brands: controller.brands),
         // ─── 6. وجبات (أنواع الوجبات من API) ───
         HomeOfferMarket(
-          title: "القريبة منك",
+          title: 'auto_key_188'.tr,
           marketList: controller.nearFromYou,
         ),
 
@@ -134,7 +134,7 @@ class HomeScreen extends GetView<HomeController> {
             ),
             SizedBox(height: 6.h),
             Text(
-              'العروض',
+              'auto_key_189'.tr,
               style: TextStyle(
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
@@ -169,7 +169,7 @@ class HomeScreen extends GetView<HomeController> {
                   );
                 },
                 child: Text(
-                  "عرض الكل",
+                  'view_all'.tr,
                   style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w700,

@@ -105,7 +105,9 @@ class CartItem {
       product: productRaw is Map
           ? CartProduct.fromJson(Map<String, dynamic>.from(productRaw))
           : CartProduct.fromJson(const {}),
-      values: json['values'] is List ? json['values'] as List<dynamic> : const [],
+      values: json['values'] is List
+          ? json['values'] as List<dynamic>
+          : const [],
     );
   }
 }
@@ -225,48 +227,46 @@ class OrderDetail {
             ),
       carts: cartsRaw is List
           ? cartsRaw
-              .whereType<Map>()
-              .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
-              .toList()
+                .whereType<Map>()
+                .map((e) => CartItem.fromJson(Map<String, dynamic>.from(e)))
+                .toList()
           : const [],
       orderStatuses: statusesRaw is List
           ? statusesRaw
-              .whereType<Map>()
-              .map(
-                (e) => OrderStatusEntry.fromJson(Map<String, dynamic>.from(e)),
-              )
-              .toList()
+                .whereType<Map>()
+                .map(
+                  (e) =>
+                      OrderStatusEntry.fromJson(Map<String, dynamic>.from(e)),
+                )
+                .toList()
           : const [],
     );
   }
 
   /// Lightweight map for payment screen hydration.
   Map<String, dynamic> toPaymentArgsMap() => {
-        'id': id,
-        'total': total,
-        'subtotal': subtotal,
-        'delivery_price': deliveryPrice,
-        'coupon_value': couponValue,
-        'discount': discount,
-        'customer_discount': customerDiscount,
-        'points_customer': pointsCustomer,
-        'grand_total': grandTotal,
-        'delivery_type': {
-          'value': deliveryType.value,
-          'desc': deliveryType.desc,
-        },
-        'payment_method': {
-          'value': paymentMethod.value,
-          'desc': paymentMethod.desc,
-        },
-        'market': {
-          'id': market.id,
-          'name': market.name,
-          'main_image': market.mainImage,
-        },
-        if (address is Map) 'address': address,
-        if (userCar is Map) 'userCar': userCar,
-      };
+    'id': id,
+    'total': total,
+    'subtotal': subtotal,
+    'delivery_price': deliveryPrice,
+    'coupon_value': couponValue,
+    'discount': discount,
+    'customer_discount': customerDiscount,
+    'points_customer': pointsCustomer,
+    'grand_total': grandTotal,
+    'delivery_type': {'value': deliveryType.value, 'desc': deliveryType.desc},
+    'payment_method': {
+      'value': paymentMethod.value,
+      'desc': paymentMethod.desc,
+    },
+    'market': {
+      'id': market.id,
+      'name': market.name,
+      'main_image': market.mainImage,
+    },
+    if (address is Map) 'address': address,
+    if (userCar is Map) 'userCar': userCar,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -280,7 +280,7 @@ class OrderDetailData {
   factory OrderDetailData.fromJson(Map<String, dynamic> json) {
     final orderRaw = json['order'];
     if (orderRaw is! Map) {
-      throw FormatException('Missing order in detail response');
+      throw const FormatException('Missing order in detail response');
     }
     return OrderDetailData(
       order: OrderDetail.fromJson(Map<String, dynamic>.from(orderRaw)),

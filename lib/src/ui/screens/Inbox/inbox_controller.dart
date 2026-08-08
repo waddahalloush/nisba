@@ -34,10 +34,11 @@ class InboxItem {
   factory InboxItem.fromApiMap(Map raw) {
     final map = Map<String, dynamic>.from(raw);
     final readRaw = map['is_read'];
-    final isRead = readRaw == true ||
+    final isRead =
+        readRaw == true ||
         readRaw == 1 ||
         readRaw?.toString() == '1' ||
-        readRaw?.toString().toLowerCase() == 'true';
+        readRaw?.toString().toLowerCase() == 'ue';
     return InboxItem(
       id: int.tryParse(map['id']?.toString() ?? '') ?? 0,
       title: map['title']?.toString() ?? '',
@@ -74,16 +75,23 @@ class InboxController extends GetxController {
     fetcher: (page, {query}) async {
       final res = await repository.getInboxes(page: page);
       final data = ApiResult.ensureSuccess(res);
-      final map = data is Map ? Map<String, dynamic>.from(data) : <String, dynamic>{};
+      final map = data is Map
+          ? Map<String, dynamic>.from(data)
+          : <String, dynamic>{};
       final list = map['inboxes'] as List? ?? [];
       final paginationMap = map['pagination'] is Map
           ? Map<String, dynamic>.from(map['pagination'] as Map)
           : <String, dynamic>{};
       return PaginatedResult(
         data: list.whereType<Map>().map(InboxItem.fromApiMap).toList(),
-        total: int.tryParse(paginationMap['total']?.toString() ?? '') ?? list.length,
-        page: int.tryParse(paginationMap['current_page']?.toString() ?? '') ?? page,
-        perPage: int.tryParse(paginationMap['per_page']?.toString() ?? '') ?? 10,
+        total:
+            int.tryParse(paginationMap['total']?.toString() ?? '') ??
+            list.length,
+        page:
+            int.tryParse(paginationMap['current_page']?.toString() ?? '') ??
+            page,
+        perPage:
+            int.tryParse(paginationMap['per_page']?.toString() ?? '') ?? 10,
       );
     },
   );

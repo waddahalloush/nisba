@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -27,10 +29,10 @@ class MyCarsScreen extends GetView<MyCarsController> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          icon: Icon(backIconData(context), color: cs.primary),
         ),
         title: Text(
-          'سياراتي',
+          'auto_key_580'.tr,
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.primary,

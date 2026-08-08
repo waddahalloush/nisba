@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/app_colors.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -17,7 +19,7 @@ class EntertainmentBookingScreen
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         body: Stack(
           children: [
@@ -163,7 +165,7 @@ class EntertainmentBookingScreen
                   Icon(Iconsax.star1, size: 16.sp, color: AppColors.star),
                   SizedBox(width: 4.w),
                   Text(
-                    '${controller.venueRating.value.toStringAsFixed(1)} (${controller.venueReviews.value} تقييم)',
+                    '${controller.venueRating.value.toStringAsFixed(1)} (${'rating_count'.trParams({'count': '${controller.venueReviews.value}'})})',
                     style: TextStyle(
                       fontSize: 13.sp,
                       color: cs.onSurface.withValues(alpha: 0.7),
@@ -233,7 +235,7 @@ class EntertainmentBookingScreen
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h),
-            child: Text('المواعيد المتاحة', style: theme.textTheme.titleMedium),
+            child: Text('available_slots'.tr, style: theme.textTheme.titleMedium),
           ),
           SizedBox(
             height: 155.h,
@@ -241,7 +243,7 @@ class EntertainmentBookingScreen
               if (controller.slots.isEmpty) {
                 return Center(
                   child: Text(
-                    'لا توجد مواعيد متاحة',
+                    'no_available_slots'.tr,
                     style: TextStyle(
                       color: cs.onSurface.withValues(alpha: 0.5),
                     ),
@@ -341,7 +343,7 @@ class EntertainmentBookingScreen
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '$priceStr ر.ق',
+                  '$priceStr ${'currency_qar'.tr}',
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w700,
@@ -355,7 +357,7 @@ class EntertainmentBookingScreen
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Text(
-                    '$remaining متبقي',
+                    'remaining_count'.trParams({'count': '$remaining'}),
                     style: TextStyle(
                       fontSize: 10.sp,
                       color: cs.primary,
@@ -379,7 +381,7 @@ class EntertainmentBookingScreen
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('عدد التذاكر', style: theme.textTheme.titleMedium),
+            Text('tickets_count'.tr, style: theme.textTheme.titleMedium),
             SizedBox(height: 8.h),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
@@ -437,7 +439,7 @@ class EntertainmentBookingScreen
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('طريقة الدفع', style: theme.textTheme.titleMedium),
+            Text('payment_method'.tr, style: theme.textTheme.titleMedium),
             SizedBox(height: 8.h),
             Obx(() {
               final methods = controller.checkout.value.paymentMethods;
@@ -476,9 +478,9 @@ class EntertainmentBookingScreen
     VoidCallback onTap,
   ) {
     final (IconData icon, String label) = switch (method) {
-      'cash' => (Iconsax.moneys, 'نقداً'),
-      'wallet' => (Iconsax.wallet_2, 'المحفظة'),
-      'card' => (Iconsax.card, 'بطاقة'),
+      'cash' => (Iconsax.moneys, 'cash'.tr),
+      'wallet' => (Iconsax.wallet_2, 'wallet'.tr),
+      'card' => (Iconsax.card, 'card'.tr),
       'apple_pay' => (Iconsax.wallet, 'Apple Pay'),
       'google_pay' => (Iconsax.money, 'Google Pay'),
       _ => (Iconsax.wallet_2, method),
@@ -553,7 +555,7 @@ class EntertainmentBookingScreen
                       controller.selectedSlot?['price']?.toString() ??
                       '—';
                   return Text(
-                    '$priceStr ر.ق',
+                    '$priceStr ${'currency_qar'.tr}',
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w800,
@@ -565,7 +567,7 @@ class EntertainmentBookingScreen
             ),
             SizedBox(height: 4.h),
             Text(
-              'الإجمالي شامل الضرائب',
+              'total_incl_tax'.tr,
               style: TextStyle(
                 fontSize: 12.sp,
                 color: cs.onSurface.withValues(alpha: 0.5),
@@ -597,7 +599,7 @@ class EntertainmentBookingScreen
                           ),
                         )
                       : Text(
-                          'تأكيد الحجز',
+                          'confirm_booking'.tr,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
@@ -618,7 +620,7 @@ class EntertainmentBookingScreen
                 ),
                 SizedBox(width: 4.w),
                 Text(
-                  'لن يتم خصم أي مبلغ الآن',
+                  'no_charge_now'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: cs.onSurface.withValues(alpha: 0.5),
@@ -644,20 +646,20 @@ class EntertainmentBookingScreen
             _footerItem(
               cs,
               Iconsax.close_circle,
-              'إلغاء مجاني',
-              'حتى 24 ساعة قبل الموعد',
+              'free_cancellation'.tr,
+              'cancel_up_to_24h'.tr,
             ),
             _footerItem(
               cs,
               Iconsax.shield_tick,
-              'دفع آمن',
-              'تشفير وحماية عالية',
+              'secure_payment'.tr,
+              'high_protection'.tr,
             ),
             _footerItem(
               cs,
               Iconsax.discount_shape,
-              'أفضل سعر مضمون',
-              'تحصل على أفضل الأسعار',
+              'best_price_guaranteed'.tr,
+              'get_best_prices'.tr,
             ),
           ],
         ),

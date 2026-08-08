@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/app_colors.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -16,7 +18,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         body: Stack(
           children: [
@@ -163,7 +165,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
                   Icon(Iconsax.star1, size: 16.sp, color: AppColors.star),
                   SizedBox(width: 4.w),
                   Text(
-                    '${controller.venueRating.value.toStringAsFixed(1)} (${controller.venueReviews.value} تقييم)',
+                    'auto_key_196'.tr,
                     style: TextStyle(
                       fontSize: 13.sp,
                       color: cs.onSurface.withValues(alpha: 0.7),
@@ -233,7 +235,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h),
-            child: Text('القاعات', style: theme.textTheme.titleMedium),
+            child: Text('auto_key_197'.tr, style: theme.textTheme.titleMedium),
           ),
           SizedBox(
             height: 100.h,
@@ -241,7 +243,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
               if (controller.resources.isEmpty) {
                 return Center(
                   child: Text(
-                    'لا توجد قاعات متاحة',
+                    'auto_key_198'.tr,
                     style: TextStyle(
                       color: cs.onSurface.withValues(alpha: 0.5),
                     ),
@@ -334,7 +336,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h),
-            child: Text('المواعيد', style: theme.textTheme.titleMedium),
+            child: Text('auto_key_199'.tr, style: theme.textTheme.titleMedium),
           ),
           SizedBox(
             height: 130.h,
@@ -342,7 +344,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
               if (controller.slots.isEmpty) {
                 return Center(
                   child: Text(
-                    'لا توجد مواعيد متاحة',
+                    'auto_key_200'.tr,
                     style: TextStyle(
                       color: cs.onSurface.withValues(alpha: 0.5),
                     ),
@@ -442,7 +444,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '$priceStr ر.ق',
+                  'auto_key_201'.tr,
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
@@ -456,7 +458,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
                     borderRadius: BorderRadius.circular(6.r),
                   ),
                   child: Text(
-                    '$remaining متبقي',
+                    'auto_key_202'.tr,
                     style: TextStyle(
                       fontSize: 10.sp,
                       color: cs.primary,
@@ -482,11 +484,11 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
           children: [
             Row(
               children: [
-                Text('اختر المقاعد', style: theme.textTheme.titleMedium),
+                Text('auto_key_203'.tr, style: theme.textTheme.titleMedium),
                 const Spacer(),
                 Obx(
                   () => Text(
-                    '${controller.guests} مقعد',
+                    'auto_key_204'.tr,
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w600,
@@ -518,7 +520,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: Center(
                     child: Text(
-                      'اختر موعداً لعرض خريطة المقاعد',
+                      'auto_key_205'.tr,
                       style: TextStyle(
                         color: cs.onSurface.withValues(alpha: 0.5),
                       ),
@@ -542,7 +544,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('طريقة الدفع', style: theme.textTheme.titleMedium),
+            Text('payment_method'.tr, style: theme.textTheme.titleMedium),
             SizedBox(height: 8.h),
             Obx(() {
               final methods = controller.checkout.value.paymentMethods;
@@ -581,9 +583,9 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
     VoidCallback onTap,
   ) {
     final (IconData icon, String label) = switch (method) {
-      'cash' => (Iconsax.moneys, 'نقداً'),
-      'wallet' => (Iconsax.wallet_2, 'المحفظة'),
-      'card' => (Iconsax.card, 'بطاقة'),
+      'cash' => (Iconsax.moneys, 'cash'.tr),
+      'wallet' => (Iconsax.wallet_2, 'wallet'.tr),
+      'card' => (Iconsax.card, 'card'.tr),
       'apple_pay' => (Iconsax.wallet, 'Apple Pay'),
       'google_pay' => (Iconsax.money, 'Google Pay'),
       _ => (Iconsax.wallet_2, method),
@@ -658,7 +660,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
                       controller.selectedSlot?['price']?.toString() ??
                       '—';
                   return Text(
-                    '$priceStr ر.ق',
+                    'auto_key_201'.tr,
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w800,
@@ -670,7 +672,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
             ),
             SizedBox(height: 4.h),
             Text(
-              'الإجمالي شامل الضرائب',
+              'auto_key_206'.tr,
               style: TextStyle(
                 fontSize: 12.sp,
                 color: cs.onSurface.withValues(alpha: 0.5),
@@ -705,8 +707,8 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
                           final count = controller.guests;
                           return Text(
                             count > 0
-                                ? 'تأكيد الحجز ($count مقعد)'
-                                : 'تأكيد الحجز',
+                                ? 'auto_key_207'.tr
+                                : 'auto_key_208'.tr,
                             style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w700,
@@ -728,7 +730,7 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
                 ),
                 SizedBox(width: 4.w),
                 Text(
-                  'لن يتم خصم أي مبلغ الآن',
+                  'auto_key_209'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: cs.onSurface.withValues(alpha: 0.5),
@@ -754,20 +756,20 @@ class CinemaBookingScreen extends GetView<CinemaBookingController> {
             _footerItem(
               cs,
               Iconsax.close_circle,
-              'إلغاء مجاني',
-              'حتى 24 ساعة قبل الموعد',
+              'auto_key_210'.tr,
+              'auto_key_211'.tr,
             ),
             _footerItem(
               cs,
               Iconsax.shield_tick,
-              'دفع آمن',
-              'تشفير وحماية عالية',
+              'auto_key_212'.tr,
+              'auto_key_213'.tr,
             ),
             _footerItem(
               cs,
               Iconsax.discount_shape,
-              'أفضل سعر مضمون',
-              'تحصل على أفضل الأسعار',
+              'auto_key_214'.tr,
+              'auto_key_215'.tr,
             ),
           ],
         ),
@@ -838,7 +840,7 @@ class _ScreenBar extends StatelessWidget {
         ),
         SizedBox(height: 6.h),
         Text(
-          'الشاشة',
+          'auto_key_216'.tr,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
             color: cs.onSurface.withValues(alpha: 0.5),
           ),
@@ -874,11 +876,11 @@ class _SeatLegend extends StatelessWidget {
 
     return Row(
       children: [
-        chip(Colors.green, 'متاح'),
+        chip(Colors.green, 'auto_key_217'.tr),
         SizedBox(width: 12.w),
-        chip(Colors.blue, 'مختار'),
+        chip(Colors.blue, 'auto_key_218'.tr),
         SizedBox(width: 12.w),
-        chip(Colors.red, 'محجوز'),
+        chip(Colors.red, 'auto_key_219'.tr),
       ],
     );
   }

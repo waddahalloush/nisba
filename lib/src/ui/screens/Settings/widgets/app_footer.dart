@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -30,7 +31,7 @@ class AppFooter extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // شارة "نسخة حديثة" خضراء
+          // شارة 'auto_key_682'.tr خضراء
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
             decoration: BoxDecoration(
@@ -46,8 +47,8 @@ class AppFooter extends StatelessWidget {
                   color: Color(0xFF2E7D32),
                 ),
                 SizedBox(width: 4.w),
-                const Text(
-                  'نسخة حديثة',
+                Text(
+                  'auto_key_682'.tr,
                   style: TextStyle(
                     fontSize: 11,
                     color: Color(0xFF2E7D32),

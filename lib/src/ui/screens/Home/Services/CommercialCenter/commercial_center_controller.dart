@@ -28,8 +28,8 @@ class CommercialCenterController extends BaseServiceController {
     errorMessage.value = '';
     centersResponse.value = ApiResponse<dynamic>.loading('');
 
-    categories.assignAll(const [
-      ServiceCategory(name: 'الكل', icon: Iconsax.category),
+    categories.assignAll([
+      ServiceCategory(name: 'all'.tr, icon: Iconsax.category),
     ]);
 
     if (!await connectionChecker.hasConnection) {
@@ -63,7 +63,7 @@ class CommercialCenterController extends BaseServiceController {
                   e,
                   Iconsax.reserve,
                   serviceType: 'commercial_center',
-                  category: 'مراكز تجارية',
+                  category: 'auto_key_379'.tr,
                   fallbackImage: Assets.images.mall11.path,
                 ),
               )
@@ -85,7 +85,7 @@ class CommercialCenterController extends BaseServiceController {
       AppSnackbar.showError(message: errorMessage.value);
     } catch (e) {
       centersResponse.value = ApiResponse<dynamic>.error(e.toString());
-      errorMessage.value = 'حدث خطأ أثناء جلب البيانات: $e';
+      errorMessage.value = 'auto_key_380'.tr;
       AppSnackbar.showError(message: errorMessage.value);
     } finally {
       isLoading.value = false;

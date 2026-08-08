@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/utils/custom_shimmer_widget.dart';
@@ -193,7 +194,7 @@ class _CategoriesShimmer extends StatelessWidget {
   }
 }
 
-/// Section title placeholder ("────" line + "عرض الكل" line).
+/// Section title placeholder ("────" line + 'view_all'.tr line).
 class _SectionTitleShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

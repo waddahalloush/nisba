@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -21,10 +23,10 @@ class AboutScreen extends GetView<AboutController> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          icon: Icon(backIconData(context), color: cs.primary),
         ),
         title: Text(
-          'عن التطبيق',
+          'about_app'.tr,
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.primary,
@@ -44,7 +46,7 @@ class AboutScreen extends GetView<AboutController> {
 
                   SizedBox(height: 14.h),
 
-                  // ── "تواصل معنا" sub-card ──
+                  // ── 'auto_key_560'.tr sub-card ──
                   _buildContactUsCard(theme),
 
                   SizedBox(height: 14.h),
@@ -90,7 +92,7 @@ class AboutScreen extends GetView<AboutController> {
           Assets.images.callCenter.image(width: 70.w, height: 70.w),
           SizedBox(height: 12.h),
           Text(
-            'معلومات التواصل',
+            'auto_key_558'.tr,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -98,7 +100,7 @@ class AboutScreen extends GetView<AboutController> {
           ),
           SizedBox(height: 8.h),
           Text(
-            'يمكنك استخدام النص التالي داخل تطبيق الطعام والمتاجر أو على الموقع الإلكتروني:',
+            'auto_key_559'.tr,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
           ),
@@ -127,7 +129,7 @@ class AboutScreen extends GetView<AboutController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'تواصل معنا',
+                  'auto_key_560'.tr,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.primary,
@@ -135,7 +137,7 @@ class AboutScreen extends GetView<AboutController> {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  'نحن سعداء دائماً بخدمتكم والإجابة على استفساراتكم أو استقبال اقتراحاتكم وشكاويكم.',
+                  'auto_key_561'.tr,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: cs.onSurface,
                   ),
@@ -154,31 +156,31 @@ class AboutScreen extends GetView<AboutController> {
     final items = [
       _ContactRow(
         icon: Iconsax.sms,
-        label: 'البريد الإلكتروني:',
+        label: 'auto_key_562'.tr,
         value: controller.email,
         onTap: controller.openEmail,
       ),
       _ContactRow(
         icon: Iconsax.call,
-        label: 'رقم الهاتف:',
+        label: 'auto_key_563'.tr,
         value: controller.phone,
         onTap: controller.callPhone,
       ),
       _ContactRow(
         icon: Icons.wechat,
-        label: 'واتساب:',
+        label: 'auto_key_564'.tr,
         value: controller.whatsapp,
         onTap: controller.openWhatsApp,
       ),
-      const _ContactRow(
+      _ContactRow(
         icon: Iconsax.location,
-        label: 'العنوان:',
-        value: 'الدوحة، قطر',
+        label: 'auto_key_565'.tr,
+        value: 'auto_key_556'.tr,
       ),
-      const _ContactRow(
+      _ContactRow(
         icon: Iconsax.clock,
-        label: 'ساعات العمل:',
-        value: 'يومياً من 9 صباحاً حتى 11 مساءً',
+        label: 'auto_key_566'.tr,
+        value: 'auto_key_557'.tr,
       ),
     ];
 
@@ -286,14 +288,14 @@ class AboutScreen extends GetView<AboutController> {
               TextSpan(
                 style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
                 children: [
-                  const TextSpan(text: 'كما يمكنكم التواصل معنا عبر نموذج '),
+                  TextSpan(text: 'auto_key_567'.tr),
                   TextSpan(
-                    text: '\'اتصل بنا\'\n',
+                    text: '${'terms_and_services'.tr}\n',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: cs.primary,
                     ),
                   ),
-                  const TextSpan(text: 'داخل التطبيق'),
+                  TextSpan(text: 'auto_key_569'.tr),
                 ],
               ),
             ),

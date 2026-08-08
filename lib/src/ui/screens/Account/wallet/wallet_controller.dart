@@ -107,7 +107,7 @@ class WalletController extends GetxController {
     fetchWallets();
   }
 
-  /// Fetches gift cards + saved payment cards for the "بطاقاتي" screen.
+  /// Fetches gift cards + saved payment cards for the 'auto_key_117'.tr screen.
   Future<void> fetchCards() async {
     if (!await connectionChecker.hasConnection) {
       AppSnackbar.showError(message: 'check_connection'.tr);
@@ -189,8 +189,8 @@ class WalletController extends GetxController {
         ? direction['value']?.toString() ?? ''
         : direction?.toString() ?? '';
     final typeDesc = type is Map
-        ? type['desc']?.toString() ?? 'معاملة'
-        : type?.toString() ?? 'معاملة';
+        ? type['desc']?.toString() ?? 'auto_key_125'.tr
+        : type?.toString() ?? 'auto_key_125'.tr;
     final isCredit = dirValue == 'deposit';
     final amount = map['amount']?.toString() ?? '0';
     return WalletTransaction(
@@ -222,7 +222,7 @@ class WalletController extends GetxController {
 
   void showBalance() {
     AppSnackbar.showInfo(
-      message: 'الرصيد الحالي: ${balance.value.toStringAsFixed(2)} QAR',
+      message: 'auto_key_126'.tr,
     );
   }
 

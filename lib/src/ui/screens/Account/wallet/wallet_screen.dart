@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -15,7 +19,7 @@ class WalletScreen extends GetView<WalletController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,10 +27,10 @@ class WalletScreen extends GetView<WalletController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'المحفظة',
+            'wallet'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -130,7 +134,7 @@ class WalletScreen extends GetView<WalletController> {
           SizedBox(height: 8.h),
           // ── Balance ──
           Text(
-            'رصيدك الحالي',
+            'current_balance'.tr,
             style: TextStyle(fontSize: 12.sp, color: cs.onPrimary),
           ),
 
@@ -145,7 +149,7 @@ class WalletScreen extends GetView<WalletController> {
                 children: [
                   TextSpan(text: controller.balance.value.toStringAsFixed(2)),
                   TextSpan(
-                    text: 'ر.ق',
+                    text: 'currency_qar'.tr,
                     style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
@@ -166,7 +170,7 @@ class WalletScreen extends GetView<WalletController> {
                 icon: const Icon(Iconsax.eye, color: Colors.white),
                 style: TextButton.styleFrom(padding: EdgeInsets.zero),
                 label: Text(
-                  'عرض الرصيد',
+                  'auto_key_127'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
@@ -191,7 +195,7 @@ class WalletScreen extends GetView<WalletController> {
                 ),
 
                 child: Text(
-                  'شحن المحفظة',
+                  'recharge_wallet'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
@@ -226,22 +230,22 @@ class WalletScreen extends GetView<WalletController> {
         children: [
           _ActionTile(
             icon: Iconsax.gift,
-            label: 'إهداء رصيد',
+            label: 'gift_credit'.tr,
             onTap: controller.sendGift,
           ),
           _ActionTile(
             icon: Iconsax.scan_barcode,
-            label: 'دفع عبر QR',
+            label: 'auto_key_128'.tr,
             onTap: controller.payWithQR,
           ),
           _ActionTile(
             icon: Iconsax.wallet_add,
-            label: 'شحن المحفظة',
+            label: 'recharge_wallet'.tr,
             onTap: controller.topUpWallet,
           ),
           _ActionTile(
             icon: Iconsax.card,
-            label: 'بطاقاتي',
+            label: 'auto_key_117'.tr,
             onTap: controller.openWalletCards,
           ),
         ],
@@ -275,7 +279,7 @@ class WalletScreen extends GetView<WalletController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'محفظتك في أمان',
+                  'auto_key_129'.tr,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.primary,
@@ -283,7 +287,7 @@ class WalletScreen extends GetView<WalletController> {
                 ),
                 SizedBox(height: 2.h),
                 Text(
-                  'جميع معاملاتك المالية محمية ومشفرة',
+                  'auto_key_130'.tr,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: cs.onSurface.withValues(alpha: 0.5),
                   ),
@@ -309,7 +313,7 @@ class WalletScreen extends GetView<WalletController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'العمليات الأخيرة',
+                'auto_key_131'.tr,
                 style: theme.textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.primary,
@@ -324,7 +328,7 @@ class WalletScreen extends GetView<WalletController> {
                   size: 10.sp,
                 ),
                 label: Text(
-                  'عرض الكل',
+                  'view_all'.tr,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 10.sp,
@@ -433,7 +437,7 @@ class WalletScreen extends GetView<WalletController> {
                 child: Column(
                   children: [
                     Text(
-                      'إجمالي المدفوعات',
+                      'auto_key_132'.tr,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: cs.onSurface.withValues(alpha: 0.5),
                       ),
@@ -457,7 +461,7 @@ class WalletScreen extends GetView<WalletController> {
                 child: Column(
                   children: [
                     Text(
-                      'إجمالي الشحنات',
+                      'auto_key_133'.tr,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: cs.onSurface.withValues(alpha: 0.5),
                       ),

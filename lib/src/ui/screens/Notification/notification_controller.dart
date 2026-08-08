@@ -17,7 +17,7 @@ class NotificationnController extends GetxController {
   final selectedTab = 0.obs; // 0 = today, 1 = all
   final selectedFilter = ''.obs; // '' = all
 
-  final filters = <String>['الطلبات', 'التوصيل', 'العروض', 'الحساب'];
+  final filters = <String>['orders'.tr, 'delivery'.tr, 'auto_key_189'.tr, 'account'.tr];
 
   // ── Date format used by the API: "26 05 26 02:02 pm" ──
   static final _apiDateFormat = DateFormat('yy MM dd hh:mm a', 'en');
@@ -137,12 +137,12 @@ class NotificationnController extends GetxController {
       pagination.items.removeWhere((n) => n.id == id);
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم حذف الإشعار',
+            'auto_key_417'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
     } catch (e) {
-      AppSnackbar.showError(message: 'تعذر حذف الإشعار');
+      AppSnackbar.showError(message: 'auto_key_418'.tr);
     }
   }
 
@@ -154,12 +154,12 @@ class NotificationnController extends GetxController {
       pagination.items.clear();
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم حذف جميع الإشعارات',
+            'auto_key_419'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
     } catch (e) {
-      AppSnackbar.showError(message: 'تعذر حذف الإشعارات');
+      AppSnackbar.showError(message: 'auto_key_420'.tr);
     }
   }
 }

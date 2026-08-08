@@ -53,7 +53,7 @@ class ProductDetailsController extends GetxController {
       fetchProductDetails();
     } else {
       productDetailsResponse.value = ApiResponse<ProductDetailsResponse>.error(
-        'معرف المنتج غير متوفر',
+        'auto_key_252'.tr,
       );
     }
   }
@@ -105,7 +105,7 @@ class ProductDetailsController extends GetxController {
     try {
       final res = await repository.getProductDetails(id);
       if (!res.isSuccess || res.product == null) {
-        final msg = res.message.isNotEmpty ? res.message : 'المنتج غير متوفر';
+        final msg = res.message.isNotEmpty ? res.message : 'auto_key_253'.tr;
         productDetailsResponse.value =
             ApiResponse<ProductDetailsResponse>.error(msg);
         AppSnackbar.showError(message: msg);
@@ -191,7 +191,7 @@ class ProductDetailsController extends GetxController {
         final max = option.maxSelections;
         if (max != null && current.length >= max) {
           AppSnackbar.showInfo(
-            message: 'يمكنك اختيار $max كحد أقصى لـ ${option.name}',
+            message: 'auto_key_254'.tr,
           );
           return;
         }
@@ -241,13 +241,13 @@ class ProductDetailsController extends GetxController {
       final selected = selectedByOption[option.id ?? -1] ?? {};
       final count = selected.length;
       if (count < option.minSelections) {
-        final label = option.isRequired ? 'مطلوب' : '';
-        return 'يرجى اختيار ${option.minSelections} على الأقل من ${option.name} $label'
+        final label = option.isRequired ? 'auto_key_85'.tr : '';
+        return 'auto_key_255'.tr
             .trim();
       }
       final max = option.maxSelections;
       if (max != null && count > max) {
-        return 'تجاوزت الحد الأقصى للاختيار في ${option.name}';
+        return 'auto_key_256'.tr;
       }
     }
     return null;
@@ -262,7 +262,7 @@ class ProductDetailsController extends GetxController {
     final pid = productId ?? details?.id;
     final mid = marketId ?? details?.market.id;
     if (pid == null || mid == null || mid == 0) {
-      AppSnackbar.showError(message: 'بيانات المنتج غير مكتملة');
+      AppSnackbar.showError(message: 'auto_key_257'.tr);
       return;
     }
 
@@ -287,7 +287,7 @@ class ProductDetailsController extends GetxController {
           values: {'name': name, 'image': image, 'price': unitPrice.toString()},
         ),
       );
-      AppSnackbar.showSuccess(message: 'تمت إضافة المنتج إلى السلة');
+      AppSnackbar.showSuccess(message: 'auto_key_258'.tr);
     } catch (e) {
       AppSnackbar.showError(message: e.toString());
     } finally {

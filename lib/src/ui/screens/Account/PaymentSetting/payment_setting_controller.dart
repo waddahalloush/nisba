@@ -32,7 +32,7 @@ class VisaCardModel {
     final number = map['number']?.toString();
     final display = lastFour != null && lastFour.isNotEmpty
         ? '•••• $lastFour'
-        : (number ?? 'بطاقة');
+        : (number ?? 'card'.tr);
     return VisaCardModel(
       id: int.tryParse(map['id']?.toString() ?? '') ?? 0,
       displayNumber: display,
@@ -43,21 +43,21 @@ class VisaCardModel {
 }
 
 class PaymentSettingController extends GetxController {
-  static const _keyDefault = 'طريقة الدفع الافتراضية';
-  static const _keyQr = 'المشتريات عبر QR-Code';
-  static const _keyNoPhone = 'الدفع بدون هاتف';
+  static final String _keyDefault = 'auto_key_45'.tr;
+  static final String _keyQr = 'auto_key_46'.tr;
+  static final String _keyNoPhone = 'auto_key_47'.tr;
 
   final dailyLimit = 5000.0.obs;
   final faceIdEnabled = true.obs;
   final fingerprintEnabled = false.obs;
-  final selectedPaymentMethod = 'المحفظة'.obs;
+  final selectedPaymentMethod = 'wallet'.tr.obs;
   final visas = <VisaCardModel>[].obs;
   final isLoading = false.obs;
 
   final paymentMethods = <String, String>{
-    _keyDefault: 'محفظة',
-    _keyQr: 'محفظة',
-    _keyNoPhone: 'محفظة',
+    _keyDefault: 'auto_key_48'.tr,
+    _keyQr: 'auto_key_48'.tr,
+    _keyNoPhone: 'auto_key_48'.tr,
   }.obs;
 
   String _editingKey = _keyDefault;
@@ -85,18 +85,20 @@ class PaymentSettingController extends GetxController {
       if (limit != null) {
         dailyLimit.value =
             double.tryParse(limit.toString())?.clamp(0, 10000) ??
-                dailyLimit.value;
+            dailyLimit.value;
       }
 
       paymentMethods[_keyDefault] =
-          _enumDesc(map['default_payment_method']) ?? paymentMethods[_keyDefault]!;
-      paymentMethods[_keyQr] = _enumDesc(map['default_qr_payment_method']) ??
+          _enumDesc(map['default_payment_method']) ??
+          paymentMethods[_keyDefault]!;
+      paymentMethods[_keyQr] =
+          _enumDesc(map['default_qr_payment_method']) ??
           _enumDesc(map['default_qr']) ??
           paymentMethods[_keyQr]!;
       paymentMethods[_keyNoPhone] =
           _enumDesc(map['default_without_phone_payment_method']) ??
-              _enumDesc(map['default_without_phone']) ??
-              paymentMethods[_keyNoPhone]!;
+          _enumDesc(map['default_without_phone']) ??
+          paymentMethods[_keyNoPhone]!;
       paymentMethods.refresh();
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -153,8 +155,9 @@ class PaymentSettingController extends GetxController {
       final res = await repository.setDefaultVisa(id);
       ApiResult.ensureSuccess(res);
       AppSnackbar.showSuccess(
-        message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم تعيين البطاقة الافتراضية',
+        message:
+            (res is Map ? res['message'] : null)?.toString() ??
+            'auto_key_49'.tr,
       );
       await fetchVisas();
     } on ApiException catch (e) {
@@ -176,8 +179,9 @@ class PaymentSettingController extends GetxController {
       ApiResult.ensureSuccess(res);
       visas.removeWhere((v) => v.id == id);
       AppSnackbar.showSuccess(
-        message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم حذف البطاقة',
+        message:
+            (res is Map ? res['message'] : null)?.toString() ??
+            'auto_key_50'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -192,8 +196,9 @@ class PaymentSettingController extends GetxController {
 
   void showPaymentMethodSheet([String? forKey]) {
     _editingKey = forKey ?? _keyDefault;
-    selectedPaymentMethod.value =
-        _normalizeLabel(paymentMethods[_editingKey] ?? 'المحفظة');
+    selectedPaymentMethod.value = _normalizeLabel(
+      paymentMethods[_editingKey] ?? 'wallet'.tr,
+    );
 
     final theme = Theme.of(Get.context!);
     final cs = theme.colorScheme;
@@ -249,9 +254,9 @@ class PaymentSettingController extends GetxController {
                 children: [
                   PaymentOption(
                     icon: Iconsax.wallet_2,
-                    label: 'المحفظة',
-                    isSelected: selectedPaymentMethod.value == 'المحفظة',
-                    onTap: () => selectedPaymentMethod.value = 'المحفظة',
+                    label: 'wallet'.tr,
+                    isSelected: selectedPaymentMethod.value == 'wallet'.tr,
+                    onTap: () => selectedPaymentMethod.value = 'wallet'.tr,
                   ),
                   Divider(
                     height: 1.h,
@@ -259,10 +264,10 @@ class PaymentSettingController extends GetxController {
                   ),
                   PaymentOption(
                     icon: Iconsax.cup,
-                    label: 'نقاطي',
-                    subtitle: '0 نقطة',
-                    isSelected: selectedPaymentMethod.value == 'نقاطي',
-                    onTap: () => selectedPaymentMethod.value = 'نقاطي',
+                    label: 'auto_key_51'.tr,
+                    subtitle: 'auto_key_52'.tr,
+                    isSelected: selectedPaymentMethod.value == 'auto_key_51'.tr,
+                    onTap: () => selectedPaymentMethod.value = 'auto_key_51'.tr,
                   ),
                   Divider(
                     height: 1.h,
@@ -270,9 +275,9 @@ class PaymentSettingController extends GetxController {
                   ),
                   PaymentOption(
                     icon: Iconsax.moneys,
-                    label: 'نقداً',
-                    isSelected: selectedPaymentMethod.value == 'نقداً',
-                    onTap: () => selectedPaymentMethod.value = 'نقداً',
+                    label: 'cash'.tr,
+                    isSelected: selectedPaymentMethod.value == 'cash'.tr,
+                    onTap: () => selectedPaymentMethod.value = 'cash'.tr,
                   ),
                   Divider(
                     height: 1.h,
@@ -280,9 +285,9 @@ class PaymentSettingController extends GetxController {
                   ),
                   PaymentOption(
                     icon: Iconsax.card,
-                    label: 'بطاقة',
-                    isSelected: selectedPaymentMethod.value == 'بطاقة',
-                    onTap: () => selectedPaymentMethod.value = 'بطاقة',
+                    label: 'card'.tr,
+                    isSelected: selectedPaymentMethod.value == 'card'.tr,
+                    onTap: () => selectedPaymentMethod.value = 'card'.tr,
                   ),
                 ],
               ),
@@ -302,7 +307,7 @@ class PaymentSettingController extends GetxController {
                   ),
                 ),
                 child: Text(
-                  'تطبيق',
+                  'apply'.tr,
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.bold,
@@ -329,15 +334,17 @@ class PaymentSettingController extends GetxController {
       return;
     }
     try {
-      final res = await repository.setDefaultPaymentMethod(data: {
-        'type': _settingKeyToType(_editingKey),
-        'payment_method': _labelToApiMethod(label),
-      });
+      final res = await repository.setDefaultPaymentMethod(
+        data: {
+          'type': _settingKeyToType(_editingKey),
+          'payment_method': _labelToApiMethod(label),
+        },
+      );
       ApiResult.ensureSuccess(res);
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تعيين طريقة الدفع: $label',
+            : 'auto_key_53'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -358,14 +365,14 @@ class PaymentSettingController extends GetxController {
       return;
     }
     try {
-      final res = await repository.setDailyPurchaseLimit(data: {
-        'amount': amount,
-      });
+      final res = await repository.setDailyPurchaseLimit(
+        data: {'amount': amount},
+      );
       ApiResult.ensureSuccess(res);
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تحديث الحد اليومي',
+            : 'auto_key_54'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -380,59 +387,46 @@ class PaymentSettingController extends GetxController {
   void toggleFingerprint(bool v) => fingerprintEnabled.value = v;
 
   String _settingKeyToType(String uiKey) {
-    switch (uiKey) {
-      case _keyQr:
-        return 'default_qr_payment_method';
-      case _keyNoPhone:
-        return 'default_without_phone_payment_method';
-      case _keyDefault:
-      default:
-        return 'default_payment_method';
-    }
+    if (uiKey == _keyQr) return 'default_qr_payment_method';
+    if (uiKey == _keyNoPhone) return 'default_without_phone_payment_method';
+    return 'default_payment_method';
   }
 
   String _labelToApiMethod(String label) {
     final n = _normalizeLabel(label);
-    switch (n) {
-      case 'نقاطي':
-        return 'point';
-      case 'نقداً':
-        return 'cash';
-      case 'بطاقة':
-        return 'card';
-      case 'المحفظة':
-      default:
-        return 'wallet';
-    }
+    if (n == 'auto_key_51'.tr) return 'point';
+    if (n == 'cash'.tr) return 'cash';
+    if (n == 'card'.tr) return 'card';
+    return 'wallet';
   }
 
   String _apiMethodToLabel(String value) {
     switch (value.toLowerCase()) {
       case 'point':
-        return 'نقاطي';
+        return 'auto_key_51'.tr;
       case 'cash':
-        return 'نقداً';
+        return 'cash'.tr;
       case 'card':
-        return 'بطاقة';
+        return 'card'.tr;
       case 'wallet':
-        return 'المحفظة';
+        return 'wallet'.tr;
       default:
         return value;
     }
   }
 
   String _normalizeLabel(String label) {
-    if (label.contains('محفظ') || label.toLowerCase() == 'wallet') {
-      return 'المحفظة';
+    if (label.contains('auto_key_55'.tr) || label.toLowerCase() == 'wallet') {
+      return 'wallet'.tr;
     }
-    if (label.contains('نقاط') || label.toLowerCase() == 'point') {
-      return 'نقاطي';
+    if (label.contains('points'.tr) || label.toLowerCase() == 'point') {
+      return 'auto_key_51'.tr;
     }
-    if (label.contains('نقد') || label.toLowerCase() == 'cash') {
-      return 'نقداً';
+    if (label.contains('auto_key_56'.tr) || label.toLowerCase() == 'cash') {
+      return 'cash'.tr;
     }
-    if (label.contains('بطاق') || label.toLowerCase() == 'card') {
-      return 'بطاقة';
+    if (label.contains('auto_key_57'.tr) || label.toLowerCase() == 'card') {
+      return 'card'.tr;
     }
     return label;
   }

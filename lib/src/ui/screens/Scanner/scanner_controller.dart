@@ -73,7 +73,7 @@ class ScannerController extends GetxController {
       final order = data is Map ? data['order'] : null;
       final client = data is Map ? data['client'] : null;
       if (order is! Map || order.isEmpty) {
-        AppSnackbar.showInfo(title: 'رمز الطلب', message: code);
+        AppSnackbar.showInfo(title: 'auto_key_519'.tr, message: code);
         return;
       }
       await Get.toNamed(

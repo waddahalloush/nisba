@@ -106,7 +106,7 @@ class PlaceDetailsController extends GetxController {
       fetchDetails();
       return;
     }
-    errorMessage.value = 'تعذر فتح تفاصيل الخدمة';
+    errorMessage.value = 'auto_key_296'.tr;
   }
 
   bool get _isCommercialCenter =>
@@ -115,7 +115,7 @@ class PlaceDetailsController extends GetxController {
   Future<void> fetchDetails() async {
     final id = int.tryParse(item.id);
     if (id == null || id <= 0) {
-      errorMessage.value = 'معرّف غير صالح';
+      errorMessage.value = 'auto_key_297'.tr;
       return;
     }
     if (!await connectionChecker.hasConnection) {
@@ -194,8 +194,8 @@ class PlaceDetailsController extends GetxController {
         category: item.category,
         serviceType: item.serviceType.isNotEmpty ? item.serviceType : 'service',
         aboutText: store['description']?.toString() ?? item.aboutText,
-        currency: item.currency.isNotEmpty ? item.currency : 'ر.ق',
-        hours: store['is_open'] == true ? 'مفتوح' : 'مغلق',
+        currency: item.currency.isNotEmpty ? item.currency : 'currency_qar'.tr,
+        hours: store['is_open'] == true ? 'auto_key_280'.tr : 'auto_key_281'.tr,
         productsOrServices:
             subItems.isNotEmpty ? subItems : item.productsOrServices,
       );
@@ -450,16 +450,16 @@ class PlaceDetailsController extends GetxController {
   /// Creates order via `POST /orders/store` (ServiceOrderStrategy products path).
   Future<void> submitOrder() async {
     if (_isCommercialCenter) {
-      AppSnackbar.showInfo(message: 'هذا المكان للتصفح فقط');
+      AppSnackbar.showInfo(message: 'auto_key_298'.tr);
       return;
     }
     final marketId = int.tryParse(item.id);
     if (marketId == null || marketId <= 0) {
-      AppSnackbar.showError(message: 'معرّف الخدمة غير صالح');
+      AppSnackbar.showError(message: 'auto_key_299'.tr);
       return;
     }
     if (selectedItems.isEmpty) {
-      AppSnackbar.showError(message: 'اختر خدمة واحدةً واحداً على الأقل');
+      AppSnackbar.showError(message: 'auto_key_300'.tr);
       return;
     }
     if (!await connectionChecker.hasConnection) {
@@ -487,7 +487,7 @@ class PlaceDetailsController extends GetxController {
       final ok = await BookingOrderSubmit.storeAndSettle(
         repository: repository,
         body: body,
-        successFallback: 'تم إنشاء الطلب بنجاح',
+        successFallback: 'auto_key_146'.tr,
       );
       if (ok) clearSelections();
     } on ApiException catch (e) {

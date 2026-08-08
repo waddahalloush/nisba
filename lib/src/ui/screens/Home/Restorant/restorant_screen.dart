@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/api_response.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -25,7 +27,7 @@ class RestorantScreen extends GetView<RestorantController> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          icon: Icon(backIconData(context), color: cs.primary),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +40,7 @@ class RestorantScreen extends GetView<RestorantController> {
               ),
             ),
             Text(
-              'اكتشف أفضل ${controller.args.name} القريبة منك',
+              'auto_key_260'.tr,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.5),
                 fontSize: 10.sp,
@@ -85,7 +87,7 @@ class RestorantScreen extends GetView<RestorantController> {
             Text(
               controller.sectionResponse.value.message.isNotEmpty
                   ? controller.sectionResponse.value.message
-                  : 'حدث خطأ ما',
+                  : 'auto_key_242'.tr,
               style: theme.textTheme.bodyLarge?.copyWith(color: cs.error),
               textAlign: TextAlign.center,
             ),
@@ -96,7 +98,7 @@ class RestorantScreen extends GetView<RestorantController> {
                 controller.fetchSectionDetails(args);
               },
               icon: const Icon(Iconsax.refresh),
-              label: const Text('إعادة المحاولة'),
+              label: Text('auto_key_243'.tr),
               style: ElevatedButton.styleFrom(
                 backgroundColor: cs.primary,
                 foregroundColor: cs.onPrimary,
@@ -182,7 +184,7 @@ class RestorantScreen extends GetView<RestorantController> {
                           ),
                         ),
                         Text(
-                          'وفر حتى 40%',
+                          'auto_key_261'.tr,
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w900,
@@ -191,7 +193,7 @@ class RestorantScreen extends GetView<RestorantController> {
                         ),
 
                         Text(
-                          'على طلبك الأول',
+                          'auto_key_262'.tr,
                           style: TextStyle(fontSize: 9.sp, color: cs.onSurface),
                         ),
 
@@ -205,7 +207,7 @@ class RestorantScreen extends GetView<RestorantController> {
                             color: cs.primary.withAlpha(42),
                           ),
                           child: Text(
-                            'الكود : First40',
+                            'auto_key_263'.tr,
                             style: TextStyle(
                               fontSize: 9.sp,
                               color: cs.primary,
@@ -248,7 +250,7 @@ class RestorantScreen extends GetView<RestorantController> {
                           ),
                         ),
                         Text(
-                          'وجبات ب 25 ر.ق',
+                          'auto_key_264'.tr,
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w900,
@@ -257,7 +259,7 @@ class RestorantScreen extends GetView<RestorantController> {
                         ),
 
                         Text(
-                          'اختر من قائمة مميزة',
+                          'auto_key_265'.tr,
                           style: TextStyle(fontSize: 9.sp, color: cs.onSurface),
                         ),
 
@@ -269,7 +271,7 @@ class RestorantScreen extends GetView<RestorantController> {
                               size: 14.sp,
                             ),
                             Text(
-                              'ينتهي خلال 7 أيام',
+                              'auto_key_266'.tr,
                               style: TextStyle(
                                 fontSize: 9.sp,
                                 color: cs.onSurface,
@@ -313,7 +315,7 @@ class RestorantScreen extends GetView<RestorantController> {
         ),
         child: TextFormField(
           decoration: InputDecoration(
-            hintText: 'ابحث عن مطعم أو مطبخ…',
+            hintText: 'auto_key_267'.tr,
             hintStyle: TextStyle(
               color: cs.onSurface.withValues(alpha: 0.35),
               fontSize: 13.sp,
@@ -402,7 +404,7 @@ class RestorantScreen extends GetView<RestorantController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'خصم 20% على جميع الطلبات',
+                    'auto_key_268'.tr,
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
@@ -411,7 +413,7 @@ class RestorantScreen extends GetView<RestorantController> {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'فترة محدودة - اطلب الآن',
+                    'auto_key_269'.tr,
                     style: TextStyle(
                       fontSize: 11.sp,
                       color: cs.onPrimary.withValues(alpha: 0.85),
@@ -428,7 +430,7 @@ class RestorantScreen extends GetView<RestorantController> {
                       color: cs.onPrimary,
                     ),
                     child: Text(
-                      'اطلب الآن',
+                      'auto_key_270'.tr,
                       style: TextStyle(fontSize: 11.sp, color: cs.primary),
                     ),
                   ),
@@ -441,7 +443,7 @@ class RestorantScreen extends GetView<RestorantController> {
               children: [
                 Assets.images.bubble.image(width: 80.w),
                 Text(
-                  'خصم\n20%',
+                  'auto_key_271'.tr,
                   style: TextStyle(
                     fontSize: 18.sp,
                     color: cs.primary,
@@ -465,7 +467,7 @@ class RestorantScreen extends GetView<RestorantController> {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Text(
-            "${controller.args.name} قريبة منك",
+            'auto_key_272'.tr,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -782,26 +784,26 @@ class RestorantScreen extends GetView<RestorantController> {
       padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             child: _FooterChip(
               icon: Icons.compare_arrows_rounded,
-              label: 'الكل',
+              label: 'all'.tr,
             ),
           ),
           SizedBox(width: 2.w),
-          const Expanded(
-            child: _FooterChip(icon: Icons.restaurant_menu, label: 'المطابخ'),
+          Expanded(
+            child: _FooterChip(icon: Icons.restaurant_menu, label: 'auto_key_273'.tr),
           ),
           SizedBox(width: 2.w),
-          const Expanded(
+          Expanded(
             child: _FooterChip(
               icon: Icons.star_border_rounded,
-              label: 'تقييم 4.0+',
+              label: 'auto_key_274'.tr,
             ),
           ),
           SizedBox(width: 2.w),
-          const Expanded(
-            child: _FooterChip(icon: Iconsax.truck_fast, label: 'توصيل سريع'),
+          Expanded(
+            child: _FooterChip(icon: Iconsax.truck_fast, label: 'auto_key_275'.tr),
           ),
         ],
       ),

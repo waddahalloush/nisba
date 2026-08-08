@@ -110,51 +110,51 @@ class AddressesController extends GetxController {
 
     Get.dialog(
       AlertDialog(
-        title: const Text('إضافة عنوان'),
+        title: Text('auto_key_16'.tr),
         content: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: nameController,
-                decoration: const InputDecoration(labelText: 'الاسم'),
+                decoration: InputDecoration(labelText: 'auto_key_17'.tr),
               ),
               TextField(
                 controller: buildingController,
-                decoration: const InputDecoration(labelText: 'المبنى'),
+                decoration: InputDecoration(labelText: 'auto_key_18'.tr),
               ),
               TextField(
                 controller: apartmentController,
-                decoration: const InputDecoration(labelText: 'الشقة'),
+                decoration: InputDecoration(labelText: 'auto_key_19'.tr),
               ),
               TextField(
                 controller: floorController,
-                decoration: const InputDecoration(labelText: 'الطابق'),
+                decoration: InputDecoration(labelText: 'auto_key_20'.tr),
               ),
               TextField(
                 controller: streetController,
-                decoration: const InputDecoration(labelText: 'الشارع'),
+                decoration: InputDecoration(labelText: 'auto_key_21'.tr),
               ),
               TextField(
                 controller: infoController,
-                decoration: const InputDecoration(labelText: 'ملاحظات'),
+                decoration: InputDecoration(labelText: 'auto_key_22'.tr),
               ),
               TextField(
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(labelText: 'الهاتف'),
+                decoration: InputDecoration(labelText: 'auto_key_23'.tr),
               ),
               Obx(
                 () => DropdownButtonFormField<String>(
                   value: selectedType.value,
-                  decoration: const InputDecoration(labelText: 'النوع'),
-                  items: const [
-                    DropdownMenuItem(value: 'house', child: Text('منزل')),
+                  decoration: InputDecoration(labelText: 'auto_key_24'.tr),
+                  items: [
+                    DropdownMenuItem(value: 'house', child: Text('auto_key_25'.tr)),
                     DropdownMenuItem(
                       value: 'apartment',
-                      child: Text('شقة'),
+                      child: Text('auto_key_26'.tr),
                     ),
-                    DropdownMenuItem(value: 'office', child: Text('مكتب')),
+                    DropdownMenuItem(value: 'office', child: Text('auto_key_27'.tr)),
                   ],
                   onChanged: (v) {
                     if (v != null) selectedType.value = v;
@@ -165,7 +165,7 @@ class AddressesController extends GetxController {
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('إلغاء')),
+          TextButton(onPressed: () => Get.back(), child: Text('cancel'.tr)),
           Obx(
             () => TextButton(
               onPressed: isSubmitting.value ? null : storeAddress,
@@ -175,7 +175,7 @@ class AddressesController extends GetxController {
                       height: 18,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
-                  : const Text('حفظ'),
+                  : Text('save'.tr),
             ),
           ),
         ],
@@ -187,7 +187,7 @@ class AddressesController extends GetxController {
     if (nameController.text.trim().isEmpty ||
         buildingController.text.trim().isEmpty ||
         streetController.text.trim().isEmpty) {
-      AppSnackbar.showError(message: 'يرجى تعبئة الحقول المطلوبة');
+      AppSnackbar.showError(message: 'auto_key_28'.tr);
       return;
     }
     if (!await connectionChecker.hasConnection) {
@@ -225,7 +225,7 @@ class AddressesController extends GetxController {
       Get.back();
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تمت إضافة العنوان',
+            'auto_key_29'.tr,
       );
       await fetchAddresses();
     } on ApiException catch (e) {
@@ -252,7 +252,7 @@ class AddressesController extends GetxController {
       addresses.removeWhere((a) => a.id == id);
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم حذف العنوان',
+            'auto_key_30'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);

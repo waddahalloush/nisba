@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +18,7 @@ class OrderChatScreen extends GetView<OrderChatController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -22,10 +26,10 @@ class OrderChatScreen extends GetView<OrderChatController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onPrimary),
+            icon: Icon(backIconData(context), color: cs.onPrimary),
           ),
           title: Text(
-            'محادثة الطلب #${controller.orderId}',
+            'auto_key_453'.tr,
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.bold,
@@ -43,7 +47,7 @@ class OrderChatScreen extends GetView<OrderChatController> {
                 if (controller.messages.isEmpty) {
                   return Center(
                     child: Text(
-                      'لا توجد رسائل بعد',
+                      'auto_key_454'.tr,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onSurface.withValues(alpha: 0.5),
                       ),
@@ -102,7 +106,7 @@ class OrderChatScreen extends GetView<OrderChatController> {
                   color: cs.onSurface,
                 ),
                 decoration: InputDecoration(
-                  hintText: 'اكتب رسالتك...',
+                  hintText: 'auto_key_455'.tr,
                   hintStyle: TextStyle(
                     color: cs.onSurface.withValues(alpha: 0.35),
                     fontSize: 13.sp,

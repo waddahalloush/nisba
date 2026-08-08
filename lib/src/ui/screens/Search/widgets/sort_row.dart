@@ -31,7 +31,7 @@ class SortRow extends GetView<SearchhController> {
                 Icon(Iconsax.setting_44, size: 18.sp, color: cs.onSurface),
                 SizedBox(width: 8.w),
                 Text(
-                  'ترتيب حسب الأقرب',
+                  'auto_key_555'.tr,
                   style: theme.textTheme.labelMedium?.copyWith(
                     color: cs.onSurface.withValues(alpha: 0.7),
                   ),
@@ -47,7 +47,7 @@ class SortRow extends GetView<SearchhController> {
   }
 
   void _showSortMenu(BuildContext context, SearchhController controller) {
-    final items = ['تصاعدي', 'تنازلي'];
+    final items = ['auto_key_544'.tr, 'auto_key_545'.tr];
     final renderBox = context.findRenderObject() as RenderBox?;
     if (renderBox == null || !renderBox.hasSize) return;
 

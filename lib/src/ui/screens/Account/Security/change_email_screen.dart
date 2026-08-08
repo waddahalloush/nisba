@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -14,7 +18,7 @@ class ChangeEmailScreen extends GetView<ChangeEmailController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -22,10 +26,10 @@ class ChangeEmailScreen extends GetView<ChangeEmailController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'تغيير البريد الإلكتروني',
+            'change_email'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -67,7 +71,7 @@ class ChangeEmailScreen extends GetView<ChangeEmailController> {
           Icon(Iconsax.sms, color: cs.primary, size: 40.sp),
           SizedBox(height: 12.h),
           Text(
-            'سنرسل رمز تحقق إلى رقم هاتفك الحالي لتأكيد تغيير البريد',
+            'auto_key_91'.tr,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: cs.onSurface.withValues(alpha: 0.7),
@@ -98,7 +102,7 @@ class ChangeEmailScreen extends GetView<ChangeEmailController> {
                       ),
                     )
                   : Text(
-                      'إرسال رمز التحقق',
+                      'auto_key_81'.tr,
                       style: TextStyle(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.bold,
@@ -121,30 +125,30 @@ class ChangeEmailScreen extends GetView<ChangeEmailController> {
         children: [
           SizedBox(height: 8.h),
           _InputCard(
-            label: 'رمز التحقق',
+            label: 'auto_key_82'.tr,
             controller: controller.codeController,
             icon: Iconsax.password_check,
             keyboardType: TextInputType.number,
             maxLength: 6,
             validator: (v) {
               if (v == null || v.trim().length != 6) {
-                return 'أدخل رمزًا من 6 أرقام';
+                return 'auto_key_83'.tr;
               }
               return null;
             },
           ),
           SizedBox(height: 12.h),
           _InputCard(
-            label: 'البريد الإلكتروني الجديد',
+            label: 'auto_key_92'.tr,
             controller: controller.emailController,
             icon: Iconsax.sms,
             keyboardType: TextInputType.emailAddress,
             validator: (v) {
               if (v == null || v.trim().isEmpty) {
-                return 'البريد الإلكتروني مطلوب';
+                return 'email_is_required'.tr;
               }
               if (!GetUtils.isEmail(v.trim())) {
-                return 'أدخل بريدًا صحيحًا';
+                return 'auto_key_93'.tr;
               }
               return null;
             },
@@ -155,7 +159,7 @@ class ChangeEmailScreen extends GetView<ChangeEmailController> {
               onPressed:
                   controller.isSendingOtp.value ? null : controller.sendOtp,
               child: Text(
-                'إعادة إرسال الرمز',
+                'auto_key_88'.tr,
                 style: TextStyle(color: cs.primary, fontSize: 13.sp),
               ),
             ),
@@ -186,7 +190,7 @@ class ChangeEmailScreen extends GetView<ChangeEmailController> {
                         ),
                       )
                     : Text(
-                        'تأكيد التغيير',
+                        'auto_key_89'.tr,
                         style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,

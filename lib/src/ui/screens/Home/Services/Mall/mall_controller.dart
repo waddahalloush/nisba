@@ -29,12 +29,12 @@ class MallController extends BaseServiceController {
     errorMessage.value = '';
     mallsResponse.value = ApiResponse<dynamic>.loading('');
 
-    categories.assignAll(const [
-      ServiceCategory(name: 'الكل', icon: Iconsax.category),
-      ServiceCategory(name: 'ترفيه', icon: Iconsax.music),
-      ServiceCategory(name: 'مطاعم', icon: Iconsax.coffee),
-      ServiceCategory(name: 'أزياء', icon: Iconsax.shop),
-      ServiceCategory(name: 'إلكترونيات', icon: Iconsax.mobile),
+    categories.assignAll([
+      ServiceCategory(name: 'all'.tr, icon: Iconsax.category),
+      ServiceCategory(name: 'auto_key_386'.tr, icon: Iconsax.music),
+      ServiceCategory(name: 'auto_key_387'.tr, icon: Iconsax.coffee),
+      ServiceCategory(name: 'auto_key_370'.tr, icon: Iconsax.shop),
+      ServiceCategory(name: 'auto_key_366'.tr, icon: Iconsax.mobile),
     ]);
 
     if (!await connectionChecker.hasConnection) {
@@ -65,7 +65,7 @@ class MallController extends BaseServiceController {
                 (e) => BaseServiceMapper.fromMallOrCenter(
                   e,Iconsax.reserve,
                   serviceType: 'mall',
-                  category: 'مولات',
+                  category: 'auto_key_388'.tr,
                   fallbackImage: Assets.images.mall11.path,
                 ),
               )
@@ -87,7 +87,7 @@ class MallController extends BaseServiceController {
       AppSnackbar.showError(message: errorMessage.value);
     } catch (e) {
       mallsResponse.value = ApiResponse<dynamic>.error(e.toString());
-      errorMessage.value = 'حدث خطأ أثناء جلب البيانات: $e';
+      errorMessage.value = 'auto_key_380'.tr;
       AppSnackbar.showError(message: errorMessage.value);
     } finally {
       isLoading.value = false;

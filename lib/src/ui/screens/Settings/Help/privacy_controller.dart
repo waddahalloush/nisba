@@ -90,30 +90,30 @@ class PrivacyController extends GetxController {
     switch (key.toLowerCase()) {
       case 'terms':
       case 'term':
-        return 'الشروط والأحكام';
+        return 'auto_key_609'.tr;
       case 'privacy':
-        return 'سياسة الخصوصية';
+        return 'auto_key_610'.tr;
       case 'about':
-        return 'عن التطبيق';
+        return 'about_app'.tr;
       default:
-        return key.isNotEmpty ? key : 'معلومات';
+        return key.isNotEmpty ? key : 'auto_key_611'.tr;
     }
   }
 
   void _seedFallback() {
     if (sections.isNotEmpty) return;
-    sections.assignAll(const [
+    sections.assignAll([
       PrivacySection(
         icon: Iconsax.document_text,
-        title: 'سياسة الاستخدام',
+        title: 'auto_key_612'.tr,
         content:
-            'باستخدام تطبيق نسبة فإنك توافق على الالتزام بهذه الشروط والأحكام.',
+            'auto_key_613'.tr,
       ),
       PrivacySection(
         icon: Iconsax.mobile,
-        title: 'وصف الخدمة',
+        title: 'auto_key_614'.tr,
         content:
-            'يوفر تطبيق نسبة منصة لعرض وبيع الطعام والمنتجات من المطاعم والمتاجر مع إمكانية الطلب والدفع والهدايا.',
+            'auto_key_615'.tr,
       ),
     ]);
   }

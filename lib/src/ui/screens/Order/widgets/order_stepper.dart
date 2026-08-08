@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -5,13 +6,13 @@ import 'package:nisba_app/src/configs/dimensions.dart';
 class OrderStepper extends StatelessWidget {
   final int currentStep;
 
-  const OrderStepper({super.key, required this.currentStep});
+  OrderStepper({super.key, required this.currentStep});
 
-  static const List<_StepData> _steps = [
-    _StepData(title: 'تم استلام الطلب', icon: Icons.receipt_long_rounded),
-    _StepData(title: 'جاري التحضير', icon: Icons.restaurant_rounded),
-    _StepData(title: 'جاري التوصيل', icon: Icons.delivery_dining_rounded),
-    _StepData(title: 'تم التوصيل', icon: Icons.check_circle_outline_rounded),
+  static List<_StepData> _steps = [
+    _StepData(title: 'auto_key_475'.tr, icon: Icons.receipt_long_rounded),
+    _StepData(title: 'order_stepper_preparing'.tr, icon: Icons.restaurant_rounded),
+    _StepData(title: 'auto_key_457'.tr, icon: Icons.delivery_dining_rounded),
+    _StepData(title: 'auto_key_458'.tr, icon: Icons.check_circle_outline_rounded),
   ];
 
   @override

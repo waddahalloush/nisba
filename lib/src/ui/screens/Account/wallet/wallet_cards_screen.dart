@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -16,7 +20,7 @@ class WalletCardsScreen extends GetView<WalletController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -24,10 +28,10 @@ class WalletCardsScreen extends GetView<WalletController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+            icon: Icon(backIconData(context), color: cs.primary),
           ),
           title: Text(
-            'بطاقاتي',
+            'auto_key_117'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -51,7 +55,7 @@ class WalletCardsScreen extends GetView<WalletController> {
                   SizedBox(height: 12.h),
                   Center(
                     child: Text(
-                      'لا توجد بطاقات حالياً',
+                      'auto_key_118'.tr,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: cs.onSurface.withValues(alpha: 0.6),
                       ),
@@ -66,7 +70,7 @@ class WalletCardsScreen extends GetView<WalletController> {
               children: [
                 if (controller.nisbaCards.isNotEmpty) ...[
                   Text(
-                    'بطاقات الهدايا',
+                    'auto_key_119'.tr,
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: cs.primary,
@@ -78,14 +82,14 @@ class WalletCardsScreen extends GetView<WalletController> {
                       theme: theme,
                       icon: Iconsax.gift,
                       title: card.name,
-                      subtitle: '${card.price.toStringAsFixed(2)} ر.ق',
+                      subtitle: 'auto_key_120'.tr,
                     ),
                   ),
                   SizedBox(height: 20.h),
                 ],
                 if (controller.visas.isNotEmpty) ...[
                   Text(
-                    'بطاقات الدفع',
+                    'auto_key_121'.tr,
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: cs.primary,
@@ -98,8 +102,8 @@ class WalletCardsScreen extends GetView<WalletController> {
                       icon: Iconsax.card,
                       title: visa.displayNumber,
                       subtitle: visa.isDefault
-                          ? 'البطاقة الافتراضية'
-                          : (visa.isUsable ? 'نشطة' : 'تحتاج إلى إعادة تفعيل'),
+                          ? 'auto_key_122'.tr
+                          : (visa.isUsable ? 'auto_key_123'.tr : 'auto_key_124'.tr),
                       trailingColor: visa.isDefault ? cs.primary : null,
                     ),
                   ),

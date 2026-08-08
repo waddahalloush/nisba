@@ -48,39 +48,39 @@ class PartnerModel {
   String get typeLabel {
     switch (marketType) {
       case 'store':
-        return 'مطعم';
+        return 'auto_key_533'.tr;
       case 'service':
-        return 'خدمة';
+        return 'auto_key_534'.tr;
       case 'cinema':
-        return 'سينما';
+        return 'auto_key_535'.tr;
       case 'hotel':
-        return 'فندق';
+        return 'auto_key_301'.tr;
       case 'entertainment':
-        return 'ترفيه';
+        return 'auto_key_386'.tr;
       case 'transport':
-        return 'نقل';
+        return 'auto_key_536'.tr;
       case 'kioks':
-        return 'كشك';
+        return 'auto_key_537'.tr;
       case 'mall':
-        return 'مول';
+        return 'auto_key_320'.tr;
       default:
-        return marketType.isEmpty ? 'شريك' : marketType;
+        return marketType.isEmpty ? 'auto_key_538'.tr : marketType;
     }
   }
 
   PartnerModel copyWith({bool? isFavorite}) => PartnerModel(
-        id: id,
-        name: name,
-        imageUrl: imageUrl,
-        rating: rating,
-        location: location,
-        promotion: promotion,
-        distanceKm: distanceKm,
-        latitude: latitude,
-        longitude: longitude,
-        marketType: marketType,
-        isFavorite: isFavorite ?? this.isFavorite,
-      );
+    id: id,
+    name: name,
+    imageUrl: imageUrl,
+    rating: rating,
+    location: location,
+    promotion: promotion,
+    distanceKm: distanceKm,
+    latitude: latitude,
+    longitude: longitude,
+    marketType: marketType,
+    isFavorite: isFavorite ?? this.isFavorite,
+  );
 
   factory PartnerModel.fromApiMap(Map raw) {
     final map = Map<String, dynamic>.from(raw);
@@ -103,14 +103,15 @@ class PartnerModel {
     return PartnerModel(
       id: int.tryParse(map['id']?.toString() ?? '') ?? 0,
       name: map['name']?.toString() ?? '',
-      imageUrl: map['main_image']?.toString() ??
+      imageUrl:
+          map['main_image']?.toString() ??
           map['image']?.toString() ??
           map['logo']?.toString() ??
           '',
       rating: (map['rating'] as num?)?.toDouble() ?? 0,
       location: map['location']?.toString() ?? '',
       promotion: map['preparation_time']?.toString().isNotEmpty == true
-          ? 'وقت التحضير: ${map['preparation_time']}'
+          ? '${'auto_key_539'.tr} ${map['preparation_time']}'
           : '',
       distanceKm: distanceKm,
       latitude: double.tryParse(map['latitude']?.toString() ?? '') ?? 0,
@@ -122,7 +123,7 @@ class PartnerModel {
 }
 
 class SearchhController extends GetxController {
-  static const _serviceDiscoveryTypes = [
+  static final _serviceDiscoveryTypes = [
     'service',
     'cinema',
     'hotel',
@@ -130,8 +131,18 @@ class SearchhController extends GetxController {
     'transport',
   ];
 
-  static const storeSubLabels = ['صحي', 'مقاهي', 'بقالة', 'مطاعم'];
-  static const serviceSubLabels = ['خدمة', 'سينما', 'فنادق', 'ترفيه'];
+  static final storeSubLabels = [
+    'auto_key_540'.tr,
+    'auto_key_541'.tr,
+    'auto_key_542'.tr,
+    'auto_key_387'.tr,
+  ];
+  static final serviceSubLabels = [
+    'auto_key_534'.tr,
+    'auto_key_535'.tr,
+    'auto_key_543'.tr,
+    'auto_key_386'.tr,
+  ];
   static const serviceSubTypes = [
     'service',
     'cinema',
@@ -141,9 +152,10 @@ class SearchhController extends GetxController {
 
   final isMapView = false.obs;
   final selectedMainTab = 0.obs;
+
   /// -1 = بدون تبويب فرعي
   final selectedSubTab = (-1).obs;
-  final selectedSort = 'تصاعدي'.obs;
+  final selectedSort = 'auto_key_544'.tr.obs;
   final keyword = ''.obs;
   final searchTextController = TextEditingController();
 
@@ -208,7 +220,7 @@ class SearchhController extends GetxController {
   }
 
   String get _sortParam =>
-      selectedSort.value == 'تنازلي' ? 'desc' : 'asc';
+      selectedSort.value == 'auto_key_545'.tr ? 'desc' : 'asc';
 
   Map<String, dynamic> _buildFilters() {
     final main = selectedMainTab.value;
@@ -239,12 +251,12 @@ class SearchhController extends GetxController {
     if (typed.isNotEmpty) parts.add(typed);
     // لا تُرسل كلمة التبويب الفرعي إن كان البحث اليدوي موجوداً
     if (typed.isEmpty && extraKeyword != null && extraKeyword.isNotEmpty) {
-      // للتبويب "مطاعم" ضمن الكل لا نقيّد بالكلمة فقط — نستخدم type=store
-      if (main == 0 && extraKeyword == 'مطاعم') {
+      // للتبويب 'auto_key_387'.tr ضمن الكل لا نقيّد بالكلمة فقط — نستخدم type=store
+      if (main == 0 && extraKeyword == 'auto_key_387'.tr) {
         type = 'store';
-      } else if (main == 1 && extraKeyword == 'مطاعم') {
+      } else if (main == 1 && extraKeyword == 'auto_key_387'.tr) {
         // type already store
-      } else if (!(main == 1 && extraKeyword == 'مطاعم')) {
+      } else if (!(main == 1 && extraKeyword == 'auto_key_387'.tr)) {
         parts.add(extraKeyword);
       }
     }
@@ -276,7 +288,9 @@ class SearchhController extends GetxController {
         page: page,
       );
       final data = ApiResult.ensureSuccess(res);
-      final map = data is Map ? Map<String, dynamic>.from(data) : <String, dynamic>{};
+      final map = data is Map
+          ? Map<String, dynamic>.from(data)
+          : <String, dynamic>{};
       final stores = map['stores'] as List? ?? [];
       partners.assignAll(
         stores.whereType<Map>().map(PartnerModel.fromApiMap).toList(),
@@ -325,7 +339,9 @@ class SearchhController extends GetxController {
 
       final res = await repository.getMapMarkets(query: query);
       final data = ApiResult.ensureSuccess(res);
-      final map = data is Map ? Map<String, dynamic>.from(data) : <String, dynamic>{};
+      final map = data is Map
+          ? Map<String, dynamic>.from(data)
+          : <String, dynamic>{};
       final stores = map['stores'] as List? ?? [];
       mapPartners.assignAll(
         stores.whereType<Map>().map(PartnerModel.fromApiMap).toList(),
@@ -379,8 +395,7 @@ class SearchhController extends GetxController {
 
   void selectSubTab(int index) {
     // إعادة الضغط تلغي الفلتر الفرعي
-    selectedSubTab.value =
-        selectedSubTab.value == index ? -1 : index;
+    selectedSubTab.value = selectedSubTab.value == index ? -1 : index;
     _reloadCurrent();
   }
 

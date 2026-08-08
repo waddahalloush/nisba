@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -27,7 +28,7 @@ class OrderDetailsButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'عرض التفاصيل',
+              'auto_key_474'.tr,
               style: theme.textTheme.labelMedium?.copyWith(
                 color: cs.primary,
                 fontWeight: FontWeight.bold,

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -39,7 +40,7 @@ class CategoryTabs extends StatelessWidget {
           _buildTab(
             context: context,
             index: 0,
-            label: 'عروض المطاعم',
+            label: 'auto_key_435'.tr,
             iconData: Icons.restaurant_rounded,
             theme: theme,
             cs: cs,
@@ -49,7 +50,7 @@ class CategoryTabs extends StatelessWidget {
           _buildTab(
             context: context,
             index: 1,
-            label: 'عروض مراكز التسوق',
+            label: 'auto_key_436'.tr,
             iconData: Iconsax.shop,
             theme: theme,
             cs: cs,
@@ -58,7 +59,7 @@ class CategoryTabs extends StatelessWidget {
           _buildTab(
             context: context,
             index: 2,
-            label: 'عروض الفنادق',
+            label: 'auto_key_437'.tr,
             iconData: Iconsax.building,
             theme: theme,
             cs: cs,

@@ -67,8 +67,8 @@ class GiftCreditController extends GetxController {
     final query = _recipientQuery();
     if (query == null) {
       Get.snackbar(
-        'خطأ',
-        selectedTab.value == 0 ? 'يرجى مسح أو إدخال رمز QR' : 'يرجى إدخال رقم الهاتف',
+        'snackbar_error'.tr,
+        selectedTab.value == 0 ? 'auto_key_32'.tr : 'auto_key_33'.tr,
       );
       return false;
     }
@@ -81,7 +81,7 @@ class GiftCreditController extends GetxController {
       final name = user is Map ? user['name']?.toString() ?? '' : '';
       recipientName.value = name;
       if (name.isEmpty) {
-        AppSnackbar.showError(message: 'تعذر العثور على المستخدم');
+        AppSnackbar.showError(message: 'auto_key_34'.tr);
         return false;
       }
       return true;
@@ -101,7 +101,7 @@ class GiftCreditController extends GetxController {
 
   Future<void> proceed() async {
     if (selectedAmount.value <= 0) {
-      Get.snackbar('خطأ', 'يرجى اختيار المبلغ');
+      Get.snackbar('snackbar_error'.tr, 'auto_key_35'.tr);
       return;
     }
 
@@ -126,7 +126,7 @@ class GiftCreditController extends GetxController {
       ApiResult.ensureSuccess(res);
       AppSnackbar.showSuccess(
         message: (res is Map ? res['message'] : null)?.toString() ??
-            'تم الإهداء بنجاح',
+            'auto_key_36'.tr,
       );
       Get.back();
     } on ApiException catch (e) {

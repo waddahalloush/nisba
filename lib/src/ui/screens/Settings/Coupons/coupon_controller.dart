@@ -58,11 +58,11 @@ class CouponModel {
     }
     return CouponModel(
       id: int.tryParse(map['id']?.toString() ?? ''),
-      title: map['name']?.toString() ?? map['title']?.toString() ?? 'قسيمة',
+      title: map['name']?.toString() ?? map['title']?.toString() ?? 'auto_key_585'.tr,
       description: map['code']?.toString() ?? '',
       discount: discountTypeDesc.isNotEmpty
           ? '$discountTypeDesc $discountVal'
-          : 'وفر $discountVal',
+          : 'auto_key_586'.tr,
       maxSaving: '',
       minOrder: '',
       expiry: map['end_at']?.toString() ?? '',
@@ -79,7 +79,7 @@ class CouponController extends GetxController {
   final isLoading = false.obs;
   final isChecking = false.obs;
 
-  final tabs = ['صالـح', 'استخدم', 'انتهت'];
+  final tabs = ['auto_key_587'.tr, 'auto_key_588'.tr, 'auto_key_589'.tr];
 
   final Repository repository = Get.find();
   final InternetConnectionChecker connectionChecker = Get.find();
@@ -133,13 +133,13 @@ class CouponController extends GetxController {
     if (coupon.code.isNotEmpty) {
       codeController.text = coupon.code;
     }
-    AppSnackbar.showSuccess(message: 'تم اختيار القسيمة: ${coupon.title}');
+    AppSnackbar.showSuccess(message: 'auto_key_590'.tr);
   }
 
   Future<void> applyCode() async {
     final code = codeController.text.trim();
     if (code.isEmpty) {
-      AppSnackbar.showError(message: 'يرجى إدخال رمز القسيمة');
+      AppSnackbar.showError(message: 'auto_key_137'.tr);
       return;
     }
     if (!await connectionChecker.hasConnection) {
@@ -153,7 +153,7 @@ class CouponController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم التحقق من القسيمة بنجاح',
+            : 'auto_key_591'.tr,
       );
       if (data is Map) {
         final name = data['name']?.toString();
@@ -164,7 +164,7 @@ class CouponController extends GetxController {
             : typeRaw?.toString() ?? '';
         if (name != null && name.isNotEmpty) {
           AppSnackbar.showInfo(
-            message: '$name — خصم $discount ($type)',
+            message: 'auto_key_592'.tr,
           );
         }
       }

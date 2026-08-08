@@ -7,7 +7,7 @@ class MainTabs extends StatelessWidget {
   final RxInt selectedTab;
   final void Function(int) onTabSelected;
 
-  static const _tabs = ['الكل', 'المطاعم', 'الخدمات'];
+  static final _tabs = ['all'.tr, 'auto_key_179'.tr, 'auto_key_294'.tr];
 
   const MainTabs({
     super.key,

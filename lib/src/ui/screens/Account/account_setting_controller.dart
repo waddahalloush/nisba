@@ -31,40 +31,40 @@ class AccountSettingController extends GetxController {
   List<SettingsItem> get settingsItems => [
         SettingsItem(
           icon: Iconsax.user,
-          title: 'معلومات الحساب',
-          subtitle: 'الاسم، البريد الإلكتروني، رقم الهاتف',
+          title: 'auto_key_5'.tr,
+          subtitle: 'auto_key_6'.tr,
           onTap: () => Get.toNamed(AppRoutesNames.userAccount),
         ),
         SettingsItem(
           icon: Iconsax.card,
-          title: 'إعدادات الدفع',
-          subtitle: 'إدارة بطاقات الدفع والمحفظة',
+          title: 'payment_settings'.tr,
+          subtitle: 'auto_key_7'.tr,
           onTap: () => Get.toNamed(AppRoutesNames.paymentSetting),
         ),
         SettingsItem(
           icon: Iconsax.notification,
-          title: 'الإشعارات',
-          subtitle: 'تفعيل أو إيقاف الإشعارات',
+          title: 'notifications'.tr,
+          subtitle: 'auto_key_8'.tr,
           onTap: () => Get.toNamed(AppRoutesNames.notification),
         ),
         SettingsItem(
           icon: Iconsax.language_square,
-          title: 'اللغة',
+          title: 'language'.tr,
           subtitle: localeService.currentLanguageLabel,
           trailing: Iconsax.arrow_swap_horizontal,
           onTap: showLanguageDialog,
         ),
         SettingsItem(
           icon: Iconsax.global,
-          title: 'الدولة',
-          subtitle: 'دولة قطر',
+          title: 'auto_key_9'.tr,
+          subtitle: 'auto_key_10'.tr,
           trailing: Iconsax.arrow_swap_horizontal,
           onTap: () {},
         ),
         SettingsItem(
           icon: Iconsax.trash,
-          title: 'حذف الحساب',
-          subtitle: 'حذف الحساب نهائياً',
+          title: 'delete_account'.tr,
+          subtitle: 'auto_key_11'.tr,
           onTap: confirmDeleteAccount,
         ),
       ];
@@ -75,17 +75,17 @@ class AccountSettingController extends GetxController {
     quickActions = [
       QuickAction(
         icon: Iconsax.bag_2,
-        label: 'الطلبات',
+        label: 'orders'.tr,
         onTap: () => Get.toNamed(AppRoutesNames.dashboard),
       ),
       QuickAction(
         icon: Iconsax.heart,
-        label: 'المفضلة',
+        label: 'favorite'.tr,
         onTap: () => Get.toNamed(AppRoutesNames.favorite),
       ),
       QuickAction(
         icon: Iconsax.location,
-        label: 'العناوين',
+        label: 'addresses'.tr,
         onTap: () => Get.toNamed(AppRoutesNames.addresses),
       ),
     ];
@@ -127,7 +127,7 @@ class AccountSettingController extends GetxController {
   void showLanguageDialog() {
     Get.dialog(
       AlertDialog(
-        title: const Text('اللغة'),
+        title: Text('language'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -164,18 +164,18 @@ class AccountSettingController extends GetxController {
   void confirmDeleteAccount() {
     Get.dialog(
       AlertDialog(
-        title: const Text('حذف الحساب'),
-        content: const Text(
-          'هل أنت متأكد من حذف حسابك نهائياً؟ لا يمكن التراجع عن هذا الإجراء.',
+        title: Text('delete_account'.tr),
+        content: Text(
+          'auto_key_12'.tr,
         ),
         actions: [
-          TextButton(onPressed: () => Get.back(), child: const Text('تراجع')),
+          TextButton(onPressed: () => Get.back(), child: Text('auto_key_13'.tr)),
           TextButton(
             onPressed: () {
               Get.back();
               deleteAccount();
             },
-            child: const Text('حذف'),
+            child: Text('delete'.tr),
           ),
         ],
       ),

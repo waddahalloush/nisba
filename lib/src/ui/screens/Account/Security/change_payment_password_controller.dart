@@ -48,7 +48,7 @@ class ChangePaymentPasswordController extends GetxController {
   Map<String, dynamic>? _otpIdentity() {
     final user = storageHelper.getUser;
     if (user == null) {
-      AppSnackbar.showError(message: 'تعذر تحميل بيانات المستخدم');
+      AppSnackbar.showError(message: 'auto_key_75'.tr);
       return null;
     }
     return {
@@ -62,7 +62,7 @@ class ChangePaymentPasswordController extends GetxController {
     if (!(formKeyOld.currentState?.validate() ?? false)) return;
     if (newPasswordController.text.trim() !=
         confirmPasswordController.text.trim()) {
-      AppSnackbar.showError(message: 'كلمة المرور الجديدة غير متطابقة');
+      AppSnackbar.showError(message: 'auto_key_77'.tr);
       return;
     }
     if (!await connectionChecker.hasConnection) {
@@ -81,7 +81,7 @@ class ChangePaymentPasswordController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تغيير كلمة مرور الدفع',
+            : 'auto_key_94'.tr,
       );
       Get.back();
     } on ApiException catch (e) {
@@ -111,7 +111,7 @@ class ChangePaymentPasswordController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم إرسال رمز التحقق',
+            : 'auto_key_76'.tr,
       );
     } on ApiException catch (e) {
       AppSnackbar.showError(message: e.message);
@@ -129,7 +129,7 @@ class ChangePaymentPasswordController extends GetxController {
     if (!(formKeyOtp.currentState?.validate() ?? false)) return;
     if (otpNewPasswordController.text.trim() !=
         otpConfirmPasswordController.text.trim()) {
-      AppSnackbar.showError(message: 'كلمة المرور الجديدة غير متطابقة');
+      AppSnackbar.showError(message: 'auto_key_77'.tr);
       return;
     }
     final identity = _otpIdentity();
@@ -151,7 +151,7 @@ class ChangePaymentPasswordController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تغيير كلمة مرور الدفع',
+            : 'auto_key_94'.tr,
       );
       Get.back();
     } on ApiException catch (e) {

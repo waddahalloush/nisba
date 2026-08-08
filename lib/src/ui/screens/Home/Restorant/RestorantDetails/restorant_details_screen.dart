@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/generated/assets.gen.dart';
 import 'package:nisba_app/src/configs/app_colors.dart';
@@ -17,7 +21,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         body: Obx(() {
@@ -76,7 +80,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
           ),
           child: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.primary, size: 20.sp),
+            icon: Icon(backIconData(), color: cs.primary, size: 20.sp),
           ),
         ),
       ),
@@ -112,7 +116,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
               ),
               SizedBox(height: 6.h),
               Text(
-                'طعم الأصالة.. جودة تستحق الثقة',
+                'auto_key_278'.tr,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w600,
@@ -134,7 +138,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
                     padding: EdgeInsets.symmetric(horizontal: 24.w),
                   ),
                   child: Text(
-                    'اطلب الآن',
+                    'auto_key_270'.tr,
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
@@ -291,16 +295,12 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
                   _infoChip(cs, Iconsax.location, r.distance),
                 // Delivery price
                 if (r.deliveryPrice != null && r.deliveryPrice! > 0)
-                  _infoChip(
-                    cs,
-                    Iconsax.car,
-                    'توصيل ${r.deliveryPrice!.toStringAsFixed(0)} ر.ق',
-                  ),
+                  _infoChip(cs, Iconsax.car, 'auto_key_279'.tr),
                 // Status
                 _infoChip(
                   cs,
                   r.isOpen ? Iconsax.tick_circle : Iconsax.close_circle,
-                  r.isOpen ? 'مفتوح' : 'مغلق',
+                  r.isOpen ? 'auto_key_280'.tr : 'auto_key_281'.tr,
                   color: r.isOpen ? Colors.green : cs.error,
                 ),
               ],
@@ -368,27 +368,31 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
     'at_provider',
   ];
 
-  static const _deliveryMeta =
+  static final _deliveryMeta =
       <String, ({String title, String subtitle, String iconKey})>{
-        'to_home': (title: 'توصيل', subtitle: 'يوصل طلبك', iconKey: 'motor'),
+        'to_home': (
+          title: 'auto_key_282'.tr,
+          subtitle: 'auto_key_283'.tr,
+          iconKey: 'motor',
+        ),
         'book_table': (
-          title: 'حجز طاولة',
-          subtitle: 'احجز جلستك',
+          title: 'book_table'.tr,
+          subtitle: 'auto_key_284'.tr,
           iconKey: 'table',
         ),
         'to_car': (
-          title: 'إلى السيارة',
-          subtitle: 'يوصلك الطلب',
+          title: 'to_car'.tr,
+          subtitle: 'auto_key_285'.tr,
           iconKey: 'car',
         ),
         'throw_in': (
-          title: 'تناول هنا',
-          subtitle: 'استلام',
+          title: 'auto_key_286'.tr,
+          subtitle: 'pickup'.tr,
           iconKey: 'delivery',
         ),
         'at_provider': (
-          title: 'عند المزود',
-          subtitle: 'استلام من المتجر',
+          title: 'at_provider'.tr,
+          subtitle: 'auto_key_4'.tr,
           iconKey: 'delivery',
         ),
       };
@@ -463,7 +467,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'قسائم مستخدم جديدة بقيمة 200 ر.ق',
+            'auto_key_287'.tr,
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.w900,
@@ -475,7 +479,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
             spacing: 18.w,
             children: [
               Text(
-                'سجل للحصول عليها',
+                'auto_key_288'.tr,
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w500,
@@ -498,7 +502,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
                     ),
                   ),
                   child: Text(
-                    'سجل الآن',
+                    'auto_key_289'.tr,
                     style: TextStyle(
                       fontSize: 11.sp,
                       fontWeight: FontWeight.bold,
@@ -636,7 +640,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
                               ),
                             ),
                             Text(
-                              'عدد الطلبات : ${meal.orders}',
+                              'auto_key_290'.tr,
                               style: TextStyle(
                                 fontSize: 11.sp,
                                 fontWeight: FontWeight.w500,
@@ -645,7 +649,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
                             ),
                             SizedBox(height: 12.h),
                             Text(
-                              '${meal.price} ريال قطري',
+                              'auto_key_291'.tr,
                               style: TextStyle(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w700,
@@ -713,7 +717,7 @@ class RestorantDetailsScreen extends GetView<RestorantDetailsController> {
                 Icon(Iconsax.star1, color: cs.primary, size: 18.sp),
                 SizedBox(width: 6.w),
                 Text(
-                  'تقييمات',
+                  'auto_key_292'.tr,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: cs.onSurface,

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/app_colors.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
@@ -16,7 +18,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         body: Stack(
           children: [
@@ -200,7 +202,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                   Icon(Iconsax.star1, size: 16.sp, color: AppColors.star),
                   SizedBox(width: 4.w),
                   Text(
-                    '${controller.hotelRating.value.toStringAsFixed(1)} (${controller.hotelReviews.value} تقييم)',
+                    'auto_key_228'.tr,
                     style: TextStyle(
                       fontSize: 13.sp,
                       color: cs.onSurface.withValues(alpha: 0.7),
@@ -242,7 +244,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
             runSpacing: 8.h,
             children: [
               if (remaining > 0)
-                _amenityChip(cs, Iconsax.more, '+$remaining المزيد'),
+                _amenityChip(cs, Iconsax.more, 'auto_key_229'.tr),
               ...displayFeatures.map((f) => _amenityChip(cs, f.icon, f.label)),
             ],
           ),
@@ -276,7 +278,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
         children: [
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 8.h, 16.w, 8.h),
-            child: Text('الغرف', style: theme.textTheme.titleMedium),
+            child: Text('auto_key_230'.tr, style: theme.textTheme.titleMedium),
           ),
           SizedBox(
             height: 175.h,
@@ -284,7 +286,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
               if (controller.resources.isEmpty) {
                 return Center(
                   child: Text(
-                    'لا توجد غرف متاحة',
+                    'auto_key_231'.tr,
                     style: TextStyle(
                       color: cs.onSurface.withValues(alpha: 0.5),
                     ),
@@ -395,7 +397,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                     ),
                     SizedBox(height: 6.h),
                     Text(
-                      '$priceStr ر.ق',
+                      'auto_key_201'.tr,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
@@ -403,7 +405,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                       ),
                     ),
                     Text(
-                      'شامل الضرائب والرسوم',
+                      'auto_key_232'.tr,
                       style: TextStyle(
                         fontSize: 10.sp,
                         color: cs.onSurface.withValues(alpha: 0.4),
@@ -432,7 +434,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                 Expanded(
                   child: _dateField(
                     cs,
-                    'من تاريخ',
+                    'auto_key_233'.tr,
                     controller.dateFromController,
                   ),
                 ),
@@ -440,7 +442,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                 Expanded(
                   child: _dateField(
                     cs,
-                    'إلى تاريخ',
+                    'auto_key_234'.tr,
                     controller.dateToController,
                   ),
                 ),
@@ -449,7 +451,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
             SizedBox(height: 8.h),
             Obx(
               () => Text(
-                '${controller.nightCount} ${controller.nightCount == 1 ? 'ليلة' : 'ليالي'}',
+                '${controller.nightCount} ${controller.nightCount == 1 ? 'auto_key_235'.tr : 'auto_key_236'.tr}',
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w600,
@@ -534,7 +536,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('عدد الضيوف', style: theme.textTheme.titleMedium),
+            Text('guests_count'.tr, style: theme.textTheme.titleMedium),
             SizedBox(height: 8.h),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
@@ -598,7 +600,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                   Icon(Iconsax.discount_shape, size: 20.sp, color: cs.primary),
                   SizedBox(width: 8.w),
                   Text(
-                    'لديك رمز ترويجي؟',
+                    'auto_key_237'.tr,
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
@@ -629,7 +631,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                       child: TextField(
                         controller: controller.promoCodeController,
                         decoration: InputDecoration(
-                          hintText: 'أدخل الرمز',
+                          hintText: 'auto_key_238'.tr,
                           hintStyle: TextStyle(
                             fontSize: 13.sp,
                             color: cs.onSurface.withValues(alpha: 0.4),
@@ -663,7 +665,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                         ),
                       ),
                       child: Text(
-                        'تطبيق',
+                        'apply'.tr,
                         style: TextStyle(
                           fontSize: 13.sp,
                           color: cs.onPrimary,
@@ -689,7 +691,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('طريقة الدفع', style: theme.textTheme.titleMedium),
+            Text('payment_method'.tr, style: theme.textTheme.titleMedium),
             SizedBox(height: 8.h),
             Obx(() {
               final methods = controller.checkout.value.paymentMethods;
@@ -729,9 +731,9 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
     VoidCallback onTap,
   ) {
     final (IconData icon, String label) = switch (method) {
-      'cash' => (Iconsax.moneys, 'نقداً'),
-      'wallet' => (Iconsax.wallet_2, 'المحفظة'),
-      'card' => (Iconsax.card, 'بطاقة'),
+      'cash' => (Iconsax.moneys, 'cash'.tr),
+      'wallet' => (Iconsax.wallet_2, 'wallet'.tr),
+      'card' => (Iconsax.card, 'card'.tr),
       'apple_pay' => (Iconsax.wallet, 'Apple Pay'),
       'google_pay' => (Iconsax.money, 'Google Pay'),
       _ => (Iconsax.wallet_2, method),
@@ -810,7 +812,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                     );
                     final base = selected?['base_price']?.toString() ?? '—';
                     return Text(
-                      '$base ر.ق',
+                      'auto_key_239'.tr,
                       style: TextStyle(
                         fontSize: 24.sp,
                         fontWeight: FontWeight.w800,
@@ -819,7 +821,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                     );
                   }
                   return Text(
-                    '${tp.toStringAsFixed(2)} ر.ق',
+                    'auto_key_240'.tr,
                     style: TextStyle(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w800,
@@ -831,7 +833,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
             ),
             SizedBox(height: 4.h),
             Text(
-              'الإجمالي شامل الضرائب',
+              'auto_key_206'.tr,
               style: TextStyle(
                 fontSize: 12.sp,
                 color: cs.onSurface.withValues(alpha: 0.5),
@@ -864,7 +866,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                           ),
                         )
                       : Text(
-                          'تأكيد الحجز',
+                          'auto_key_208'.tr,
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
@@ -885,7 +887,7 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
                 ),
                 SizedBox(width: 4.w),
                 Text(
-                  'لن يتم خصم أي مبلغ الآن',
+                  'auto_key_209'.tr,
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: cs.onSurface.withValues(alpha: 0.5),
@@ -911,20 +913,20 @@ class HotelBookingScreen extends GetView<HotelBookingController> {
             _footerItem(
               cs,
               Iconsax.close_circle,
-              'إلغاء مجاني',
-              'حتى 24 ساعة قبل الوصول',
+              'auto_key_210'.tr,
+              'auto_key_241'.tr,
             ),
             _footerItem(
               cs,
               Iconsax.shield_tick,
-              'دفع آمن',
-              'تشفير وحماية عالية',
+              'auto_key_212'.tr,
+              'auto_key_213'.tr,
             ),
             _footerItem(
               cs,
               Iconsax.discount_shape,
-              'أفضل سعر مضمون',
-              'تحصل على أفضل الأسعار',
+              'auto_key_214'.tr,
+              'auto_key_215'.tr,
             ),
           ],
         ),

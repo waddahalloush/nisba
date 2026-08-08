@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/configs/theme_extensions.dart';
@@ -15,7 +19,7 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         body: Obx(
@@ -33,7 +37,7 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
                     SliverToBoxAdapter(child: _buildTabs(theme)),
 
                     // ── Tabs content ──
-                    if (controller.selectedTab.value == 'نظرة عامة') ...[
+                    if (controller.selectedTab.value == 'auto_key_391'.tr) ...[
                       SliverToBoxAdapter(child: _buildAboutSection(theme)),
                       SliverToBoxAdapter(child: _buildActionButtons(theme)),
                       if (controller.featuredRestaurants.isNotEmpty)
@@ -43,9 +47,11 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
                       if (controller.featuredStores.isNotEmpty)
                         SliverToBoxAdapter(child: _buildFeaturedStores(theme)),
                       SliverToBoxAdapter(child: _buildFacilities(theme)),
-                    ] else if (controller.selectedTab.value == 'المتاجر') ...[
+                    ] else if (controller.selectedTab.value ==
+                        'auto_key_377'.tr) ...[
                       SliverToBoxAdapter(child: _buildFeaturedStores(theme)),
-                    ] else if (controller.selectedTab.value == 'المطاعم') ...[
+                    ] else if (controller.selectedTab.value ==
+                        'auto_key_179'.tr) ...[
                       SliverToBoxAdapter(
                         child: _buildFeaturedRestaurants(theme),
                       ),
@@ -79,7 +85,7 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
           ),
           child: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onPrimary, size: 20.sp),
+            icon: Icon(backIconData(), color: cs.onPrimary, size: 20.sp),
           ),
         ),
       ),
@@ -423,7 +429,7 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'عن ${controller.mallName.value}',
+            'auto_key_398'.tr,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -548,7 +554,7 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Text(
-              'المطاعم المميزة',
+              'auto_key_355'.tr,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -567,104 +573,109 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
                 return GestureDetector(
                   onTap: () => controller.openVendor(rest),
                   child: Container(
-                  width: 140.w,
-                  margin: EdgeInsets.only(left: 10.w),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: cs.surface,
-                    borderRadius: BorderRadius.circular(14.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: cs.shadow.withValues(alpha: 0.04),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // ── Image ──
-                      SizedBox(
-                        height: 90.h,
-                        child: rest.imageUrl.isNotEmpty
-                            ? Image.network(
-                                rest.imageUrl,
-                                fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) => Container(
-                                  color: cs.primary.withValues(alpha: 0.2),
-                                  child: Icon(Iconsax.coffee, color: cs.primary),
-                                ),
-                              )
-                            : Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      cs.primary.withValues(alpha: 0.8),
-                                      cs.primary.withValues(alpha: 0.4),
-                                    ],
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Iconsax.coffee,
-                                    color: cs.onPrimary.withValues(alpha: 0.3),
-                                    size: 30.sp,
-                                  ),
-                                ),
-                              ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.r),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              rest.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold,
-                                color: cs.onSurface,
-                              ),
-                            ),
-                            SizedBox(height: 4.h),
-                            Row(
-                              children: [
-                                Icon(
-                                  Iconsax.star1,
-                                  color: context.zatheExtras.star,
-                                  size: 11.sp,
-                                ),
-                                SizedBox(width: 3.w),
-                                Text(
-                                  '${rest.rating}',
-                                  style: TextStyle(
-                                    fontSize: 11.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: cs.onSurface,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Text(
-                                  'احجز طاولة',
-                                  style: TextStyle(
-                                    fontSize: 10.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: cs.primary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                    width: 140.w,
+                    margin: EdgeInsets.only(left: 10.w),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: cs.surface,
+                      borderRadius: BorderRadius.circular(14.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: cs.shadow.withValues(alpha: 0.04),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // ── Image ──
+                        SizedBox(
+                          height: 90.h,
+                          child: rest.imageUrl.isNotEmpty
+                              ? Image.network(
+                                  rest.imageUrl,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) => Container(
+                                    color: cs.primary.withValues(alpha: 0.2),
+                                    child: Icon(
+                                      Iconsax.coffee,
+                                      color: cs.primary,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        cs.primary.withValues(alpha: 0.8),
+                                        cs.primary.withValues(alpha: 0.4),
+                                      ],
+                                      begin: Alignment.topRight,
+                                      end: Alignment.bottomLeft,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Iconsax.coffee,
+                                      color: cs.onPrimary.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                      size: 30.sp,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.r),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                rest.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: cs.onSurface,
+                                ),
+                              ),
+                              SizedBox(height: 4.h),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Iconsax.star1,
+                                    color: context.zatheExtras.star,
+                                    size: 11.sp,
+                                  ),
+                                  SizedBox(width: 3.w),
+                                  Text(
+                                    '${rest.rating}',
+                                    style: TextStyle(
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: cs.onSurface,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    'auto_key_3'.tr,
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: cs.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
                 );
               },
             ),
@@ -688,7 +699,7 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Text(
-              'المتاجر المميزة',
+              'auto_key_362'.tr,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: cs.onSurface,
@@ -707,84 +718,86 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
                 return GestureDetector(
                   onTap: () => controller.openVendor(store),
                   child: Container(
-                  width: 120.w,
-                  margin: EdgeInsets.only(left: 10.w),
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    color: cs.surface,
-                    borderRadius: BorderRadius.circular(14.r),
-                    boxShadow: [
-                      BoxShadow(
-                        color: cs.shadow.withValues(alpha: 0.04),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(
-                        height: 80.h,
-                        child: store.imageUrl.isNotEmpty
-                            ? Image.network(
-                                store.imageUrl,
-                                fit: BoxFit.cover,
-                                errorBuilder: (_, __, ___) => Container(
-                                  color: cs.primary.withValues(alpha: 0.2),
-                                  child: Icon(Iconsax.bag, color: cs.primary),
-                                ),
-                              )
-                            : Container(
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      cs.primary.withValues(alpha: 0.75),
-                                      cs.primary.withValues(alpha: 0.35),
-                                    ],
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Iconsax.bag,
-                                    color: cs.onPrimary.withValues(alpha: 0.3),
-                                    size: 28.sp,
-                                  ),
-                                ),
-                              ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.r),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              store.name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold,
-                                color: cs.onSurface,
-                              ),
-                            ),
-                            SizedBox(height: 4.h),
-                            Text(
-                              'عرض المتجر',
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w600,
-                                color: cs.primary,
-                              ),
-                            ),
-                          ],
+                    width: 120.w,
+                    margin: EdgeInsets.only(left: 10.w),
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: cs.surface,
+                      borderRadius: BorderRadius.circular(14.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: cs.shadow.withValues(alpha: 0.04),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          height: 80.h,
+                          child: store.imageUrl.isNotEmpty
+                              ? Image.network(
+                                  store.imageUrl,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (_, __, ___) => Container(
+                                    color: cs.primary.withValues(alpha: 0.2),
+                                    child: Icon(Iconsax.bag, color: cs.primary),
+                                  ),
+                                )
+                              : Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        cs.primary.withValues(alpha: 0.75),
+                                        cs.primary.withValues(alpha: 0.35),
+                                      ],
+                                      begin: Alignment.topRight,
+                                      end: Alignment.bottomLeft,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Iconsax.bag,
+                                      color: cs.onPrimary.withValues(
+                                        alpha: 0.3,
+                                      ),
+                                      size: 28.sp,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(8.r),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                store.name,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: cs.onSurface,
+                                ),
+                              ),
+                              SizedBox(height: 4.h),
+                              Text(
+                                'auto_key_399'.tr,
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: cs.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
                 );
               },
             ),
@@ -806,7 +819,7 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'المرافق',
+            'auto_key_400'.tr,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -870,19 +883,11 @@ class MallDetailsScreen extends GetView<MallDetailsController> {
   }
 
   IconData _facilityIcon(String facility) {
-    switch (facility) {
-      case 'مصاعد':
-        return Iconsax.arrow_up_1;
-      case 'منطقة أطفال':
-        return Iconsax.smileys;
-      case 'واي فاي مجاني':
-        return Iconsax.wifi;
-      case 'غرفة صلاة':
-        return Iconsax.building;
-      case 'دورات مياه':
-        return Iconsax.empty_wallet;
-      default:
-        return Iconsax.tick_circle;
-    }
+    if (facility == 'auto_key_376'.tr) return Iconsax.arrow_up_1;
+    if (facility == 'auto_key_392'.tr) return Iconsax.smileys;
+    if (facility == 'auto_key_306'.tr) return Iconsax.wifi;
+    if (facility == 'auto_key_393'.tr) return Iconsax.building;
+    if (facility == 'auto_key_372'.tr) return Iconsax.empty_wallet;
+    return Iconsax.tick_circle;
   }
 }

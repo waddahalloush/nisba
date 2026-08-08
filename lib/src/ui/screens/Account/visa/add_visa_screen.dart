@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -15,7 +19,7 @@ class AddVisaScreen extends GetView<AddVisaController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,13 +27,13 @@ class AddVisaScreen extends GetView<AddVisaController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(backIconData(context), color: cs.onSurface),
           ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'إضافة بطاقة Visa',
+                'auto_key_104'.tr,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: cs.onSurface,
@@ -37,7 +41,7 @@ class AddVisaScreen extends GetView<AddVisaController> {
               ),
               SizedBox(height: 2.h),
               Text(
-                'أضف بيانات بطاقتك لإجراء مدفوعات آمنة وسريعة',
+                'auto_key_105'.tr,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: cs.onSurface.withValues(alpha: 0.5),
                   fontSize: 10.sp,
@@ -61,25 +65,25 @@ class AddVisaScreen extends GetView<AddVisaController> {
                 SizedBox(height: 20.h),
 
                 // ── Name field ──
-                _buildFieldLabel(theme, 'الاسم *'),
+                _buildFieldLabel(theme, 'auto_key_106'.tr),
                 SizedBox(height: 8.h),
                 _buildTextField(
                   theme,
                   controller: controller.nameController,
-                  hint: 'الاسم كما هو على البطاقة',
+                  hint: 'auto_key_107'.tr,
                   icon: Iconsax.user,
-                  validator: (v) => v!.isEmpty ? 'الاسم مطلوب' : null,
+                  validator: (v) => v!.isEmpty ? 'name_is_required'.tr : null,
                 ),
 
                 SizedBox(height: 16.h),
 
                 // ── Card number field ──
-                _buildFieldLabel(theme, 'رقم البطاقة *'),
+                _buildFieldLabel(theme, 'auto_key_108'.tr),
                 SizedBox(height: 8.h),
                 _buildTextField(
                   theme,
                   controller: controller.cardNumberController,
-                  hint: 'رقم البطاقة',
+                  hint: 'auto_key_109'.tr,
                   icon: Iconsax.card,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
@@ -100,9 +104,9 @@ class AddVisaScreen extends GetView<AddVisaController> {
                   ),
                   isObscured: controller.isCardNumberMasked,
                   validator: (v) {
-                    if (v!.isEmpty) return 'رقم البطاقة مطلوب';
+                    if (v!.isEmpty) return 'auto_key_110'.tr;
                     if (v.replaceAll(RegExp(r'\s'), '').length < 16) {
-                      return 'رقم البطاقة غير صحيح';
+                      return 'auto_key_111'.tr;
                     }
                     return null;
                   },
@@ -117,7 +121,7 @@ class AddVisaScreen extends GetView<AddVisaController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildFieldLabel(theme, 'التاريخ *'),
+                          _buildFieldLabel(theme, 'auto_key_112'.tr),
                           SizedBox(height: 8.h),
                           _buildTextField(
                             theme,
@@ -130,8 +134,8 @@ class AddVisaScreen extends GetView<AddVisaController> {
                               LengthLimitingTextInputFormatter(4),
                             ],
                             validator: (v) {
-                              if (v!.isEmpty) return 'مطلوب';
-                              if (v.length < 4) return 'غير صحيح';
+                              if (v!.isEmpty) return 'auto_key_85'.tr;
+                              if (v.length < 4) return 'auto_key_113'.tr;
                               return null;
                             },
                           ),
@@ -145,7 +149,7 @@ class AddVisaScreen extends GetView<AddVisaController> {
                         children: [
                           Row(
                             children: [
-                              _buildFieldLabel(theme, 'الرمز *'),
+                              _buildFieldLabel(theme, 'auto_key_114'.tr),
                               SizedBox(width: 4.w),
                               Icon(
                                 Iconsax.info_circle,
@@ -179,8 +183,8 @@ class AddVisaScreen extends GetView<AddVisaController> {
                             ),
                             isObscured: controller.isCvvMasked,
                             validator: (v) {
-                              if (v!.isEmpty) return 'مطلوب';
-                              if (v.length < 3) return 'غير صحيح';
+                              if (v!.isEmpty) return 'auto_key_85'.tr;
+                              if (v.length < 3) return 'auto_key_113'.tr;
                               return null;
                             },
                           ),
@@ -207,7 +211,7 @@ class AddVisaScreen extends GetView<AddVisaController> {
                       ),
                     ),
                     child: Text(
-                      'إضافة',
+                      'add'.tr,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
@@ -229,7 +233,7 @@ class AddVisaScreen extends GetView<AddVisaController> {
                     ),
                     SizedBox(width: 6.w),
                     Text(
-                      'بياناتك محمية ومشفرة بالكامل',
+                      'auto_key_115'.tr,
                       style: TextStyle(
                         fontSize: 10.sp,
                         color: cs.onSurface.withValues(alpha: 0.4),
@@ -319,7 +323,7 @@ class AddVisaScreen extends GetView<AddVisaController> {
               Expanded(
                 child: Text(
                   controller.nameController.text.isEmpty
-                      ? 'الاسم على البطاقة'
+                      ? 'auto_key_116'.tr
                       : controller.nameController.text.toUpperCase(),
                   style: TextStyle(
                     fontSize: 12.sp,

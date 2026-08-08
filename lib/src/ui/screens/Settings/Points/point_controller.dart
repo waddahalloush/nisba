@@ -29,7 +29,7 @@ class PointController extends GetxController {
   final totalPoints = 120.obs;
   final totalEarned = 320.obs;
   final totalRedeemed = 200.obs;
-  final expiryDate = '31 ديسمبر 2025'.obs;
+  final expiryDate = 'auto_key_625'.tr.obs;
 
   final log = <PointLogEntry>[].obs;
 
@@ -94,14 +94,14 @@ class PointController extends GetxController {
         ? direction['value']?.toString() ?? ''
         : direction?.toString() ?? '';
     final typeDesc = type is Map
-        ? type['desc']?.toString() ?? 'نقاط'
-        : type?.toString() ?? 'نقاط';
+        ? type['desc']?.toString() ?? 'points'.tr
+        : type?.toString() ?? 'points'.tr;
     final isEarned = dirValue == 'deposit';
     final amount = map['amount']?.toString() ?? '0';
     return PointLogEntry(
       title: typeDesc,
       date: map['created_at']?.toString() ?? '',
-      points: '${isEarned ? '+' : '-'}$amount نقطة',
+      points: '${isEarned ? '+' : '-'}\$amount',
       isEarned: isEarned,
     );
   }
@@ -127,17 +127,17 @@ class PointController extends GetxController {
   }
 
   void _seedMockLog() {
-    log.assignAll(const [
+    log.assignAll([
       PointLogEntry(
-        title: 'شراء من مطعم البيت',
-        date: '15 مايو 2025 10:30 ص',
-        points: '+34 نقطة',
+        title: 'auto_key_627'.tr,
+        date: 'auto_key_628'.tr,
+        points: 'auto_key_629'.tr,
         isEarned: true,
       ),
       PointLogEntry(
-        title: 'استبدال إلى رصيد',
-        date: '10 مايو 2025 04:15 م',
-        points: '-50 نقطة',
+        title: 'auto_key_630'.tr,
+        date: 'auto_key_631'.tr,
+        points: 'auto_key_632'.tr,
         isEarned: false,
       ),
     ]);
@@ -168,13 +168,13 @@ class PointController extends GetxController {
               TextFormField(
                 controller: amountCtrl,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  hintText: 'عدد النقاط',
-                  labelText: 'عدد النقاط',
+                decoration: InputDecoration(
+                  hintText: 'auto_key_633'.tr,
+                  labelText: 'auto_key_633'.tr,
                 ),
                 validator: (v) {
-                  if (v == null || v.isEmpty) return 'مطلوب';
-                  if ((double.tryParse(v) ?? 0) <= 0) return 'غير صالح';
+                  if (v == null || v.isEmpty) return 'auto_key_85'.tr;
+                  if ((double.tryParse(v) ?? 0) <= 0) return 'auto_key_634'.tr;
                   return null;
                 },
               ),
@@ -184,7 +184,7 @@ class PointController extends GetxController {
                   children: [
                     Expanded(
                       child: RadioListTile<bool>(
-                        title: const Text('QR'),
+                        title: Text('auto_key_636'.tr),
                         value: true,
                         groupValue: isQr.value,
                         onChanged: (v) => isQr.value = v!,
@@ -192,7 +192,7 @@ class PointController extends GetxController {
                     ),
                     Expanded(
                       child: RadioListTile<bool>(
-                        title: const Text('رقم الهاتف'),
+                        title: Text('auto_key_635'.tr),
                         value: false,
                         groupValue: isQr.value,
                         onChanged: (v) => isQr.value = v!,
@@ -204,10 +204,10 @@ class PointController extends GetxController {
               TextFormField(
                 controller: recipientCtrl,
                 decoration: InputDecoration(
-                  hintText: isQr.value ? 'رمز QR' : 'رقم الهاتف',
+                  hintText: isQr.value ? 'auto_key_636'.tr : 'auto_key_635'.tr,
                 ),
                 validator: (v) {
-                  if (v == null || v.isEmpty) return 'مطلوب';
+                  if (v == null || v.isEmpty) return 'auto_key_85'.tr;
                   return null;
                 },
               ),
@@ -220,7 +220,7 @@ class PointController extends GetxController {
                       Get.back(result: true);
                     }
                   },
-                  child: const Text('إرسال'),
+                  child: Text('send'.tr),
                 ),
               ),
             ],
@@ -251,7 +251,7 @@ class PointController extends GetxController {
       AppSnackbar.showSuccess(
         message:
             (res is Map ? res['message'] : null)?.toString() ??
-            'تم إهداء النقاط',
+            'auto_key_637'.tr,
       );
       await fetchPoints();
     } on ApiException catch (e) {
@@ -267,19 +267,19 @@ class PointController extends GetxController {
 
     final confirmed = await Get.dialog<bool>(
       AlertDialog(
-        title: const Text('استبدال إلى رصيد'),
+        title: Text('auto_key_630'.tr),
         content: Form(
           key: formKey,
           child: TextFormField(
             controller: amountCtrl,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              hintText: 'عدد النقاط',
-              labelText: 'عدد النقاط',
+            decoration: InputDecoration(
+              hintText: 'auto_key_633'.tr,
+              labelText: 'auto_key_633'.tr,
             ),
             validator: (v) {
-              if (v == null || v.isEmpty) return 'مطلوب';
-              if ((double.tryParse(v) ?? 0) <= 0) return 'غير صالح';
+              if (v == null || v.isEmpty) return 'auto_key_85'.tr;
+              if ((double.tryParse(v) ?? 0) <= 0) return 'auto_key_634'.tr;
               return null;
             },
           ),
@@ -287,7 +287,7 @@ class PointController extends GetxController {
         actions: [
           TextButton(
             onPressed: () => Get.back(result: false),
-            child: const Text('إلغاء'),
+            child: Text('cancel'.tr),
           ),
           TextButton(
             onPressed: () {
@@ -295,7 +295,7 @@ class PointController extends GetxController {
                 Get.back(result: true);
               }
             },
-            child: const Text('تأكيد'),
+            child: Text('confirm'.tr),
           ),
         ],
       ),
@@ -314,7 +314,7 @@ class PointController extends GetxController {
       AppSnackbar.showSuccess(
         message:
             (res is Map ? res['message'] : null)?.toString() ??
-            'تم التحويل للمحفظة',
+            'auto_key_638'.tr,
       );
       await fetchPoints();
     } on ApiException catch (e) {

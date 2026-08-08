@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/ui/screens/Home/Services/AllServices/all_home_services_controller.dart';
@@ -18,10 +20,10 @@ class AllHomeServicesScreen extends GetView<AllHomeServicesController> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          icon: Icon(backIconData(context), color: cs.primary),
         ),
         title: Text(
-          'الخدمات',
+          'auto_key_294'.tr,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.primary,
@@ -36,7 +38,7 @@ class AllHomeServicesScreen extends GetView<AllHomeServicesController> {
           return Center(
             child: TextButton(
               onPressed: controller.loadSections,
-              child: const Text('إعادة المحاولة'),
+              child: Text('auto_key_243'.tr),
             ),
           );
         }

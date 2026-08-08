@@ -28,10 +28,10 @@ class SearchToggle extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // زر "عرض على الخريطة"
+            // زر 'auto_key_553'.tr
             _buildToggleButton(
               context,
-              label: 'عرض على الخريطة',
+              label: 'auto_key_553'.tr,
               isActive: isMapView.value,
               cs: cs,
               theme: theme,
@@ -39,10 +39,10 @@ class SearchToggle extends StatelessWidget {
                 if (!isMapView.value) onToggle();
               },
             ),
-            // زر "عرض كقائمة"
+            // زر 'auto_key_554'.tr
             _buildToggleButton(
               context,
-              label: 'عرض كقائمة',
+              label: 'auto_key_554'.tr,
               isActive: !isMapView.value,
               cs: cs,
               theme: theme,

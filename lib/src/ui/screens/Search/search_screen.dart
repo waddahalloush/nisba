@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+
 import 'package:nisba_app/src/configs/api_response.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/ui/screens/Search/search_controller.dart';
@@ -22,7 +24,7 @@ class SearchScreen extends GetView<SearchhController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         body: Column(
@@ -82,7 +84,7 @@ class SearchScreen extends GetView<SearchhController> {
             Text(
               ctrl.errorMessage.value.isNotEmpty
                   ? ctrl.errorMessage.value
-                  : 'حدث خطأ',
+                  : 'auto_key_546'.tr,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: cs.onSurface.withValues(alpha: 0.6),
               ),
@@ -90,7 +92,7 @@ class SearchScreen extends GetView<SearchhController> {
             SizedBox(height: 12.h),
             TextButton(
               onPressed: ctrl.fetchList,
-              child: const Text('إعادة المحاولة'),
+              child: Text('auto_key_243'.tr),
             ),
           ],
         ),
@@ -101,7 +103,7 @@ class SearchScreen extends GetView<SearchhController> {
     if (partners.isEmpty) {
       return Center(
         child: Text(
-          'لا توجد نتائج',
+          'auto_key_547'.tr,
           style: theme.textTheme.bodyMedium?.copyWith(
             color: cs.onSurface.withValues(alpha: 0.5),
           ),

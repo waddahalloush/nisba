@@ -42,7 +42,7 @@ class OrderController extends GetxController {
     fetcher: (page, {query}) async {
       final res = await repository.getMyOrders('now', page: page);
       if (!res.isSuccess) {
-        throw ApiException(res.message.isNotEmpty ? res.message : 'خطأ');
+        throw ApiException(res.message.isNotEmpty ? res.message : 'auto_key_444'.tr);
       }
       return PaginatedResult(
         data: res.data.orders,
@@ -58,7 +58,7 @@ class OrderController extends GetxController {
     fetcher: (page, {query}) async {
       final res = await repository.getMyOrders('prev', page: page);
       if (!res.isSuccess) {
-        throw ApiException(res.message.isNotEmpty ? res.message : 'خطأ');
+        throw ApiException(res.message.isNotEmpty ? res.message : 'auto_key_444'.tr);
       }
       return PaginatedResult(
         data: res.data.orders,
@@ -120,7 +120,7 @@ class OrderController extends GetxController {
       final res = await repository.getDetailedOrder(id: id);
       if (!res.isSuccess || res.data == null) {
         throw ApiException(
-          res.message.isNotEmpty ? res.message : 'تعذر تحميل التفاصيل',
+          res.message.isNotEmpty ? res.message : 'auto_key_445'.tr,
         );
       }
       orderDetails[id] = Rx<OrderDetail?>(res.data!.order);
@@ -216,7 +216,7 @@ class OrderController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم إلغاء الطلب',
+            : 'auto_key_446'.tr,
       );
       await _refreshAllOrders(clearDetailId: apiId);
     } on ApiException catch (e) {
@@ -247,7 +247,7 @@ class OrderController extends GetxController {
       AppSnackbar.showSuccess(
         message: ApiResult.message(res).isNotEmpty
             ? ApiResult.message(res)
-            : 'تم تقييم الطلب',
+            : 'auto_key_447'.tr,
       );
       await _refreshAllOrders(clearDetailId: apiId);
     } on ApiException catch (e) {

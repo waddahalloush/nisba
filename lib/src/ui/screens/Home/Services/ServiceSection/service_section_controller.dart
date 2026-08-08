@@ -33,7 +33,7 @@ class ServiceSectionController extends BaseServiceController {
   final Rx<ApiResponse<dynamic>> servicesResponse =
       ApiResponse<dynamic>.init().obs;
 
-  String get sectionName => section?.name ?? 'الخدمات';
+  String get sectionName => section?.name ?? 'auto_key_294'.tr;
 
   @override
   void onInit() {
@@ -64,12 +64,12 @@ class ServiceSectionController extends BaseServiceController {
     servicesResponse.value = ApiResponse<dynamic>.loading('');
     allItems.clear();
     featuredItems.clear();
-    categories.assignAll(const [
-      ServiceCategory(name: 'الكل', icon: Iconsax.category),
+    categories.assignAll([
+      ServiceCategory(name: 'all'.tr, icon: Iconsax.category),
     ]);
 
     if (section == null) {
-      servicesResponse.value = ApiResponse<dynamic>.error('قسم غير صالح');
+      servicesResponse.value = ApiResponse<dynamic>.error('auto_key_401'.tr);
       errorMessage.value = servicesResponse.value.message;
       isLoading.value = false;
       return;
@@ -117,7 +117,7 @@ class ServiceSectionController extends BaseServiceController {
           .toSet();
       if (typeLabels.length > 1) {
         categories.assignAll([
-          const ServiceCategory(name: 'الكل', icon: Iconsax.category),
+          ServiceCategory(name: 'all'.tr, icon: Iconsax.category),
           ...typeLabels.map(
             (name) => ServiceCategory(name: name, icon: Iconsax.shop),
           ),

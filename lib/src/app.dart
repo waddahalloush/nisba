@@ -24,15 +24,18 @@ class MyApp extends StatelessWidget {
 
       return GetMaterialApp(
         builder: (context, child) {
-          return Theme(
-            data: isDark
-                ? ThemesData.darkTheme(primaryColor)
-                : ThemesData.lightTheme(primaryColor),
-            child: MediaQuery(
-              data: MediaQuery.of(
-                context,
-              ).copyWith(textScaler: const TextScaler.linear(1)),
-              child: child!,
+          return Directionality(
+            textDirection: localeService.textDirection,
+            child: Theme(
+              data: isDark
+                  ? ThemesData.darkTheme(primaryColor)
+                  : ThemesData.lightTheme(primaryColor),
+              child: MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: const TextScaler.linear(1)),
+                child: child!,
+              ),
             ),
           );
         },

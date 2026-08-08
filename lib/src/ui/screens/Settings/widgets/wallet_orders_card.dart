@@ -4,6 +4,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
 
+import '../../dashboard/dashboard_controller.dart';
+
 /// كارد المحفظة + الطلبات السابقة
 class WalletOrdersCard extends StatelessWidget {
   final int walletPoints;
@@ -23,19 +25,22 @@ class WalletOrdersCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'الطلبات السابقة',
+              'auto_key_685'.tr,
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 10.sp,
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+                Get.find<DashboardController>().changeTabIndex(1);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'عرض الكل',
+                    'view_all'.tr,
                     style: theme.textTheme.labelMedium?.copyWith(
                       color: cs.primary,
                       fontSize: 10.sp,
@@ -78,13 +83,13 @@ class WalletOrdersCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'المحفوظة',
+                    'auto_key_686'.tr,
                     style: theme.textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    '0 طلب',
+                    'auto_key_687'.tr,
                     style: theme.textTheme.labelSmall?.copyWith(
                       color: cs.onSurface.withValues(alpha: 0.5),
                     ),
@@ -130,7 +135,7 @@ class WalletOrdersCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: 10.h),
                       child: Text(
-                        'نقطة',
+                        'auto_key_640'.tr,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: cs.onPrimary.withValues(alpha: 0.85),
                         ),
@@ -145,7 +150,7 @@ class WalletOrdersCard extends StatelessWidget {
                     Expanded(
                       child: _buildCapsuleButton(
                         context,
-                        label: 'شحن المحفظة',
+                        label: 'recharge_wallet'.tr,
                         icon: Iconsax.wallet,
                         onTap: () {
                           Get.toNamed(AppRoutesNames.rechargeWallet);
@@ -156,7 +161,7 @@ class WalletOrdersCard extends StatelessWidget {
                     Expanded(
                       child: _buildCapsuleButton(
                         context,
-                        label: 'إهداء رصيد',
+                        label: 'gift_credit'.tr,
                         icon: Icons.person,
                         onTap: () {
                           Get.toNamed(AppRoutesNames.giftCredit);

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 import 'package:nisba_app/src/routes/routes_names.dart';
+import 'package:nisba_app/src/services/locale_service.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
 
 import 'payment_setting_controller.dart';
 
@@ -15,7 +17,7 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
     final cs = theme.colorScheme;
 
     return Directionality(
-      textDirection: TextDirection.rtl,
+      textDirection: Get.find<LocaleService>().textDirection,
       child: Scaffold(
         backgroundColor: cs.surfaceContainerHighest,
         appBar: AppBar(
@@ -23,10 +25,10 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
           elevation: 0,
           leading: IconButton(
             onPressed: () => Get.back(),
-            icon: Icon(Iconsax.arrow_right_1, color: cs.onSurface),
+            icon: Icon(backIconData(context), color: cs.onSurface),
           ),
           title: Text(
-            'إعدادات الدفع',
+            'payment_settings'.tr,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.onSurface,
@@ -107,7 +109,7 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
             SizedBox(width: 12.w),
             Expanded(
               child: Text(
-                'كلمة مرور الدفع',
+                'auto_key_58'.tr,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: cs.onSurface,
@@ -223,16 +225,10 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
   }
 
   IconData _iconForMethod(String method) {
-    switch (method) {
-      case 'طريقة الدفع الافتراضية':
-        return Iconsax.card;
-      case 'المشتريات عبر QR-Code':
-        return Iconsax.scan_barcode;
-      case 'الدفع بدون هاتف':
-        return Iconsax.watch;
-      default:
-        return Iconsax.card;
-    }
+    if (method == 'auto_key_45'.tr) return Iconsax.card;
+    if (method == 'auto_key_46'.tr) return Iconsax.scan_barcode;
+    if (method == 'auto_key_47'.tr) return Iconsax.watch;
+    return Iconsax.card;
   }
 
   Widget _buildVisasSection(ThemeData theme) {
@@ -266,7 +262,7 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
                   leading: Icon(Iconsax.card, color: cs.primary),
                   title: Text(visa.displayNumber),
                   subtitle: Text(
-                    visa.isDefault ? 'الافتراضية' : 'اضغط للتعيين كافتراضية',
+                    visa.isDefault ? 'auto_key_59'.tr : 'auto_key_60'.tr,
                     style: TextStyle(
                       color: visa.isDefault ? cs.primary : null,
                       fontSize: 12.sp,
@@ -332,7 +328,7 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
             SizedBox(width: 12.w),
             Expanded(
               child: Text(
-                'أضف بطاقة Visa',
+                'auto_key_61'.tr,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: cs.primary,
@@ -383,7 +379,7 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
               SizedBox(width: 12.w),
               Expanded(
                 child: Text(
-                  'الحد الأقصى للمشتريات اليومية',
+                  'auto_key_62'.tr,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     color: cs.onSurface,
@@ -474,7 +470,7 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
           // ── Face ID ──
           _ToggleRow(
             icon: Iconsax.scan,
-            label: 'تفعيل بصمة الوجه',
+            label: 'auto_key_63'.tr,
             value: controller.faceIdEnabled,
             onChanged: controller.toggleFaceId,
           ),
@@ -487,7 +483,7 @@ class PaymentSettingScreen extends GetView<PaymentSettingController> {
           // ── Fingerprint ──
           _ToggleRow(
             icon: Iconsax.finger_cricle,
-            label: 'تفعيل بصمة الاصبع',
+            label: 'auto_key_64'.tr,
             value: controller.fingerprintEnabled,
             onChanged: controller.toggleFingerprint,
           ),

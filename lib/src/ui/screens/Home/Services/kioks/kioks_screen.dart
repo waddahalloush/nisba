@@ -14,8 +14,8 @@ class KioskScreen extends StatelessWidget {
 
     return BaseServiceScreen<KioskController>(
       title: name,
-      subtitle: 'استكشف الأكشاك والمتاجر السريعة القريبة منك',
-      searchHint: 'ابحث في $name...',
+      subtitle: 'auto_key_384'.tr,
+      searchHint: 'auto_key_385'.tr,
     );
   }
 }

@@ -94,9 +94,7 @@ class AllHomeServicesController extends GetxController {
         final hasNet = section.image.startsWith('http');
         return HomeCategoryModel(
           catName: section.name,
-          catIcon: hasNet
-              ? section.image
-              : _assetFallback(i),
+          catIcon: hasNet ? section.image : _assetFallback(i),
           isNetworkIcon: hasNet,
           onTap: () => ServiceSectionNavigator.open(section),
         );
@@ -131,16 +129,28 @@ class AllHomeServicesController extends GetxController {
   /// Offline / empty API: keep navigable tiles via empty Section + route_key.
   void _applyFallbackTiles() {
     final tiles = <({String name, String key, String icon})>[
-      (name: 'ترفيه', key: 'entertainment', icon: Assets.images.serv1.path),
-      (name: 'سياحة', key: 'tourism', icon: Assets.images.serv2.path),
-      (name: 'هدايا', key: 'gifts', icon: Assets.images.serv6.path),
-      (name: 'فنادق', key: 'hotel', icon: Assets.images.serv5.path),
-      (name: 'سينما', key: 'cinema', icon: Assets.images.serv3.path),
-      (name: 'نقل', key: 'transport', icon: Assets.images.serv9.path),
-      (name: 'عيادات', key: 'service', icon: Assets.images.serv8.path),
-      (name: 'مولات', key: 'mall', icon: Assets.images.serv7.path),
-      (name: 'مراكز تجارية', key: 'commercial_center', icon: Assets.images.serv7.path),
-      (name: 'كيوسك', key: 'kioks', icon: Assets.images.serv9.path),
+      (
+        name: 'auto_key_386'.tr,
+        key: 'entertainment',
+        icon: Assets.images.serv1.path,
+      ),
+      (name: 'tourism'.tr, key: 'tourism', icon: Assets.images.serv2.path),
+      (name: 'gifts'.tr, key: 'gifts', icon: Assets.images.serv6.path),
+      (name: 'auto_key_543'.tr, key: 'hotel', icon: Assets.images.serv5.path),
+      (name: 'auto_key_535'.tr, key: 'cinema', icon: Assets.images.serv3.path),
+      (
+        name: 'auto_key_536'.tr,
+        key: 'transport',
+        icon: Assets.images.serv9.path,
+      ),
+      (name: 'clinics'.tr, key: 'service', icon: Assets.images.serv8.path),
+      (name: 'auto_key_388'.tr, key: 'mall', icon: Assets.images.serv7.path),
+      (
+        name: 'auto_key_379'.tr,
+        key: 'commercial_center',
+        icon: Assets.images.serv7.path,
+      ),
+      (name: 'kiosks'.tr, key: 'kioks', icon: Assets.images.serv9.path),
     ];
     homeServiceList.assignAll(
       tiles.map(

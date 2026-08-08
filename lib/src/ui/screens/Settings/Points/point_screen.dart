@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nisba_app/src/utils/locale_extensions.dart';
+
 import 'package:iconsax/iconsax.dart';
 import 'package:nisba_app/src/configs/dimensions.dart';
 
@@ -21,10 +23,10 @@ class PointScreen extends GetView<PointController> {
         elevation: 0,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Iconsax.arrow_right_1, color: cs.primary),
+          icon: Icon(backIconData(context), color: cs.primary),
         ),
         title: Text(
-          'نقاطي',
+          'auto_key_51'.tr,
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
             color: cs.primary,
@@ -90,7 +92,7 @@ class PointScreen extends GetView<PointController> {
         children: [
           // ── Points total ──
           Text(
-            'إجمالي نقاطك',
+            'auto_key_639'.tr,
             style: TextStyle(fontSize: 13.sp, color: cs.onPrimary),
           ),
 
@@ -110,7 +112,7 @@ class PointScreen extends GetView<PointController> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Text(
-                  'نقطة',
+                  'auto_key_640'.tr,
                   style: TextStyle(fontSize: 13.sp, color: cs.onPrimary),
                 ),
               ),
@@ -133,7 +135,7 @@ class PointScreen extends GetView<PointController> {
                   Icon(Iconsax.clock, color: cs.onPrimary, size: 14.sp),
                   SizedBox(width: 4.w),
                   Text(
-                    'تنتهي النقاط في ${controller.expiryDate.value}',
+                    'auto_key_641'.tr,
                     style: TextStyle(fontSize: 11.sp, color: cs.onPrimary),
                   ),
                 ],
@@ -166,8 +168,8 @@ class PointScreen extends GetView<PointController> {
           Expanded(
             child: _ActionCard(
               icon: Iconsax.calculator,
-              title: 'حاسبة النقاط',
-              subtitle: 'احسب نقاط مشترياتك',
+              title: 'auto_key_642'.tr,
+              subtitle: 'auto_key_643'.tr,
               onTap: controller.calculatePoints,
             ),
           ),
@@ -179,8 +181,8 @@ class PointScreen extends GetView<PointController> {
           Expanded(
             child: _ActionCard(
               icon: Iconsax.send_2,
-              title: 'إرسال نقاط لصديق',
-              subtitle: 'شارك نقاطك لمن تحب',
+              title: 'auto_key_644'.tr,
+              subtitle: 'auto_key_645'.tr,
               onTap: controller.sendToFriend,
             ),
           ),
@@ -192,8 +194,8 @@ class PointScreen extends GetView<PointController> {
           Expanded(
             child: _ActionCard(
               icon: Iconsax.convert_card,
-              title: 'استبدال إلى رصيد',
-              subtitle: 'حول نقاطك إلى رصيد',
+              title: 'auto_key_630'.tr,
+              subtitle: 'auto_key_646'.tr,
               onTap: controller.redeemToBalance,
             ),
           ),
@@ -217,7 +219,7 @@ class PointScreen extends GetView<PointController> {
           SizedBox(width: 10.w),
           Expanded(
             child: Text(
-              'كل نقطة تقربك من المزيد!\n استخدم نقاطك واستمتع بمزايا حصرية وعروض مميزة.',
+              'auto_key_647'.tr,
               style: theme.textTheme.bodySmall?.copyWith(color: cs.onSurface),
             ),
           ),
@@ -246,7 +248,7 @@ class PointScreen extends GetView<PointController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'طرق اكتساب النقاط',
+            'auto_key_648'.tr,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.bold,
               color: cs.primary,
@@ -256,23 +258,23 @@ class PointScreen extends GetView<PointController> {
             height: 12.h,
             color: cs.outlineVariant.withValues(alpha: 0.4),
           ),
-          const _EarnWayRow(
+          _EarnWayRow(
             icon: Iconsax.shop,
-            text: 'الشراء من المطاعم/المحلات.',
+            text: 'auto_key_649'.tr,
           ),
           Divider(
             height: 12.h,
             color: cs.outlineVariant.withValues(alpha: 0.4),
           ),
-          const _EarnWayRow(
+          _EarnWayRow(
             icon: Iconsax.discount_shape,
-            text: 'العروض الخاصة والترويج.',
+            text: 'auto_key_650'.tr,
           ),
           Divider(
             height: 12.h,
             color: cs.outlineVariant.withValues(alpha: 0.4),
           ),
-          const _EarnWayRow(icon: Iconsax.people, text: 'إحالة الأصدقاء.'),
+          _EarnWayRow(icon: Iconsax.people, text: 'auto_key_651'.tr),
         ],
       ),
     );
@@ -305,7 +307,7 @@ class PointScreen extends GetView<PointController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'سجل النقاط',
+                    'auto_key_652'.tr,
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: cs.primary,
@@ -320,7 +322,7 @@ class PointScreen extends GetView<PointController> {
                       size: 10.sp,
                     ),
                     label: Text(
-                      'عرض الكل',
+                      'view_all'.tr,
                       style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 10.sp,
@@ -335,7 +337,7 @@ class PointScreen extends GetView<PointController> {
                 children: [
                   Expanded(
                     child: _TotalColumn(
-                      label: 'إجمالي المكتسب',
+                      label: 'auto_key_653'.tr,
                       value: controller.totalEarned,
                       color: Colors.teal,
                     ),
@@ -343,7 +345,7 @@ class PointScreen extends GetView<PointController> {
                   Container(width: 1, height: 30.h, color: cs.outlineVariant),
                   Expanded(
                     child: _TotalColumn(
-                      label: 'إجمالي المستبدل',
+                      label: 'auto_key_654'.tr,
                       value: controller.totalRedeemed,
                       color: cs.error,
                     ),
@@ -351,7 +353,7 @@ class PointScreen extends GetView<PointController> {
                   Container(width: 1, height: 30.h, color: cs.outlineVariant),
                   Expanded(
                     child: _TotalColumn(
-                      label: 'الرصيد الحالي',
+                      label: 'auto_key_655'.tr,
                       value: controller.totalPoints,
                       color: cs.primary,
                     ),
@@ -440,7 +442,7 @@ class PointScreen extends GetView<PointController> {
                               ),
                             ),
                             Text(
-                              entry.isEarned ? 'مكتسب' : 'مستبدل',
+                              entry.isEarned ? 'auto_key_656'.tr : 'auto_key_657'.tr,
                               style: TextStyle(
                                 fontSize: 10.sp,
                                 color: entry.isEarned

@@ -29,7 +29,7 @@ class EntertainmentBookingController extends GetxController {
   final slots = <Map<String, dynamic>>[].obs;
   final selectedSlotId = RxnInt();
   final guests = 1.obs;
-  final title = 'حجز تذاكر'.obs;
+  final title = 'auto_key_220'.tr.obs;
 
   final checkout = BookingCheckoutOptions().obs;
   final selectedPayment = 'wallet'.obs;
@@ -100,7 +100,7 @@ class EntertainmentBookingController extends GetxController {
 
   Future<void> loadSlots() async {
     if (marketId <= 0) {
-      AppSnackbar.showError(message: 'معرّف السوق غير صالح');
+      AppSnackbar.showError(message: 'auto_key_191'.tr);
       return;
     }
     isLoading.value = true;
@@ -142,7 +142,7 @@ class EntertainmentBookingController extends GetxController {
 
   Future<void> submit() async {
     if (selectedSlotId.value == null) {
-      AppSnackbar.showError(message: 'اختر موعداً أولاً');
+      AppSnackbar.showError(message: 'auto_key_193'.tr);
       return;
     }
     isSubmitting.value = true;
@@ -171,7 +171,7 @@ class EntertainmentBookingController extends GetxController {
       await BookingOrderSubmit.storeAndSettle(
         repository: repository,
         body: body,
-        successFallback: 'تم حجز التذاكر بنجاح',
+        successFallback: 'auto_key_221'.tr,
       );
     } on DioException catch (e) {
       AppSnackbar.showError(message: DioErrorUtil.handleError(e));
